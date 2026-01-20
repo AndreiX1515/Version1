@@ -1,0 +1,169 @@
+@layer Modal { 
+    .layer { 
+        opacity: 0;
+        visibility: hidden;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0, .5);
+        z-index: 200;
+        transition: all .3s;
+        &.active { 
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+   .alert-modal { 
+        // position: fixed;
+        // top: 50%;
+        // left: 50%;
+        // transform: translate(-50%, -50%);
+        display: flex;    
+        flex-direction: column;
+        gap: 32px;
+        border-radius: 6px;
+        width: 100%;
+        max-width: 320px;
+        background: var(--white);
+        padding: 30px 16px;
+        border: 1px solid red;
+        z-index: 100;
+        .guide { 
+            color: var(--black12);
+            text-align: center;
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 28px;
+            letter-spacing: -0.16px;
+        } 
+        .guide-sub { 
+            color: var(--gray96);
+            text-align: center;
+            font-size: 16px;
+            line-height: 26px;
+            margin-top: 4px;
+        }
+   }
+   .toast { 
+        color: var(--white);
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 16px;
+        letter-spacing: 0.1px;
+        padding: 10px;
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.70);
+        text-align: center;
+   }
+   .modal-bottom { 
+        display: none;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        z-index: 200;
+        width: 100%;
+        background: var(--white);
+        background: var(--white);
+        border-radius: 16px 16px 0 0;
+        &.active { 
+            display: block;
+        }
+        .btn-wrap { 
+            display: flex;
+            justify-content: flex-end;
+            padding: 16px 20px;
+        }
+        .btn-close { 
+        }
+        .cont { 
+            display: flex;
+            flex-direction: column;
+            // padding: 16px 20px 80px 20px;
+            padding-bottom: 80px;
+            .btn-edit { 
+                color: var(--black12);
+                text-align: center;
+                font-family: "Noto Sans";
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 22px;
+                padding: 16px 0;
+            }
+            .btn-delete { 
+                color: var(--reded);
+                text-align: center;
+                font-family: "Noto Sans";
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 22px;
+                padding: 16px 0;
+            }
+            .btn-language { 
+                color: var(--grayb0);
+                font-family: "Noto Sans";
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 24px;
+                letter-spacing: -0.1px;
+                &.active { 
+                    color: var(--reded);
+                }
+            }
+        }
+   }
+
+   .profile-modal { 
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: calc(100% - 40px);
+        background: var(--white);
+        z-index: 200;
+        border-radius: 8px;
+        &.active { 
+            display: block;
+        }
+        .header { 
+            background: var(--reded);
+            border-radius: 8px 8px 0 0;
+            padding: 16px;
+        }
+        .img-profile { 
+            width: 100%;
+        }
+        .form-wrap { 
+            padding: 20px 44px;
+            .about { 
+                height: 38px;
+                display: flex;
+                align-items: center;
+                img { 
+                    width: 24px;
+                }
+            }
+            .input-wrap { 
+                display: flex;
+                border-bottom: 1px solid var(--orangeff);
+                img { 
+                    
+                }
+                input { 
+                    width: 100%;
+                    color: var(--black12);
+                    font-family: "Noto Sans";
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 22px;
+                    &:focus { 
+                        border: none;
+                    }
+                }
+            }
+        }
+   }
+
+}

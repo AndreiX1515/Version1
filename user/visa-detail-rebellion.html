@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel | Visa Application Details - Returned</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/auth-guard.js" defer></script>
+    <script src="../js/api.js" defer></script>
+    <script src="../js/validation.js" defer></script>
+    <link rel="stylesheet" href="/css/i18n-boot.css">
+    <script src="/js/i18n-boot.js"></script>
+    <script src="../js/i18n.js" defer></script>
+    <script src="../js/visa-detail-rebellion.js" defer></script>
+</head>
+<body>
+    <div class="main bg white mh100">
+        <header class="header-type2 bg white">
+            <a class="btn-mypage" href="visa-history.html"><img src="../images/ico_back_black.svg"></a>
+            <div class="title"></div>
+            <div></div>
+        </header>
+       
+        <div class="px20 pb20 mt24">
+            <div class="text fz20 fw600 lh28 black12">
+                Your visa application has been rejected.<br>
+                Please resubmit the documents below.
+            </div>
+            <!-- Documents are rendered by JS -->
+            <div class="mt32" id="documentsContainer"></div>
+            <div class="fixed-bottom px20">
+                <button class="btn primary lg" type="button" id="saveButton">Save</button>
+            </div>
+        </div>
+       
+</body>
+</html>

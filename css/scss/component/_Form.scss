@@ -1,0 +1,53 @@
+@layer Form { 
+    .form-group {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+    }
+    
+    .form-label {
+        min-width: 74px !important;
+        color: #000;
+        font-size: 17px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+    
+    .file-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        width: 100%;
+        // max-width: 800px;
+        position: relative;
+    }
+    
+    .file-name {
+        flex: 1;
+        height: 56px;
+        padding: 0 16px;
+        font-size: 16px;
+        border: 1px solid var(--graye4);
+        border-radius: 6px;
+        color: #333;
+        background-color: #fff;
+        box-sizing: border-box;
+    }
+    
+    .btn-upload {
+        height: 56px;
+        padding: 0 16px;
+        border: 1px solid #2454cc;
+        border-radius: 8px;
+        background-color: #fff;
+        color: #2454cc;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    
+    .input-file {
+        display: none;
+    }
+    
+}

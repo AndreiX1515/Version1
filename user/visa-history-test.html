@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visa History Test</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        .card-type { display: none; }
+        .card-type.active { display: block; }
+        .visa-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 16px;
+        }
+        .visa-card:hover {
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="main bg grayfa mh100">
+        <header class="header-type2 bg white">
+            <a class="btn-mypage" href="mypage.html"><img src="../images/ico_back_black.svg"></a>
+            <div class="title">Visa Application Test</div>
+            <div></div>
+        </header>
+
+        <div class="shadow-bottom h48 w100">
+            <ul class="tab-type2 px20 bg white">
+                <li><a class="btn-tab2 active" data-target="pending" href="#none">Incomplete<span id="count-pending">0</span></a></li>
+                <li><a class="btn-tab2" data-target="under_review" href="#none">Review<span id="count-review">0</span></a></li>
+                <li><a class="btn-tab2" data-target="approved" href="#none">Approved<span id="count-approved">0</span></a></li>
+                <li><a class="btn-tab2" data-target="rejected" href="#none">Rejected<span id="count-rejected">0</span></a></li>
+            </ul>
+        </div>
+
+        <div class="px20 pb20 mt24">
+            <div class="card-type active" id="pending"></div>
+            <div class="card-type" id="under_review"></div>
+            <div class="card-type" id="approved"></div>
+            <div class="card-type" id="rejected"></div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data generator
+        function generateSampleData() {
+            const applicants = [
+                'Jose Ramirez', 'Maria Garcia', 'John Smith', 'Lisa Anderson', 'Kim Min-ji',
+                'Tanaka Yuki', 'Sarah Johnson', 'Michael Brown', 'Anna Lee', 'David Wilson',
+                'Emma Davis', 'James Martinez', 'Sofia Rodriguez', 'Oliver Taylor', 'Isabella Chen'
+            ];
+
+            const packages = [
+                'Seoul Cherry Blossom Highlights 6-Day Package',
+                'Jeju Island Nature Tour 4-Day Package',
+                'Busan Coastal Adventure 5-Day Package',
+                'Korean Traditional Culture 7-Day Tour',
+                'DMZ and Seoul City Tour 3-Day Package'
+            ];
+
+            const statuses = ['pending', 'under_review', 'approved', 'rejected'];
+            const data = [];
+
+            statuses.forEach((status, statusIdx) => {
+                for (let i = 0; i < 12; i++) {
+                    const appDate = new Date(2025, 3 + statusIdx, 1 + i);
+                    const depDate = new Date(2025, 4 + statusIdx, 15 + i);
+
+                    data.push({
+                        id: `${status.toUpperCase()}${String(i + 1).padStart(3, '0')}`,
+                        applicantName: applicants[i % applicants.length],
+                        applicationDate: appDate.toISOString().split('T')[0],
+                        departureDate: depDate.toISOString().split('T')[0],
+                        packageName: packages[i % packages.length],
+                        status: status
+                    });
+                }
+            });
+
+            return data;
+        }
+
+        // Render cards
+        function renderCards(containerId, applications, statusTitle, buttonClass, buttonText) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            let html = `<div class="text fz16 fw600 lh24 black12 mb16">${statusTitle}</div>`;
+
+            applications.forEach(app => {
+                html += `
+                    <div class="visa-card">
+                        <ul>
+                            <li class="align gap10 mb8">
+                                <div class="text fz14 fw400 lh22 gray6b">Applicant name</div>
+                                <p class="text fz14 fw500 lh22 black12">${app.applicantName}</p>
+                            </li>
+                            <li class="align gap10 mb8">
+                                <div class="text fz14 fw400 lh22 gray6b">Application date</div>
+                                <p class="text fz14 fw500 lh22 black12">${app.applicationDate}</p>
+                            </li>
+                            <li class="align gap10 mb8">
+                                <div class="text fz14 fw400 lh22 gray6b">Product Name</div>
+                                <p class="text fz14 fw500 lh22 black12">${app.packageName}</p>
+                            </li>
+                            <li class="align gap10">
+                                <div class="text fz14 fw400 lh22 gray6b">Departure date</div>
+                                <p class="text fz14 fw500 lh22 black12">${app.departureDate}</p>
+                            </li>
+                        </ul>
+                        <button class="${buttonClass}" type="button">${buttonText}</button>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Generating test data...');
+            const allData = generateSampleData();
+            console.log('Total applications:', allData.length);
+
+            const pending = allData.filter(d => d.status === 'pending');
+            const review = allData.filter(d => d.status === 'under_review');
+            const approved = allData.filter(d => d.status === 'approved');
+            const rejected = allData.filter(d => d.status === 'rejected');
+
+            console.log('Pending:', pending.length);
+            console.log('Review:', review.length);
+            console.log('Approved:', approved.length);
+            console.log('Rejected:', rejected.length);
+
+            // Update counts
+            document.getElementById('count-pending').textContent = pending.length;
+            document.getElementById('count-review').textContent = review.length;
+            document.getElementById('count-approved').textContent = approved.length;
+            document.getElementById('count-rejected').textContent = rejected.length;
+
+            // Render all panels
+            renderCards('pending', pending, 'Incomplete documents', 'btn primary lg mt12', 'Submit Documents');
+            renderCards('under_review', review, 'Under review', 'btn line active lg mt12', 'Document Verification');
+            renderCards('approved', approved, 'Issuance completed', 'btn primary lg ico1 mt12', 'Visa file download');
+            renderCards('rejected', rejected, 'Returned', 'btn primary lg mt12', 'Submit Again');
+
+            // Tab switching
+            document.querySelectorAll('.btn-tab2').forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = this.getAttribute('data-target');
+
+                    document.querySelectorAll('.btn-tab2').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+
+                    document.querySelectorAll('.card-type').forEach(c => c.classList.remove('active'));
+                    document.getElementById(target).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

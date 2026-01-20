@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN - Visa Application Details</title>
+
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css?v=20260113">
+	<link rel="stylesheet" href="../css/a_contents.css?v=20260113">
+</head>
+
+<body>
+
+	<!-- header -->
+	<header class="layout-header"></header>
+
+	<!-- main -->
+	<main class="layout-main">
+		<!-- nav -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content">
+			<div class="page-toolbar">
+				<a href="visa-management.html" class="jw-button" aria-label="Return to list">
+					<img src="../image/arrow4.svg" alt="">
+					<span data-lan-eng="Return to list">Return to list</span>
+				</a>
+
+				<div class="page-toolbar-actions">
+					<select class="select" id="statusSelect" disabled>
+						<option value="pending" data-lan-eng="Request Received">Request Received</option>
+						<option value="reviewing" data-lan-eng="Under Review">Under Review</option>
+						<option value="approved" data-lan-eng="Issuance Complete">Issuance Complete</option>
+						<option value="rejected" data-lan-eng="Returned">Returned</option>
+					</select>
+					<button type="button" class="jw-button typeB" id="saveStatusBtn" data-lan-eng="Save" disabled>Save</button>
+				</div>
+			</div>
+			<h1 class="page-title" data-lan-eng="Visa Application Details">Visa Application Details</h1>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Document Details">Document Details</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap" id="documentGridWrap">
+					<!-- Documents will be rendered dynamically -->
+				</div>
+			</div>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Application Information">Application Information</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+					<!-- Row 1 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Booking ID">Booking ID</label>
+						<input type="text" class="form-control" id="bookingIdDisplay" value="" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Visa Type">Visa Type</label>
+						<input type="text" class="form-control" id="visaTypeDisplay" value="" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Application Date">Application Date</label>
+						<input type="text" class="form-control" id="applicationDate" value="" disabled>
+					</div>
+
+					<!-- Row 2 -->
+					<div class="grid-item col-span-3">
+						<label class="label-name" data-lan-eng="Package Name">Package Name</label>
+						<input type="text" class="form-control" id="productName" value="" disabled>
+					</div>
+
+					<!-- Row 3 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Departure Date">Departure Date</label>
+						<input type="text" class="form-control" id="departureDate" value="" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Booking Status">Booking Status</label>
+						<input type="text" class="form-control" id="bookingStatusDisplay" value="" disabled>
+					</div>
+				</div>
+			</div>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Applicant Information">Applicant Information</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Title">Title</label>
+						<select class="select" id="honorific" disabled>
+							<option value="">-</option>
+							<option value="MR">MR</option>
+							<option value="MS">MS</option>
+							<option value="MRS">MRS</option>
+						</select>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="First Name">First Name</label>
+						<input type="text" class="form-control" id="firstName" value="" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Last Name">Last Name</label>
+						<input type="text" class="form-control" id="lastName" value="" disabled>
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Gender">Gender</label>
+						<select class="select" id="gender" disabled>
+							<option value="">-</option>
+							<option value="male">Male</option>
+							<option value="female">Female</option>
+						</select>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Age">Age</label>
+						<input type="text" class="form-control" id="age" value="" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Date of Birth">Date of Birth</label>
+						<input type="text" class="form-control" id="birthDate" value="" disabled>
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Nationality">Nationality</label>
+						<input type="text" class="form-control" id="countryOfOrigin" value="" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Passport Number">Passport Number</label>
+						<input type="text" class="form-control" id="passportNumber" value="" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Passport Issue Date">Passport Issue Date</label>
+						<input type="text" class="form-control" id="passportIssueDate" value="" disabled>
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Passport Expiry Date">Passport Expiry Date</label>
+						<input type="text" class="form-control" id="passportExpiryDate" value="" disabled>
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Passport Photo">Passport Photo</label>
+						<div class="upload-box">
+							<div class="thumb" id="passportPhotoPreview" aria-label="passport photo preview"></div>
+							<div class="file-controller">
+								<div class="jw-center jw-gap10">
+									<img src="../image/file.svg" alt="">
+									<span id="passportPhotoMeta" data-lan-eng="No file">No file</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Visa Upload">Visa Upload</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+					<div class="grid-item col-span-3">
+						<label class="label-name" data-lan-eng="Visa File">Visa File</label>
+						<label class="inputFile jw-mgt8">
+							<input id="visaFileInput" type="file">
+							<button type="button" class="btn-upload" id="visaUploadBtn"><img src="../image/upload3.svg" alt="">&nbsp;Upload</button>
+						</label>
+						<div class="attach-list" id="visaFileList"></div>
+					</div>
+				</div>
+			</div>
+
+		</section>
+
+	</main>
+
+	<script src="../js/default.js?v=20260113"></script>
+	<script src="../js/agent.js?v=20260113"></script>
+
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_agent.html'
+		});
+
+		let visaApplicationId = null;
+		let __visaApplication = null;
+
+		// Document configuration for Group visa
+		const DOCUMENT_CONFIG = [
+			{ key: 'passport', title: 'Passport bio page', required: true },
+			{ key: 'visaApplicationForm', title: 'Visa Application Form', required: true, download: true, downloadPath: '/uploads/visa/doc/Korea-visa-application.pdf' },
+			{ key: 'bankCertificate', title: 'Bank Certificate', required: true },
+			{ key: 'bankStatement', title: 'Bank Statement', required: true },
+			{ key: 'additionalDocuments', title: 'Additional requirements', required: false }
+		];
+
+		// Pending changes
+		const __pending = {
+			uploadedDocs: {},      // docKey -> filePath
+			deleteDocs: new Set(), // docKeys to delete
+			newVisaFilePath: '',
+			newVisaFileSize: 0,
+			deleteVisaFile: false,
+		};
+
+		function formatFileSize(bytes) {
+			if (!bytes || bytes <= 0) return '';
+			if (bytes < 1024) return bytes + 'B';
+			if (bytes < 1024 * 1024) return Math.round(bytes / 1024) + 'KB';
+			return (bytes / (1024 * 1024)).toFixed(1) + 'MB';
+		}
+
+		function __setSaveEnabled(enabled) {
+			const btn = document.getElementById('saveStatusBtn');
+			if (!btn) return;
+			btn.disabled = !enabled;
+		}
+
+		function __hasPendingChanges() {
+			return Object.keys(__pending.uploadedDocs).length > 0 ||
+				__pending.deleteDocs.size > 0 ||
+				Boolean(__pending.newVisaFilePath) ||
+				Boolean(__pending.deleteVisaFile);
+		}
+
+		document.addEventListener('DOMContentLoaded', async () => {
+			try {
+				const sessionResponse = await fetch('../backend/api/check-session.php', { credentials: 'same-origin' });
+				const sessionData = await sessionResponse.json();
+				if (!sessionData || !sessionData.authenticated) {
+					window.location.href = '../index.html';
+					return;
+				}
+
+				waitForHeaderUserNameAndHydrate();
+
+				const urlParams = new URLSearchParams(window.location.search);
+				visaApplicationId = urlParams.get('id') || urlParams.get('visaApplicationId');
+
+				// Wire save button
+				const stBtn = document.getElementById('saveStatusBtn');
+				if (stBtn) {
+					stBtn.disabled = true;
+					stBtn.addEventListener('click', handleSaveChanges);
+				}
+
+				// Wire visa file input
+				document.getElementById('visaFileInput')?.addEventListener('change', handleVisaUpload);
+
+				if (visaApplicationId) {
+					await loadVisaApplicationDetail();
+				}
+			} catch (error) {
+				console.error('Session check error:', error);
+				window.location.href = '../index.html';
+			}
+		});
+
+		function pickFirst(obj, keys) {
+			for (const k of keys) {
+				const v = obj && obj[k];
+				if (v !== null && typeof v !== 'undefined' && String(v).trim() !== '') return v;
+			}
+			return '';
+		}
+
+		function formatDateTime(val) {
+			if (!val) return '';
+			const s = String(val).replace('T', ' ');
+			return s.length >= 16 ? s.substring(0, 16) : s;
+		}
+
+		function setValue(id, val) {
+			const el = document.getElementById(id);
+			if (!el) return;
+			el.value = (val === null || typeof val === 'undefined') ? '' : String(val);
+		}
+
+		function setSelect(id, val) {
+			const el = document.getElementById(id);
+			if (!el) return;
+			const v = String(val || '');
+			const opt = Array.from(el.options || []).find(o => o.value === v);
+			el.value = opt ? v : (el.options?.[0]?.value || '');
+		}
+
+		function statusLabel(status) {
+			const map = {
+				pending: 'Request Received',
+				reviewing: 'Under Review',
+				approved: 'Issuance Complete',
+				rejected: 'Returned'
+			};
+			return map[status] || status;
+		}
+
+		function __docPathFor(docKey, application) {
+			// Root fields
+			const rootMap = {
+				passport: ['passport', 'passportCopy', 'passport_copy'],
+				visaApplicationForm: ['visaApplicationForm', 'visa_application_form'],
+				bankCertificate: ['bankCertificate', 'bank_certificate'],
+				bankStatement: ['bankStatement', 'bank_statement'],
+				additionalDocuments: ['additionalDocuments', 'additional_documents']
+			};
+			const direct = String(pickFirst(application, rootMap[docKey] || [docKey]) || '').trim();
+			if (direct) return direct[0] === '/' ? direct : ('/' + direct);
+
+			// documents nested object
+			try {
+				const docsObj = application?.documents || null;
+				if (docsObj && typeof docsObj === 'object') {
+					const v2 = String(pickFirst(docsObj, rootMap[docKey] || [docKey]) || '').trim();
+					if (v2) return v2[0] === '/' ? v2 : ('/' + v2);
+				}
+			} catch (_) {}
+
+			// notes JSON
+			try {
+				const notesTxt = String(application?.notes || '').trim();
+				if (!notesTxt) return '';
+				const j = JSON.parse(notesTxt);
+				const docs = (j && j.documents && typeof j.documents === 'object') ? j.documents : null;
+				if (!docs) return '';
+				const v3 = String(pickFirst(docs, rootMap[docKey] || [docKey]) || '').trim();
+				if (!v3) return '';
+				return v3[0] === '/' ? v3 : ('/' + v3);
+			} catch (_) {
+				return '';
+			}
+		}
+
+		function __effectivePath(docKey) {
+			// Check pending upload first
+			if (__pending.uploadedDocs[docKey]) {
+				return __pending.uploadedDocs[docKey];
+			}
+			// Check if deleted
+			if (__pending.deleteDocs.has(docKey)) {
+				return '';
+			}
+			// Get from application
+			return __docPathFor(docKey, __visaApplication);
+		}
+
+		function renderDocumentSection() {
+			const container = document.getElementById('documentGridWrap');
+			if (!container) return;
+			container.innerHTML = '';
+
+			DOCUMENT_CONFIG.forEach(doc => {
+				const div = document.createElement('div');
+				div.className = 'grid-item';
+
+				const path = __effectivePath(doc.key);
+				const hasFile = path !== '';
+				const fileName = hasFile ? path.split('/').pop() : 'No file';
+
+				div.innerHTML = `
+					<label class="label-name">${escapeHtml(doc.title)}${doc.required ? ' *' : ''}</label>
+					<div class="cell">
+						<div class="field-row jw-center">
+							<div class="jw-center jw-gap10" style="flex:1;">
+								<img src="../image/file.svg" alt="">
+								<span id="docMeta-${doc.key}">${hasFile ? '[' + escapeHtml(fileName) + ']' : 'No file'}</span>
+							</div>
+							<div class="jw-center jw-gap10">
+								${doc.download ? `<button type="button" class="jw-button typeF" onclick="downloadStaticDoc('${escapeHtml(doc.downloadPath)}')" title="Download template"><img src="../image/button-download.svg" alt=""></button>` : ''}
+								<label class="inputFile" style="margin:0;">
+									<input type="file" id="docFile-${doc.key}" onchange="handleDocUpload('${doc.key}')">
+									<button type="button" class="jw-button typeF" title="Upload"><img src="../image/upload3.svg" alt=""></button>
+								</label>
+								<button type="button" class="jw-button typeF" id="docDl-${doc.key}" ${hasFile ? '' : 'style="display:none;"'} onclick="downloadAttachment('${escapeHtml(path)}')" title="Download"><img src="../image/button-download.svg" alt=""></button>
+								<button type="button" class="jw-button typeF" id="docDel-${doc.key}" ${hasFile ? '' : 'style="display:none;"'} onclick="deleteDocument('${doc.key}')" title="Delete"><img src="../image/button-close2.svg" alt=""></button>
+							</div>
+						</div>
+					</div>
+				`;
+				container.appendChild(div);
+			});
+		}
+
+		function __renderVisaFile() {
+			const list = document.getElementById('visaFileList');
+			if (!list) return;
+
+			let visaFile = '';
+			if (__pending.deleteVisaFile) {
+				visaFile = '';
+			} else if (__pending.newVisaFilePath) {
+				visaFile = __pending.newVisaFilePath;
+			} else {
+				visaFile = pickFirst(__visaApplication, ['visaFile', 'visa_file', 'visaDocument', 'visa_document', 'visaUrl']);
+				// Also check notes JSON
+				if (!visaFile) {
+					try {
+						const notesTxt = String(__visaApplication?.notes || '').trim();
+						if (notesTxt) {
+							const j = JSON.parse(notesTxt);
+							visaFile = j?.visaFile || j?.visa_file || '';
+						}
+					} catch (_) {}
+				}
+			}
+
+			list.innerHTML = '';
+			if (visaFile) {
+				const p = String(visaFile);
+				const fullName = p.split('/').pop() || p;
+				const lastDot = fullName.lastIndexOf('.');
+				const nameWithoutExt = lastDot > 0 ? fullName.substring(0, lastDot) : fullName;
+				const ext = lastDot > 0 ? fullName.substring(lastDot + 1).toLowerCase() : '';
+				const fileSize = __pending.newVisaFilePath ? formatFileSize(__pending.newVisaFileSize) : '';
+				const fileMeta = ext ? (fileSize ? `[${ext}, ${fileSize}]` : `[${ext}]`) : '';
+				list.innerHTML = `
+					<div style="display:flex; align-items:center; gap:8px; padding:11px 12px; border:1px solid #D4D4D4; border-radius:12px; background:#fff; max-width:492px; margin-bottom:8px;">
+						<div style="display:flex; align-items:center; gap:6px; flex:1;">
+							<img src="../image/file.svg" alt="" style="width:20px; height:20px; flex-shrink:0;">
+							<div style="display:flex; align-items:center; gap:2px; font-size:14px; line-height:20px; color:#121212;">
+								<span style="font-weight:500;">${escapeHtml(nameWithoutExt)}</span>
+								<span style="font-weight:400;">${escapeHtml(fileMeta)}</span>
+							</div>
+						</div>
+						<div style="width:1px; height:20px; background:#D4D4D4;"></div>
+						<button type="button" style="padding:0; border:0; background:transparent; cursor:pointer; flex-shrink:0;" onclick="downloadAttachment('${escapeHtml(p)}')" title="Download">
+							<img src="../image/button-download.svg" alt="" style="width:24px; height:24px;">
+						</button>
+						<button type="button" style="padding:0; border:0; background:transparent; cursor:pointer; flex-shrink:0;" onclick="deleteVisaFile()" title="Delete">
+							<img src="../image/button-close2.svg" alt="" style="width:24px; height:24px;">
+						</button>
+					</div>
+				`;
+			}
+		}
+
+		function __updateUI() {
+			renderDocumentSection();
+			__renderVisaFile();
+			__updateStatus();
+			__setSaveEnabled(__hasPendingChanges());
+		}
+
+		function __updateStatus() {
+			// Auto-calculate status based on documents
+			const requiredDocs = DOCUMENT_CONFIG.filter(d => d.required).map(d => d.key);
+			let presentCount = 0;
+			requiredDocs.forEach(k => {
+				if (__effectivePath(k)) presentCount++;
+			});
+
+			let visaFile = '';
+			if (!__pending.deleteVisaFile) {
+				visaFile = __pending.newVisaFilePath || pickFirst(__visaApplication, ['visaFile', 'visa_file', 'visaDocument']);
+				if (!visaFile) {
+					try {
+						const notesTxt = String(__visaApplication?.notes || '').trim();
+						if (notesTxt) {
+							const j = JSON.parse(notesTxt);
+							visaFile = j?.visaFile || j?.visa_file || '';
+						}
+					} catch (_) {}
+				}
+			}
+
+			let status = 'pending';
+			if (visaFile) {
+				status = 'approved';
+			} else if (presentCount === requiredDocs.length) {
+				status = 'reviewing';
+			} else if (presentCount > 0) {
+				status = 'rejected';
+			}
+
+			setSelect('statusSelect', status);
+		}
+
+		async function loadVisaApplicationDetail() {
+			try {
+				const response = await fetch(`../backend/api/agent-api.php?action=getAgentVisaApplicationDetail&id=${encodeURIComponent(visaApplicationId)}`, {
+					credentials: 'same-origin'
+				});
+				if (response.status === 401 || response.status === 403) {
+					alert('Access denied.');
+					window.location.href = 'visa-management.html';
+					return;
+				}
+				if (!response.ok) throw new Error('HTTP ' + response.status);
+
+				const result = await response.json();
+				const application = result?.data?.application || null;
+				if (!result?.success || !application) {
+					alert(result?.message || 'Failed to load visa application.');
+					return;
+				}
+				__visaApplication = application;
+
+				// Populate form
+				setValue('bookingIdDisplay', pickFirst(application, ['bookingId', 'transactNo']) || '-');
+				setValue('visaTypeDisplay', 'Group');
+				setValue('productName', pickFirst(application, ['packageName', 'productName', 'destinationCountry']) || '-');
+
+				const createdAt = pickFirst(application, ['createdAt', 'submittedAt', 'applicationDate']);
+				setValue('applicationDate', formatDateTime(createdAt) || '-');
+
+				const depDate = pickFirst(application, ['departureDate', 'departure_date']);
+				setValue('departureDate', depDate ? formatDateTime(depDate).split(' ')[0] : '-');
+
+				const bookingStatus = pickFirst(application, ['bookingStatus', 'booking_status']) || '';
+				const statusMap = {
+					'pending': 'Pending',
+					'confirmed': 'Confirmed',
+					'completed': 'Completed',
+					'cancelled': 'Cancelled'
+				};
+				setValue('bookingStatusDisplay', statusMap[bookingStatus.toLowerCase()] || bookingStatus || '-');
+
+				// Applicant info
+				setSelect('honorific', pickFirst(application, ['honorific', 'title', 'salutation']));
+				setValue('firstName', pickFirst(application, ['fName', 'firstName', 'fname']));
+				setValue('lastName', pickFirst(application, ['lName', 'lastName', 'lname']));
+				setSelect('gender', String(pickFirst(application, ['gender']) || '').toLowerCase());
+				setValue('age', pickFirst(application, ['age']));
+				setValue('birthDate', pickFirst(application, ['birthDate', 'dateOfBirth', 'dob']));
+				setValue('countryOfOrigin', pickFirst(application, ['nationality', 'countryOfOrigin']));
+				setValue('passportNumber', pickFirst(application, ['passportNumber', 'passport_no']));
+				setValue('passportIssueDate', pickFirst(application, ['passportIssueDate', 'passport_issue_date']));
+				setValue('passportExpiryDate', pickFirst(application, ['passportExpiryDate', 'passportExpirationDate']));
+
+				// Passport photo
+				const passportPhoto = pickFirst(application, ['passportPhoto', 'passport_photo', 'passportPhotoUrl']);
+				const preview = document.getElementById('passportPhotoPreview');
+				const metaEl = document.getElementById('passportPhotoMeta');
+				if (preview && passportPhoto) {
+					let url = String(passportPhoto).trim();
+					if (url.startsWith('uploads/')) url = '/' + url;
+					let bgUrl = url;
+					if (bgUrl.startsWith('/uploads/')) {
+						bgUrl = `/backend/api/download.php?file=${encodeURIComponent(bgUrl)}&inline=1`;
+					}
+					preview.style.backgroundImage = `url('${bgUrl}')`;
+					preview.style.backgroundSize = 'cover';
+					preview.style.backgroundPosition = 'center';
+					if (metaEl) {
+						const name = url.startsWith('data:') ? 'Image' : (url.split('/').pop() || url);
+						metaEl.textContent = name;
+					}
+				}
+
+				// Status
+				setSelect('statusSelect', application.status || 'pending');
+
+				// Render documents and visa file
+				__updateUI();
+
+			} catch (error) {
+				console.error('Error loading visa application detail:', error);
+				alert('Error loading visa application.');
+			}
+		}
+
+		async function handleDocUpload(docKey) {
+			const input = document.getElementById(`docFile-${docKey}`);
+			const file = input?.files?.[0];
+			if (!file) return;
+
+			try {
+				const fd = new FormData();
+				fd.append('file', file);
+				fd.append('type', 'visa');
+				fd.append('related_id', String(visaApplicationId));
+
+				const upRes = await fetch('/backend/api/upload.php', {
+					method: 'POST',
+					body: fd,
+					credentials: 'same-origin'
+				});
+				const upJson = await upRes.json();
+				if (!upRes.ok || !upJson?.success) {
+					alert('File upload failed: ' + (upJson?.message || ('HTTP ' + upRes.status)));
+					return;
+				}
+
+				const filePath = upJson?.data?.filePath || upJson?.data?.file_path || '';
+				if (!filePath) {
+					alert('No file path returned from upload.');
+					return;
+				}
+
+				__pending.uploadedDocs[docKey] = filePath;
+				__pending.deleteDocs.delete(docKey);
+				__updateUI();
+			} catch (e) {
+				console.error('handleDocUpload error:', e);
+				alert('An error occurred while uploading.');
+			}
+		}
+
+		function deleteDocument(docKey) {
+			if (!confirm('Delete this document?')) return;
+
+			// If it was a pending upload, just remove it
+			if (__pending.uploadedDocs[docKey]) {
+				delete __pending.uploadedDocs[docKey];
+			} else {
+				// Mark for deletion
+				__pending.deleteDocs.add(docKey);
+			}
+			__updateUI();
+		}
+
+		async function handleVisaUpload() {
+			const input = document.getElementById('visaFileInput');
+			const file = input?.files?.[0];
+			if (!file) return;
+
+			try {
+				const fd = new FormData();
+				fd.append('file', file);
+				fd.append('type', 'visa');
+				fd.append('related_id', String(visaApplicationId));
+
+				const upRes = await fetch('/backend/api/upload.php', {
+					method: 'POST',
+					body: fd,
+					credentials: 'same-origin'
+				});
+				const upJson = await upRes.json();
+				if (!upRes.ok || !upJson?.success) {
+					alert('File upload failed: ' + (upJson?.message || ('HTTP ' + upRes.status)));
+					return;
+				}
+
+				const filePath = upJson?.data?.filePath || upJson?.data?.file_path || '';
+				if (!filePath) {
+					alert('No file path returned from upload.');
+					return;
+				}
+
+				__pending.newVisaFilePath = filePath;
+				__pending.newVisaFileSize = file.size || 0;
+				__pending.deleteVisaFile = false;
+				__updateUI();
+			} catch (e) {
+				console.error('handleVisaUpload error:', e);
+				alert('An error occurred while uploading the visa file.');
+			}
+		}
+
+		function deleteVisaFile() {
+			if (__pending.newVisaFilePath) {
+				if (!confirm('Remove the uploaded file?')) return;
+				__pending.newVisaFilePath = '';
+				__pending.newVisaFileSize = 0;
+			} else {
+				if (!confirm('Delete the visa file?')) return;
+				__pending.deleteVisaFile = true;
+			}
+			__updateUI();
+		}
+
+		async function handleSaveChanges() {
+			try {
+				if (!visaApplicationId) return;
+				if (!__hasPendingChanges()) return;
+
+				const btn = document.getElementById('saveStatusBtn');
+				if (btn) btn.disabled = true;
+
+				// 1) Upload documents
+				for (const [docKey, filePath] of Object.entries(__pending.uploadedDocs)) {
+					const res = await fetch('../backend/api/agent-api.php', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({
+							action: 'updateAgentVisaDocument',
+							visaApplicationId,
+							docKey,
+							filePath
+						}),
+						credentials: 'same-origin'
+					});
+					const j = await res.json().catch(() => ({}));
+					if (!res.ok || !j?.success) {
+						alert('Failed to save document: ' + (j?.message || ('HTTP ' + res.status)));
+						__setSaveEnabled(true);
+						return;
+					}
+				}
+
+				// 2) Delete documents
+				for (const docKey of Array.from(__pending.deleteDocs)) {
+					const res = await fetch('../backend/api/agent-api.php', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({
+							action: 'deleteAgentVisaDocument',
+							visaApplicationId,
+							docKey
+						}),
+						credentials: 'same-origin'
+					});
+					const j = await res.json().catch(() => ({}));
+					if (!res.ok || !j?.success) {
+						alert('Failed to delete document: ' + (j?.message || ('HTTP ' + res.status)));
+						__setSaveEnabled(true);
+						return;
+					}
+				}
+
+				// 3) Delete visa file
+				if (__pending.deleteVisaFile) {
+					const res = await fetch('../backend/api/agent-api.php', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({
+							action: 'deleteAgentVisaFile',
+							visaApplicationId
+						}),
+						credentials: 'same-origin'
+					});
+					const j = await res.json().catch(() => ({}));
+					if (!res.ok || !j?.success) {
+						alert('Failed to delete visa file: ' + (j?.message || ('HTTP ' + res.status)));
+						__setSaveEnabled(true);
+						return;
+					}
+				}
+
+				// 4) Upload visa file
+				if (__pending.newVisaFilePath) {
+					const res = await fetch('../backend/api/agent-api.php', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({
+							action: 'updateAgentVisaFile',
+							visaApplicationId,
+							visaFilePath: __pending.newVisaFilePath
+						}),
+						credentials: 'same-origin'
+					});
+					const j = await res.json().catch(() => ({}));
+					if (!res.ok || !j?.success) {
+						alert('Failed to save visa file: ' + (j?.message || ('HTTP ' + res.status)));
+						__setSaveEnabled(true);
+						return;
+					}
+				}
+
+				alert('Saved successfully.');
+				window.location.reload();
+			} catch (e) {
+				console.error('handleSaveChanges error:', e);
+				alert('An error occurred while saving.');
+				__setSaveEnabled(true);
+			}
+		}
+
+		function downloadStaticDoc(path) {
+			if (!path) return;
+			window.open(path, '_blank');
+		}
+
+		function downloadAttachment(filePath) {
+			const raw = String(filePath || '').trim();
+			if (!raw) return;
+			let p = raw;
+			if (p.startsWith('uploads/')) p = '/' + p;
+			window.open(`/backend/api/download.php?file=${encodeURIComponent(p)}`, '_blank');
+		}
+
+		function escapeHtml(text) {
+			const div = document.createElement('div');
+			div.textContent = text;
+			return div.innerHTML;
+		}
+	</script>
+</body>
+
+</html>

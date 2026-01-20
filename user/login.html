@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel | Log In</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="/css/i18n-boot.css">
+    <script src="/js/i18n-boot.js"></script>
+    <script src="../js/i18n.js" defer></script>
+    <!-- NOTE -->
+    <script src="../js/api.js?v=20251218"></script>
+    <script src="../js/login.js?v=20251218_2"></script>
+    <script src="../js/password.js" defer></script>
+    <script src="../js/input_member.js" defer></script>
+    <script src="../js/validation.js" defer></script>
+</head>
+<body>
+    <div class="main">
+        <header class="header-type2">
+            <a class="btn-mypage" href="#none" id="closeLoginBtn" aria-label="Close"><img src="../images/ico_close_black.svg" alt=""></a>
+            <div class="title"><img class="img-logo" src="../images/logo_txt.svg"></div>
+            <div></div>
+        </header>
+
+        <div class="px20">
+            <h2 class="text fz20 fw600 lh28 black12 txt-center mt88" data-i18n="logIn">Log In</h2>
+            <div class="mt32">
+                <input class="input-type1" id="email" type="text" data-i18n-placeholder="email" placeholder="Email">
+                <div class="input-wrap1 mt14">
+                    <input class="input-type1" id="password" type="password" data-i18n-placeholder="passwordPlaceholder" placeholder="8-12 characters, including letters/numbers/special characters">
+                    <button class="btn-eye" type="button"><img src="../images/ico_eye_off.svg" alt=""></button>
+                </div>
+            </div>
+            <div class="mt12">
+                <ul class="check-type4">
+                    <li>
+                        <label for="chk3">
+                            <input type="checkbox" id="chk3" value="">
+                            <span data-i18n="autoLogin">Auto Login</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <button class="btn primary lg inactive mt32" type="button" id="loginBtn" data-i18n="logIn">Log In</button>
+
+            <ul class="account-utils mt16">
+                <li><a href="find-id.html" data-i18n="findId">Find ID</a></li>
+                <li><a href="change-password1.html" data-i18n="changePassword">Change Password</a></li>
+                <li><a href="join.html" data-i18n="signUp">Sign Up</a></li>
+            </ul>
+        </div>
+
+        <!-- NOTE -->
+        <div class="layer" id="noMemberLayer" style="display: none;"></div>
+        <div class="alert-modal" id="noMemberPopup" style="display: none;">
+            <div class="guide" data-i18n="noMemberInfo">There is no member information that matches the information you entered.</div>
+            <div class="align gap12">
+                <button class="btn primary lg" type="button" id="noMemberOkBtn" data-i18n="confirm" style="width: 100%;">Confirm</button>
+            </div>
+        </div>
+
+        <!-- NOTE -->
+        <div class="layer" id="loginLimitLayer" style="display: none;"></div>
+        <div class="alert-modal" id="loginLimitPopup" style="display: none;">
+            <div class="guide" data-i18n="loginLimitMessage">Please try again in 15 minutes. Login has been temporarily restricted due to multiple failed attempts.</div>
+            <div class="align gap12">
+                <button class="btn primary lg" type="button" id="loginLimitOkBtn" data-i18n="confirm" style="width: 100%;">Confirm</button>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

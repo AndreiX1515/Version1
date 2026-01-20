@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel | Notice</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="/css/i18n-boot.css">
+    <script src="/js/i18n-boot.js"></script>
+    <script src="../js/i18n.js" defer></script>
+</head>
+<body>
+    <div class="main bg white mh100">
+        <header class="header-type2 bg white">
+            <a class="btn-mypage" href="#none" id="backBtn"><img src="../images/ico_back_black.svg"></a>
+            <div class="title">Notice</div>
+            <div style="width:50px;">
+                <a class="btn-registration" id="noticeRegistrationLink" href="notice-registration.html" style="font-size: 12px; line-height: 6px;">
+                    Notice Registration
+                </a>
+            </div>
+        </header>
+
+        <div id="noticesContainer">
+            <div class="px20 pb20 border-bottom10">
+                <div class="text fz14 fw400 lh22 black12 mt16" style="text-align: center; padding: 40px 0;">
+                    Loading...
+                </div>
+            </div>
+        </div>
+
+        <div class="layer" id="editDeleteModalLayer"></div>
+        <div class="permit type2" id="editDeleteModal">
+            <div>
+                <div class="align both vm">
+                    <div></div>
+                    <button class="btn-close" type="button" id="closeEditDeleteModal"><img src="../images/ico_close_black.svg" alt=""></button>
+                </div>
+               <button class="btn-edit" type="button" id="editBtn">Edit</button>
+               <button class="btn-delete" type="button" id="deleteBtn">Delete</button>
+            </div> 
+        </div>
+
+        <div class="layer" id="confirmPopupLayer"></div>
+        <div class="popup" id="confirmPopup">
+            <div class="popup-content">
+                <p class="text fz16 fw500 lh24 black12">Do you want to delete the post?</p>
+                <div class="popup-buttons">
+                    <button class="btn-cancel" type="button" id="cancelDeleteBtn">Cancel</button>
+                    <button class="btn-delete-popup" type="button" id="finalDeleteBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="layer" id="deletedPopupLayer"></div>
+        <div class="popup" id="deletedPopup">
+            <div class="popup-content">
+                <p class="text fz16 fw500 lh24 black12">Deleted</p>
+                <div class="popup-buttons">
+                    <button class="btn-confirm" type="button" id="closeDeletedPopupBtn">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <script>
+        let currentEditDeleteAnnouncementId = null;
+        let currentResolvedBookingId = '';
+
+        document.addEventListener("DOMContentLoaded", async function () {
+            const ok = await ensureGuideLoggedIn();
+            if (!ok) return;
+
+            const backBtn = document.getElementById('backBtn');
+            if (backBtn) {
+                backBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    history.back();
+                });
+            }
+
+            setupModalEvents();
+            await loadNotices();
+        });
+
+        // 브라우저 뒤로가기(bfcache)로 돌아왔을 때 데이터 새로고침
+        window.addEventListener('pageshow', async function (event) {
+            // bfcache에서 복원되었거나 등록/수정 완료 플래그가 있으면 데이터 새로고침
+            if (event.persisted || sessionStorage.getItem('noticeRegistered') === '1') {
+                sessionStorage.removeItem('noticeRegistered');
+                await loadNotices();
+            }
+        });
+
+        async function ensureGuideLoggedIn() {
+            try {
+                const sessionResponse = await fetch('../backend/api/check-session.php', { credentials: 'same-origin' });
+                const sessionData = await sessionResponse.json();
+
+                if (!sessionData || !sessionData.success || !sessionData.isLoggedIn) {
+                    window.location.href = 'login.html';
+                    return false;
+                }
+
+                const accountType = (sessionData?.user?.accountType || sessionData?.user?.account_type || '').toLowerCase();
+                if (accountType !== 'guide') {
+                    window.location.href = '../home.html';
+                    return false;
+                }
+
+                return true;
+            } catch (error) {
+                console.error('Session check error:', error);
+                window.location.href = 'login.html';
+                return false;
+            }
+        }
+
+        async function loadNotices() {
+            const container = document.getElementById('noticesContainer');
+            if (!container) return;
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const lang = urlParams.get('lang') || '';
+                // Checklist: show only today's itinerary (do not show other bookings)
+                const res = await fetch(`../backend/api/guide-notices.php?action=getGuideNotices&todayOnly=1`, {
+                    credentials: 'same-origin'
+                });
+                if (res.status === 401) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+
+                const json = await res.json();
+                const notices = Array.isArray(json?.data?.notices) ? json.data.notices : [];
+                currentResolvedBookingId = String(json?.data?.resolvedBookingId || '');
+
+                // Always show registration button (matches plan)
+                const regLink = document.getElementById('noticeRegistrationLink');
+                if (regLink) {
+                    const langQs = lang ? `&lang=${encodeURIComponent(lang)}` : '';
+                    if (currentResolvedBookingId) {
+                        regLink.style.display = '';
+                        regLink.href = `notice-registration.html?booking_id=${encodeURIComponent(currentResolvedBookingId)}${langQs}`;
+                    } else {
+                        // Checklist: hide registration button if no schedule today
+                        regLink.style.display = 'none';
+                    }
+                }
+
+                if (!currentResolvedBookingId) {
+                    alert('There is no schedule planned for today.');
+                    container.innerHTML = `
+                        <div class="px20 pb20 border-bottom10">
+                            <div class="text fz14 fw400 lh22 black12 mt16" style="text-align: center; padding: 40px 0;">
+                                No schedule today.
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                if (notices.length === 0) {
+                    container.innerHTML = `
+                        <div class="px20 pb20 border-bottom10">
+                            <div class="text fz14 fw400 lh22 black12 mt16" style="text-align: center; padding: 40px 0;">
+                                No notices have been registered.
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = notices.map((notice) => {
+                    const aid = Number(notice.announcementId || notice.noticeId || 0) || 0;
+                    return `
+                        <div class="px20 pb20 border-bottom10" data-announcement-id="${aid}">
+                            <div class="align both vm mt4">
+                                <div class="text fz14 fw600 lh22 gray96 mt16">Registration date/time</div>
+                                <button class="btn-more" type="button" data-announcement-id="${aid}"><img src="../images/ico_more.svg" alt=""></button>
+                            </div>
+                            <div class="text fz14 fw400 lh22 black12 mt4">${escapeHtml(notice.registrationDateTime || notice.createdAt || '')}</div>
+                            <div class="text fz14 fw600 lh22 gray96 mt20">Title</div>
+                            <div class="text fz14 fw400 lh22 black12 mt4">${escapeHtml(notice.title || '')}</div>
+                            <div class="text fz14 fw600 lh22 gray96 mt20">Content</div>
+                            <div class="text fz14 fw400 lh22 black12 mt4">${escapeHtml(notice.content || '').replace(/\\n/g, '<br>')}</div>
+                        </div>
+                    `;
+                }).join('');
+
+                document.querySelectorAll('button.btn-more[data-announcement-id]').forEach((btn) => {
+                    btn.addEventListener('click', () => {
+                        const id = btn.getAttribute('data-announcement-id');
+                        if (!id) return;
+                        showEditDeleteModal(Number(id));
+                    });
+                });
+            } catch (e) {
+                console.error('Error loading notice:', e);
+                container.innerHTML = `
+                    <div class="px20 pb20 border-bottom10">
+                        <div class="text fz14 fw400 lh22 black12 mt16" style="text-align: center; padding: 40px 0;">
+                            An error occurred while loading data.
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function setupModalEvents() {
+            const closeEditDeleteModal = document.getElementById('closeEditDeleteModal');
+            const editDeleteModalLayer = document.getElementById('editDeleteModalLayer');
+            const editBtn = document.getElementById('editBtn');
+            const deleteBtn = document.getElementById('deleteBtn');
+
+            const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+            const confirmPopupLayer = document.getElementById('confirmPopupLayer');
+            const finalDeleteBtn = document.getElementById('finalDeleteBtn');
+
+            const closeDeletedPopupBtn = document.getElementById('closeDeletedPopupBtn');
+            const deletedPopupLayer = document.getElementById('deletedPopupLayer');
+
+            if (closeEditDeleteModal) closeEditDeleteModal.addEventListener('click', hideEditDeleteModal);
+            if (editDeleteModalLayer) editDeleteModalLayer.addEventListener('click', hideEditDeleteModal);
+
+            if (editBtn) {
+                editBtn.addEventListener('click', () => {
+                    if (!currentEditDeleteAnnouncementId) return;
+                    const qs = currentResolvedBookingId ? `&booking_id=${encodeURIComponent(currentResolvedBookingId)}` : '';
+                    window.location.href = `notice-registration.html?id=${encodeURIComponent(currentEditDeleteAnnouncementId)}${qs}`;
+                });
+            }
+
+            if (deleteBtn) {
+                deleteBtn.addEventListener('click', () => {
+                    if (!currentEditDeleteAnnouncementId) return;
+                    hideEditDeleteModal();
+                    showConfirmPopup();
+                });
+            }
+
+            if (cancelDeleteBtn) cancelDeleteBtn.addEventListener('click', hideConfirmPopup);
+            if (confirmPopupLayer) confirmPopupLayer.addEventListener('click', hideConfirmPopup);
+
+            if (finalDeleteBtn) {
+                finalDeleteBtn.addEventListener('click', async () => {
+                    await deleteNotice();
+                });
+            }
+
+            if (closeDeletedPopupBtn) {
+                closeDeletedPopupBtn.addEventListener('click', () => {
+                    hideDeletedPopup();
+                    loadNotices();
+                });
+            }
+            if (deletedPopupLayer) {
+                deletedPopupLayer.addEventListener('click', () => {
+                    hideDeletedPopup();
+                    loadNotices();
+                });
+            }
+        }
+
+        function showEditDeleteModal(announcementId) {
+            currentEditDeleteAnnouncementId = announcementId;
+            const layer = document.getElementById('editDeleteModalLayer');
+            const modal = document.getElementById('editDeleteModal');
+            if (layer) layer.classList.add('active');
+            if (modal) modal.classList.add('active');
+        }
+
+        function hideEditDeleteModal() {
+            const layer = document.getElementById('editDeleteModalLayer');
+            const modal = document.getElementById('editDeleteModal');
+            if (layer) layer.classList.remove('active');
+            if (modal) modal.classList.remove('active');
+        }
+
+        function showConfirmPopup() {
+            const layer = document.getElementById('confirmPopupLayer');
+            const popup = document.getElementById('confirmPopup');
+            if (layer) layer.classList.add('active');
+            if (popup) popup.classList.add('active');
+        }
+
+        function hideConfirmPopup() {
+            const layer = document.getElementById('confirmPopupLayer');
+            const popup = document.getElementById('confirmPopup');
+            if (layer) layer.classList.remove('active');
+            if (popup) popup.classList.remove('active');
+        }
+
+        function showDeletedPopup() {
+            const layer = document.getElementById('deletedPopupLayer');
+            const popup = document.getElementById('deletedPopup');
+            if (layer) layer.classList.add('active');
+            if (popup) popup.classList.add('active');
+        }
+
+        function hideDeletedPopup() {
+            const layer = document.getElementById('deletedPopupLayer');
+            const popup = document.getElementById('deletedPopup');
+            if (layer) layer.classList.remove('active');
+            if (popup) popup.classList.remove('active');
+        }
+
+        async function deleteNotice() {
+            if (!currentEditDeleteAnnouncementId) return;
+            try {
+                const res = await fetch('../backend/api/guide-notices.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'same-origin',
+                    body: JSON.stringify({
+                        action: 'deleteGuideNotice',
+                        announcementId: currentEditDeleteAnnouncementId
+                    })
+                });
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const json = await res.json();
+                if (!json || !json.success) {
+                    alert(json?.message || 'Failed to delete.');
+                    hideConfirmPopup();
+                    return;
+                }
+                hideConfirmPopup();
+                showDeletedPopup();
+                currentEditDeleteAnnouncementId = null;
+            } catch (e) {
+                console.error('Error deleting notice:', e);
+                alert('An error occurred while deleting.');
+                hideConfirmPopup();
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = String(text ?? '');
+            return div.innerHTML;
+        }
+   </script>
+
+    <style>
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            z-index: 10001;
+            min-width: 280px;
+            max-width: 90%;
+            display: none;
+        }
+        .popup.active { display: block; }
+        .popup-content { text-align: center; }
+        .popup-content p { margin-bottom: 24px; }
+        .popup-buttons { display: flex; gap: 12px; }
+        .btn-cancel {
+            flex: 1; padding: 12px; background: white; border: 1px solid #ddd; border-radius: 8px;
+            font-size: 14px; font-weight: 500; color: #333; cursor: pointer;
+        }
+        .btn-delete-popup {
+            flex: 1; padding: 12px; background: #e74c3c; border: none; border-radius: 8px;
+            font-size: 14px; font-weight: 500; color: white; cursor: pointer;
+        }
+        .btn-confirm {
+            flex: 1; padding: 12px; background: #3498db; border: none; border-radius: 8px;
+            font-size: 14px; font-weight: 500; color: white; cursor: pointer;
+        }
+        .layer.active { display: block; }
+    </style>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel | Reservation Details - Completed</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="/css/i18n-boot.css">
+    <script src="/js/i18n-boot.js"></script>
+    <script src="../js/i18n.js" defer></script>
+    <script src="../js/auth-guard.js" defer></script>
+    <script src="../js/api.js" defer></script>
+    <script src="../js/tab.js" defer></script>
+    <script src="../js/booking.js" defer></script>
+    <script src="../js/reservation-detail.js" defer></script>
+</head>
+<body>
+    <div class="main bg white mh100">
+        <header class="header-type2 bg white">
+            <a class="btn-mypage" href="#none"><img src="../images/ico_back_black.svg"></a>
+            <div class="title">Reservation Details</div>
+            <div></div>
+        </header>
+        <div class="px20 pb20 mt18 border-bottom10">
+            <div class="label primary" id="bookingStatus">Reservation Completed</div>
+            <div class="text fz16 fw600 lh24 black12 py12">Product Information</div>
+            <a href="#" id="productLink">
+                <div class="align vm gap8 mt16">
+                    <img src="../images/@img_thumbnail.png" alt="" id="productImage">
+                    <div class="mxw100 hidden">
+                        <div class="text fz14 fw500 lh22 black12 ellipsis1" id="productName">Loading product information...</div>
+                        <p class="text fz14 fw600 lh22 black12" id="productPrice">₱0</p>
+                    </div>
+                    <img src="../images/ico_arrow_right_black.svg" alt="">
+                </div>
+            </a>
+            <div class="text fz14 fw600 lh22 gray96 mt12">Trip Dates</div>
+            <div class="text fz14 fw400 lh22 black12 mt4" id="tripDates">Loading travel schedule...</div>
+        </div>
+        <div class="px20 border-bottomf3">
+            <div class="text fz16 fw600 lh24 black12 py12">Reservation Information</div>
+        </div>
+        <div class="px20 pb20 border-bottom10">
+            <div class="text fz14 fw600 lh22 gray96 mt16">Reservation No.</div>
+            <div class="text fz14 fw400 lh22 black12 mt4" id="reservationNo">Loading reservation number...</div>
+            <div class="text fz14 fw600 lh22 gray96 mt20">Reservation Status</div>
+            <div class="text fz14 fw400 lh22 black12 mt4" id="reservationStatus">Loading reservation status...</div>
+            <div class="text fz14 fw600 lh22 gray96 mt20">Guests</div>
+            <div id="guestsInfo">
+                <!-- NOTE -->
+            </div>
+            <div class="text fz14 fw600 lh22 gray96 mt20">Room Option</div>
+            <div id="roomInfo">
+                <!-- NOTE -->
+            </div>
+            <div class="text fz14 fw600 lh22 gray96 mt20">Extra Baggage</div>
+            <p class="text fz14 fw400 lh22 black12 mt4" id="extraBaggage">Not selected</p>
+            <div class="text fz14 fw600 lh22 gray96 mt20">Breakfast Request</div>
+            <p class="text fz14 fw400 lh22 black12 mt4" id="breakfastRequest">Applied</p>
+            <div class="text fz14 fw600 lh22 gray96 mt20">Wi-Fi Rental</div>
+            <p class="text fz14 fw400 lh22 black12 mt4" id="wifiRental">Applied</p>
+            <div class="text fz14 fw600 lh22 gray96 mt20">Seat Preference</div>
+            <p class="text fz14 fw400 lh22 black12 mt4" id="seatPreference">Please seat me by the window.</p>
+            <div class="text fz14 fw600 lh22 gray96 mt20">Other Requests</div>
+            <p class="text fz14 fw400 lh22 black12 mt4" id="otherRequests">It's an anniversary trip, so please assign a quiet room.</p>
+            <div class="text fz14 fw600 lh22 gray96 mt20">Total Price</div>
+            <p class="text fz14 fw400 lh22 black12 mt4" id="totalPrice">₱0</p>
+        </div>
+        <div class="px20 border-bottomf3">
+             <div class="text fz16 fw600 lh24 black12 py12">Booker Information</div>
+        </div>
+        <div class="px20 pb20 border-bottom10">
+            <div class="text fz14 fw600 lh22 gray96 mt20">Booker Information</div>
+            <div class="card-type8 pink mt8">
+                <ul>
+                    <li class="align both vm">
+                        <div class="text fz14 fw400 lh22 black12">Name</div>
+                        <p class="text fz14 fw400 lh22 black12" id="bookerName">Loading booker information...</p>
+                    </li>
+                    <li class="align both vm mt8">
+                        <div class="text fz14 fw400 lh22 black12">Email</div>
+                        <p class="text fz14 fw400 lh22 black12" id="bookerEmail">Loading email...</p>
+                    </li>
+                    <li class="align both vm mt8">
+                        <div class="text fz14 fw400 lh22 black12">Phone number</div>
+                        <p class="text fz14 fw400 lh22 black12" id="bookerPhone">Loading phone number...</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="text fz14 fw600 lh22 gray96 mt20">Traveler Information</div>
+            <div id="travelersInfo">
+                <!-- NOTE -->
+            </div>
+        </div>
+        <div class="px20 border-bottomf3">
+            <div class="text fz16 fw600 lh24 black12 py12">Payment Information</div>
+        </div>
+        <div class="px20 pb20 border-bottom10">
+            <div class="text fz14 fw600 lh22 gray96 mt20">Payment Method</div>
+            <p class="text fz14 fw400 lh22 black12 mt4" id="paymentMethod">Loading payment method...</p>
+            <div class="text fz14 fw600 lh22 gray96 mt20">Payment Date&Time</div>
+            <p class="text fz14 fw400 lh22 black12 mt4" id="paymentDateTime">Loading payment date/time...</p>
+            <div class="text fz14 fw600 lh22 gray96 mt20">Order Amount</div>
+            <p class="text fz14 fw400 lh22 black12 mt4" id="orderAmount">₱0</p>
+            <div class="text fz14 fw600 lh22 gray96 mt20">Total Amount Paid</div>
+            <p class="text fz14 fw400 lh22 black12 mt4" id="totalAmountPaid">₱0</p>
+            <div class="mt16">
+                <button class="btn line lg" type="button" id="receiptBtn">Payment receipt</button>
+            </div>
+        </div>
+        <div class="px20 border-bottomf3">
+            <div class="text fz16 fw600 lh24 black12 py12">Travel Schedule</div>
+        </div>
+        <div class="px20 pb20 border-bottom10">
+            <div class="mt16">
+                <a class="btn secondary lg" href="#" id="scheduleLink">View schedule</a>
+            </div>
+            <div class="mt16">
+                <button class="btn line lg ico2 active" type="button" id="downloadScheduleBtn">Download full schedule</button>
+            </div>
+        </div>
+        <div class="px20 border-bottomf3">
+            <div class="text fz16 fw600 lh24 black12 py12">Usage Guide</div>
+        </div>
+        <div class="px20 pb20 border-bottom10">
+            <p class="text fz14 fw400 lh22 black12 mt16">Usage guide text will be displayed here.</p>
+            <div class="mt16">
+                <button class="btn line lg ico2 active" type="button">Download guide</button>
+            </div>
+        </div>
+         <div class="px20 border-bottomf3">
+            <div class="text fz16 fw600 lh24 black12 py12">Guide Information</div>
+        </div>
+        <div class="px20 pb20 pb20">
+            <div class="align both mt16">
+                <div>
+                    <div class="text fz14 fw600 lh22 gray96">Contact</div>
+                    <p class="text fz14 fw400 lh22 black12 mt4" id="guideContact">Loading guide information...</p>
+
+                    <div class="text fz14 fw600 lh22 gray96 mt16">Name</div>
+                    <p class="text fz14 fw400 lh22 black12 mt4" id="guidePhone">Loading guide contact...</p>
+
+                    <div class="text fz14 fw600 lh22 gray96 mt16">About Me</div>
+                    <p class="text fz14 fw400 lh22 black12 mt4" id="guideAbout">Loading guide introduction...</p>
+                </div>
+                <img class="img-80 rounded8" src="../images/@img_profile_square.png" alt="" id="guideImage">
+            </div>
+            <div class="mt16">
+                <a class="btn primary lg" href="#" id="guideLocationLink">Confirm guide location</a>
+            </div>
+            <div class="card-type12 mt40">
+                <div class="text fz16 fw600 lh24 black12">Cancellation Policy</div>
+                <p class="text fz14 fw400 lh22 black12">
+                    • Before 15 days of departure: 100% tour fare refund(No cancellation charge)<br>
+                    • Before 8-14 days of departure: 50% tour fare refund(50% cancellation charge)<br>
+                    • Before 4-7 days of departure: 30% tour fare refund(70% cancellation charge)<br>
+                    • Before 1-3 days of departure: 0% tour fare refund(100% cancellation charge)
+                </p>
+            </div>
+            <!-- NOTE -->
+            <div class="mt40">
+                <a class="btn line lg" href="#" id="cancellationLink">Reservation Cancel</a>
+            </div>
+            <div class="card-type grayf3 px16 py14 align both vm mt60">
+                <div class="align gap8 vm">
+                    <img src="../images/ico_inquiry_red.svg" alt="">
+                    <div class="text fz14 fw500 lh20 black12">Have any questions?</div>
+                </div>
+                <a href="inquiry.html" class="text fz14 fw500 lh20 reded">Customer Support <img src="../images/ico_arrow_right_red.svg" alt=""></a>
+            </div>
+        </div>
+</body>
+</html>

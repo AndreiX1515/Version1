@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel | Package Products</title>
+    <meta name="description" content="Browse Smart Travel's travel packages.">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="/css/i18n-boot.css">
+    <script src="/js/i18n-boot.js"></script>
+    <script src="../js/i18n.js" defer></script>
+    <link rel="stylesheet" href="../css/product-info.css">
+    <link rel="stylesheet" href="../css/sr-only.css">
+    <script src="../js/tab.js" defer></script>
+    <script src="../js/api.js" defer></script>
+    <script src="../js/product-info.js" defer></script>
+</head>
+<body>
+    <!-- Skip Navigation -->
+    
+    <div class="main" id="main-content" role="main">
+        <!-- Header -->
+        <header class="header-type2" style="box-shadow: none;" role="banner">
+            <a class="btn-mypage" href="#none" aria-label="Go back">
+                <img src="../images/ico_back_black.svg" alt="">
+            </a>
+            <div class="title"></div>
+            <button class="btn-search" aria-label="Search" onclick="toggleSearch()">
+                <img src="../images/ico_search_black.svg" alt="">
+            </button>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="search-container" id="searchContainer" role="search" aria-hidden="true">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search destinations or themes" aria-label="Search packages">
+                <button class="btn-search-submit" onclick="performSearch()" aria-label="Search">
+                    <img src="../images/ico_search_black.svg" alt="">
+                </button>
+            </div>
+        </div>
+
+        <!-- Category Tabs -->
+        <nav role="tablist" aria-label="Package categories">
+            <ul class="tab-type2 px20" style="box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);">
+                <li><a class="btn-tab2" href="?category=season" data-category="season" role="tab" aria-selected="false">By Season</a></li>
+                <li><a class="btn-tab2" href="?category=region" data-category="region" role="tab" aria-selected="false">By Region</a></li>
+                <li><a class="btn-tab2" href="?category=theme" data-category="theme" role="tab" aria-selected="false">By Theme</a></li>
+                <li><a class="btn-tab2" href="?category=private" data-category="private" role="tab" aria-selected="false">Private</a></li>
+            </ul>
+        </nav>
+
+        <!-- Sub Categories & Filters -->
+        <div class="filter-section" role="region" aria-label="Filter options">
+            <div class="mt16 px20 scroll-x">
+                <ul class="align gap12" id="subCategories" role="tablist" aria-label="Sub categories">
+                    <li>
+                        <button class="chips type2 active btn-category" type="button" role="tab" aria-selected="true">All</button>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Sort and View Options -->
+            <div class="filter-controls px20 mt12">
+                <div class="align both vm">
+                    <div class="align gap8">
+                        <label for="sortSelect" class="text fz14 fw400 lh20 gray6b">Sort</label>
+                        <select id="sortSelect" class="select-box" onchange="handleSortChange()">
+                            <option value="popular">Most popular</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="newest">Newest</option>
+                        </select>
+                    </div>
+                    <div class="align gap8">
+                        <button class="btn-view grid active" onclick="setViewType('grid')" aria-label="Grid view" aria-pressed="true">
+                            <img src="../images/ico_grid.svg" alt="">
+                        </button>
+                        <button class="btn-view list" onclick="setViewType('list')" aria-label="List view" aria-pressed="false">
+                            <img src="../images/ico_list.svg" alt="">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Package Count -->
+        <div class="package-info px20 mt16">
+            <div class="text fz14 fw400 lh20 gray6b">
+                <span id="packageCount">0</span> packages
+            </div>
+        </div>
+
+        <!-- Package List -->
+        <div class="package-container">
+            <ul class="list-type2 px20 mt8" id="packageList" role="grid" aria-label="Package list">
+                <!-- NOTE -->
+            </ul>
+            
+            <!-- Loading -->
+            <div class="loading-section" id="loadingSection" style="display: none;" aria-hidden="true">
+                <div class="loading-spinner"></div>
+                <div class="text fz14 fw400 lh20 gray6b mt12">Loading packages...</div>
+            </div>
+            
+            <!-- Load More -->
+            <div class="load-more-section" id="loadMoreSection" style="display: none;">
+                <button class="btn line lg" onclick="loadMorePackages()" id="loadMoreBtn">
+                    Load more (<span id="remainingCount">0</span>)
+                </button>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;" role="status">
+            <img src="../images/ico_empty.svg" alt="" class="empty-icon">
+            <div class="text fz16 fw500 lh24 black12 mt16">No results found</div>
+            <div class="text fz14 fw400 lh20 gray6b mt8">Try searching with a different keyword.</div>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button class="fab-filter" onclick="toggleFilterModal()" aria-label="Filter settings">
+        <img src="../images/ico_filter.svg" alt="">
+    </button>
+
+    <!-- Filter Modal -->
+    <div class="modal-overlay" id="filterModal" role="dialog" aria-modal="true" aria-labelledby="filterModalTitle" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="filterModalTitle" class="text fz18 fw600 lh26 black12">Filter settings</h2>
+                <button class="btn-close" onclick="toggleFilterModal()" aria-label="Close filter">
+                    <img src="../images/ico_close.svg" alt="">
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Price Filter -->
+                <div class="filter-group">
+                    <h3 class="text fz16 fw600 lh24 black12 mb12">Price range</h3>
+                    <div class="price-range">
+                        <input type="range" id="minPrice" min="0" max="2000000" value="0" step="50000">
+                        <input type="range" id="maxPrice" min="0" max="2000000" value="2000000" step="50000">
+                        <div class="price-labels">
+                            <span id="minPriceLabel">₱0</span>
+                            <span id="maxPriceLabel">₱2,000,000</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Duration Filter -->
+                <div class="filter-group">
+                    <h3 class="text fz16 fw600 lh24 black12 mb12">Trip duration</h3>
+                    <div class="duration-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="duration" value="1-3"> 1-3 days
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="duration" value="4-6"> 4-6 days
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="duration" value="7+"> 7+ days
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Features Filter -->
+                <div class="filter-group">
+                    <h3 class="text fz16 fw600 lh24 black12 mb12">Included</h3>
+                    <div class="feature-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="features" value="flight"> Airfare included
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="features" value="hotel"> Accommodation included
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="features" value="guide"> Guide included
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="features" value="meal"> Meals included
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn line lg" onclick="resetFilters()">Reset</button>
+                <button class="btn primary lg" onclick="applyFilters()">Apply</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

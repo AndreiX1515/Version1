@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel | 1:1 Inquiry Edit</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="/css/i18n-boot.css">
+    <script src="/js/i18n-boot.js"></script>
+    <script src="../js/i18n.js" defer></script>
+    <script src="../js/auth-guard.js" defer></script>
+    <script src="../js/api.js" defer></script>
+    <script src="../js/validation.js" defer></script>
+    <!-- NOTE -->
+    <script src="../js/button.js" defer></script>
+    <script src="../js/inquiry-edit.js?v=20251218_1" defer></script>
+</head>
+<body>
+    <div class="main bg white mh100 pb20">
+        <header class="header-type2 bg white">
+            <a class="btn-mypage" href="inquiry-detail.html" id="backToInquiryDetail"><img src="../images/ico_back_black.svg" alt=""></a>
+            <div class="title">1:1 Inquiry</div>
+            <div></div>
+        </header>
+       
+        <div class="px20 pb20 mt28">
+            <label class="label-input mb6" for="txt1">Reply email address<span class="text fz14 fw500 reded lh22 ml3">*</span></label>
+            <input class="input-type1" id="txt1" type="email" placeholder="email">
+            <label class="label-input mt16" for="txt2">Reply phone number<span class="text fz14 fw500 reded lh22 ml3">*</span></label>
+            <div class="align vm relative">
+                <select class="select-type1" name="" id="">
+                    <option value="">+63</option>
+                </select>
+                <input class="input-type2" id="txt2" type="tel" placeholder="Enter numbers only (no '-')">
+            </div>
+            <label class="label-input mt16" for="">Inquiry type<span class="text fz14 fw500 reded lh22 ml3">*</span></label>
+            <div class="custom-select mt10">
+                <div class="select-trigger">
+                    <span class="placeholder">Product Inquiry</span>
+                </div>
+                <ul class="select-options" style="display: none;">
+                    <!-- populated by JS -->
+                </ul>
+            </div>
+            <label class="label-input mt16" for="txt3">Inquiry content<span class="text fz14 fw500 reded lh22 ml3">*</span></label>
+            <input class="input-type1" id="txt3" type="text" placeholder="Inquiry content">
+            <textarea class="textarea-type1 mt16" name="" id="txt4" cols="30" rows="10" placeholder="Please enter content."></textarea>
+            <label class="label-input mt16" for="">Attachments</label>
+            <!-- NOTE -->
+            <div id="existingAttachmentsContainer" class="mt10"></div>
+
+            <!-- NOTE -->
+            <div class="img-upload-wrap mt10">
+                <ul class="img-upload" id="newAttachmentsList"></ul>
+            </div>
+            <div class="upload-box">
+                <label for="upload" class="upload-label">
+                    <span class="upload-icon"><img src="../images/ico_upload_black.svg" alt=""></span>
+                    <span class="upload-text">Upload</span>
+                </label>
+                <input type="file" id="upload" name="files[]" multiple accept=".jpg,.jpeg,.png,.gif,.pdf" hidden />
+            </div>
+            <p class="text fz12 fw400 lh16 gray96 mt10">* You can upload up to 5 photos/files.</p>
+            <p class="text fz12 fw400 lh16 gray96 mt4">* Only JPG, JPEG, PNG, GIF, and PDF files are allowed. Each file must be under 10MB.</p>
+            <div class="mt150">
+                <button class="btn primary lg" type="button">Submit</button>
+            </div>
+        </div>
+    </div>
+       
+</body>
+</html>     

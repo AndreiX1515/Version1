@@ -1,0 +1,45 @@
+@layer Pagination { 
+    .pagination { 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .btn-prev { 
+            background: transparent;
+        }
+        .btn-next { 
+            background: transparent;
+        }
+        ul { 
+            display: flex;
+            li {
+                display: flex;
+                align-items: center;
+                cursor: pointer; 
+                a { 
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 4rem;
+                    height: 4rem;
+                    border-radius: 2px;
+                    color: var(--gray78);
+                    font-size: 1.6rem;
+                    font-weight: 500;
+                    &.prev { 
+                        width: 2.4rem;
+                        height: 2.4rem;
+                    }
+                    &.next { 
+                        width: 2.4rem;
+                        height: 2.4rem;
+                    }
+                    &.active { 
+                        background: var(--navy26);
+                        color: var(--white);
+                    }
+
+                }
+            }
+        }
+    }
+}

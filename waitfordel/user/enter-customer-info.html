@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스마트 트래블 | 고객 정보 입력 (step3)</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/button.js" defer></script>
+</head>
+<body>
+    <div class="main">
+        <header class="header-type2">
+            <a class="btn-mypage" href="select-room.html"><img src="../images/ico_back_black.svg"></a>
+            <div class="title">Book Now</div>
+            <div></div>
+        </header>
+        <div class="mt16 px20 pb24 border-bottom10">
+            <div class="progress-type1">
+                <i class="active"></i>
+                <i class="active"></i>
+                <i class="active"></i>
+                <i></i>
+                <i></i>
+            </div>
+            <div class="text fz14 fw600 lh22 black12 mt8">4.19(Sat) 12:20<span class="text fw 700">departure</span></div>
+            <h3 class="text fz20 fw600 lh28 black12 mt24">Please enter<br>
+                    your personal information.</h3>
+
+            <div class="mt32">
+                <h3 class="text fz16 fw600 lh24 black12">Reservation Information</h3>
+                <div class="align right"> 
+                    <label class="align vm" for="chk1">
+                        <input type="checkbox" id="chk1" value="">
+                        <p class="text fz12 fw500 lh16 gray96 ml4">Loading my account information</p>
+                    </label>
+                </div>
+                <ul class="mt12">
+                    <li>
+                        <label class="label-input mb6" for="txt1">Name</label>
+                        <input class="input-type1" id="txt1" type="text" placeholder="Name" autocomplete="off">
+                    </li>
+                    <li class="mt16">
+                        <label class="label-input mb6" for="email">Email</label>
+                        <input class="input-type1" id="email" type="email" placeholder="Email" autocomplete="off">
+                        <div class="text fz12 fw400 lh16 reded mt4">The email format is not correct.</div>
+                    </li>
+                    <li class="mt16">
+                        <label class="label-input mb6" for="email">Contacts</label>
+                        <div class="align vm relative">
+                            <select class="select-type1" name="" id="">
+                                <option value="">+63</option>
+                            </select>
+                            <input class="input-type2" id="txt1" type="text" placeholder="-' Enter only numbers" autocomplete="off">
+                        </div>
+                        <div class="text fz12 fw400 lh16 reded mt4">Contact format is not correct.</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="px20 pt24">
+            <h3 class="text fz16 fw600 lh24 black12">Traveler Information</h3>
+            <ul class="mt12">
+                <li class="align both vm py12">
+                    <div class="text fz14 fw500 lh22 black12">Adult 1</div>
+                    <a class="text fz12 fw400 lh16 gray96 btn-input active" href="enter-traveler-info.html">Input before </a>
+                </li>
+                <li class="align both vm py12">
+                    <div class="text fz14 fw500 lh22 black12">Child (ages 3-7)1</div>
+                    <a class="text fz12 fw400 lh16 gray96 btn-input" href="enter-traveler-info.html">Input before</a>
+                </li>
+                <li class="align both vm py12">
+                    <div class="text fz14 fw500 lh22 black12">Child (ages 3-7)2</div>
+                    <a class="text fz12 fw400 lh16 gray96 btn-input" href="enter-traveler-info.html">Input before</a>
+                </li>
+            </ul>
+            <div class="mt50 pb12">
+                <a class="btn primary lg" href="add-option.html">Next</a>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

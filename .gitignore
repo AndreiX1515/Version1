@@ -1,0 +1,6 @@
+_e2e/
+_reports/
+.venv-e2e/
+.waitfordel/
+.images/
+uploads/

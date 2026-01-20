@@ -1,0 +1,34 @@
+@layer Counter { 
+    .counter { 
+        display: inline-flex;
+        padding: 4px;
+        align-items: center;
+        gap: 12px;
+        border-radius: 32px;
+        border: 1px solid var(--grayea);
+        button { 
+            width: 24px;
+            height: 24px;
+        }
+        .btn-minus {
+            &.disabled {
+                opacity: 0.4;
+                pointer-events: none;
+                cursor: default;
+            }
+        }
+        .count-value { 
+            color: var(--black12);
+            font-family: "Noto Sans";
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 22px;
+            &.is-zero {
+                color: var(--grayb0); /* 회색 */
+            }
+        }
+    }
+
+   
+
+}

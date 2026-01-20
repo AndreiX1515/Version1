@@ -1,0 +1,181 @@
+@layer Calendar {
+    .calendar-type1 { 
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 6px;
+        width: 100%;
+        min-width: max-content;
+        li { 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 44px !important;
+            height: 48px;
+            background: var(--white);
+            border-radius: 8px;
+            padding: 2px 4px;
+            
+            &.active { 
+                background: var(--secondary);
+                .date { 
+                    color: var(--reded);
+                }
+            }
+            .day { 
+                color: var(--black12);
+                text-align: center;
+                font-size: 12px;
+                font-weight: 500;
+                line-height: 16px; 
+                letter-spacing: 0.2px;
+            }
+            .date { 
+                color: var(--redffb);
+                text-align: center;
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 24px;                
+                letter-spacing: -0.1px;
+            }
+        }
+    }
+    .calendar-type2-wrap {
+        border-radius: 12px;
+        background: var(--white);
+        box-shadow: 0 0 4px 0 rgba(87, 87, 87, 0.03), 0 0 20px 0 rgba(198, 198, 198, 0.18);
+        padding: 14px;
+    }
+    .calendar { 
+        thead { 
+            tr { 
+                th { 
+                    height: 28px;
+                    // height: 4rem;
+                    color: #4E4E4E;
+                    text-align: center;
+                    font-size: 14px;
+                    font-weight: 500;
+                    line-height: 140%;
+                }
+            }
+        }
+        tbody { 
+            tr {
+                border: 1px solid var(--grayd4);
+                @media screen and (max-width: 1000px) {
+                    border: 0;
+                }
+                td { 
+                    color: var(--black12);
+                    font-size: 14px;
+                    font-weight: 600;
+                    position: relative;
+                    padding: .4rem;
+                    text-align: right;
+                    vertical-align: top;
+                    background: var(--white);
+                    cursor: pointer;
+                    height: 50px;
+                    text-align: center;
+                    border-radius: 4px;
+                    
+                    &.inactive { 
+                        color: var(--grayb0);
+                    }
+                    &.active { 
+                        background: var(--reded);
+                        color: var(--white);
+                    }
+                    &.holyday { 
+                        background: var(--grayf3);
+                        @media screen and (max-width: 1000px) {
+                            background: var(--white);
+                        }
+                    }
+
+                    &:nth-child(5),
+                    &:nth-child(6),
+                    &:nth-child(7) { 
+                        .schedule-view { 
+                            left: auto;
+                            right: 0;
+                        }
+                    }
+                    .schedule-view { 
+                        display: none;
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 2rem 0;
+                        position: absolute;
+                        top: 8rem;
+                        left: 1.6rem;
+                        padding: 2rem 0;
+                        margin-top: .2rem;
+                        background: var(--white);
+                        z-index: 100;
+                        text-align: left;
+                        border-radius: 6px;
+                        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
+                        &.active { 
+                            display: grid;
+                            max-height: 310px;
+                            overflow-y: auto;
+                            overflow-x: hidden;
+                        }
+                        @media screen and (max-width: 1000px) {
+                            display: none;
+                        }
+                        li { 
+                            position: relative;
+                            width: 14.5rem;
+                            margin-left: 2rem;
+                            padding-right: 2rem;
+                            border-right: 1px solid var(--grayf4);
+                            &:nth-child(3n) { 
+                                border-right: 0;
+                            }
+                        }
+                        label { 
+                            display: block;
+                        }
+                    }
+                    &.day { 
+                        .event { 
+                            @media screen and (max-width: 1000px) {
+                                ul {display: none}
+                                width: 5px;
+                                height: 5px;
+                                font-size: 0;
+                                border: 3px solid red;
+                                overflow: hidden;
+                                position: absolute;
+                                right: 10px;
+                                top: 10px;
+                                border-radius: 100%;
+                                &.active { 
+                                    width: 3.5rem;
+                                    height: 3.5rem;
+                                    border: 1px solid var(--navy09);
+                                    border-radius: 6px;
+                                    right:0;
+                                    top: 50%;
+                                    left: 50%;
+                                    transform: translate(-50%, -50%);
+                                }
+                            }
+                        }
+                    }
+                }
+                .today { 
+                    position: relative;
+                    background: var(--grayf69);
+                    color: var(--navy09);
+                    @media screen and (max-width: 1000px) {
+                        background: var(--white);
+                        color: var(--black00);
+                    }
+                }
+            }
+        }
+    }
+}

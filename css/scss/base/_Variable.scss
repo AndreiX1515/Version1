@@ -1,0 +1,108 @@
+:root {
+    /* Colors */
+    --primary: #ED1B23;
+    --secondary: #FFD6D6;
+
+    --black00: #000000;
+    --black12: #121212;
+    --black13: #131313;
+    --black21: #212121;
+    --black36: #363636;
+    --black4e: #4e4e4e;
+    
+    --blue21: #2165C2;
+    --bluecf: #CFE4FF;
+    --bluee1: #E1EAF3;
+
+    --orangedb: #DB7A00;
+    --orangef2: #F28B00;
+    --orangeff: #FF9800;
+    --reded: #ED1B23;
+    --FFF9F9: #FFD6D6;
+    --redffe: #FFE9E9;
+    --redfff: #FFF9F9;
+    --redffb: #FFB8B6;
+    --green1b: #1BAA5E;
+    --green3f: #3FC378;
+    --greend0: #D0F2DF;
+    --greenf7: #F7FCF9;
+    
+    --gray4e: #4e4e4e;
+    --gray44: #444444;
+    --gray40: #404446;
+    --gray4e: #4E4E4E;
+    --gray5d: #5D5D5D;
+    --gray56: #565656;
+    --gray6b: #6B6B6B;
+    --gray76: #767676;
+    --gray78: #787878;
+    --gray85: #858585;
+    --gray82: #828282;
+    --gray84: #848484;
+    --gray85: #858585;
+    --gray96: #969696;
+    --graya0: #A0A0A0;
+    --graya6: #A6A6A6;
+    --grayb0: #B0B0B0;
+    --grayb3: #B3B3B3;
+    --graycf: #cfcfcf;
+    --grayc9: #C9CCCF;
+    --grayd4: #D4D4D4;
+    --grayd9: #D9D9D9;
+    --bluee4: #E4EBFE;
+    --graye4: #E4E4E4;
+    --graye8: #E8E8E8;
+    --grayea: #EAEAEA;
+    --graye1: #E1E1E3;
+    --grayed: #EDEDED;
+    --grayec: #ECECEC;
+    --grayef: #EEEFF1;
+    --grayee: #EEE;
+    --grayeef: #EEEFF1;
+    --graye9: #E9E9E9;
+    --grayfa: #FAFCFF;
+    --grayf2: #f2f2f2;
+    --grayf3: #f3f3f3;
+    --grayf4: #f4f4f4;
+    --grayf5: #F5F9FE;
+    --grayf6: #f6f6f6;
+    --grayf8: #f8f8f8;
+    --grayf8f: #F8F9FB;
+    --grayf9: #F9F9F9;
+    --grayf69: #F6F9FF;
+    --grayfb: #FBFBFB;
+    --grayfc: #FCFCFC;
+    --white: #ffffff;
+  
+    --in-sine: cubic-bezier(0.47, 0, 0.745, 0.715);
+    --out-sine: cubic-bezier(0.39, 0.575, 0.565, 1);
+    --inout-sine: cubic-bezier(0.39, 0.575, 0.565, 1);
+    --in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    --out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --inout-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    --out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+    --inout-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+    --in-quart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+    --out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+    --inout-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+    --in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    --out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+    --inout-quint: cubic-bezier(0.23, 1, 0.32, 1);
+    --in-expo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+    --out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --inout-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.335);
+    --out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
+    --inout-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
+    --in-back: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    --out-back: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --inout-back: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  } 
+  
+  $img-path: "../images/";
+  $font-primary: 'Noto Sans', 'Pretendard'; 
+  // $font-secondary: 'GongGothicMedium', 'Pretendard';
+  $font-sans: 'Noto Sans';
+  
+  .relative { position: relative; }

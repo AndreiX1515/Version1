@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN</title>
+
+	<!--   -->
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+
+	<!-- editor -->
+	<link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.js"></script>
+</head>
+
+<body>
+
+	<!-- header   -->
+	<header class="layout-header"></header>
+
+	<!--   -->
+	<main class="layout-main">
+		<!-- nav   -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content">
+			<div class="page-toolbar">
+				<a href="inquiry-list.html" class="jw-button" aria-label=" ">
+					<img src="../image/arrow4.svg" alt="">
+					<span data-lan-eng="Return to list">Return to list</span>
+				</a>
+
+				<div class="page-toolbar-actions">
+					<button type="button" class="jw-button typeB" id="save-btn" data-lan-eng="Save">Save</button>
+				</div>
+			</div>
+
+			<h1 class="page-title" data-lan-eng="Inquiry detail">Inquiry detail</h1>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Inquiry details">Inquiry details</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+
+					<!--  -->
+					<div class="grid-item">
+						<label class="label-name" for="created_at" data-lan-eng="Created at">Created at</label>
+						<input id="created_at" type="text" class="form-control" value="" disabled>
+					</div>
+					<div class="grid-item"></div>
+					<div class="grid-item"></div>
+
+					<!--  -->
+					<div class="grid-item col-span-3">
+						<label class="label-name" for="title" data-lan-eng="Title">Title</label>
+						<input id="title" type="text" class="form-control" value="">
+					</div>
+
+					<!--  -->
+					<div class="grid-item col-span-3">
+						<label class="label-name" for="content" data-lan-eng="Content">Content</label>
+						<div class="editor-box-wrap">
+							<div class="jw-editor" id="content-editor">
+								<div class="toolbar" id="content-toolbar">
+									<div class="group">
+										<button type="button" class="editor-btn ql-bold"><img src="../image/editer_bold.svg" alt=""></button>
+										<button type="button" class="editor-btn ql-italic"><img src="../image/editer_italic.svg" alt=""></button>
+										<button type="button" class="editor-btn ql-underline"><img src="../image/editer_underline.svg" alt=""></button>
+										<button type="button" class="editor-btn ql-strike"><img src="../image/editer_strikethrough.svg" alt=""></button>
+										<button type="button" class="editor-btn font-color" onclick="setColor(this);">A</button>
+										<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+									</div>
+									<div class="group">
+										<select class="ql-size">
+											<option value="" selected>Font</option>
+											<option value="12px">12px</option>
+											<option value="14px">14px</option>
+											<option value="16px">16px</option>
+											<option value="18px">18px</option>
+											<option value="24px">24px</option>
+										</select>
+									</div>
+									<div class="group">
+										<button type="button" class="editor-btn ql-align" value=""><img src="../image/editer_left.svg" alt=""></button>
+										<button type="button" class="editor-btn ql-align" value="center"><img src="../image/editer_center.svg" alt=""></button>
+										<button type="button" class="editor-btn ql-align" value="right"><img src="../image/editer_right.svg" alt=""></button>
+									</div>
+									<div class="group">
+										<button type="button" class="editor-btn ql-list" value="ordered"><img src="../image/editer_ordered.svg" alt=""></button>
+										<button type="button" class="editor-btn ql-list" value="bullet"><img src="../image/editer_bullet.svg" alt=""></button>
+									</div>
+								</div>
+
+								<div class="jweditor" id="content" data-placeholder=" "></div>
+							</div>
+						</div>
+					</div>
+
+					<!--  -->
+					<div class="grid-item col-span-3">
+						<label class="label-name" data-lan-eng="Attachment">Attachment</label>
+						<div class="jw-mgb12" id="upload-btn-wrap" style="display: none;">
+							<label class="inputFile">
+								<input type="file" id="file-upload" multiple style="display:none;">
+								<button type="button" class="jw-button typeE" id="file-upload-btn"><img src="../image/upload.svg" alt=""> <span data-lan-eng="File upload">File upload</span></button>
+							</label>
+						</div>
+						<div class="attach-list" id="attach-list"></div>
+					</div>
+
+				</div>
+			</div>
+
+			<!--    (Case 1: Unanswered -   ) -->
+			<h2 class="section-title jw-mgt32" id="reply-section-title" data-lan-eng="Inquiry Response">Inquiry Response</h2>
+			<div class="card-panel jw-mgt16" id="reply-section">
+				<div class="grid-wrap">
+					<!-- Case 1: Unanswered -   -->
+					<div class="grid-item col-span-3" id="reply-input-section">
+						<label class="label-name" for="reply_content_input" data-lan-eng="Content">Content</label>
+						<div class="editor-box-wrap">
+							<div class="jw-editor" id="reply-content-editor">
+								<div class="toolbar" id="reply-content-toolbar">
+									<div class="group">
+										<button type="button" class="editor-btn ql-bold"><img src="../image/editer_bold.svg" alt=""></button>
+										<button type="button" class="editor-btn ql-italic"><img src="../image/editer_italic.svg" alt=""></button>
+										<button type="button" class="editor-btn ql-underline"><img src="../image/editer_underline.svg" alt=""></button>
+										<button type="button" class="editor-btn ql-strike"><img src="../image/editer_strikethrough.svg" alt=""></button>
+										<button type="button" class="editor-btn font-color" onclick="setColor(this);">A</button>
+										<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+									</div>
+									<div class="group">
+										<select class="ql-size">
+											<option value="" selected>Font</option>
+											<option value="12px">12px</option>
+											<option value="14px">14px</option>
+											<option value="16px">16px</option>
+											<option value="18px">18px</option>
+											<option value="24px">24px</option>
+										</select>
+									</div>
+									<div class="group">
+										<button type="button" class="editor-btn ql-align" value=""><img src="../image/editer_left.svg" alt=""></button>
+										<button type="button" class="editor-btn ql-align" value="center"><img src="../image/editer_center.svg" alt=""></button>
+										<button type="button" class="editor-btn ql-align" value="right"><img src="../image/editer_right.svg" alt=""></button>
+									</div>
+									<div class="group">
+										<button type="button" class="editor-btn ql-list" value="ordered"><img src="../image/editer_ordered.svg" alt=""></button>
+										<button type="button" class="editor-btn ql-list" value="bullet"><img src="../image/editer_bullet.svg" alt=""></button>
+									</div>
+								</div>
+								<div class="jweditor" id="reply_content_input" data-placeholder="  "></div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Case 1: Unanswered -   -->
+
+					<!-- Case 2: Answer completed - 답변 완료 시 표시 -->
+					<div class="inquiry-response-wrap" id="replied-section-wrap" style="display:none;">
+						<div class="inquiry-response-item">
+							<label class="label-name" for="replied_at" data-lan-eng="Response time">Response time</label>
+							<div class="inquiry-response-input-box" id="replied_at"></div>
+						</div>
+						<div class="inquiry-response-item">
+							<label class="label-name" data-lan-eng="Content">Content</label>
+							<div class="reply-content-box" id="reply_content_display"></div>
+						</div>
+					</div>
+					<!-- Case 2: Answer completed - 답변 완료 -->
+				</div>
+			</div>
+
+			<!-- Submit  (Case 1 ) -->
+			<div class="controller jw-mgt32" id="submit-section">
+				<button type="button" class="jw-button typeB" id="submit-btn" data-lan-eng="Submit">Submit</button>
+			</div>
+
+
+
+		</section>
+
+	</main>
+
+	<!--   -->
+	<script src="../js/default.js"></script>
+	<script src="../js/agent.js"></script>
+	<script src="../js/multi-editor.js"></script>
+	<script src="../js/agent-inquiry-detail.js?v=20251218_1"></script>
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_agent.html'
+		});
+	</script>
+</body>
+
+</html>

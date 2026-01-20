@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스마트 트래블 | 룸 옵션 선택 (step2)</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/counter.js" defer></script>
+</head>
+<body>
+    <div class="main">
+        <header class="header-type2">
+            <a class="btn-mypage" href="select-reservation.html"><img src="../images/ico_back_black.svg"></a>
+            <div class="title">Book Now</div>
+            <div></div>
+        </header>
+        <div class="mt16 px20 pb24 border-bottom10">
+            <div class="progress-type1">
+                <i class="active"></i>
+                <i class="active"></i>
+            <i></i>
+                <i></i>
+                <i></i>
+            </div>
+            <div class="text fz14 fw600 lh22 black12 mt8">4.19(Sat) 12:20<span class="text fw 700">departure</span></div>
+            <h3 class="text fz20 fw600 lh28 black12 mt24">Please choose a room<br>
+                    based on the number of guests.</h3>
+            <div class="card-type8 mt16">
+                <div class="text fz16 fw600 lh24 black12">Current Room Combination (0/3명)</div>
+                <p class="text fz12 fw400 lh16 orangedb mt8">*Children (2 years old or younger) are not included in the room occupancy.</p>
+            </div>
+            <ul class="mt32">
+                <li class="align vm both">
+                    <div>
+                        <p class="text fz14 fw500 lh22 black12">Standard room</p>
+                        <p class="text fz14 fw500 lh22 black12">2 people</p>
+                    </div>
+                    <div class="counter">
+                        <button class="btn-minus" type="button"><img src="../images/ico_minus.svg" alt=""></button>
+                        <p class="count-value">1</p>
+                        <button class="btn-plus" type="button"><img src="../images/ico_plus.svg" alt=""></button>
+                    </div>
+                </li>
+                <li class="align vm both mt20">
+                    <div>
+                        <p class="text fz14 fw500 lh22 black12">Double room</p>
+                        <p class="text fz14 fw500 lh22 black12">2 people</p>
+                    </div>
+                    <div class="counter">
+                        <button class="btn-minus" type="button"><img src="../images/ico_minus.svg" alt=""></button>
+                        <p class="count-value">1</p>
+                        <button class="btn-plus" type="button"><img src="../images/ico_plus.svg" alt=""></button>
+                    </div>
+                </li>
+                
+                <li class="align vm both mt20">
+                    <div>
+                        <p class="text fz14 fw500 lh22 black12">Triple room</p>
+                        <p class="text fz14 fw500 lh22 black12">3 people</p>
+                    </div>
+                    <div class="counter">
+                        <button class="btn-minus" type="button"><img src="../images/ico_minus.svg" alt=""></button>
+                        <p class="count-value">1</p>
+                        <button class="btn-plus" type="button"><img src="../images/ico_plus.svg" alt=""></button>
+                    </div>
+                </li>
+                <li class="align vm both mt20">
+                    <div>
+                        <p class="text fz14 fw500 lh22 black12">Family room</p>
+                        <p class="text fz14 fw500 lh22 black12">4 people</p>
+                    </div>
+                    <div class="counter">
+                        <button class="btn-minus" type="button"><img src="../images/ico_minus.svg" alt=""></button>
+                        <p class="count-value">1</p>
+                        <button class="btn-plus" type="button"><img src="../images/ico_plus.svg" alt=""></button>
+                    </div>
+                </li>
+                <li class="align vm both mt20">
+                    <div>
+                        <p class="text fz14 fw500 lh22 black12">Single room</p>
+                        <p class="text fz14 fw500 lh22 black12">1 person</p>
+                        <span class="text fz14 fw400 lh22 black12">₱10,000</span>
+                    </div>
+                    <div class="counter">
+                        <button class="btn-minus" type="button"><img src="../images/ico_minus.svg" alt=""></button>
+                        <p class="count-value">1</p>
+                        <button class="btn-plus" type="button"><img src="../images/ico_plus.svg" alt=""></button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="px20 mt24">
+            <div class="align both vm">
+                <p class="text fz14 fw400 lh22 black12">Adult x1</p>
+                <span class="text fz14 fw400 lh22 black12">₱34,000</span>
+            </div>
+            <div class="align both vm mt8">
+                <p class="text fz14 fw400 lh22 black12">Children x2</p>
+                <span class="text fz14 fw400 lh22 black12">₱68,000</span>
+            </div>
+            <div class="align both vm mt8">
+                <p class="text fz14 fw400 lh22 black12">Standard room x1</p>
+                <span class="text fz14 fw400 lh22 black12">₱0</span>
+            </div>
+            <div class="align both vm mt8 pb24 border-bottomea">
+                <p class="text fz14 fw400 lh22 black12">Single room x5</p>
+                <span class="text fz14 fw400 lh22 black12">₱50,000</span>
+            </div>
+            <div class="mt24 align both vm">
+                <div class="text fz16 fw600 lh24 black12">Total product amount</div>
+                <strong class="text fz20 fw600 lh28 black12">₱112,000</strong>
+            </div>
+            <p class="align right mt4 text fz14 fw400 grayb0 lh140">Payment fee and VAT included</p>
+
+            <div class="mt88 mb12">
+                <div class="text fz12 fw400 lh16 reded mt4 mb12 align center">The number of people does not match the room capacity.</div>
+                <div class="text fz12 fw400 lh16 green1b mt4 mb12 align center">The room combination has been completed.</div>
+                <!-- 알맞게 선택 되었을 때에는 inactive 제거 -->
+                <a class="btn primary lg inactive" href="enter-customer-info.html">Next</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

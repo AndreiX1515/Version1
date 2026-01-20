@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN</title>
+
+	<!--   -->
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+</head>
+
+<body>
+
+	<!-- header   -->
+	<header class="layout-header"></header>
+
+	<!--   -->
+	<main class="layout-main">
+		<!-- nav   -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content">
+
+			<h1 class="page-title" data-lan-eng="Detailed Itinerary">Detailed Itinerary</h1>
+
+			<!--  -->
+			<div class="tab-wrap jw-mgt32">
+				<button type="button" class="tab-btn active" data-tab="today" onclick="switchTab('today')">Today's Itinerary</button>
+				<button type="button" class="tab-btn" data-tab="detailed" onclick="switchTab('detailed')">Detailed Itinerary</button>
+			</div>
+
+			<!-- Today's Itinerary   ( ) -->
+			<div id="todayTabContent" class="tab-content" style="display: none;">
+				<div class="card-panel jw-mgt32">
+					<p>Today's Itinerary content will be displayed here.</p>
+				</div>
+			</div>
+
+			<!-- Detailed Itinerary   ( ) -->
+			<div id="detailedTabContent" class="tab-content">
+				<div class="tab-wrap jw-mgt32">
+					<p>   </p>
+					<a href="#" target="_blank" id="meetingLocationLink"><span> </span><img src="../image/linkout.svg" alt=""></a>
+					<a href="#" target="_blank" id="announcementsLink"><span></span><img src="../image/linkout.svg" alt=""></a>
+				</div>
+
+				<h2 class="section-title jw-mgt32" data-lan-eng="Product Information">Product Information</h2>
+				<div class="card-panel jw-mgt16">
+					<div class="grid-wrap">
+						<!-- 1 :   -->
+						<div class="grid-item col-span-3">
+							<label class="label-name" data-lan-eng="Product Name">Product Name</label>
+							<input type="text" class="form-control" id="packageName" disabled>
+						</div>
+
+						<!-- 2 : // -->
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Travel Period">Travel Period</label>
+							<input type="text" class="form-control" id="travelPeriod" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Meeting Time">Meeting Time</label>
+							<input type="datetime-local" class="form-control" id="meetingTime" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Meeting Location">Meeting Location</label>
+							<input type="text" class="form-control" id="meetingLocation" placeholder=" 2" disabled>
+						</div>
+					</div>
+				</div>
+
+				<h2 class="section-title jw-mgt32" data-lan-eng="Flight Information">Flight Information</h2>
+				<div class="card-panel jw-mgt16">
+					<h3 class="grid-wrap-title" data-lan-eng="Departure Flight">Departure Flight</h3>
+					<div class="grid-wrap jw-mgt16">
+						<!-- 1 -->
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Flight Number">Flight Number</label>
+							<input type="text" class="form-control" id="departureFlightNumber" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Departure Date/Time">Departure Date/Time</label>
+							<input type="datetime-local" class="form-control" id="departureDateTime" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Arrival Date/Time">Arrival Date/Time</label>
+							<input type="datetime-local" class="form-control" id="departureArrivalDateTime" disabled>
+						</div>
+
+						<!-- 2 -->
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Departure Point">Departure Point</label>
+							<input type="text" class="form-control" id="departurePoint" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Destination">Destination</label>
+							<input type="text" class="form-control" id="departureDestination" disabled>
+						</div>
+						<div class="grid-item"></div>
+					</div>
+				</div>
+				<div class="card-panel jw-mgt16">
+					<h3 class="grid-wrap-title" data-lan-eng="Return Flight">Return Flight</h3>
+					<div class="grid-wrap jw-mgt16">
+						<!-- 1 -->
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Flight Number">Flight Number</label>
+							<input type="text" class="form-control" id="returnFlightNumber" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Departure Date/Time">Departure Date/Time</label>
+							<input type="datetime-local" class="form-control" id="returnDepartureDateTime" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Arrival Date/Time">Arrival Date/Time</label>
+							<input type="datetime-local" class="form-control" id="returnArrivalDateTime" disabled>
+						</div>
+
+						<!-- 2 -->
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Departure Point">Departure Point</label>
+							<input type="text" class="form-control" id="returnDeparturePoint" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Destination">Destination</label>
+							<input type="text" class="form-control" id="returnDestination" disabled>
+						</div>
+						<div class="grid-item"></div>
+					</div>
+				</div>
+
+				<h2 class="section-title jw-mgt32" data-lan-eng="Reservation Information">Reservation Information</h2>
+				<div class="card-panel jw-mgt16">
+					<div class="grid-wrap">
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Number of People">Number of People</label>
+							<input type="text" class="form-control" id="reservationPeople" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Room Option">Room Option</label>
+							<input type="text" class="form-control" id="roomOption" disabled>
+						</div>
+					</div>
+				</div>
+
+				<h2 class="section-title jw-mgt32" data-lan-eng="Travel Customer Information">Travel Customer Information</h2>
+				<div class="card-panel jw-mgt16">
+					<table class="jw-tableA">
+						<colgroup>
+							<col class="col-60"> <!-- No -->
+							<col><!--  -->
+							<col><!--  -->
+							<col><!--  -->
+							<col><!--   -->
+						</colgroup>
+
+						<thead>
+							<tr>
+								<th class="is-center">No</th>
+								<th data-lan-eng="Name">Name</th>
+								<th data-lan-eng="Last Name">Last Name</th>
+								<th data-lan-eng="Passport number">Passport number</th>
+								<th data-lan-eng="Number of people option">Number of people option</th>
+							</tr>
+						</thead>
+
+						<tbody id="travelersTableBody">
+							<tr>
+								<td colspan="5" class="is-center">  ...</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<div class="jw-pagebox" role="navigation" aria-label="" id="travelersPagination">
+						<div class="contents">
+							<button type="button" class="first" aria-label=" " aria-disabled="true" id="travelersFirstPage">
+								<img src="../image/first.svg" alt="">
+							</button>
+							<button type="button" class="prev" aria-label=" " aria-disabled="true" id="travelersPrevPage">
+								<img src="../image/prev.svg" alt="">
+							</button>
+
+							<div class="page" role="list" id="travelersPageNumbers">
+								<!--   JavaScript   -->
+							</div>
+
+							<button type="button" class="next" aria-label=" " aria-disabled="true" id="travelersNextPage">
+								<img src="../image/next.svg" alt="">
+							</button>
+							<button type="button" class="last" aria-label=" " aria-disabled="true" id="travelersLastPage">
+								<img src="../image/last.svg" alt="">
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</section>
+
+	</main>
+
+	<!--   -->
+	<script src="../js/default.js"></script>
+	<script src="../js/guide.js"></script>
+
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_guide.html'
+		});
+
+		let bookingId = null;
+		let currentScheduleData = null;
+		let travelersCurrentPage = 1;
+		const travelersLimit = 10;
+
+		document.addEventListener('DOMContentLoaded', async () => {
+			try {
+				const __testGuide = new URLSearchParams(window.location.search).get('test_guide');
+				const __qs = __testGuide ? `?test_guide=${encodeURIComponent(__testGuide)}` : '';
+				const sessionResponse = await fetch('../backend/api/check-session.php' + __qs, {
+					credentials: 'same-origin'
+				});
+				const sessionData = await sessionResponse.json();
+				
+				if (!sessionData.authenticated || (sessionData.userType && sessionData.userType !== 'guide')) {
+					window.location.href = '../index.html';
+					return;
+				}
+				
+				const urlParams = new URLSearchParams(window.location.search);
+				bookingId = urlParams.get('id') || urlParams.get('bookingId');
+				
+				if (bookingId) {
+					await loadScheduleDetail();
+				} else {
+					// bookingId  " "   /
+					await resolveTodayBookingAndLoad();
+				}
+			} catch (error) {
+				console.error('Session check error:', error);
+				window.location.href = '../index.html';
+				return;
+			}
+		});
+
+		async function resolveTodayBookingAndLoad() {
+			try {
+				const __testGuide = new URLSearchParams(window.location.search).get('test_guide');
+				const __tq = __testGuide ? `&test_guide=${encodeURIComponent(__testGuide)}` : '';
+				const res = await fetch(`../backend/api/guide-api.php?action=getTodayBookings${__tq}`, { credentials: 'same-origin' });
+				if (!res.ok) throw new Error('HTTP ' + res.status);
+				const json = await res.json();
+				const bookings = (json && json.success && json.data && Array.isArray(json.data.bookings)) ? json.data.bookings : [];
+
+				if (bookings.length === 0) {
+					//    :  
+					try {
+						if (typeof modal === 'function') modal('../popup/no-today-schedule.html', '580px', '252px');
+						else alert('  .');
+					} catch {
+						try { alert('  .'); } catch {}
+					}
+					return;
+				}
+
+				//      :      
+				bookingId = bookings[0].bookingId;
+				const qs = new URLSearchParams();
+				qs.set('id', String(bookingId));
+				if (__testGuide) qs.set('test_guide', String(__testGuide));
+				window.location.href = `assigned-schedule-detail.html?${qs.toString()}`;
+			} catch (e) {
+				console.error('Failed to resolve today booking:', e);
+				try { alert('   .'); } catch {}
+			}
+		}
+
+		function renderTodaySummary(b, today) {
+			const container = document.getElementById('todayTabContent');
+			if (!container) return;
+			container.innerHTML = `
+				<div class="card-panel jw-mgt32">
+					<p><strong> </strong> ${today ? `(${escapeHtml(today)})` : ''}</p>
+					<p style="margin-top: 8px;">${escapeHtml(String(b.packageName || ''))}</p>
+					<p style="margin-top: 6px; color:#666;">${escapeHtml(String(b.travelStartDate || ''))} - ${escapeHtml(String(b.travelEndDate || ''))}</p>
+				</div>
+			`;
+		}
+
+		//  ( onclick )
+		function selectTodayBooking(id) {
+			bookingId = id;
+			// test_guide  
+			try {
+				const u = new URLSearchParams(window.location.search);
+				u.set('id', String(id));
+				u.delete('bookingId');
+				history.replaceState({}, '', `today-schedule-detail.html?${u.toString()}`);
+			} catch {}
+			updateExternalLinks();
+			loadScheduleDetail();
+		}
+
+		function updateExternalLinks() {
+			if (!bookingId) return;
+			try {
+				const loc = document.getElementById('meetingLocationLink');
+				const noti = document.getElementById('announcementsLink');
+				if (loc) loc.href = `../../user/guide-location.php?booking_id=${encodeURIComponent(String(bookingId))}`;
+				if (noti) noti.href = `../../user/guide-notice.html?booking_id=${encodeURIComponent(String(bookingId))}`;
+			} catch (_) {}
+		}
+
+		function switchTab(tabName) {
+			//   
+			document.querySelectorAll('.tab-btn').forEach(btn => {
+				btn.classList.remove('active');
+			});
+			document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+			
+			//   /
+			document.getElementById('todayTabContent').style.display = tabName === 'today' ? 'block' : 'none';
+			document.getElementById('detailedTabContent').style.display = tabName === 'detailed' ? 'block' : 'none';
+		}
+
+		async function loadScheduleDetail() {
+			try {
+				const __testGuide = new URLSearchParams(window.location.search).get('test_guide');
+				const __tq = __testGuide ? `&test_guide=${encodeURIComponent(__testGuide)}` : '';
+				const response = await fetch(`../backend/api/guide-api.php?action=getTodayScheduleDetail&id=${bookingId}${__tq}`, {
+					credentials: 'same-origin'
+				});
+
+				if (!response.ok) throw new Error('HTTP ' + response.status);
+
+				const result = await response.json();
+
+				if (result.success && result.data && result.data.schedule) {
+					currentScheduleData = result.data.schedule;
+					const schedule = result.data.schedule;
+					updateExternalLinks();
+					// Today   (bookingId  )
+					try {
+						renderTodaySummary({
+							bookingId: bookingId,
+							packageName: schedule.packageName,
+							travelStartDate: schedule.travelStartDate,
+							travelEndDate: schedule.travelEndDate
+						}, '');
+					} catch {}
+					
+					//  
+					document.getElementById('packageName').value = schedule.packageName || '';
+					
+					//  
+					if (schedule.travelStartDate && schedule.travelEndDate) {
+						document.getElementById('travelPeriod').value = `${schedule.travelStartDate} - ${schedule.travelEndDate}`;
+					} else if (schedule.travelStartDate) {
+						document.getElementById('travelPeriod').value = schedule.travelStartDate;
+					}
+					
+					//     (bookings   )
+					const meetingTime = schedule.meetingTime || schedule.departureTime || schedule.travelStartDate;
+					if (meetingTime) {
+						const meetingDateTime = new Date(meetingTime);
+						document.getElementById('meetingTime').value = meetingDateTime.toISOString().slice(0, 16);
+					}
+					document.getElementById('meetingLocation').value = schedule.meetingLocation || schedule.meetingPoint || '';
+					
+					//  
+					const flights = schedule.flights || {};
+					const departureFlight = flights['departure'] || flights['outbound'] || {};
+					const returnFlight = flights['return'] || {};
+					
+					// 
+					document.getElementById('departureFlightNumber').value = departureFlight.flight_number || '';
+					if (departureFlight.departure_time) {
+						const depDateTime = new Date(departureFlight.departure_time);
+						document.getElementById('departureDateTime').value = depDateTime.toISOString().slice(0, 16);
+					}
+					if (departureFlight.arrival_time) {
+						const arrDateTime = new Date(departureFlight.arrival_time);
+						document.getElementById('departureArrivalDateTime').value = arrDateTime.toISOString().slice(0, 16);
+					}
+					document.getElementById('departurePoint').value = departureFlight.departure_point || '';
+					document.getElementById('departureDestination').value = departureFlight.destination || '';
+					
+					// 
+					document.getElementById('returnFlightNumber').value = returnFlight.flight_number || '';
+					if (returnFlight.departure_time) {
+						const depDateTime = new Date(returnFlight.departure_time);
+						document.getElementById('returnDepartureDateTime').value = depDateTime.toISOString().slice(0, 16);
+					}
+					if (returnFlight.arrival_time) {
+						const arrDateTime = new Date(returnFlight.arrival_time);
+						document.getElementById('returnArrivalDateTime').value = arrDateTime.toISOString().slice(0, 16);
+					}
+					document.getElementById('returnDeparturePoint').value = returnFlight.departure_point || '';
+					document.getElementById('returnDestination').value = returnFlight.destination || '';
+					
+					//  
+					const reservationPeople = schedule.reservationPeople || {};
+					const peopleText = [];
+					if (reservationPeople.adults > 0) peopleText.push(`x${reservationPeople.adults}`);
+					if (reservationPeople.children > 0) peopleText.push(`x${reservationPeople.children}`);
+					if (reservationPeople.infants > 0) peopleText.push(`x${reservationPeople.infants}`);
+					document.getElementById('reservationPeople').value = peopleText.join(', ') || '-';
+					
+					const rooms = schedule.rooms || [];
+					const roomText = rooms.map(room => `${room.roomType || ''}x${room.roomCount || 1}`).join(', ');
+					document.getElementById('roomOption').value = roomText || '-';
+					
+					//  
+					renderTravelers(schedule.travelers || []);
+				}
+			} catch (error) {
+				console.error('Error loading schedule detail:', error);
+			}
+		}
+
+		function renderTravelers(travelers, page = 1) {
+			const tbody = document.getElementById('travelersTableBody');
+			if (!tbody) return;
+			
+			if (!travelers || travelers.length === 0) {
+				tbody.innerHTML = '<tr><td colspan="5" class="is-center">  .</td></tr>';
+				return;
+			}
+			
+			// 
+			const totalPages = Math.ceil(travelers.length / travelersLimit);
+			const startIndex = (page - 1) * travelersLimit;
+			const endIndex = startIndex + travelersLimit;
+			const pageTravelers = travelers.slice(startIndex, endIndex);
+			
+			tbody.innerHTML = pageTravelers.map((traveler, index) => {
+				const rowNumber = startIndex + index + 1;
+				return `
+					<tr>
+						<td class="is-center">${rowNumber}</td>
+						<td class="is-center">${escapeHtml(traveler.firstName || '')}</td>
+						<td class="is-center">${escapeHtml(traveler.lastName || '')}</td>
+						<td class="is-center">${escapeHtml(traveler.passportNumber || '')}</td>
+						<td class="is-center">${escapeHtml(traveler.peopleOption || '')}</td>
+					</tr>
+				`;
+			}).join('');
+			
+			//  
+			updateTravelersPagination(page, totalPages);
+		}
+
+		function updateTravelersPagination(currentPage, totalPages) {
+			//   
+			const pageNumbersEl = document.getElementById('travelersPageNumbers');
+			if (pageNumbersEl) {
+				pageNumbersEl.innerHTML = '';
+				
+				const maxVisiblePages = 5;
+				let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+				let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+				
+				if (endPage - startPage < maxVisiblePages - 1) {
+					startPage = Math.max(1, endPage - maxVisiblePages + 1);
+				}
+				
+				for (let i = startPage; i <= endPage; i++) {
+					const button = document.createElement('button');
+					button.type = 'button';
+					button.className = 'p' + (i === currentPage ? ' show' : '');
+					button.setAttribute('role', 'listitem');
+					if (i === currentPage) {
+						button.setAttribute('aria-current', 'page');
+					}
+					button.textContent = i;
+					button.onclick = () => {
+						travelersCurrentPage = i;
+						if (currentScheduleData && currentScheduleData.travelers) {
+							renderTravelers(currentScheduleData.travelers, i);
+						}
+					};
+					pageNumbersEl.appendChild(button);
+				}
+			}
+			
+			//   
+			const firstPageBtn = document.getElementById('travelersFirstPage');
+			if (firstPageBtn) {
+				firstPageBtn.disabled = currentPage === 1;
+				firstPageBtn.setAttribute('aria-disabled', currentPage === 1);
+				firstPageBtn.onclick = currentPage === 1 ? null : () => {
+					travelersCurrentPage = 1;
+					if (currentScheduleData && currentScheduleData.travelers) {
+						renderTravelers(currentScheduleData.travelers, 1);
+					}
+				};
+			}
+			
+			//   
+			const prevPageBtn = document.getElementById('travelersPrevPage');
+			if (prevPageBtn) {
+				prevPageBtn.disabled = currentPage === 1;
+				prevPageBtn.setAttribute('aria-disabled', currentPage === 1);
+				prevPageBtn.onclick = currentPage === 1 ? null : () => {
+					travelersCurrentPage = currentPage - 1;
+					if (currentScheduleData && currentScheduleData.travelers) {
+						renderTravelers(currentScheduleData.travelers, travelersCurrentPage);
+					}
+				};
+			}
+			
+			//   
+			const nextPageBtn = document.getElementById('travelersNextPage');
+			if (nextPageBtn) {
+				nextPageBtn.disabled = currentPage >= totalPages;
+				nextPageBtn.setAttribute('aria-disabled', currentPage >= totalPages);
+				nextPageBtn.onclick = currentPage >= totalPages ? null : () => {
+					travelersCurrentPage = currentPage + 1;
+					if (currentScheduleData && currentScheduleData.travelers) {
+						renderTravelers(currentScheduleData.travelers, travelersCurrentPage);
+					}
+				};
+			}
+			
+			//   
+			const lastPageBtn = document.getElementById('travelersLastPage');
+			if (lastPageBtn) {
+				lastPageBtn.disabled = currentPage >= totalPages;
+				lastPageBtn.setAttribute('aria-disabled', currentPage >= totalPages);
+				lastPageBtn.onclick = currentPage >= totalPages ? null : () => {
+					travelersCurrentPage = totalPages;
+					if (currentScheduleData && currentScheduleData.travelers) {
+						renderTravelers(currentScheduleData.travelers, totalPages);
+					}
+				};
+			}
+		}
+
+		function escapeHtml(text) {
+			const div = document.createElement('div');
+			div.textContent = text;
+			return div.innerHTML;
+		}
+	</script>
+</body>
+
+</html>

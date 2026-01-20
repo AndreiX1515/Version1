@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html id="html-lang" lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN - Payment</title>
+
+	<!-- 언어 설정 스크립트 -->
+	<script>
+		(function() {
+			function getCookie(name) {
+				const value = `; ${document.cookie}`;
+				const parts = value.split(`; ${name}=`);
+				if (parts.length === 2) return parts.pop().split(';').shift();
+				return null;
+			}
+			const lang = getCookie('lang') || 'eng';
+			const htmlLang = document.getElementById('html-lang') || document.documentElement;
+			htmlLang.setAttribute('lang', (lang === 'tl') ? 'tl' : 'en');
+		})();
+	</script>
+
+	<!-- 공통 스타일 -->
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+</head>
+
+<body>
+
+	<!-- header 들어올 자리 -->
+	<header class="layout-header"></header>
+
+	<!-- 본문 영역 -->
+	<main class="layout-main">
+		<!-- nav 들어올 자리 -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content">
+
+			<div class="jw-cols jw-between">
+				<h1 class="page-title" data-lan-eng="Payment Information">결제 정보</h1>
+				<div class="jw-center jw-gap8">
+					<span class="step-indicator">Step 2 of 2</span>
+				</div>
+			</div>
+
+			<!-- 예약 요약 정보 -->
+			<div class="card-panel jw-mgt16" style="background: #F7FAFF; border: 1px solid #0050C8;">
+				<h3 class="card-panel-title" style="color: #0050C8;" data-lan-eng="Reservation Summary">예약 요약</h3>
+				<div class="card-panel-divider"></div>
+				<div class="grid-wrap jw-mgt16">
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Booking ID">예약번호</label>
+						<div class="form-control readonly-field" id="summary_booking_id">-</div>
+					</div>
+					<div class="grid-item col-span-2">
+						<label class="label-name" data-lan-eng="Product Name">상품명</label>
+						<div class="form-control readonly-field" id="summary_package_name">-</div>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Travel Period">여행기간</label>
+						<div class="form-control readonly-field" id="summary_trip_range">-</div>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Travelers">인원</label>
+						<div class="form-control readonly-field" id="summary_travelers">-</div>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Total Amount">총 금액</label>
+						<div class="form-control readonly-field" id="summary_total_amount" style="font-weight: 600; color: #0050C8;">-</div>
+					</div>
+				</div>
+				<!-- Amount Breakdown -->
+				<div id="amount-breakdown-section" class="amount-breakdown" style="display: none;">
+					<div class="breakdown-divider"></div>
+					<div class="breakdown-title" data-lan-eng="Amount Breakdown">금액 상세</div>
+					<div class="breakdown-list" id="amount-breakdown-list">
+						<!-- Breakdown items will be populated by JS -->
+					</div>
+				</div>
+			</div>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Payment Information">결제 정보</h2>
+
+			<!-- 계좌 정보 박스 -->
+			<div class="card-panel jw-mgt16" style="background: #F0F7FF; border: 1px solid #0050C8;">
+				<div style="font-weight: 600; margin-bottom: 12px; color: #0050C8;">Please deposit to the account below:</div>
+				<div class="grid-wrap" style="gap: 8px;">
+					<div class="grid-item col-span-3" style="display: flex; gap: 24px; flex-wrap: wrap;">
+						<div><span style="color: #6B7280;">Bank:</span> <strong>BDO Bank</strong></div>
+						<div><span style="color: #6B7280;">Account No.:</span> <strong>004920342791</strong></div>
+						<div><span style="color: #6B7280;">Account Name:</span> <strong>TRAVEL ESCAPE TRAVEL AND TOURS</strong></div>
+					</div>
+				</div>
+				<div style="margin-top: 16px; padding: 12px; background: #FFF5F5; border: 1px solid #F87171; border-radius: 8px; color: #DC2626; font-size: 13px;">
+					<strong>Warning:</strong> For products with less than 30 days until departure from the reservation date, all payments must be completed within 3 days.
+				</div>
+			</div>
+
+			<!-- Payment Type Selection Tabs -->
+			<div class="payment-type-tabs jw-mgt16">
+				<div class="tab-wrap" style="display: flex; border-bottom: 1px solid #E5E7EB;">
+					<button type="button" class="payment-tab-btn active" data-payment-type="staged" onclick="switchPaymentType('staged')">
+						<span data-lan-eng="Staged Payment (3-Step)">3단계 결제</span>
+					</button>
+					<button type="button" class="payment-tab-btn" data-payment-type="full" onclick="switchPaymentType('full')">
+						<span data-lan-eng="Full Payment">전액 결제</span>
+					</button>
+				</div>
+			</div>
+
+			<!-- Hidden field to track selected payment type -->
+			<input type="hidden" id="payment_type" value="staged">
+
+			<!-- Staged Payment Content -->
+			<div id="staged_payment_content">
+			<!-- Order Amount -->
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+					<div class="grid-item">
+						<label class="label-name" for="pay_total" data-lan-eng="Order Amount">Order Amount (PHP)</label>
+						<input id="pay_total" type="text" class="form-control" value="0" disabled>
+					</div>
+					<div class="grid-item"></div>
+					<div class="grid-item"></div>
+				</div>
+			</div>
+
+			<!-- Down Payment -->
+			<div class="card-panel jw-mgt16">
+				<h3 class="card-panel-title">Down Payment</h3>
+				<div class="card-panel-divider"></div>
+				<div class="grid-wrap jw-mgt16">
+					<div class="grid-item">
+						<label class="label-name" for="down_payment_amount">Down Payment (PHP)</label>
+						<input id="down_payment_amount" type="text" class="form-control" value="5,000" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name">Down Payment Deadline</label>
+						<div class="form-control" id="down_payment_deadline_display" style="background: #F5F5F5; color: #666; display: flex; align-items: center;">Within 3 days</div>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" for="down_payment_file">Proof File</label>
+						<div class="field-col">
+							<input id="down_payment_file_input" type="file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.xls,.xlsx,.heic,.heif" style="display:none;">
+							<button type="button" class="jw-button typeE" id="down_payment_file_btn"><img src="../image/upload.svg" alt=""><span>File Upload</span></button>
+							<div class="file-info" id="down_payment_file_info" style="display:none; margin-top:12px;">
+								<div class="file-info-item" style="display:flex; align-items:center; justify-content:space-between; padding:12px; background:#F7FAFF; border-radius:10px;">
+									<span class="file-name" id="down_payment_file_name" style="font-weight:500;"></span>
+									<button type="button" class="file-remove" id="down_payment_file_remove" aria-label="Remove file" style="background:none; border:none; cursor:pointer; padding:4px;">
+										<img src="../image/button-close2.svg" alt="" style="width:16px;height:16px;">
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="margin-top: 12px; padding: 8px 12px; background: #FFF5F5; border: 1px solid #F87171; border-radius: 6px; color: #DC2626; font-size: 12px;">
+					<strong>Warning:</strong> Down payment is non-refundable.
+				</div>
+			</div>
+
+			<!-- Second Payment -->
+			<div class="card-panel jw-mgt16" id="second_payment_section">
+				<h3 class="card-panel-title">Second Payment</h3>
+				<div class="card-panel-divider"></div>
+				<div class="grid-wrap jw-mgt16">
+					<div class="grid-item">
+						<label class="label-name" for="second_payment_amount">Second Payment (PHP)</label>
+						<input id="second_payment_amount" type="text" class="form-control" value="-" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name">Second Payment Deadline</label>
+						<div class="form-control" style="background: #F5F5F5; color: #666; display: flex; align-items: center;">Within 30 days after down payment approval</div>
+					</div>
+					<div class="grid-item"></div>
+				</div>
+				<div id="second_payment_disabled_notice" class="payment-disabled-notice" style="padding: 16px; background: #F5F5F5; border-radius: 8px; margin-top: 16px; text-align: center; color: #666;">
+					<img src="../image/lock.svg" alt="" style="width: 24px; height: 24px; margin-bottom: 8px; opacity: 0.5;" onerror="this.style.display='none'">
+					<p style="margin: 0; font-size: 14px;">Second Payment can be uploaded after Down Payment is confirmed.</p>
+				</div>
+				<div style="margin-top: 12px; padding: 8px 12px; background: #FFF5F5; border: 1px solid #F87171; border-radius: 6px; color: #DC2626; font-size: 12px;">
+					<strong>Warning:</strong> Second payment is non-refundable.
+				</div>
+			</div>
+
+			<!-- Balance -->
+			<div class="card-panel jw-mgt16" id="balance_section">
+				<h3 class="card-panel-title">Balance</h3>
+				<div class="card-panel-divider"></div>
+				<div class="grid-wrap jw-mgt16">
+					<div class="grid-item">
+						<label class="label-name" for="balance_amount">Balance (PHP)</label>
+						<input id="balance_amount" type="text" class="form-control" value="-" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name">Balance Deadline</label>
+						<div class="form-control" style="background: #F5F5F5; color: #666; display: flex; align-items: center;">30 days before departure</div>
+					</div>
+					<div class="grid-item"></div>
+				</div>
+				<div id="balance_disabled_notice" class="payment-disabled-notice" style="padding: 16px; background: #F5F5F5; border-radius: 8px; margin-top: 16px; text-align: center; color: #666;">
+					<img src="../image/lock.svg" alt="" style="width: 24px; height: 24px; margin-bottom: 8px; opacity: 0.5;" onerror="this.style.display='none'">
+					<p style="margin: 0; font-size: 14px;">Balance can be uploaded after Second Payment is confirmed.</p>
+				</div>
+			</div>
+			</div><!-- End of staged_payment_content -->
+
+			<!-- Full Payment Content -->
+			<div id="full_payment_content" style="display: none;">
+				<!-- Order Amount (for Full Payment view) -->
+				<div class="card-panel jw-mgt16">
+					<div class="grid-wrap">
+						<div class="grid-item">
+							<label class="label-name" for="full_pay_total" data-lan-eng="Order Amount">Order Amount (PHP)</label>
+							<input id="full_pay_total" type="text" class="form-control" value="0" disabled>
+						</div>
+						<div class="grid-item"></div>
+						<div class="grid-item"></div>
+					</div>
+				</div>
+
+				<!-- Full Payment Section -->
+				<div class="card-panel jw-mgt16">
+					<h3 class="card-panel-title" data-lan-eng="Full Payment">Full Payment</h3>
+					<div class="card-panel-divider"></div>
+					<div class="grid-wrap jw-mgt16">
+						<div class="grid-item">
+							<label class="label-name" for="full_payment_amount" data-lan-eng="Full Payment Amount">Full Payment Amount (PHP)</label>
+							<input id="full_payment_amount" type="text" class="form-control" value="0" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Payment Deadline">Payment Deadline</label>
+							<div class="form-control" id="full_payment_deadline_display" style="background: #F5F5F5; color: #666; display: flex; align-items: center;">Within 3 days</div>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" for="full_payment_file" data-lan-eng="Proof File">Proof File</label>
+							<div class="field-col">
+								<input id="full_payment_file_input" type="file" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.xls,.xlsx,.heic,.heif" style="display:none;">
+								<button type="button" class="jw-button typeE" id="full_payment_file_btn">
+									<img src="../image/upload.svg" alt=""><span data-lan-eng="File Upload">File Upload</span>
+								</button>
+								<div class="file-info" id="full_payment_file_info" style="display:none; margin-top:12px;">
+									<div class="file-info-item" style="display:flex; align-items:center; justify-content:space-between; padding:12px; background:#F7FAFF; border-radius:10px;">
+										<span class="file-name" id="full_payment_file_name" style="font-weight:500;"></span>
+										<button type="button" class="file-remove" id="full_payment_file_remove" aria-label="Remove file" style="background:none; border:none; cursor:pointer; padding:4px;">
+											<img src="../image/button-close2.svg" alt="" style="width:16px;height:16px;">
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div style="margin-top: 16px; padding: 12px 16px; background: #E8F5E9; border: 1px solid #4CAF50; border-radius: 8px; color: #2E7D32; font-size: 13px;">
+						<strong>Full Payment:</strong> Complete your payment in one transaction for a simplified booking process.
+					</div>
+				</div>
+			</div><!-- End of full_payment_content -->
+
+		</section>
+	</main>
+
+	<!-- 하단 고정 액션 바 -->
+	<div class="fixed-bottom-bar">
+		<button type="button" class="jw-button typeD" id="backBtn" data-lan-eng="Back">Back</button>
+		<button type="button" class="jw-button typeB" id="saveBtn" data-lan-eng="Complete Reservation">Complete Reservation</button>
+	</div>
+
+	<style>
+		.layout-main {
+			padding-bottom: 60px !important;
+		}
+		/* 읽기 전용 필드 스타일 */
+		.readonly-field {
+			background: #E9ECEF !important;
+			color: #495057;
+			cursor: not-allowed;
+			display: flex;
+			align-items: center;
+			min-height: 44px;
+		}
+		/* Amount Breakdown 스타일 */
+		.amount-breakdown {
+			margin-top: 16px;
+		}
+		.breakdown-divider {
+			height: 1px;
+			background: #E5E7EB;
+			margin-bottom: 16px;
+		}
+		.breakdown-title {
+			font-size: 14px;
+			font-weight: 600;
+			color: #374151;
+			margin-bottom: 12px;
+		}
+		.breakdown-list {
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+		}
+		.breakdown-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 8px 12px;
+			background: #fff;
+			border-radius: 6px;
+			font-size: 13px;
+		}
+		.breakdown-item-label {
+			color: #6B7280;
+		}
+		.breakdown-item-value {
+			font-weight: 500;
+			color: #111827;
+		}
+		.breakdown-item.total {
+			background: #EFF6FF;
+			border: 1px solid #0050C8;
+			margin-top: 8px;
+		}
+		.breakdown-item.total .breakdown-item-label {
+			font-weight: 600;
+			color: #0050C8;
+		}
+		.breakdown-item.total .breakdown-item-value {
+			font-weight: 700;
+			color: #0050C8;
+		}
+		.fixed-bottom-bar {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 60px;
+			background: #fff;
+			border-top: 1px solid #e0e0e0;
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			padding: 0 24px;
+			gap: 12px;
+			z-index: 100;
+		}
+		.step-indicator {
+			display: inline-block;
+			padding: 4px 12px;
+			background: #E8F5E9;
+			color: #2E7D32;
+			border-radius: 16px;
+			font-size: 13px;
+			font-weight: 500;
+		}
+		/* Payment Type Tabs */
+		.payment-tab-btn {
+			position: relative;
+			height: 48px;
+			padding: 0 24px;
+			background: transparent;
+			border: none;
+			font-size: 15px;
+			font-weight: 600;
+			color: #6B7280;
+			cursor: pointer;
+			transition: color 0.2s;
+		}
+		.payment-tab-btn:hover {
+			color: #374151;
+		}
+		.payment-tab-btn.active {
+			color: #0065F8;
+		}
+		.payment-tab-btn.active::after {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 3px;
+			background: #0065F8;
+			border-radius: 3px 3px 0 0;
+		}
+	</style>
+
+	<!-- 기본 스크립트 -->
+	<script src="../js/default.js"></script>
+	<script src="../js/agent.js"></script>
+	<script src="../js/agent-create-reservation-payment.js?v=20260112001"></script>
+
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_agent.html'
+		});
+	</script>
+</body>
+
+</html>

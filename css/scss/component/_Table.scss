@@ -1,0 +1,37 @@
+@layer Table { 
+    .table-type1 { 
+        max-width: 1500px;
+        
+        thead { 
+            border-top: 1px solid var(--grayeef);
+            border-bottom: 1px solid var(--grayeef);
+            tr { 
+                background: var(--grayfa);
+                height: 58px;
+                th { 
+                    color: var(--navy26);
+                    font-size: 18px;
+                    font-weight: 700;
+                    padding: 2rem;
+                }
+            }
+        }
+        tbody { 
+            tr { 
+                height: 54px;
+                border-bottom: 1px solid var(--grayeef);
+                cursor: pointer;
+                td { 
+                    color: var(--black00);
+                    font-size: 14px;
+                    font-weight: 500;
+                    padding: 2rem;
+                    text-align: center;
+                    &.txt-left { 
+                        text-align: left;
+                    }
+                }
+            }
+        }
+    }
+}

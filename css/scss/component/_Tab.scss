@@ -1,0 +1,90 @@
+@layer Tab { 
+    .tab-type1 { 
+        display: flex;
+        li { 
+            flex-grow: 1;
+            a { 
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--gray96);
+                font-family: "Noto Sans";
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 22px;
+                height: 46px;
+                border-bottom: 1px solid var(--grayea);
+                &.active { 
+                    color: var(--black12);
+                    font-weight: 700;
+                    border-bottom: 2px solid var(--reded);
+                }
+            }
+        }
+    }
+    .tab-type2 { 
+        display: flex;
+        gap: 23px;
+        &.gap16 { 
+            gap: 16px;
+        }
+        li { 
+            a { 
+                white-space: nowrap;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--gray96);
+                font-family: "Noto Sans";
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 22px;
+                height: 46px;
+                span { 
+                    padding-left: 4px;
+                    color: var(--gray96);
+                }
+                &.active { 
+                    color: var(--black12);
+                    font-weight: 700;
+                    border-bottom: 2px solid var(--reded);
+                    span { 
+                        color: var(--reded);
+                    }
+                }
+            }
+        }
+    }
+    .tab-type3 { 
+        display: flex;
+        gap: 6px;
+        background: var(--grayf3);
+        border-radius: 46px;
+        li { 
+            flex-grow: 1;
+            a { 
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--grayb0);
+                font-family: "Noto Sans";
+                font-size: 14px;
+                font-weight: 600;
+                line-height: 22px;
+                height: 46px;
+                span { 
+                    padding-left: 4px;
+                    color: var(--reded);
+                }
+                &.active { 
+                    color: var(--reded);
+                    font-weight: 700;
+                    border-radius: 156px;
+                    background: #FFF;
+                    box-shadow: 0 0 3px 0 rgba(55, 55, 55, 0.04), 0 0 20px 0 rgba(169, 169, 169, 0.30);
+                }
+            }
+        }
+    }
+
+}

@@ -1,0 +1,1798 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN</title>
+
+	<!-- 공통 스타일 -->
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+	
+	<!-- calendar -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+	<!-- editor -->
+	<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+</head>
+
+<body>
+
+	<!-- header 들어올 자리 -->
+	<header class="layout-header"></header>
+
+	<!-- 본문 영역 -->
+	<main class="layout-main">
+		<!-- nav 들어올 자리 -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content layout-content-aside" data-essentialWrap="y">
+			<div class="page-toolbar">
+				<a href="product-list.html" class="jw-button" aria-label="목록으로 돌아가기">
+					<img src="../image/arrow4.svg" alt="">
+					<span data-lan-eng="Return to list">목록으로 돌아가기</span>
+				</a>
+
+				<div class="page-toolbar-actions">
+					<button type="button" class="jw-button typeA" onclick="modal('product-detail_modal_5.html', '600px', '252px')" data-lan-eng="Delete">삭제</button>
+					<button type="button" class="jw-button typeB" onclick="product_detail_save(this)" data-lan-eng="Save">저장</button>
+				</div>
+			</div>
+
+			<div class="content-main">
+				<h1 class="page-title" data-lan-eng="Product Details">상품 상세</h1>
+				<div class="jw-cols jw-between jw-mgt32">
+					<h2 class="section-title" data-lan-eng="Product Information">상품 정보</h2>
+					<button type="button" class="jw-button typeA" onclick="modal('product-detail_m1.html', '580px', '508px')" data-lan-eng="Load Template">템플릿 불러오기</button>
+				</div>
+				
+				<div class="card-panel jw-mgt16">
+					<div class="grid-wrap">
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Registration date/time">등록일시</label>
+							<input type="text" class="form-control" value="2025-01-01 12:12" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Product code">상품코드</label>
+							<input type="text" class="form-control" placeholder="KOR54124" disabled>
+						</div>
+						<div class="grid-item"></div>
+
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Product Name">상품명</span> <span class="req">*</span></label>
+							<input type="text" class="form-control" data-essential="y" value="Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro">
+						</div>
+
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Sales Target">판매 대상</span> <span class="req">*</span></label>
+							<select class="select" disabled >
+								<option selected>B2B</option>
+								<option>B2C</option>
+							</select>
+						</div>
+						<div class="grid-item"></div>
+						<div class="grid-item"></div>
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Category">대분류</span> <span class="req">*</span></label>
+							<select class="select" data-essential="y" data-category="1" onchange="template_detail_sdaf_cate()">
+								<option value="계절별" selected>Seasonal</option>
+								<option value="지역별">Regional</option>
+								<option value="테마별">Theme</option>
+								<option value="">null</option>
+							</select>
+						</div>
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Category">중분류</span> <span class="req">*</span></label>
+							<select class="select" data-essential="y" data-category="2">
+								<option selected>Spring</option>
+								<option>Summer</option>
+								<option>Autumn</option>
+								<option>Winter</option>
+							</select>
+						</div>
+						<div class="grid-item"></div>
+						<!-- multi-editor.js -->
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Product Description">상품 설명</span> <span class="req">*</span></label>
+							<div class="editor-box-wrap">
+							<div class="jw-editor">
+								<div class="toolbar">
+								<div class="group">
+									<button type="button" class="editor-btn ql-bold">
+									<img src="../image/editer_bold.svg">
+									</button>
+									<button type="button" class="editor-btn ql-italic">
+									<img src="../image/editer_italic.svg">
+									</button>
+									<button type="button" class="editor-btn ql-underline">
+									<img src="../image/editer_underline.svg">
+									</button>
+									<button type="button" class="editor-btn ql-strike">
+									<img src="../image/editer_strikethrough.svg">
+									</button>
+						
+									<!-- 색상 버튼은 this 넘겨주기 -->
+									<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+									<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+								</div>
+						
+								<div class="group">
+									<!-- select도 this 넘겨주기 -->
+									<select class="editor-font-size" onchange="fontsize(this);">
+									<option value="" selected>폰트</option>
+									<option value="12px">12px</option>
+									<option value="14px">14px</option>
+									<option value="16px">16px</option>
+									<option value="18px">18px</option>
+									<option value="24px">24px</option>
+									</select>
+								</div>
+						
+								<div class="group">
+									<button type="button" class="editor-btn ql-align" value="">
+									<img src="../image/editer_left.svg">
+									</button>
+									<button type="button" class="editor-btn ql-align" value="center">
+									<img src="../image/editer_center.svg">
+									</button>
+									<button type="button" class="editor-btn ql-align" value="right">
+									<img src="../image/editer_right.svg">
+									</button>
+								</div>
+						
+								<div class="group">
+									<button type="button" class="editor-btn ql-list" value="ordered">
+									<img src="../image/editer_ordered.svg">
+									</button>
+									<button type="button" class="editor-btn ql-list" value="bullet">
+									<img src="../image/editer_unordered.svg">
+									</button>
+								</div>
+						
+								<div class="group">
+									<!-- 이것도 this 넘기게 변경 -->
+									<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+									<img src="../image/editer_removeHtmlTags.svg">
+									</button>
+									<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+									HTML
+									</button>
+								</div>
+						
+								<div class="group">
+									<label class="inputFile">
+									<!-- this 넘기기 -->
+									<input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+									<span class="text">이미지</span>
+									<i class="progress"></i>
+									</label>
+								</div>
+								</div>
+						
+								<div class="jweditor" data-placeholder="내용을 입력해주세요"></div>
+							</div>
+							</div>
+						</div>
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Thumbnail image">썸네일 이미지</span> <span class="req">*</span></label>
+							<div class="upload-grid">
+								<div class="upload-item is-filled jw-center">
+									<img class="preview" src="https://picsum.photos/600/600" alt="">
+									<button type="button" class="jw-button btn-close" aria-label="remove" onclick="template_upload_close(this)">
+										<div class="ic-close" style="width:15px; height:15px; --line:1px; --color:#969696"></div>
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class="grid-item"></div>
+						<div class="grid-item"></div>
+						<div class="grid-item col-span-3">
+							<label class="label-name" data-lan-eng="Product image">상품 이미지</label>
+							<div class="upload-grid">
+							
+								<div class="upload-item is-filled jw-center">
+									<img class="preview" src="https://picsum.photos/600/600" alt="">
+									<button type="button" class="jw-button btn-close" aria-label="remove" onclick="template_upload_close(this)">
+										<div class="ic-close" style="width:15px; height:15px; --line:1px; --color:#969696"></div>
+									</button>
+								</div>
+								
+								<div class="upload-item jw-center">
+									<label class="inputFile">
+										<input name="" type="file" onchange="filePreview(this);" >
+										<button type="button" class="btn-upload"><img src="../image/upload3.svg" alt=""> <span data-lan-eng="Image upload">Image upload</span></button>
+									</label>
+								</div>
+								<div class="upload-item jw-center">
+									<label class="inputFile">
+										<input name="" type="file" onchange="filePreview(this);" >
+										<button type="button" class="btn-upload"><img src="../image/upload3.svg" alt=""> <span data-lan-eng="Image upload">Image upload</span></button>
+									</label>
+								</div>
+								<div class="upload-item jw-center">
+									<label class="inputFile">
+										<input name="" type="file" onchange="filePreview(this);" >
+										<button type="button" class="btn-upload"><img src="../image/upload3.svg" alt=""> <span data-lan-eng="Image upload">Image upload</span></button>
+									</label>
+								</div>
+								<div class="upload-item jw-center">
+									<label class="inputFile">
+										<input name="" type="file" onchange="filePreview(this);" >
+										<button type="button" class="btn-upload"><img src="../image/upload3.svg" alt=""> <span data-lan-eng="Image upload">Image upload</span></button>
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Detailed introduction image">상세 소개 이미지</span> <span class="req">*</span></label>
+							<div class="upload-grid">
+								<div class="upload-item is-filled jw-center">
+									<img class="preview" src="https://picsum.photos/600/600" alt="">
+									<button type="button" class="btn-close" aria-label="remove" onclick="template_upload_close(this)">×</button>
+								</div>
+							</div>
+
+						</div>
+						<div class="grid-item"></div>
+						<div class="grid-item"></div>
+					</div>
+				</div>
+
+				<h2 class="section-title jw-mgt32" data-section-name="flight-information" data-lan-eng="Flight Information">항공편 정보</h2>
+				<div class="card-panel jw-mgt16" data-section-name="flight-information" >
+					<h3 class="grid-wrap-title" data-lan-eng="Departure flight">출국편</h3>
+
+					<div class="grid-wrap jw-mgt16">
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Flight number">항공편명</span> <span class="req">*</span></label>
+							<input type="text" class="form-control" value="PR467">
+						</div>
+
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Departure time">출발시각</span> <span class="req">*</span></label>
+							<div class="meeting-wrap">
+								<select class="select">
+									<option>00</option>
+									<option>01</option>
+									<option>02</option>
+									<option>03</option>
+									<option>04</option>
+									<option>05</option>
+									<option>06</option>
+									<option>07</option>
+									<option>08</option>
+									<option>09</option>
+									<option>10</option>
+									<option>11</option>
+									<option selected>12</option>
+									<option>13</option>
+									<option>14</option>
+									<option>15</option>
+									<option>16</option>
+									<option>17</option>
+									<option>18</option>
+									<option>19</option>
+									<option>20</option>
+									<option>21</option>
+									<option>22</option>
+									<option>23</option>
+								</select>
+								<select class="select">
+									<option>00</option>
+									<option>10</option>
+									<option selected>20</option>
+									<option>30</option>
+									<option>40</option>
+									<option>50</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Arrival time">도착시각</span> <span class="req">*</span></label>
+							<div class="meeting-wrap">
+								<select class="select">
+									<option>00</option>
+									<option>01</option>
+									<option>02</option>
+									<option>03</option>
+									<option>04</option>
+									<option>05</option>
+									<option>06</option>
+									<option>07</option>
+									<option>08</option>
+									<option>09</option>
+									<option>10</option>
+									<option selected>14</option>
+									<option>15</option>
+									<option>16</option>
+									<option>17</option>
+									<option>18</option>
+									<option>19</option>
+									<option>20</option>
+									<option>21</option>
+									<option>22</option>
+									<option>23</option>
+								</select>
+								<select class="select">
+									<option>00</option>
+									<option>10</option>
+									<option selected>20</option>
+									<option>30</option>
+									<option>40</option>
+									<option>50</option>
+								</select>
+							</div>
+						</div>
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Departure point">출발지</span> <span class="req">*</span></label>
+							<input type="text" class="form-control" value="Manila (MNL)">
+						</div>
+
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Destination">도착지</span> <span class="req">*</span></label>
+							<input type="text" class="form-control" value="Incheon (ICN)">
+						</div>
+
+						<div class="grid-item"></div>
+					</div>
+				</div>
+				<div class="card-panel jw-mgt16" data-section-name="flight-information" >
+					<h3 class="grid-wrap-title" data-lan-eng="Return trip">귀국편</h3>
+
+					<div class="grid-wrap jw-mgt16">
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Flight number">항공편명</span> <span class="req">*</span></label>
+							<input type="text" class="form-control" value="PR468">
+						</div>
+
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Departure time">출발시각</span> <span class="req">*</span></label>
+							<div class="meeting-wrap">
+								<select class="select">
+									<option>00</option>
+									<option>01</option>
+									<option>02</option>
+									<option>03</option>
+									<option>04</option>
+									<option>05</option>
+									<option>06</option>
+									<option>07</option>
+									<option>08</option>
+									<option>09</option>
+									<option>10</option>
+									<option>11</option>
+									<option>12</option>
+									<option>13</option>
+									<option selected>17</option>
+									<option>18</option>
+									<option>19</option>
+									<option>20</option>
+									<option>21</option>
+									<option>22</option>
+									<option>23</option>
+								</select>
+								<select class="select">
+									<option>00</option>
+									<option selected>05</option>
+									<option>10</option>
+									<option>20</option>
+									<option>30</option>
+									<option>40</option>
+									<option>50</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Arrival time">도착시각</span> <span class="req">*</span></label>
+							<div class="meeting-wrap">
+								<select class="select">
+									<option>00</option>
+									<option>01</option>
+									<option>02</option>
+									<option>03</option>
+									<option>04</option>
+									<option>05</option>
+									<option>06</option>
+									<option>07</option>
+									<option>08</option>
+									<option>09</option>
+									<option>10</option>
+									<option>11</option>
+									<option selected>19</option>
+									<option>20</option>
+									<option>21</option>
+									<option>22</option>
+									<option>23</option>
+								</select>
+								<select class="select">
+									<option>00</option>
+									<option selected>05</option>
+									<option>10</option>
+									<option>20</option>
+									<option>30</option>
+									<option>40</option>
+									<option>50</option>
+								</select>
+							</div>
+						</div>
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Departure point">출발지</span> <span class="req">*</span></label>
+							<input type="text" class="form-control" value="Incheon (ICN)">
+						</div>
+
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Destination">도착지</span> <span class="req">*</span></label>
+							<input type="text" class="form-control" value="Manila (MNL)">
+						</div>
+
+						<div class="grid-item"></div>
+					</div>
+				</div>
+
+				<h2 class="section-title jw-mgt32" data-lan-eng="Sales Information">판매 정보</h2>
+				<div class="card-panel jw-mgt16">
+					<h3 class="grid-wrap-title" data-lan-eng="Basic Sales Information">기본 판매 정보</h3>
+					<hr class="jw-mgt16">
+					
+					<div class="grid-wrap jw-mgt16">
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Sale period ">판매 기간</span> <span class="req">*</span></label>
+							<div class="field-row jw-w400">
+								<input id="contract-period" type="text" class="jw-w form-control" placeholder="Please select a date" readonly>
+								<button type="button" class="btn-icon calendar" aria-label="달력 열기" data-target="#contract-period"></button>
+							</div>
+							<p class="form-desc is-warning" data-lan-eng="The period can only be set up to a maximum of 100 days.">기간은 최대 <b>100</b>일까지만 설정이 가능합니다.</p>
+						</div>
+				
+						<!-- 최소/최대/요금 -->
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Minimum departure headcount">최소 출발 인원</span> <span class="req">*</span></label>
+							<input type="number" class="form-control" value="2" min="0" data-essential="y" placeholder="0">
+						</div>
+
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Maximum capacity">최대 수용 인원</span> <span class="req">*</span></label>
+							<input type="number" class="form-control" value="36" min="0" value="0" data-essential="y" disabled>
+						</div>
+
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Basic airfare (₱)">기본 항공 요금 (₱)</span> <span class="req">*</span></label>
+							<input type="text" class="form-control" value="15,000" data-essential="y" inputmode="numeric" placeholder="15,000">
+						</div>
+					</div>
+				</div>
+
+				<div class="card-panel jw-mgt16 iljastar" data-section-name="iljastar">
+					<h3 class="grid-wrap-title" data-lan-eng="Daily Sales Adjustment">일자별 판매 조정</h3>
+					<div class="calendar-row jw-mgt16">
+						<div>
+							<div class="cal-month">
+								<div class="cal-header">Jun 2025</div>
+								
+								<div class="cal-head">
+								  <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
+								</div>
+								<div class="cal-body">
+									<div class="cal-day is-sun is-in-range"><time datetime="2025-06-01">1</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-02">2</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-03">3</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-04">4</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-05">5</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-06">6</time></div>
+									<div class="cal-day is-sat is-selected"><time datetime="2025-06-07">7</time></div>
+
+									<div class="cal-day is-sun"><time datetime="2025-06-08">8</time></div>
+									<div class="cal-day"><time datetime="2025-06-09">9</time></div>
+									<div class="cal-day"><time datetime="2025-06-10">10</time></div>
+									<div class="cal-day"><time datetime="2025-06-11">11</time></div>
+									<div class="cal-day"><time datetime="2025-06-12">12</time></div>
+									<div class="cal-day"><time datetime="2025-06-13">13</time></div>
+									<div class="cal-day is-sat"><time datetime="2025-06-14">14</time></div>
+
+									<div class="cal-day is-sun"><time datetime="2025-06-15">15</time></div>
+									<div class="cal-day"><time datetime="2025-06-16">16</time></div>
+									<div class="cal-day"><time datetime="2025-06-17">17</time></div>
+									<div class="cal-day"><time datetime="2025-06-18">18</time></div>
+									<div class="cal-day"><time datetime="2025-06-19">19</time></div>
+									<div class="cal-day"><time datetime="2025-06-20">20</time></div>
+									<div class="cal-day is-sat"><time datetime="2025-06-21">21</time></div>
+
+									<div class="cal-day is-sun"><time datetime="2025-06-22">22</time></div>
+									<div class="cal-day"><time datetime="2025-06-23">23</time></div>
+									<div class="cal-day"><time datetime="2025-06-24">24</time></div>
+									<div class="cal-day"><time datetime="2025-06-25">25</time></div>
+									<div class="cal-day"><time datetime="2025-06-26">26</time></div>
+									<div class="cal-day"><time datetime="2025-06-27">27</time></div>
+									<div class="cal-day is-sat"><time datetime="2025-06-28">28</time></div>
+
+									<div class="cal-day is-sun"><time datetime="2025-06-29">29</time></div>
+									<div class="cal-day"><time datetime="2025-06-30">30</time></div>
+									<div class="cal-day"><time datetime="2025-07-01">1</time></div>
+									<div class="cal-day"><time datetime="2025-07-02">2</time></div>
+									<div class="cal-day"><time datetime="2025-07-03">3</time></div>
+									<div class="cal-day"><time datetime="2025-07-04">4</time></div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="cal-month">
+								<div class="cal-header">Jun 2025</div>
+								
+								<div class="cal-head">
+								  <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
+								</div>
+								<div class="cal-body">
+									<div class="cal-day is-sun is-in-range"><time datetime="2025-06-01">1</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-02">2</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-03">3</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-04">4</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-05">5</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-06">6</time></div>
+									<div class="cal-day is-sat is-selected"><time datetime="2025-06-07">7</time></div>
+
+									<div class="cal-day is-sun"><time datetime="2025-06-08">8</time></div>
+									<div class="cal-day"><time datetime="2025-06-09">9</time></div>
+									<div class="cal-day"><time datetime="2025-06-10">10</time></div>
+									<div class="cal-day"><time datetime="2025-06-11">11</time></div>
+									<div class="cal-day"><time datetime="2025-06-12">12</time></div>
+									<div class="cal-day"><time datetime="2025-06-13">13</time></div>
+									<div class="cal-day is-sat"><time datetime="2025-06-14">14</time></div>
+
+									<div class="cal-day is-sun"><time datetime="2025-06-15">15</time></div>
+									<div class="cal-day"><time datetime="2025-06-16">16</time></div>
+									<div class="cal-day"><time datetime="2025-06-17">17</time></div>
+									<div class="cal-day"><time datetime="2025-06-18">18</time></div>
+									<div class="cal-day"><time datetime="2025-06-19">19</time></div>
+									<div class="cal-day"><time datetime="2025-06-20">20</time></div>
+									<div class="cal-day is-sat"><time datetime="2025-06-21">21</time></div>
+
+									<div class="cal-day is-sun"><time datetime="2025-06-22">22</time></div>
+									<div class="cal-day"><time datetime="2025-06-23">23</time></div>
+									<div class="cal-day"><time datetime="2025-06-24">24</time></div>
+									<div class="cal-day"><time datetime="2025-06-25">25</time></div>
+									<div class="cal-day"><time datetime="2025-06-26">26</time></div>
+									<div class="cal-day"><time datetime="2025-06-27">27</time></div>
+									<div class="cal-day is-sat"><time datetime="2025-06-28">28</time></div>
+
+									<div class="cal-day is-sun"><time datetime="2025-06-29">29</time></div>
+									<div class="cal-day"><time datetime="2025-06-30">30</time></div>
+									<div class="cal-day"><time datetime="2025-07-01">1</time></div>
+									<div class="cal-day"><time datetime="2025-07-02">2</time></div>
+									<div class="cal-day"><time datetime="2025-07-03">3</time></div>
+									<div class="cal-day"><time datetime="2025-07-04">4</time></div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="cal-month">
+								<div class="cal-header">Jun 2025</div>
+								
+								<div class="cal-head">
+								  <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
+								</div>
+								<div class="cal-body">
+									<div class="cal-day is-sun is-in-range"><time datetime="2025-06-01">1</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-02">2</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-03">3</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-04">4</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-05">5</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-06">6</time></div>
+									<div class="cal-day is-sat is-selected"><time datetime="2025-06-07">7</time></div>
+
+									<div class="cal-day is-sun"><time datetime="2025-06-08">8</time></div>
+									<div class="cal-day"><time datetime="2025-06-09">9</time></div>
+									<div class="cal-day"><time datetime="2025-06-10">10</time></div>
+									<div class="cal-day"><time datetime="2025-06-11">11</time></div>
+									<div class="cal-day"><time datetime="2025-06-12">12</time></div>
+									<div class="cal-day"><time datetime="2025-06-13">13</time></div>
+									<div class="cal-day is-sat"><time datetime="2025-06-14">14</time></div>
+
+									<div class="cal-day is-sun"><time datetime="2025-06-15">15</time></div>
+									<div class="cal-day"><time datetime="2025-06-16">16</time></div>
+									<div class="cal-day"><time datetime="2025-06-17">17</time></div>
+									<div class="cal-day"><time datetime="2025-06-18">18</time></div>
+									<div class="cal-day"><time datetime="2025-06-19">19</time></div>
+									<div class="cal-day"><time datetime="2025-06-20">20</time></div>
+									<div class="cal-day is-sat"><time datetime="2025-06-21">21</time></div>
+
+									<div class="cal-day is-sun"><time datetime="2025-06-22">22</time></div>
+									<div class="cal-day"><time datetime="2025-06-23">23</time></div>
+									<div class="cal-day"><time datetime="2025-06-24">24</time></div>
+									<div class="cal-day"><time datetime="2025-06-25">25</time></div>
+									<div class="cal-day"><time datetime="2025-06-26">26</time></div>
+									<div class="cal-day"><time datetime="2025-06-27">27</time></div>
+									<div class="cal-day is-sat"><time datetime="2025-06-28">28</time></div>
+
+									<div class="cal-day is-sun"><time datetime="2025-06-29">29</time></div>
+									<div class="cal-day"><time datetime="2025-06-30">30</time></div>
+									<div class="cal-day"><time datetime="2025-07-01">1</time></div>
+									<div class="cal-day"><time datetime="2025-07-02">2</time></div>
+									<div class="cal-day"><time datetime="2025-07-03">3</time></div>
+									<div class="cal-day"><time datetime="2025-07-04">4</time></div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="cal-month">
+								<div class="cal-header">Jun 2025</div>
+								
+								<div class="cal-head">
+								  <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
+								</div>
+								<div class="cal-body">
+									<div class="cal-day is-sun is-in-range"><time datetime="2025-06-01">1</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-02">2</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-03">3</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-04">4</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-05">5</time></div>
+									<div class="cal-day is-in-range"><time datetime="2025-06-06">6</time></div>
+									<div class="cal-day is-sat is-selected"><time datetime="2025-06-07">7</time></div>
+
+									<div class="cal-day is-sun"><time datetime="2025-06-08">8</time></div>
+									<div class="cal-day"><time datetime="2025-06-09">9</time></div>
+									<div class="cal-day"><time datetime="2025-06-10">10</time></div>
+									<div class="cal-day"><time datetime="2025-06-11">11</time></div>
+									<div class="cal-day"><time datetime="2025-06-12">12</time></div>
+									<div class="cal-day"><time datetime="2025-06-13">13</time></div>
+									<div class="cal-day is-sat"><time datetime="2025-06-14">14</time></div>
+
+									<div class="cal-day is-sun"><time datetime="2025-06-15">15</time></div>
+									<div class="cal-day"><time datetime="2025-06-16">16</time></div>
+									<div class="cal-day"><time datetime="2025-06-17">17</time></div>
+									<div class="cal-day"><time datetime="2025-06-18">18</time></div>
+									<div class="cal-day"><time datetime="2025-06-19">19</time></div>
+									<div class="cal-day"><time datetime="2025-06-20">20</time></div>
+									<div class="cal-day is-sat"><time datetime="2025-06-21">21</time></div>
+
+									<div class="cal-day is-sun"><time datetime="2025-06-22">22</time></div>
+									<div class="cal-day"><time datetime="2025-06-23">23</time></div>
+									<div class="cal-day"><time datetime="2025-06-24">24</time></div>
+									<div class="cal-day"><time datetime="2025-06-25">25</time></div>
+									<div class="cal-day"><time datetime="2025-06-26">26</time></div>
+									<div class="cal-day"><time datetime="2025-06-27">27</time></div>
+									<div class="cal-day is-sat"><time datetime="2025-06-28">28</time></div>
+
+									<div class="cal-day is-sun"><time datetime="2025-06-29">29</time></div>
+									<div class="cal-day"><time datetime="2025-06-30">30</time></div>
+									<div class="cal-day"><time datetime="2025-07-01">1</time></div>
+									<div class="cal-day"><time datetime="2025-07-02">2</time></div>
+									<div class="cal-day"><time datetime="2025-07-03">3</time></div>
+									<div class="cal-day"><time datetime="2025-07-04">4</time></div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<!-- 테이블 -->
+					<div class="tableA-scrollY jw-mgt32" style="height:400px;">
+						<table class="jw-tableA booking-detail">
+							<colgroup>
+								<col class="col-60">
+								<col>
+								<col>
+								<col>
+								<col>
+							</colgroup>
+							<thead>
+								<tr>
+									<th class="no is-center">No</th>
+									<th data-lan-eng="Flight departure date">항공편 출발일</th>
+									<th data-lan-eng="Reserved personnel">예약된 인원</th>
+									<th data-lan-eng="Maximum capacity">최대 수용 인원</th>
+									<th data-lan-eng="Airfare (₱)">항공 요금 (₱)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="no is-center">1</td>
+									<td class="is-center">2025-04-05</td>
+									<td class="is-center">4</td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="10" min="0"></div></td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="25,000" inputmode="numeric"></div></td>
+								</tr>
+								<tr>
+									<td class="no is-center">2</td>
+									<td class="is-center">2025-04-06</td>
+									<td class="is-center">4</td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="10" min="0"></div></td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="25,000" inputmode="numeric"></div></td>
+								</tr>
+								<tr>
+									<td class="no is-center">3</td>
+									<td class="is-center">2025-04-10</td>
+									<td class="is-center">4</td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="4" min="0"></div></td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="40,000" inputmode="numeric"></div></td>
+								</tr>
+								<tr>
+									<td class="no is-center">4</td>
+									<td class="is-center">2025-04-13</td>
+									<td class="is-center">4</td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="10" min="0"></div></td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="25,000" inputmode="numeric"></div></td>
+								</tr>
+								<tr>
+									<td class="no is-center">5</td>
+									<td class="is-center">2025-04-17</td>
+									<td class="is-center">4</td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="4" min="0"></div></td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="40,000" inputmode="numeric"></div></td>
+								</tr>
+								<tr>
+									<td class="no is-center">6</td>
+									<td class="is-center">2025-04-20</td>
+									<td class="is-center">4</td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="10" min="0"></div></td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="25,000" inputmode="numeric"></div></td>
+								</tr>
+								<tr>
+									<td class="no is-center">7</td>
+									<td class="is-center">2025-04-21</td>
+									<td class="is-center">4</td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="10" min="0"></div></td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="25,000" inputmode="numeric"></div></td>
+								</tr>
+								<tr>
+									<td class="no is-center">8</td>
+									<td class="is-center">2025-04-24</td>
+									<td class="is-center">4</td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="4" min="0"></div></td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="40,000" inputmode="numeric"></div></td>
+								</tr>
+								<tr>
+									<td class="no is-center">9</td>
+									<td class="is-center">2025-04-27</td>
+									<td class="is-center">4</td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="10" min="0"></div></td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="25,000" inputmode="numeric"></div></td>
+								</tr>
+								<tr>
+									<td class="no is-center">10</td>
+									<td class="is-center">2025-04-30</td>
+									<td class="is-center">4</td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="10" min="0"></div></td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="25,000" inputmode="numeric"></div></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<h2 class="section-title jw-mgt32" data-lan-eng="Schedule">일정표</h2>
+				<div class="card-panel jw-mgt16">
+					<h3 class="grid-wrap-title" data-lan-eng="Meeting Information">미팅 정보</h3>
+
+					<div class="grid-wrap jw-mgt16">
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Meeting time">미팅 시간</span> <span class="req">*</span></label>
+							<div class="meeting-wrap">
+								<select class="select">
+									<option>00</option>
+									<option>01</option>
+									<option>02</option>
+									<option>03</option>
+									<option>04</option>
+									<option>05</option>
+									<option>06</option>
+									<option>07</option>
+									<option>08</option>
+									<option selected>09</option>
+									<option>10</option>
+									<option>11</option>
+									<option>12</option>
+									<option>13</option>
+									<option>14</option>
+									<option>15</option>
+									<option>16</option>
+									<option>17</option>
+									<option>18</option>
+									<option>19</option>
+									<option>20</option>
+									<option>21</option>
+									<option>22</option>
+									<option>23</option>
+								</select>
+								<select class="select">
+									<option selected>00</option>
+									<option>05</option>
+									<option>10</option>
+									<option>15</option>
+									<option>20</option>
+									<option>25</option>
+									<option>30</option>
+									<option>35</option>
+									<option>40</option>
+									<option>45</option>
+									<option>50</option>
+									<option>55</option>
+								</select>
+							</div>
+						</div>
+						<div class="grid-item"></div>
+						<div class="grid-item"></div>
+
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Meeting place name">미팅 장소명</span> <span class="req">*</span></label>
+							<div class="jw-center jw-gap20">
+								<input type="text" class="form-control jw-wf" value="Incheon International Airport Terminal 2" disabled>
+								<button type="button" class="jw-button typeA " data-lan-eng="Address Search">주소 검색</button>
+							</div>
+						</div>
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Meeting place address">미팅 장소 주소</span> <span class="req">*</span></label>
+							<input type="text" class="form-control" value="Incheon Metropolitan City, Jung-gu, 446 Terminal 2 Road" disabled>
+						</div>
+					</div>
+				</div>
+
+				<div class="card-panel jw-mgt16"  id="nday">
+					<h3 class="grid-wrap-title">
+						<button type="button" class="jw-w jw-cols jw-between" onclick="ndasdtoggle()">1Day <img src="../image/arrow42.svg" alt=""></button>
+					</h3>
+					<i class="line"></i>
+					<div class="grid-wrap jw-mgt12">
+						<div class="grid-item col-span-3">
+							<label class="label-name" data-lan-eng="Schedule Summary">일정 요약</label>
+							<input type="text" class="form-control" value="인천 도착" data-lan-eng="Arrival at Incheon">
+						</div>
+					</div>
+					<div class="sub-panel jw-mgt20">
+						<h3 class="grid-wrap-title" data-lan-eng="Tourist Information">관광지 정보</h3>
+						<button type="button" class="jw-button typeA jw-mgt12" data-lan-eng="＋ Add Tourist Attraction" onclick="template_detail_dfghs(this)">＋ 관광지 추가</button>
+						<div class="grid-wrap grid-highlight jw-mgt12 dfghs">
+							<div class="grid-item">
+								<label class="label-name"><span data-lan-eng="Schedule start time">Schedule start time</span> <span class="req">*</span></label>
+								<div class="meeting-wrap">
+									<select class="select">
+										<option>00</option>
+										<option selected>09</option>
+										<option>10</option>
+										<option>11</option>
+										<option>12</option>
+										<option>13</option>
+										<option>14</option>
+										<option>15</option>
+										<option>16</option>
+										<option>17</option>
+										<option>18</option>
+										<option>19</option>
+										<option>20</option>
+										<option>21</option>
+										<option>22</option>
+										<option>23</option>
+									</select>
+									<select class="select">
+										<option selected>00</option>
+										<option>10</option>
+										<option>20</option>
+										<option>30</option>
+										<option>40</option>
+										<option>50</option>
+									</select>
+								</div>
+							</div>
+							<div class="grid-item">
+								<label class="label-name"><span data-lan-eng="Schedule end time">Schedule end time</span> <span class="req">*</span></label>
+								<div class="meeting-wrap">
+									<select class="select">
+										<option>00</option>
+										<option>09</option>
+										<option selected>10</option>
+										<option>11</option>
+										<option>12</option>
+										<option>13</option>
+										<option>14</option>
+										<option>15</option>
+										<option>16</option>
+										<option>17</option>
+										<option>18</option>
+										<option>19</option>
+										<option>20</option>
+										<option>21</option>
+										<option>22</option>
+										<option>23</option>
+									</select>
+									<select class="select">
+										<option selected>00</option>
+										<option>10</option>
+										<option>20</option>
+										<option>30</option>
+										<option>40</option>
+										<option>50</option>
+									</select>
+								</div>
+							</div>
+							<div class="grid-item"></div>
+
+							<div class="grid-item col-span-3">
+								<label class="label-name"><span data-lan-eng="Sight Name">Sight Name</span><span class="req">*</span></label>
+								<div class="jw-center jw-gap20">
+									<input type="text" class="form-control jw-wf" data-essential="y" value="Nami Island" disabled>
+									<button type="button" class="jw-button typeA " data-lan-eng="Address Search">Address Search</button>
+								</div>
+							</div>
+
+							<div class="grid-item col-span-3">
+								<label class="label-name"><span data-lan-eng="Sight Address">Sight Address</span><span class="req">*</span></label>
+								<input type="text" class="form-control" value="Gangwon Chuncheon-si Namsan-myeon Nami Island Road 1" disabled>
+							</div>
+
+							<!-- multi-editor.js -->
+							<div class="grid-item col-span-3">
+								<label class="label-name"><span data-lan-eng="Sight Information">Sight Information</span><span class="req">*</span></label>
+								<div class="editor-box-wrap">
+								<div class="jw-editor">
+									<div class="toolbar">
+									<div class="group">
+										<button type="button" class="editor-btn ql-bold">
+										<img src="../image/editer_bold.svg">
+										</button>
+										<button type="button" class="editor-btn ql-italic">
+										<img src="../image/editer_italic.svg">
+										</button>
+										<button type="button" class="editor-btn ql-underline">
+										<img src="../image/editer_underline.svg">
+										</button>
+										<button type="button" class="editor-btn ql-strike">
+										<img src="../image/editer_strikethrough.svg">
+										</button>
+							
+										<!-- 색상 버튼은 this 넘겨주기 -->
+										<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+										<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+									</div>
+							
+									<div class="group">
+										<!-- select도 this 넘겨주기 -->
+										<select class="editor-font-size" onchange="fontsize(this);">
+										<option value="" selected>폰트</option>
+										<option value="12px">12px</option>
+										<option value="14px">14px</option>
+										<option value="16px">16px</option>
+										<option value="18px">18px</option>
+										<option value="24px">24px</option>
+										</select>
+									</div>
+							
+									<div class="group">
+										<button type="button" class="editor-btn ql-align" value="">
+										<img src="../image/editer_left.svg">
+										</button>
+										<button type="button" class="editor-btn ql-align" value="center">
+										<img src="../image/editer_center.svg">
+										</button>
+										<button type="button" class="editor-btn ql-align" value="right">
+										<img src="../image/editer_right.svg">
+										</button>
+									</div>
+							
+									<div class="group">
+										<button type="button" class="editor-btn ql-list" value="ordered">
+										<img src="../image/editer_ordered.svg">
+										</button>
+										<button type="button" class="editor-btn ql-list" value="bullet">
+										<img src="../image/editer_unordered.svg">
+										</button>
+									</div>
+							
+									<div class="group">
+										<!-- 이것도 this 넘기게 변경 -->
+										<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+										<img src="../image/editer_removeHtmlTags.svg">
+										</button>
+										<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+										HTML
+										</button>
+									</div>
+							
+									<div class="group">
+										<label class="inputFile">
+										<!-- this 넘기기 -->
+										<input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+										<span class="text">이미지</span>
+										<i class="progress"></i>
+										</label>
+									</div>
+									</div>
+							
+									<div class="jweditor" data-placeholder="내용을 입력해주세요"></div>
+								</div>
+								</div>
+							</div>
+							<div class="grid-item col-span-3">
+								<label class="label-name"><span data-lan-eng="Sight Image">Sight Image</span><span class="req">*</span></label>
+								<div class="upload-grid">
+									<div class="upload-item jw-center">
+										<label class="inputFile">
+											<input name="" type="file" onchange="filePreview(this);" >
+											<button type="button" class="btn-upload"><img src="../image/upload3.svg" alt=""> <span data-lan-eng="Image upload">Image upload</span></button>
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item col-span-3">
+								<div class="grid-item-controoler">
+									<button type="button" class="jw-button typeA" onclick="template_detail_hsdfghsh(this)"><img src="../image/trash.svg" alt="" data-lan-eng="Delete tourist attraction">Delete tourist attraction</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="sub-panel jw-mgt20">
+						<h4 class="grid-wrap-title" data-lan-eng="Accommodation Information">숙소 정보</h4>
+
+						<div class="grid-wrap grid-highlight jw-mgt12">
+							<div class="grid-item col-span-3">
+								<label class="label-name"><span data-lan-eng="Accommodation name">숙소명</span> <span class="req">*</span></label>
+								<div class="jw-center jw-gap20">
+									<input type="text" class="form-control jw-wf" value="Airsky Hotel Incheon" disabled>
+									<button type="button" class="jw-button typeA " data-lan-eng="Address Search">주소 검색</button>
+								</div>
+
+							</div>
+
+							<div class="grid-item col-span-3">
+								<label class="label-name"><span data-lan-eng="Accommodation address">숙소 주소</span> <span class="req">*</span></label>
+								<input type="text" class="form-control" value="Incheon Jung-gu Eunhasu-ro 29beon-gil 31 Airsky Hotel" disabled>
+							</div>
+
+							<div class="grid-item col-span-3">
+								<div class="grid-item col-span-3">
+									<label class="label-name"><span data-lan-eng="Accommodation Description">Accommodation Description</span> <span class="req">*</span></label>
+									<div class="editor-box-wrap">
+											<div class="jw-editor">
+												<div class="toolbar" id="custom-toolbar">
+													<div class="group">
+														<button type="button" class="editor-btn ql-bold"><img src="../image/editer_bold.svg" ></button>
+														<button type="button" class="editor-btn ql-italic" ><img src="../image/editer_italic.svg" ></button>
+														<button type="button" class="editor-btn ql-underline"><img src="../image/editer_underline.svg" ></button>
+														<button type="button" class="editor-btn ql-strike"><img src="../image/editer_strikethrough.svg" ></button>
+														
+														<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+														<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+													</div>
+													<div class="group">
+														<select class=" ql-size" id="fontSize" onchange="fontsize(this);">
+															<option value="" selected>폰트</option>
+															<option value="12px">12px</option>
+															<option value="14px">14px</option>
+															<option value="16px">16px</option>
+															<option value="18px">18px</option>
+															<option value="24px">24px</option>
+														</select>
+													</div>
+													<div class="group">
+														<button type="button" class="editor-btn ql-align" value=""><img src="../image/editer_left.svg" ></button>
+														<button type="button" class="editor-btn ql-align" value="center"><img src="../image/editer_center.svg" ></button>
+														<button type="button" class="editor-btn ql-align" value="right"><img src="../image/editer_right.svg" ></button>
+													</div>
+													<div class="group">
+														<button type="button" class="editor-btn ql-list" value="ordered"><img src="../image/editer_ordered.svg" ></button>
+														<button type="button" class="editor-btn ql-list" value="bullet"><img src="../image/editer_unordered.svg" ></button>
+													</div>
+													<div class="group">
+														<button type="button" class="editor-btn" onclick="removeHtmlTags();"><img src="../image/editer_removeHtmlTags.svg" ></button>
+														<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView();">HTML</button>
+													</div>
+													<div class="group">
+														<label class="inputFile" >
+															<input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage( this );" >
+															<span class="text" >이미지</span>
+															<i class="progress"></i>
+														</label>
+													</div>
+												</div>
+												<div class="jweditor" data-placeholder="내용을 입력해주세요"></div>
+											</div>
+			
+									</div>
+								</div>
+							</div>
+
+							<div class="grid-item col-span-3">
+								<label class="label-name"><span data-lan-eng="Accommodation Image">Accommodation Image</span> <span class="req">*</span></label>
+								<div class="upload-grid">
+									<div class="upload-item jw-center">
+										<label class="inputFile">
+											<input name="" type="file" onchange="filePreview(this);" >
+											<button type="button" class="btn-upload"><img src="../image/upload3.svg" alt=""> <span data-lan-eng="Image upload">Image upload</span></button>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="sub-panel jw-mgt20">
+						<h4 class="grid-wrap-title" data-lan-eng="Transportation Information">교통편 정보</h4>
+						<div class="grid-wrap grid-highlight jw-mgt12">
+							<!-- multi-editor.js -->
+							<div class="grid-item col-span-3">
+								<label class="label-name" data-lan-eng="Description">설명</label>
+								<div class="editor-box-wrap">
+								<div class="jw-editor">
+									<div class="toolbar">
+									<div class="group">
+										<button type="button" class="editor-btn ql-bold">
+										<img src="../image/editer_bold.svg">
+										</button>
+										<button type="button" class="editor-btn ql-italic">
+										<img src="../image/editer_italic.svg">
+										</button>
+										<button type="button" class="editor-btn ql-underline">
+										<img src="../image/editer_underline.svg">
+										</button>
+										<button type="button" class="editor-btn ql-strike">
+										<img src="../image/editer_strikethrough.svg">
+										</button>
+							
+										<!-- 색상 버튼은 this 넘겨주기 -->
+										<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+										<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+									</div>
+							
+									<div class="group">
+										<!-- select도 this 넘겨주기 -->
+										<select class="editor-font-size" onchange="fontsize(this);">
+										<option value="" selected>폰트</option>
+										<option value="12px">12px</option>
+										<option value="14px">14px</option>
+										<option value="16px">16px</option>
+										<option value="18px">18px</option>
+										<option value="24px">24px</option>
+										</select>
+									</div>
+							
+									<div class="group">
+										<button type="button" class="editor-btn ql-align" value="">
+										<img src="../image/editer_left.svg">
+										</button>
+										<button type="button" class="editor-btn ql-align" value="center">
+										<img src="../image/editer_center.svg">
+										</button>
+										<button type="button" class="editor-btn ql-align" value="right">
+										<img src="../image/editer_right.svg">
+										</button>
+									</div>
+							
+									<div class="group">
+										<button type="button" class="editor-btn ql-list" value="ordered">
+										<img src="../image/editer_ordered.svg">
+										</button>
+										<button type="button" class="editor-btn ql-list" value="bullet">
+										<img src="../image/editer_unordered.svg">
+										</button>
+									</div>
+							
+									<div class="group">
+										<!-- 이것도 this 넘기게 변경 -->
+										<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+										<img src="../image/editer_removeHtmlTags.svg">
+										</button>
+										<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+										HTML
+										</button>
+									</div>
+							
+									<div class="group">
+										<label class="inputFile">
+										<!-- this 넘기기 -->
+										<input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+										<span class="text">이미지</span>
+										<i class="progress"></i>
+										</label>
+									</div>
+									</div>
+							
+									<div class="jweditor" data-placeholder="내용을 입력해주세요"></div>
+								</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="sub-panel jw-mgt20">
+						<h4 class="grid-wrap-title" data-lan-eng="Meal information">식사 정보</h4>
+						<div class="grid-wrap grid-highlight jw-mgt12">
+							<div class="grid-item">
+								<label class="label-name" data-lan-eng="Breakfast">조식</label>
+								<input type="text" class="form-control" value="Hotel breakfast">
+							</div>
+							<div class="grid-item">
+								<label class="label-name" data-lan-eng="Chinese food">중식</label>
+								<input type="text" class="form-control" value="BBQ Chicken">
+							</div>
+							<div class="grid-item">
+								<label class="label-name" data-lan-eng="Dinner">석식</label>
+								<input type="text" class="form-control" value="Korean food">
+							</div>
+						</div>
+					</div>
+				</div>
+				
+
+				<h2 class="section-title jw-mgt32" data-lan-eng="Fee information">요금 정보</h2>
+				<div class="card-panel jw-mgt16">
+					<h3 class="grid-wrap-title" data-lan-eng="Number of people fee">인원별 요금</h3>
+					<i class="line"></i>
+					<button type="button" class="jw-button typeA" onclick="template_detail_sfg1(this)" data-lan-eng="＋ Add">＋ 추가</button>
+					<div class="tableA-scroll jw-mgt12">
+						<table class="jw-tableA booking-detail">
+							<colgroup>
+								<col class="col-80"> <!-- No -->
+								<col> <!-- 옵션명 -->
+								<col class="col-300"> <!-- 인원별 요금 -->
+								<col class="col-100"> <!-- 삭제 -->
+							</colgroup>
+							<thead>
+								<tr>
+									<th class="is-center">No</th>
+									<th data-lan-eng="Option name">옵션명</th>
+									<th data-lan-eng="Number of people fee (₱)">인원별 요금 (₱)</th>
+									<th data-lan-eng="Delete">삭제</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="is-center">1</td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Adult" placeholder="옵션명"></div></td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="34,000" inputmode="numeric" placeholder="0"></div></td>
+									<td class="is-center jw-center">
+										<button type="button" class="jw-button" onclick="template_detail_sfg1d(this)" aria-label="row delete"><img src="../image/trash.svg" alt=""></button>
+									</td>
+								</tr>
+								<tr>
+									<td class="is-center">2</td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Child"></div></td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="23,800" inputmode="numeric"></div></td>
+									<td class="is-center jw-center">
+										<button type="button" class="jw-button" onclick="template_detail_sfg1d(this)" aria-label="row delete"><img src="../image/trash.svg" alt=""></button>
+									</td>
+								</tr>
+								<tr>
+									<td class="is-center">3</td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Child"></div></td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="0" inputmode="numeric"></div></td>
+									<td class="is-center jw-center">
+										<button type="button" class="jw-button" onclick="template_detail_sfg1d(this)" aria-label="row delete"><img src="../image/trash.svg" alt=""></button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="card-panel jw-mgt16">
+					<h3 class="grid-wrap-title" data-lan-eng="Room rate for single occupancy">싱글룸 이용 요금</h3>
+					<div class="grid-wrap jw-mgt16">
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Single room usage fee (₱)">싱글룸 이용 요금 (₱)</span> <span class="req">*</span></label>
+							<input type="text" class="form-control jw-w348" value="10,000" inputmode="numeric" placeholder="0">
+							<p class="form-desc is-warning" data-lan-eng="* When booking for 2 or more people, you will be charged for the number of single rooms selected. For 1 person booking, it is applied for free.">* 2인 이상 예약 시, 선택한 싱글룸 수만큼 요금이 부과됩니다. 1인 예약 시에는 무료로 적용됩니다.</p>
+						</div>
+					</div>
+				</div>
+
+
+				<h2 class="section-title jw-mgt32" data-lan-eng="Included/Not Included Items" data-section-name="poham">포함/불포함 사항</h2>
+				<div class="card-panel jw-mgt16" data-section-name="poham">
+					<h3 class="grid-wrap-title" data-lan-eng="Included items">포함 사항</h3>
+					<i class="line"></i>
+					<button type="button" class="jw-button typeA" data-lan-eng="＋ Add" onclick="template_detail_sfg3(this)">＋ 추가</button>
+					<div class="tableA-scroll jw-mgt20">
+						<table class="jw-tableA booking-detail">
+							<colgroup>
+								<col class="col-80"> <!-- No -->
+								<col> <!-- 포함 사항 -->
+								<col class="col-100"> <!-- 삭제 -->
+							</colgroup>
+							<thead>
+								<tr>
+									<th>No</th>
+									<th data-lan-eng="Included items">포함 사항</th>
+									<th data-lan-eng="Delete">삭제</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="is-center">1</td>
+									<td class="is-center">
+										<div class="cell">
+											<input type="text" class="form-control" value="All accommodation (based on 2 people per room)">
+										</div>
+									</td>
+									<td class="is-center jw-center">
+										<button type="button" class="jw-button" aria-label="row delete" onclick="trash_typeA(this);"><img src="../image/trash.svg" alt=""></button>
+									</td>
+								</tr>
+								<tr>
+									<td class="is-center">2</td>
+									<td class="is-center">
+										<div class="cell">
+											<input type="text" class="form-control" value="Accompanied by a dedicated vehicle and professional guide">
+										</div>
+									</td>
+									<td class="is-center jw-center">
+										<button type="button" class="jw-button" aria-label="row delete" onclick="trash_typeA(this);"><img src="../image/trash.svg" alt=""></button>
+									</td>
+								</tr>
+								<tr>
+									<td class="is-center">3</td>
+									<td class="is-center">
+										<div class="cell">
+											<input type="text" class="form-control" value="All meals and entrance fees specified in the schedule are included">
+										</div>
+									</td>
+									<td class="is-center jw-center">
+										<button type="button" class="jw-button" aria-label="row delete" onclick="trash_typeA(this);"><img src="../image/trash.svg" alt=""></button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="card-panel jw-mgt16" data-section-name="poham">
+					<h3 class="grid-wrap-title" data-lan-eng="Excluded items">불포함 사항</h3>
+					<i class="line"></i>
+					<button type="button" class="jw-button typeA" data-lan-eng="＋ Add" onclick="template_detail_sfg3(this)">＋ 추가</button>
+
+					<div class="tableA-scroll jw-mgt20">
+						<table class="jw-tableA booking-detail">
+							<colgroup>
+								<col class="col-80"> <!-- No -->
+								<col> <!-- 불포함 사항 -->
+								<col class="col-100"> <!-- 삭제 -->
+							</colgroup>
+							<thead>
+								<tr>
+									<th data-lan-eng="">No</th>
+									<th data-lan-eng="Excluded items">불포함 사항</th>
+									<th data-lan-eng="Delete">삭제</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="is-center">1</td>
+									<td class="is-center">
+										<div class="cell">
+											<input type="text" class="form-control" value="Personal travel insurance and personal expenses">
+										</div>
+									</td>
+									<td class="is-center jw-center"><button type="button" class="jw-button" aria-label="row delete" onclick="trash_typeA(this);"><img src="../image/trash.svg" alt=""></button>
+									</td>
+								</tr>
+								<tr>
+									<td class="is-center">2</td>
+									<td class="is-center">
+										<div class="cell">
+											<input type="text" class="form-control" value="Meals and transportation costs during free time">
+										</div>
+									</td>
+									<td class="is-center jw-center"><button type="button" class="jw-button" aria-label="row delete" onclick="trash_typeA(this);"><img src="../image/trash.svg" alt=""></button>
+									</td>
+								</tr>
+								<tr>
+									<td class="is-center">3</td>
+									<td class="is-center">	
+										<div class="cell">
+											<input type="text" class="form-control" value="Manner tips and optional tourism costs">
+										</div>
+									</td>
+									<td class="is-center jw-center"><button type="button" class="jw-button" aria-label="row delete" onclick="trash_typeA(this);"><img src="../image/trash.svg" alt=""></button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+
+				<h2 class="section-title jw-mgt32" data-lan-eng="Usage Guide">이용안내</h2>
+				<div class="card-panel jw-mgt16">
+					<div class="grid-wrap jw-mgt0">
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Notice">안내문</span> <span class="req">*</span></label>
+							<div class="cell">
+								<div class="field-row jw-center">
+									<div class="jw-center jw-gap10"><img src="../image/file.svg" alt=""> <span data-lan-eng="File">파일</span> [pdf, 328KB]</div>
+									<div class="jw-center jw-gap10">
+										<i></i>
+										<button type="button" class="jw-button typeF" onclick="download('', 'melong')"><img src="../image/buttun-download.svg" alt=""></button>
+										<button type="button" class="jw-button typeF" onclick="deletefile(this)"><img src="../image/button-close2.svg" alt=""></button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- multi-editor.js -->
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Description">설명</span> <span class="req">*</span></label>
+							<div class="editor-box-wrap">
+							<div class="jw-editor">
+								<div class="toolbar">
+								<div class="group">
+									<button type="button" class="editor-btn ql-bold">
+									<img src="../image/editer_bold.svg">
+									</button>
+									<button type="button" class="editor-btn ql-italic">
+									<img src="../image/editer_italic.svg">
+									</button>
+									<button type="button" class="editor-btn ql-underline">
+									<img src="../image/editer_underline.svg">
+									</button>
+									<button type="button" class="editor-btn ql-strike">
+									<img src="../image/editer_strikethrough.svg">
+									</button>
+						
+									<!-- 색상 버튼은 this 넘겨주기 -->
+									<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+									<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+								</div>
+						
+								<div class="group">
+									<!-- select도 this 넘겨주기 -->
+									<select class="editor-font-size" onchange="fontsize(this);">
+									<option value="" selected>폰트</option>
+									<option value="12px">12px</option>
+									<option value="14px">14px</option>
+									<option value="16px">16px</option>
+									<option value="18px">18px</option>
+									<option value="24px">24px</option>
+									</select>
+								</div>
+						
+								<div class="group">
+									<button type="button" class="editor-btn ql-align" value="">
+									<img src="../image/editer_left.svg">
+									</button>
+									<button type="button" class="editor-btn ql-align" value="center">
+									<img src="../image/editer_center.svg">
+									</button>
+									<button type="button" class="editor-btn ql-align" value="right">
+									<img src="../image/editer_right.svg">
+									</button>
+								</div>
+						
+								<div class="group">
+									<button type="button" class="editor-btn ql-list" value="ordered">
+									<img src="../image/editer_ordered.svg">
+									</button>
+									<button type="button" class="editor-btn ql-list" value="bullet">
+									<img src="../image/editer_unordered.svg">
+									</button>
+								</div>
+						
+								<div class="group">
+									<!-- 이것도 this 넘기게 변경 -->
+									<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+									<img src="../image/editer_removeHtmlTags.svg">
+									</button>
+									<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+									HTML
+									</button>
+								</div>
+						
+								<div class="group">
+									<label class="inputFile">
+									<!-- this 넘기기 -->
+									<input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+									<span class="text">이미지</span>
+									<i class="progress"></i>
+									</label>
+								</div>
+								</div>
+						
+								<div class="jweditor" data-placeholder="내용을 입력해주세요"></div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<h2 class="section-title jw-mgt32" data-lan-eng="Cancellation/Refund Policy">취소/환불 규정</h2>
+				<div class="card-panel jw-mgt16">
+					<div class="grid-wrap jw-mgt0">
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Full refund available standard date">Full refund available standard date</span> <span class="req">*</span></label>
+							<input type="text" class="form-control jw-w348" value="15" inputmode="numeric" placeholder="Enter numbers">
+							<p class="form-desc is-warning" data-lan-eng="Cancel up to 1 day before for a full refund">Cancel up to 1 day before for a full refund</p>
+						</div>
+						<!-- multi-editor.js -->
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Description">설명</span> <span class="req">*</span></label>
+							<div class="editor-box-wrap">
+							<div class="jw-editor">
+								<div class="toolbar">
+								<div class="group">
+									<button type="button" class="editor-btn ql-bold">
+									<img src="../image/editer_bold.svg">
+									</button>
+									<button type="button" class="editor-btn ql-italic">
+									<img src="../image/editer_italic.svg">
+									</button>
+									<button type="button" class="editor-btn ql-underline">
+									<img src="../image/editer_underline.svg">
+									</button>
+									<button type="button" class="editor-btn ql-strike">
+									<img src="../image/editer_strikethrough.svg">
+									</button>
+						
+									<!-- 색상 버튼은 this 넘겨주기 -->
+									<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+									<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+								</div>
+						
+								<div class="group">
+									<!-- select도 this 넘겨주기 -->
+									<select class="editor-font-size" onchange="fontsize(this);">
+									<option value="" selected>폰트</option>
+									<option value="12px">12px</option>
+									<option value="14px">14px</option>
+									<option value="16px">16px</option>
+									<option value="18px">18px</option>
+									<option value="24px">24px</option>
+									</select>
+								</div>
+						
+								<div class="group">
+									<button type="button" class="editor-btn ql-align" value="">
+									<img src="../image/editer_left.svg">
+									</button>
+									<button type="button" class="editor-btn ql-align" value="center">
+									<img src="../image/editer_center.svg">
+									</button>
+									<button type="button" class="editor-btn ql-align" value="right">
+									<img src="../image/editer_right.svg">
+									</button>
+								</div>
+						
+								<div class="group">
+									<button type="button" class="editor-btn ql-list" value="ordered">
+									<img src="../image/editer_ordered.svg">
+									</button>
+									<button type="button" class="editor-btn ql-list" value="bullet">
+									<img src="../image/editer_unordered.svg">
+									</button>
+								</div>
+						
+								<div class="group">
+									<!-- 이것도 this 넘기게 변경 -->
+									<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+									<img src="../image/editer_removeHtmlTags.svg">
+									</button>
+									<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+									HTML
+									</button>
+								</div>
+						
+								<div class="group">
+									<label class="inputFile">
+									<!-- this 넘기기 -->
+									<input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+									<span class="text">이미지</span>
+									<i class="progress"></i>
+									</label>
+								</div>
+								</div>
+						
+								<div class="jweditor" data-placeholder="내용을 입력해주세요"></div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<h2 class="section-title jw-mgt32" data-lan-eng="Visa Application Guide">비자 신청 안내</h2>
+				<div class="card-panel jw-mgt16">
+					<div class="grid-wrap jw-mgt0">
+						<!-- multi-editor.js -->
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Description">설명</span> <span class="req">*</span></label>
+							<div class="editor-box-wrap">
+							<div class="jw-editor">
+								<div class="toolbar">
+								<div class="group">
+									<button type="button" class="editor-btn ql-bold">
+									<img src="../image/editer_bold.svg">
+									</button>
+									<button type="button" class="editor-btn ql-italic">
+									<img src="../image/editer_italic.svg">
+									</button>
+									<button type="button" class="editor-btn ql-underline">
+									<img src="../image/editer_underline.svg">
+									</button>
+									<button type="button" class="editor-btn ql-strike">
+									<img src="../image/editer_strikethrough.svg">
+									</button>
+						
+									<!-- 색상 버튼은 this 넘겨주기 -->
+									<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+									<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+								</div>
+						
+								<div class="group">
+									<!-- select도 this 넘겨주기 -->
+									<select class="editor-font-size" onchange="fontsize(this);">
+									<option value="" selected>폰트</option>
+									<option value="12px">12px</option>
+									<option value="14px">14px</option>
+									<option value="16px">16px</option>
+									<option value="18px">18px</option>
+									<option value="24px">24px</option>
+									</select>
+								</div>
+						
+								<div class="group">
+									<button type="button" class="editor-btn ql-align" value="">
+									<img src="../image/editer_left.svg">
+									</button>
+									<button type="button" class="editor-btn ql-align" value="center">
+									<img src="../image/editer_center.svg">
+									</button>
+									<button type="button" class="editor-btn ql-align" value="right">
+									<img src="../image/editer_right.svg">
+									</button>
+								</div>
+						
+								<div class="group">
+									<button type="button" class="editor-btn ql-list" value="ordered">
+									<img src="../image/editer_ordered.svg">
+									</button>
+									<button type="button" class="editor-btn ql-list" value="bullet">
+									<img src="../image/editer_unordered.svg">
+									</button>
+								</div>
+						
+								<div class="group">
+									<!-- 이것도 this 넘기게 변경 -->
+									<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+									<img src="../image/editer_removeHtmlTags.svg">
+									</button>
+									<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+									HTML
+									</button>
+								</div>
+						
+								<div class="group">
+									<label class="inputFile">
+									<!-- this 넘기기 -->
+									<input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+									<span class="text">이미지</span>
+									<i class="progress"></i>
+									</label>
+								</div>
+								</div>
+						
+								<div class="jweditor" data-placeholder="내용을 입력해주세요"></div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="controller jw-flex-s">
+					<button type="button" class="jw-button typeG" data-lan-eng="Save as Template">템플릿으로 저장하기</button>
+				</div>
+			</div>
+
+			<aside class="content-aside off" aria-label="구성 요소" style="top:5px">
+				<h3 class="aside-title" data-lan-eng="Components">구성 요소</h3>
+				<div class="card-panel jw-mgt16">
+						<div class="grid-item">
+							<div class="aside-list">
+								<div class="aside-row">
+									<div class="aside-row__title" data-lan-eng="Product Information">상품 정보</div>
+									<span class="aside-row__req" data-lan-eng="Required">필수</span>
+								</div>
+								<hr>
+								<div class="aside-row">
+									<div class="aside-row__title" data-lan-eng="Flight Information">항공편 정보</div>
+									<button type="button" class="jw-button aside-add-section" data-target-section="flight-information" onclick="togglePlusMinus(this)"><img src="../image/minus.svg" alt=""></button>
+								</div>
+								<hr>
+								<div class="aside-row">
+									<div class="aside-row__title" data-lan-eng="Sales Information">판매 정보</div>
+									<span class="aside-row__req" data-lan-eng="Required">필수</span>
+								</div>
+								<div class="aside-sub">
+									<div class="aside-row">
+										<div class="aside-row__subtitle" data-lan-eng="Basic Sales Information">기본 판매 정보</div>
+										<span class="aside-row__req" data-lan-eng="Required">필수</span>
+									</div>
+									<div class="aside-row">
+										<div class="aside-row__subtitle" data-lan-eng="Daily Sales Adjustment">일자별 판매 조정</div>
+										<button type="button" class="jw-button aside-add-section" data-target-section="iljastar" onclick="togglePlusMinus(this)"><img src="../image/minus.svg" alt=""></button>
+									</div>
+								</div>
+								<div class="aside-row">
+									<div class="aside-row__title" data-lan-eng="Schedule">일정표</div>
+									<span class="aside-row__req" data-lan-eng="Required">필수</span>
+								</div>
+								<div class="aside-sub">
+									<div class="aside-row">
+										<div class="aside-row__title" data-lan-eng="Meeting Information">미팅 정보</div>
+										<span class="aside-row__req" data-lan-eng="Required">필수</span>
+									</div>
+									<div class="aside-row-list">
+										<div class="aside-row">
+											<div class="aside-row__subtitle" data-lan-eng="1st day">1일차</div>
+											<span class="aside-row__req" data-lan-eng="Required">필수</span>
+										</div>
+										<div class="aside-row">
+											<div class="aside-row__subtitle" data-lan-eng="Day 2">2일차</div>
+											<button type="button" class="jw-button aside-add-section" onclick="template_detail_sdaf_delete(this)"><img src="../image/minus.svg" alt=""></button>
+										</div>
+									</div>
+									<div class="aside-row">
+										<button type="button" class="jw-button aside-button-typeA" onclick="template_detail_sdaf(this)"><img src="../image/plus.svg" alt=""> <span data-lan-eng="Add day">일차 추가</span></button>
+									</div>
+								</div>
+								<hr class="aside-row__sep">
+								<div class="aside-row">
+									<div class="aside-row__title" data-lan-eng="Fee information">요금 정보</div>
+									<span class="aside-row__req" data-lan-eng="Required">필수</span>
+								</div>
+								<hr>
+								<div class="aside-row">
+									<div class="aside-row__title" data-lan-eng="Included/Not Included Items">포함/불포함 사항</div>
+									<button type="button" class="jw-button aside-add-section" data-target-section="poham" onclick="togglePlusMinus(this)"><img src="../image/minus.svg" alt=""></button>
+								</div>
+								<hr>
+								<div class="aside-row">
+									<div class="aside-row__title" data-lan-eng="Usage Guide">이용안내</div>
+									<span class="aside-row__req" data-lan-eng="Required">필수</span>
+								</div>
+								<hr>
+								<div class="aside-row">
+									<div class="aside-row__title" data-lan-eng="Cancellation/Refund Policy">취소/환불 규정</div>
+									<span class="aside-row__req" data-lan-eng="Required">필수</span>
+								</div>
+								<hr>
+								<div class="aside-row">
+									<div class="aside-row__title" data-lan-eng="Visa Application Guide">비자 신청 안내</div>
+									<span class="aside-row__req" data-lan-eng="Required">필수</span>
+								</div>
+
+							</div>
+
+						</div>
+						<div class="temporary-guide" style="position:relative; margin-top:50px; ">
+							<button type="button" class="jw-button" onclick="modal('product-detail_m1.html', '580px', '508px')">템플릿 검색</button>
+							<button type="button" class="jw-button" onclick="modal('product-detail_m2.html', '580px', '358px')">템플릿으로 저장</button>
+							<button type="button" class="jw-button" onclick="modal('template-detail-modal1.html', '600px', '252px')">필수값 입력 요청</button>
+							
+							<button type="button" class="jw-button" onclick="modal('product-detail_modal_5.html', '580px', '252px')">테이블 삭제 시</button>
+							<button type="button" class="jw-button" onclick="modal('template-detail-modal3.html', '580px', '252px')">삭제 확인</button>
+						</div>
+				</div>
+			</aside>
+		</section>
+	
+	</main>
+
+
+
+	<!-- 기본 스크립트 -->
+	<script src="../js/default.js"></script>
+	<script src="../js/super.js"></script>
+	<script src="../js/datepicker.js"></script>
+	<script src="../js/multi-editor.js"></script>
+
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_super.html'
+		});
+	</script>
+</body>
+
+</html>

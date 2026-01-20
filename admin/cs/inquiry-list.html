@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN</title>
+
+	<!--   -->
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+</head>
+
+<body>
+
+	<!-- header   -->
+	<header class="layout-header"></header>
+
+	<!--   -->
+	<main class="layout-main">
+		<!-- nav   -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content">
+			<h1 class="page-title" data-lan-eng="Inquiry List">Inquiry List</h1>
+
+			<div class="card-panel jw-mgt32">
+
+				<div class="list-header">
+					<div class="result-count">
+						<span data-lan-eng="Search results">Search results</span>
+						<span class="result-count__num" id="totalCount">0</span>
+						<span data-lan-eng="items">items</span>
+					</div>
+					<form class="search-form" action="" method="get" id="filterForm">
+						<select class="select" name="replyStatus" id="replyStatusFilter">
+							<option value="" data-lan-eng="Response Status">Response Status</option>
+							<option value="unanswered" data-lan-eng="Not Responded">Not Responded</option>
+							<option value="answered" data-lan-eng="Response Complete">Response Complete</option>
+						</select>
+						<select class="select" name="processingStatus" id="processingStatusFilter">
+							<option value="" data-lan-eng="Processing Status">Processing Status</option>
+							<option value="pending" data-lan-eng="Received">Received</option>
+							<option value="processing" data-lan-eng="In Progress">In Progress</option>
+							<option value="completed" data-lan-eng="Processing Complete">Processing Complete</option>
+						</select>
+						<select class="select" name="sortOrder" id="sortOrderFilter">
+							<option value="latest" data-lan-eng="Latest">Latest</option>
+							<option value="oldest" data-lan-eng="Oldest">Oldest</option>
+							<option value="unanswered_first" data-lan-eng="Not Responded First">Not Responded First</option>
+							<option value="answered_first" data-lan-eng="Response Complete First">Response Complete First</option>
+						</select>
+						<div class="search-field">
+							<input type="text" class="search-input" id="searchInput" placeholder=" " data-lan-eng="Search">
+							<button type="button" class="jw-button search-btn" aria-label="Search" id="searchBtn">
+								<span class="search-ico"><img src="../image/search.svg" alt=""></span>
+							</button>
+						</div>
+					</form>
+				</div>
+				
+				<table class="jw-tableA">
+					<colgroup>
+						<col class="col-60"> <!-- No -->
+						<col> <!--   -->
+						<col> <!--   -->
+						<col class="col-180"> <!--  -->
+						<col class="col-140"> <!--   -->
+						<col class="col-140"> <!--   -->
+					</colgroup>
+					<thead>
+						<tr>
+							<th class="is-center">No</th>
+							<th data-lan-eng="Inquiry type">Inquiry type</th>
+							<th data-lan-eng="Inquiry Title">Inquiry Title</th>
+							<th data-lan-eng="Date created">Date created</th>
+							<th data-lan-eng="Response status">Response status</th>
+							<th data-lan-eng="Processing status">Processing status</th>
+						</tr>
+					</thead>
+					<tbody id="inquiriesTableBody">
+						<tr>
+							<td colspan="6" class="is-center">Loading...</td>
+						</tr>
+					</tbody>
+				</table>
+
+				
+				<div class="jw-pagebox" role="navigation" aria-label="pagination" id="pagination">
+					<div class="contents">
+						<button type="button" class="first" aria-label="first page" aria-disabled="true" id="firstPage">
+							<img src="../image/first.svg" alt="">
+						</button>
+						<button type="button" class="prev" aria-label="previous page" aria-disabled="true" id="prevPage">
+							<img src="../image/prev.svg" alt="">
+						</button>
+
+						<div class="page" role="list" id="pageNumbers">
+							<!--   JavaScript   -->
+						</div>
+
+						<button type="button" class="next" aria-label="next page" aria-disabled="true" id="nextPage">
+							<img src="../image/next.svg" alt="">
+						</button>
+						<button type="button" class="last" aria-label="last page" aria-disabled="true" id="lastPage">
+							<img src="../image/last.svg" alt="">
+						</button>
+					</div>
+				</div>
+
+			</div>
+			
+			<div class="controller">
+				<button type="button" class="jw-button typeA" data-lan-eng="Download" id="downloadBtn">Download</button>
+			</div>
+
+		</section>
+
+	</main>
+
+	<script src="../js/default.js"></script>
+	<script src="../js/cs.js"></script>
+	<script src="../js/cs-inquiry-list.js"></script>
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_cs.html'
+		});
+	</script>
+</body>
+
+</html>

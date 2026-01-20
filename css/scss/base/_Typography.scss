@@ -1,0 +1,191 @@
+@layer Typography { 
+    .text { 
+        &.fz12 { 
+            font-size: 12px;
+        }
+        &.fz13 { 
+            font-size: 13px;
+        }
+        &.fz14 { 
+            font-size: 14px;
+        }
+        &.fz16 { 
+            font-size: 16px;
+        }
+        &.fz18 { 
+            font-size: 18px;
+        }
+        &.fz20 { 
+            font-size: 20px;
+        }
+        &.fw400 { 
+            font-weight: 400;
+        }
+        &.fw500 { 
+            font-weight: 500;
+        }
+        &.fw600 { 
+            font-weight: 600;
+        }
+        &.black12 { 
+            color: var(--black12);
+        }
+        &.black36 { 
+            color: var(--black36);
+        }
+        &.black4e { 
+            color: var(--black4e);
+        }
+        &.grayb0 { 
+            color: var(--grayb0);
+        }
+        &.gray4e { 
+            color: var(--gray4e);
+        }
+        &.gray6b { 
+            color: var(--gray6b);
+        }
+        &.gray96 { 
+            color: var(--gray96);
+        }
+        &.reded { 
+            color: var(--reded);
+        }
+        &.green1b { 
+            color: var(--green1b);
+        }
+        &.orangedb { 
+            color: var(--orangedb);
+        }
+        &.white { 
+            color: var(--white);
+        }
+        &.lh16 { 
+            line-height: 16px;
+        }
+        &.lh19 { 
+            line-height: 19px;
+        }
+        &.lh22 { 
+            line-height: 22px;
+        }
+        &.lh24 { 
+            line-height: 24px;
+        }
+        &.lh26 { 
+            line-height: 26px;
+        }
+        &.lh28 { 
+            line-height: 28px;
+        }
+        &.lh140 { 
+            line-height: 140%;
+        }
+        &.ico-time { 
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            
+            &::before { 
+                @include content;
+                width: 20px;
+                height: 20px;
+                background: url(../images/ico_time.svg);
+            }
+        }
+        &.ico-location { 
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            
+            &::before { 
+                @include content;
+                width: 20px;
+                height: 20px;
+                background: url(../images/ico_location_red.svg) center center / contain;
+            }
+        }
+        &.ico-mem-gray { 
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            
+            &::before { 
+                @include content;
+                width: 20px;
+                height: 20px;
+                background: url(../images/ico_mem_gray.svg) center center / contain;
+            }
+        }
+        &.ico-airplane-gray { 
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            
+            &::before { 
+                @include content;
+                width: 20px;
+                height: 20px;
+                background: url(../images/ico_airplane_gray.svg) center center / contain;
+            }
+        }
+        &.ico-bar { 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            &::before { 
+                @include content;
+                width: 1px;
+                height: 12px;
+                background: var(--grayd4);
+                margin-left: 8px;
+                margin-top: 2px;
+            }
+        }
+        &.ico1 { 
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            &::before { 
+                @include content;
+                width: 20px;
+                height: 20px;
+                background: url(../images/ico_check_green_round.svg) center center / contain;
+            }
+        }
+        &.ico2 { 
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            &::before { 
+                @include content;
+                width: 20px;
+                height: 20px;
+                background: url(../images/ico_x_orange_round.svg) center center / contain;
+            }
+        }
+        &.ico3 { 
+            display: flex; 
+            align-items: center;
+            gap: 4px;
+            &::before { 
+                @include content;
+                width: 24px;
+                height: 24px;
+                background: url(../images/ico_globe.svg) center center / contain;
+            }
+        }
+        .btn-folding { 
+            width: 20px;
+            img { 
+                display: block;
+                width: 20px;
+                transform: rotate(-180deg);
+                transition: all .3s;
+                &.active { 
+                    transform: rotate(-0deg);
+                }
+            }
+        }
+    }
+}

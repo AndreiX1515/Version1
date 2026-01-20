@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN</title>
+
+	<!-- 공통 스타일 -->
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+
+	<!-- 날짜 범위 선택용 라이브러리 -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+</head>
+
+<body>
+
+	<!-- header 들어올 자리 -->
+	<header class="layout-header"></header>
+
+	<!-- 본문 영역 -->
+	<main class="layout-main">
+		<!-- nav 들어올 자리 -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content">
+			<div class="page-toolbar">
+				<a href="b2b-booking-list.html" class="jw-button" aria-label="목록으로 돌아가기">
+					<img src="../image/arrow4.svg" alt="">
+					<span data-lan-eng="Return to list">목록으로 돌아가기</span>
+				</a>
+
+				<div class="page-toolbar-actions">
+					<select class="select">
+						<option value="contract" selected>Guide assignment</option>
+						<option value="review">Guide assignment</option>
+					</select>
+					<select class="select">
+						<option value="contract" selected>Waiting for balance payment</option>
+					</select>
+					<button type="button" class="jw-button typeB">Save</button>
+				</div>
+			</div>
+
+			<h1 class="page-title" data-lan-eng="B2B Reservation Details">B2B 예약 상세</h1>
+
+			<div class="tab-wrap jw-mgt32">
+				<p data-lan-eng="Product and Reservation Information">상품 및 예약 정보</p>
+				<a href="../common/reservation-location.html" target="_blank"><span data-lan-eng="Meeting location">집합 위치</span><img src="../image/linkout.svg" alt=""></a>
+				<a href="../common/reservation-notices.html" target="_blank"><span data-lan-eng="Announcements">공지사항</span><img src="../image/linkout.svg" alt=""></a>
+			</div>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Product Information">상품 정보</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+					<!-- 상품명 : 전체폭 -->
+					<div class="grid-item col-span-3">
+						<label class="label-name" data-lan-eng="Product Name">상품명</label>
+						<input type="text" class="form-control" value="Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro"
+							disabled>
+					</div>
+
+					<!-- 여행 기간 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Travel period">여행 기간</label>
+						<input type="text" class="form-control" value="2025-04-19 - 2025-04-24" disabled>
+					</div>
+
+					<!-- 미팅 시간 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Meeting time">미팅 시간</label>
+						<input type="text" class="form-control" value="2025-04-19 09:00" disabled>
+					</div>
+
+					<!-- 미팅 장소 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Meeting place">미팅 장소</label>
+						<input type="text" class="form-control" value="Incheon International Airport Terminal 2" disabled>
+					</div>
+				</div>
+			</div>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Reservation Information">예약 정보</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+					<!-- 1행 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Reservation number">예약 번호</label>
+						<input type="text" class="form-control" placeholder="23490871349" disabled readonly>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Reservation date and time">예약일시</label>
+						<input type="text" class="form-control" placeholder="2025-12-01 12:12" disabled readonly>
+					</div>
+					<div class="grid-item"></div>
+
+					<!-- 2행 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Number of people for reservation">예약 인원</label>
+						<input type="text" class="form-control" placeholder="Adult x1, Child x2" disabled readonly>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Room options">룸 옵션</label>
+						<input type="text" class="form-control" placeholder="Standard x1, Single room x1" disabled readonly>
+					</div>
+					<div class="grid-item"></div>
+
+					<!-- 3행 : 선택 항목 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Add Cabin Baggage">기내 수화물 추가</label>
+						<select class="select">
+							<option selected data-lan-eng="Not selected">Not selected</option>
+							<option>15kg</option>
+							<option>20kg</option>
+							<option>30kg</option>
+						</select>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Breakfast Request">조식 신청</label>
+						<select class="select">
+							<option selected data-lan-eng="Apply">Apply</option>
+							<option data-lan-eng="No request">No request</option>
+						</select>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="WiFi Rental">와이파이 대여</label>
+						<select class="select">
+							<option selected data-lan-eng="Apply">Apply</option>
+							<option data-lan-eng="No request">No request</option>
+						</select>
+					</div>
+
+					<!-- 4행 : 항공 좌석 요청사항 -->
+					<div class="grid-item col-span-3">
+						<label class="label-name" data-lan-eng="Airline seat request details">항공 좌석 요청사항</label>
+						<div class="editor-box-wrap">
+							<textarea rows="6" placeholder="Please give me a window seat~" style="resize:none;" disabled readonly></textarea>
+						</div>
+					</div>
+
+					<!-- 5행 : 기타 요청사항 -->
+					<div class="grid-item col-span-3">
+						<label class="label-name" data-lan-eng="Other requests">기타 요청사항</label>
+						<div class="editor-box-wrap">
+							<textarea rows="6" placeholder="Please provide us with a quiet room as it's an anniversary trip." style="resize:none;" disabled readonly></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Payment Information">결제 정보</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+					<!-- 1행 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Order Amount (₱)">주문 금액 (₱)</label>
+						<input type="text" class="form-control" placeholder="15,000" disabled>
+					</div>
+					<div class="grid-item"></div>
+					<div class="grid-item"></div>
+					
+					<!-- 2행 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Advance payment (₱)">선금 (₱)</label>
+						<input type="text" class="form-control" placeholder="10,000" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Deadline for advance payment">선금 입금 기한</label>
+						<input type="text" class="form-control" placeholder="2025-12-01 12:12" disabled>
+					</div>
+					
+					<div class="grid-item">
+						<label class="label-name"><span data-lan-eng="Advance payment proof file">선금 증빙 파일</span></label>
+						<div class="cell">
+							<div class="field-row jw-center">
+								<div class="jw-center jw-gap10"><img src="../image/file.svg" alt=""> <span data-lan-eng="Advance payment proof file">선금 증빙 파일</span> [pdf, 328KB]</div>
+								<div class="jw-center jw-gap10">
+									<i></i>
+									<button type="button" class="jw-button typeF"><img src="../image/buttun-download.svg" alt=""></button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<!-- 3행 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Balance (₱)">잔금 (₱)</label>
+						<input type="text" class="form-control" placeholder="5,000" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Payment deadline">잔금 입금 기한</label>
+						<div class="field-row">
+							<input id="travelStartDate" type="text" class="jw-w form-control" placeholder="Please select a date" readonly>
+							<button type="button" class="btn-icon calendar" aria-label="달력 열기" data-target="#travelStartDate"></button>
+						</div>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Proof of balance file">잔금 증빙 파일</label>
+						<div id="b2b_booking_detail_target" class="jw-w">
+							<input type="text" class="jw-w" id="" placeholder="-" disabled>
+						</div>
+					</div>
+
+					<div class="grid-item"></div>
+					<div class="grid-item"></div>
+				</div>
+			</div>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Agent Information">에이전트 정보</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+					<!-- 1행 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Agent Name">지점명</label>
+						<input type="text" class="form-control" placeholder="Davao City" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Person in charge">담당자명</label>
+						<input type="text" class="form-control" placeholder="Maria Santos" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Person in charge email">담당자 이메일</label>
+						<input type="email" class="form-control" placeholder="maria@agency.davao.ph" disabled>
+					</div>
+
+					<!-- 2행 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Contact information">담당자 연락처</label>
+						<input type="tel" class="form-control" placeholder="+63 2 8890 1234" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Deposit ratio (%)">예약금 비율 (%)</label>
+						<input type="number" class="form-control" placeholder="15" min="0" max="100" step="1" disabled>
+					</div>
+					<div class="grid-item"></div>
+				</div>
+			</div>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Agent Notes">에이전트 전달사항</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+					<div class="grid-item col-span-3">
+						<label class="label-name" data-lan-eng="Note">메모</label>
+						<div class="editor-box-wrap">
+							<textarea rows="8" placeholder="에이전트가 작성한 전달사항입니다" disabled readonly data-lan-eng="This is a message written by the agent" style="resize:none;"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Flight Information">항공편 정보</h2>
+			<div class="card-panel jw-mgt16">
+				<h3 class="grid-wrap-title" data-lan-eng="Departure flight">출국편</h3>
+				<div class="grid-wrap jw-mgt16">
+					<!-- 1행 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Flight number">항공편명</label>
+						<input type="text" class="form-control" placeholder="PR467" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Departure date and time">출발일시</label>
+						<input type="text" class="form-control" value="2025-04-19 12:20" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Arrival time">도착일시</label>
+						<input type="text" class="form-control" value="2025-04-19 14:20" disabled>
+					</div>
+
+					<!-- 2행 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Departure point">출발지</label>
+						<input type="text" class="form-control" placeholder="Manila (MNL)" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Destination">도착지</label>
+						<input type="text" class="form-control" placeholder="Incheon (ICN)" disabled>
+					</div>
+					<div class="grid-item"></div>
+				</div>
+			</div>
+			<div class="card-panel jw-mgt16">
+				<h3 class="grid-wrap-title" data-lan-eng="Return trip">귀국편</h3>
+				<div class="grid-wrap jw-mgt16">
+					<!-- 1행 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Flight number">항공편명</label>
+						<input type="text" class="form-control" placeholder="PR468" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Departure date and time">출발일시</label>
+						<input type="text" class="form-control" value="2025-04-24 15:05" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Arrival time">도착일시</label>
+						<input type="text" class="form-control" value="2025-04-24 17:05" disabled>
+					</div>
+
+					<!-- 2행 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Departure point">출발지</label>
+						<input type="text" class="form-control" placeholder="Incheon (ICN)" disabled>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Destination">도착지</label>
+						<input type="text" class="form-control" placeholder="Manila (MNL)" disabled>
+					</div>
+					<div class="grid-item"></div>
+				</div>
+			</div>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Customer Information">예약 고객 정보</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Name">이름</label>
+						<input type="text" class="form-control" value="Jose Ramirez">
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Email">이메일</label>
+						<input type="email" class="form-control" value="ramirez@gmail.com">
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Contacts">연락처</label>
+						<div class="field-row">
+							<select class="select w-auto">
+								<option value="+63" selected>+63</option>
+								<option value="+82">+82</option>
+								<option value="+81">+81</option>
+							</select>
+							<input type="tel" class="form-control" value="9 17 123 4567">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Travel Customer Information">여행 고객 정보</h2>
+			<div class="card-panel jw-mgt16">
+				<!-- 가로 스크롤 래퍼 -->
+				<div class="tableA-scroll">
+					<table class="jw-tableA booking-detail">
+						<colgroup>
+							<col style="width:50px;"> <!-- No -->
+							<col style="width:100px;"> <!-- 대표 여행자 -->
+							<col style="width:400px;"> <!-- 예약 상태 -->
+							<col style="width:200px;"> <!-- 인원 옵션 -->
+							<col style="width:200px;"> <!-- 비자 신청 여부 -->
+							<col style="width:200px;"> <!-- 호칭 -->
+							<col style="width:200px;"> <!-- 이름 -->
+							<col style="width:200px;"> <!-- 성 -->
+							<col style="width:200px;"> <!-- 성별 -->
+							<col style="width:200px;"> <!-- 나이 -->
+							<col style="width:200px;"> <!-- 생년월일 -->
+							<col style="width:200px;"> <!-- 출신국가 -->
+							<col style="width:200px;"> <!-- 여권번호 -->
+							<col style="width:200px;"> <!-- 여권 발행일 -->
+							<col style="width:200px;"> <!-- 여권 만료일 -->
+							<col style="width:240px;"> <!-- 여권 사진 -->
+						</colgroup>
+						<thead>
+							<tr>
+								<th>No</th>
+								<th data-lan-eng="Main traveler">대표 여행자</th>
+								<th data-lan-eng="Reservation Status">예약 상태</th>
+								<th data-lan-eng="Number of people option">인원 옵션</th>
+								<th data-lan-eng="Visa application status">비자 신청 여부</th>
+								<th data-lan-eng="Title">호칭</th>
+								<th data-lan-eng="Name">이름</th>
+								<th data-lan-eng="Nature">성</th>
+								<th data-lan-eng="Gender">성별</th>
+								<th data-lan-eng="Age">나이</th>
+								<th data-lan-eng="Date of birth">생년월일</th>
+								<th data-lan-eng="Country of origin">출신국가</th>
+								<th data-lan-eng="Passport number">여권번호</th>
+								<th data-lan-eng="Passport Issue Date">여권 발행일</th>
+								<th data-lan-eng="Passport expiration date">여권 만료일</th>
+								<th data-lan-eng="Passport photo">여권 사진</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- 1행 -->
+							<tr>
+								<td class="is-center">1</td>
+								<td class="is-center">
+									<label class="jw-radio jw-self-center">
+										<input type="radio" name="radio1" >
+										<i class="icon"></i>
+									</label>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Waiting for advance payment deposit"> 선금 입금 대기</option>
+											<option>Paid</option>
+											<option>Cancel</option>
+										</select>
+									</div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select" disabled>
+											<option selected data-lan-eng="Adult">성인</option>
+											<option>아동</option>
+											<option>유아</option>
+										</select>
+									</div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Not applied">Not applied</option>
+											<option>Applied</option>
+										</select>
+									</div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected>MR</option>
+											<option>MRS</option>
+											<option>MS</option>
+										</select>
+									</div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Ramirez"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Jose"></div></td>
+								<td class="is-center">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected data-lan-eng="Male">Male</option>
+											<option>Female</option>
+										</select>
+									</div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="40"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="19710101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Philippines"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="P1234567"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20200101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20300101"></div></td>
+								<td class="is-center">
+									<div class="cell">
+										<div class="field-row jw-center">
+											<div class="jw-center jw-gap10"><img src="../image/file.svg" alt=""> <span data-lan-eng="Passport photo">여권 사진</span></div>
+											<div class="jw-center jw-gap10">
+												<i></i>
+												<button type="button" class="jw-button typeF"><img src="../image/buttun-download.svg" alt=""></button>
+												<button type="button" class="jw-button typeF" onclick="deletePassportFile(this)"><img src="../image/button-close2.svg" alt=""></button>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="is-center">2</td>
+								<td class="is-center">
+									<label class="jw-radio jw-self-center">
+										<input type="radio" name="radio1" checked>
+										<i class="icon"></i>
+									</label>
+								</td>
+
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Waiting for advance payment deposit"> 선금 입금 대기</option>
+											<option>Paid</option>
+											<option>Cancel</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select" disabled>
+											<option selected data-lan-eng="Adult">성인</option>
+											<option>아동</option>
+											<option>유아</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell"><select class="select">
+											<option selected data-lan-eng="Not applied">Not applied</option>
+											<option>applied</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected>MR</option>
+											<option>MRS</option>
+											<option>MS</option>
+										</select></div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Ramirez"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Jose"></div></td>
+								<td class="is-center">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected data-lan-eng="Male">남성</option>
+											<option>여성</option>
+										</select></div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="40"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="19710101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Philippines"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="P1234567"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20200101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20300101"></div></td>
+								<td class="is-center">
+									<div class="cell">
+										<div class="field-row jw-center">
+											<div class="jw-center jw-gap10"><img src="../image/file.svg" alt=""> <span data-lan-eng="Passport photo">여권 사진</span></div>
+											<div class="jw-center jw-gap10">
+												<i></i>
+												<button type="button" class="jw-button typeF"><img src="../image/buttun-download.svg" alt=""></button>
+												<button type="button" class="jw-button typeF" onclick="deletePassportFile(this)"><img src="../image/button-close2.svg" alt=""></button>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="is-center">3</td>
+								<td class="is-center">
+									<label class="jw-radio jw-self-center">
+										<input type="radio" name="radio1" >
+										<i class="icon"></i>
+										
+									</label>
+								</td>
+
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Waiting for advance payment deposit"> 선금 입금 대기</option>
+											<option>Paid</option>
+											<option>Cancel</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select" disabled>
+											<option selected data-lan-eng="Adult">성인</option>
+											<option>아동</option>
+											<option>유아</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Not applied">Not applied</option>
+											<option>applied</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected>MR</option>
+											<option>MRS</option>
+											<option>MS</option>
+										</select></div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Ramirez"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Jose"></div></td>
+								<td class="show">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected data-lan-eng="Male">남성</option>
+											<option>여성</option>
+										</select></div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="40"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="19710101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Philippines"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="P1234567"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20200101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20300101"></div></td>
+								<td class="is-center">
+									<div class="cell">
+										<div class="field-row jw-center">
+											<div class="jw-center jw-gap10"><img src="../image/file.svg" alt=""> <span data-lan-eng="Passport photo">여권 사진</span></div>
+											<div class="jw-center jw-gap10">
+												<i></i>
+												<button type="button" class="jw-button typeF"><img src="../image/buttun-download.svg" alt=""></button>
+												<button type="button" class="jw-button typeF" onclick="deletePassportFile(this)"><img src="../image/button-close2.svg" alt=""></button>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="is-center">4</td>
+								<td class="is-center">
+									<label class="jw-radio jw-self-center">
+										<input type="radio" name="radio1" >
+										<i class="icon"></i>
+										
+									</label>
+								</td>
+
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Waiting for advance payment deposit"> 선금 입금 대기</option>
+											<option>Paid</option>
+											<option>Cancel</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select" disabled>
+											<option selected data-lan-eng="Adult">성인</option>
+											<option>아동</option>
+											<option>유아</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Not applied">Not applied</option>
+											<option>applied</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected>MR</option>
+											<option>MRS</option>
+											<option>MS</option>
+										</select></div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Ramirez"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Jose"></div></td>
+								<td class="is-center">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected data-lan-eng="Male">남성</option>
+											<option>여성</option>
+										</select></div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="40"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="19710101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Philippines"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="P1234567"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20200101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20300101"></div></td>
+								<td class="is-center">
+									<div class="cell">
+										<div class="field-row jw-center">
+											<div class="jw-center jw-gap10"><img src="../image/file.svg" alt=""> <span data-lan-eng="Passport photo">여권 사진</span></div>
+											<div class="jw-center jw-gap10">
+												<i></i>
+												<button type="button" class="jw-button typeF"><img src="../image/buttun-download.svg" alt=""></button>
+												<button type="button" class="jw-button typeF" onclick="deletePassportFile(this)"><img src="../image/button-close2.svg" alt=""></button>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="is-center">5</td>
+								<td class="is-center">
+									<label class="jw-radio jw-self-center">
+										<input type="radio" name="radio1" >
+										<i class="icon"></i>
+										
+									</label>
+								</td>
+
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Waiting for advance payment deposit"> 선금 입금 대기</option>
+											<option>Paid</option>
+											<option>Cancel</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select" disabled>
+											<option selected data-lan-eng="Adult">성인</option>
+											<option>아동</option>
+											<option>유아</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Not applied">Not applied</option>
+											<option>applied</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected>MR</option>
+											<option>MRS</option>
+											<option>MS</option>
+										</select></div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Ramirez"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Jose"></div></td>
+								<td class="is-center">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected data-lan-eng="Male">남성</option>
+											<option>여성</option>
+										</select></div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="40"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="19710101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Philippines"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="P1234567"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20200101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20300101"></div></td>
+								<td class="is-center">
+									<div class="cell">
+										<div class="field-row jw-center">
+											<div class="jw-center jw-gap10"><img src="../image/file.svg" alt=""> <span data-lan-eng="Passport photo">여권 사진</span></div>
+											<div class="jw-center jw-gap10">
+												<i></i>
+												<button type="button" class="jw-button typeF"><img src="../image/buttun-download.svg" alt=""></button>
+												<button type="button" class="jw-button typeF" onclick="deletePassportFile(this)"><img src="../image/button-close2.svg" alt=""></button>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="is-center">6</td>
+								<td class="is-center">
+									<label class="jw-radio jw-self-center">
+										<input type="radio" name="radio1" >
+										<i class="icon"></i>
+									</label>
+								</td>
+
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Waiting for advance payment deposit"> 선금 입금 대기</option>
+											<option>Paid</option>
+											<option>Cancel</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select" disabled>
+											<option selected data-lan-eng="Adult">성인</option>
+											<option>아동</option>
+											<option>유아</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Not applied">Not applied</option>
+											<option>applied</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected>MR</option>
+											<option>MRS</option>
+											<option>MS</option>
+										</select></div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Ramirez"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Jose"></div></td>
+								<td class="is-center">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected data-lan-eng="Male">남성</option>
+											<option>여성</option>
+										</select></div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="40"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="19710101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Philippines"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="P1234567"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20200101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20300101"></div></td>
+								<td class="is-center">
+									<div class="cell">
+										<div class="field-row jw-center">
+											<div class="jw-center jw-gap10"><img src="../image/file.svg" alt=""> <span data-lan-eng="Passport photo">여권 사진</span></div>
+											<div class="jw-center jw-gap10">
+												<i></i>
+												<button type="button" class="jw-button typeF"><img src="../image/buttun-download.svg" alt=""></button>
+												<button type="button" class="jw-button typeF" onclick="deletePassportFile(this)"><img src="../image/button-close2.svg" alt=""></button>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="is-center">7</td>
+								<td class="is-center">
+									<label class="jw-radio jw-self-center">
+										<input type="radio" name="radio1" >
+										<i class="icon"></i>
+									</label>
+								</td>
+
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Waiting for advance payment deposit"> 선금 입금 대기</option>
+											<option>Paid</option>
+											<option>Cancel</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select" disabled>
+											<option selected data-lan-eng="Adult">성인</option>
+											<option>아동</option>
+											<option>유아</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Not applied">Not applied</option>
+											<option>applied</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected>MR</option>
+											<option>MRS</option>
+											<option>MS</option>
+										</select></div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Ramirez"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Jose"></div></td>
+								<td class="is-center">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected data-lan-eng="Male">남성</option>
+											<option>여성</option>
+										</select></div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="40"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="19710101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Philippines"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="P1234567"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20200101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20300101"></div></td>
+								<td class="is-center">
+									<div class="cell">
+										<div class="field-row jw-center">
+											<div class="jw-center jw-gap10"><img src="../image/file.svg" alt=""> <span data-lan-eng="Passport photo">여권 사진</span></div>
+											<div class="jw-center jw-gap10">
+												<i></i>
+												<button type="button" class="jw-button typeF"><img src="../image/buttun-download.svg" alt=""></button>
+												<button type="button" class="jw-button typeF" onclick="deletePassportFile(this)"><img src="../image/button-close2.svg" alt=""></button>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="is-center">8</td>
+								<td class="is-center">
+									<label class="jw-radio jw-self-center">
+										<input type="radio" name="radio1" >
+										<i class="icon"></i>
+										
+									</label>
+								</td>
+
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Waiting for advance payment deposit"> 선금 입금 대기</option>
+											<option>Paid</option>
+											<option>Cancel</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select" disabled>
+											<option selected data-lan-eng="Adult">성인</option>
+											<option>아동</option>
+											<option>유아</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Not applied">Not applied</option>
+											<option>applied</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected>MR</option>
+											<option>MRS</option>
+											<option>MS</option>
+										</select></div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Ramirez"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Jose"></div></td>
+								<td class="is-center">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected data-lan-eng="Male">남성</option>
+											<option>여성</option>
+										</select></div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="40"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="19710101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Philippines"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="P1234567"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20200101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20300101"></div></td>
+								<td class="is-center">
+									<div class="cell">
+										<div class="field-row jw-center">
+											<div class="jw-center jw-gap10"><img src="../image/file.svg" alt=""> <span data-lan-eng="Passport photo">여권 사진</span></div>
+											<div class="jw-center jw-gap10">
+												<i></i>
+												<button type="button" class="jw-button typeF"><img src="../image/buttun-download.svg" alt=""></button>
+												<button type="button" class="jw-button typeF" onclick="deletePassportFile(this)"><img src="../image/button-close2.svg" alt=""></button>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="is-center">9</td>
+								<td class="is-center">
+									<label class="jw-radio jw-self-center">
+										<input type="radio" name="radio1" >
+										<i class="icon"></i>
+										
+									</label>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Waiting for advance payment deposit"> 선금 입금 대기</option>
+											<option>Paid</option>
+											<option>Cancel</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select" disabled>
+											<option selected data-lan-eng="Adult">성인</option>
+											<option>아동</option>
+											<option>유아</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Not applied">Not applied</option>
+											<option>applied</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected>MR</option>
+											<option>MRS</option>
+											<option>MS</option>
+										</select></div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Ramirez"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Jose"></div></td>
+								<td class="is-center">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected data-lan-eng="Male">남성</option>
+											<option>여성</option>
+										</select></div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="40"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="19710101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Philippines"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="P1234567"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20200101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20300101"></div></td>
+								<td class="is-center">
+									<div class="cell">
+										<div class="field-row jw-center">
+											<div class="jw-center jw-gap10"><img src="../image/file.svg" alt=""> <span data-lan-eng="Passport photo">여권 사진</span></div>
+											<div class="jw-center jw-gap10">
+												<i></i>
+												<button type="button" class="jw-button typeF"><img src="../image/buttun-download.svg" alt=""></button>
+												<button type="button" class="jw-button typeF" onclick="deletePassportFile(this)"><img src="../image/button-close2.svg" alt=""></button>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="is-center">10</td>
+								<td class="is-center">
+									<label class="jw-radio jw-self-center">
+										<input type="radio" name="radio1" >
+										<i class="icon"></i>
+									</label>
+								</td>
+
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Waiting for advance payment deposit"> 선금 입금 대기</option>
+											<option>Paid</option>
+											<option>Cancel</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select" disabled>
+											<option selected data-lan-eng="Adult">성인</option>
+											<option>아동</option>
+											<option>유아</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Not applied">Not applied</option>
+											<option>applied</option>
+										</select></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected>MR</option>
+											<option>MRS</option>
+											<option>MS</option>
+										</select></div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Ramirez"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Jose"></div></td>
+								<td class="is-center">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected data-lan-eng="Male">남성</option>
+											<option>여성</option>
+										</select></div>
+								</td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="40"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="19710101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Philippines"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="P1234567"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20200101"></div></td>
+								<td class="is-center"><div class="cell"><input type="text" class="form-control" value="20300101"></div></td>
+								<td class="is-center">
+									<div class="cell">
+										<div class="field-row jw-center">
+											<div class="jw-center jw-gap10"><img src="../image/file.svg" alt=""> <span data-lan-eng="Passport photo">여권 사진</span></div>
+											<div class="jw-center jw-gap10">
+												<i></i>
+												<button type="button" class="jw-button typeF"><img src="../image/buttun-download.svg" alt=""></button>
+												<button type="button" class="jw-button typeF" onclick="deletePassportFile(this)"><img src="../image/button-close2.svg" alt=""></button>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				<div class="jw-pagebox" role="navigation" aria-label="페이지네이션">
+					<div class="contents">
+						<button type="button" class="first" aria-label="첫 페이지" aria-disabled="false">
+							<img src="../image/first.svg" alt="">
+						</button>
+						<button type="button" class="prev" aria-label="이전 페이지" aria-disabled="false">
+							<img src="../image/prev.svg" alt="">
+						</button>
+
+						<div class="page" role="list">
+							<button type="button" class="p" role="listitem">1</button>
+							<button type="button" class="p" role="listitem">2</button>
+							<button type="button" class="p show" role="listitem" aria-current="page">3</button>
+							<button type="button" class="p" role="listitem">4</button>
+							<button type="button" class="p" role="listitem">5</button>
+						</div>
+
+						<button type="button" class="next" aria-label="다음 페이지" aria-disabled="false">
+							<img src="../image/next.svg" alt="">
+						</button>
+						<button type="button" class="last" aria-label="마지막 페이지" aria-disabled="false">
+							<img src="../image/last.svg" alt="">
+						</button>
+					</div>
+				</div>
+
+
+			</div>
+
+		</section>
+
+	</main>
+
+	<!-- 기본 스크립트 -->
+	<script src="../js/default.js"></script>
+	<script src="../js/super.js"></script>
+	<script src="../js/datepicker.js"></script>
+	<script src="../js/passport-photo.js"></script>
+
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_super.html'
+		});
+	</script>
+</body>
+
+</html>

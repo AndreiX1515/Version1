@@ -1,0 +1,389 @@
+@layer Base {
+    .m0auto {
+      margin: 0 auto;
+      width: 122.4rem;
+      @media screen and (max-width: 900px) {
+        width: 100%;
+        margin: 0;
+      }
+    }
+    .mx-auto { 
+      margin: 0 auto;
+    }
+    .only-mobile {
+      display: none;
+      @media screen and (max-width: 900px) {
+        display: block;
+      }
+    }
+    .relative { position: relative; }
+    .w100 { width: 100% !important; }
+    .w40 { width: 40px !important; }
+    .w107 { width: 107px !important; }
+    .mw170 { min-width: 17rem; }
+    .w14 { width: 14px; }
+    .w400 { width: 400px; }
+    .mw102 { width: 10.2rem; }
+    .mw130 { width: 13rem; }
+    .mw170 { width: 17rem; }
+    .mxw400 { 
+      width: 100%;
+      max-width: 40rem;
+    }
+    .mxw1490 { 
+      width: 100%;
+      max-width: 149rem;
+    }
+    .mxw1500 { 
+      width: 100%;
+      max-width: 1500px;
+    }
+    .mxw540 { 
+      width: 100%;
+      max-width: 54rem;
+    }
+    .mxw927 { 
+      width: 100%;
+      max-width: 92.7rem;
+    }
+    .mxw270 { 
+      width: 100%;
+      max-width: 27rem;
+    }
+    .mxh270 { 
+      max-height: 18rem;
+    }
+    .mxh270 { 
+      max-height: 27rem;
+    }
+    .mh100 {  
+      min-height: 100vh;
+    }
+    .minh219 {  
+      min-height: 219px;
+    }
+    .minh275 { 
+      min-height: 27.5rem;
+    }
+    .minh285 { 
+      min-height: 28.5rem;
+    }
+    .h48 { 
+      height: 4.8rem;
+    }
+    .h260 { 
+      height: 26rem;
+    }
+    .h270 { 
+      height: 27rem;
+    }
+    .h285 { 
+      height: 28.5rem;
+    }
+    .h670 { 
+      height: 67rem;
+    }
+    .inline-flex { 
+      display: inline-flex;
+    }
+    .grid-type1 { 
+      display: grid;
+      grid-template-columns: 1fr minmax(100px, auto);
+      gap: 8px;
+    }
+   .grid-type2 { 
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+   }
+   .grid-type3 { 
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px;
+   }
+   .grid-type4 { 
+      display: grid;
+      grid-template-columns: 1fr 430px;
+      gap: 24px;
+   }
+    
+    .bg { 
+      &.white { 
+        background: var(--white);
+      }
+      &.grayfa { 
+        background: var(--grayfa);
+      }
+      &.grayfb { 
+        background: var(--grayfb);
+      }
+      &.grayfc { 
+        background: var(--grayfc);
+      }
+      &.grayf4 { 
+        background: var(--grayf4);
+      }
+      &.grayf6 { 
+        background: var(--grayf6);
+      }
+      &.grayf69 { 
+        background: var(--grayf69);
+      }
+      &.gradient1 { 
+        background: linear-gradient(90deg, #78D8CB 0%, #4DAFC1 19.5%, #1597D2 50%, #4DAFC1 80%, #78D8CB 100%);
+      }
+      &.navy09 { 
+        background: var(--navy09);
+      }
+    }
+  
+    .border-type1 { 
+      border: 1px solid var(--graye4);
+    }
+    .border-type2 { 
+      width: 100%;
+      height: 1px;
+      background: var(--grayf4);
+    }
+    .border-type3 { 
+      border: 1px solid var(--grayf4);
+    }
+    .border-bottom00 { 
+      border-bottom: 2px solid var(--black00);
+    }
+    .border-bottomf2 { 
+      border-bottom: 1px solid var(--grayf2);
+    }
+    .border-bottomf3 { 
+      border-bottom: 1px solid var(--grayf3);
+    }
+    .border-bottomf4 { 
+      border-bottom: 1px solid var(--grayf4);
+    }
+    .border-bottomb0 { 
+      border-bottom: 1px solid var(--grayb0);
+    }
+    .border-bottomd4 { 
+      border-bottom: 1px solid var(--grayd4);
+    }
+    .border-bottomea { 
+      border-bottom: 1px solid var(--grayea);
+    }
+    .border-bottomec { 
+      border-bottom: 1px solid var(--grayec);
+    }
+    .border-bottome4 { 
+      border-bottom: 1px solid var(--graye4);
+    }
+    .border-bottomc9 { 
+      border-bottom: 1px solid var(--grayc9);
+    }
+    .border-bottom10 { 
+      border-bottom: 10px solid var(--grayf3);
+    }
+    .border-bottom6b { 
+      border-bottom: 1px solid var(--gray6b);
+    }
+    .border-topf4 { 
+      border-top: 1px solid var(--grayf4);
+    }
+    .border-topd4 { 
+      border-top: 1px solid var(--grayd4);
+    }
+    .border-tope4 { 
+      border-top: 1px solid var(--graye4);
+    }
+    .border-leftf4 { 
+      border-left: 1px solid var(--grayf4);
+    }
+    .hr { 
+      border-color: var(--grayb0);
+    }
+    @media screen and (max-width: 1000px) {
+      .border-mo1 {
+        width: 100%;
+        height: 1px;
+        background: var(--grayf4);
+      }
+      .border-mo10 {
+        width: 100%;
+        height: 10px;
+        background: #F4F5FB;
+      }
+    }
+    .rounded6 { 
+      border-radius: 2px;
+    }
+    .rounded6 { 
+      border-radius: 6px;
+    }
+    .rounded8 { 
+      border-radius: 8px;
+    }
+    .scroll-y {
+      overflow-y: auto; // 내용이 넘칠 때 세로 스크롤 표시
+      // max-height: 400px; // 필요에 따라 최대 높이 조절
+      padding-right: 8px; // 스크롤바와 내용 간 간격 조절
+    }
+    
+    /* 스크롤바 스타일 (크롬, 엣지) */
+    .scroll-y::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .scroll-y::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+    }
+    
+    .scroll-y::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  
+    .scroll_x { 
+      overflow-x: auto;
+    }
+    .scroll-x {
+      overflow-x: auto;
+      // display: block;
+      // padding-bottom: 8px;
+    }
+    
+    /* 스크롤바 스타일 (크롬, 엣지) */
+    .scroll-x::-webkit-scrollbar {
+      height: 0px;
+      display: block;
+    }
+    
+    .scroll-x::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+    }
+    
+    .scroll-x::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .scroll-x2 {
+      overflow-x: auto;
+    }
+  
+    .flex1 { 
+      flex: 1;
+    }
+    .ellipsis1 { 
+      white-space: nowrap;      
+      overflow: hidden;           
+      text-overflow: ellipsis;
+    }
+    .ellipsis2 {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2; /* 2줄까지 표시 */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-break: break-word;
+    }
+    .block { 
+      display: block;
+    }
+    
+    @media screen and (max-width: 1000px) {
+      .block-mo2,
+      .align.block-mo2 { 
+        display: block !important;
+      }
+      .block-mo,
+      .align.block-mo
+       { 
+        display: block !important;
+      }
+    
+      .mt20-mo { 
+        margin-top: 2rem;
+      }
+    }
+    .relative { 
+      position: relative;
+    }
+    .absolute {
+      position: absolute;
+      .center-x {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  
+    .custom-scroll {
+      overflow-y: auto;
+    }
+    
+    /* 특정 클래스에만 적용 */
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #3498db;
+      border-radius: 3px;
+    }
+    .hidden { 
+      overflow: hidden;
+    }
+    .nowrap { 
+      white-space: nowrap !important;
+    }
+    .bar { 
+      display: block;
+      
+      width: 1px;
+      height: 10px;
+      background: var(--graye4);
+    }
+    .pointer { 
+      cursor: pointer;
+    }
+    .ico-check { 
+      display: block;
+      width: 54px;
+    }
+  }
+.img-80 { 
+  width: 80px;
+  height: 80px;
+}
+.passport-view { 
+  width: 94px;
+  height: 94px;
+  aspect-ratio: 1 / 1;
+  background: var(--grayea);
+  img { 
+    display: block;
+      width: 94px;
+    height: 94px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    
+  }
+}
+.shadow-bottom { 
+    box-shadow: 
+      0 4px 4px 0 rgba(87, 87, 87, 0.03),
+      0 8px 20px 0 rgba(198, 198, 198, 0.18);
+
+}
+.thumbnail-wrap { 
+  width: 80px;
+  height: 80px;
+  aspect-ratio: 1 / 1;
+  background: var(--grayea);
+  img { 
+    display: block;
+      width: 80px;
+    height: 80px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+}
+
+   
+  

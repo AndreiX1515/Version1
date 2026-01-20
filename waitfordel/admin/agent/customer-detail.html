@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL</title>
+
+	<!-- 공통 스타일 -->
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+
+	<!-- editor -->
+	<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+</head>
+
+<body>
+
+	<!-- header 들어올 자리 -->
+	<header class="layout-header"></header>
+
+	<!-- 본문 영역 -->
+	<main class="layout-main">
+		<!-- nav 들어올 자리 -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content">
+			<div class="page-toolbar">
+				<a href="customer-list.html" class="jw-button" aria-label="목록으로 돌아가기">
+					<img src="../image/arrow4.svg" alt="">
+					<span data-lan-eng="">Return to list</span>
+				</a>
+
+				<div class="page-toolbar-actions">
+					
+					<button type="button" class="jw-button typeB">Save</button>
+				</div>
+			</div>
+			
+			<h1 class="page-title" data-lan-eng="Customer Details">고객 상세</h1>
+
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Basic Information">기본 정보</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+
+					<!-- 1행: 고객명 / 연락처 / 이메일 -->
+					<div class="grid-item">
+						<label class="label-name" for="cust_name" data-lan-eng="Customer Name">고객명</label>
+						<input id="cust_name" type="text" class="form-control" value="Jose Ramirez" placeholder="고객명">
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="cust_phone" data-lan-eng="Contacts">연락처</label>
+						<div class="field-row">
+							<select class="select w-auto" aria-label="국가 코드">
+								<option selected>+63</option>
+								<option>+82</option>
+								<option>+81</option>
+								<option>+86</option>
+								<option>+1</option>
+							</select>
+							<input id="cust_phone" type="tel" class="form-control" value="917 123 4567" placeholder="전화번호">
+						</div>
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="cust_email" data-lan-eng="Email">이메일</label>
+						<input id="cust_email" type="email" class="form-control" value="ramirez@gmail.com"
+							placeholder="email@example.com">
+					</div>
+
+					<!-- 2행: PW / 고객 번호 / 소속 지점명 -->
+					<div class="grid-item">
+						<label class="label-name" for="cust_pw">PW</label>
+						<div class="input-box">
+							<input type="password" value="**********">
+							<button type="button" class="jw-button typeD"><img src="../image/replay.svg" alt="" data-lan-eng="Reset">Reset</button>
+						</div>
+
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="cust_no" data-lan-eng="Customer number">고객 번호</label>
+						<input id="cust_no" type="text" class="form-control" value="B100231" disabled>
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="cust_branch" data-lan-eng="Agent Name">소속 지점명</label>
+						<input id="cust_branch" type="text" class="form-control" value="Bacolod City" disabled>
+					</div>
+
+					<!-- 3행: 등록일시 -->
+					<div class="grid-item">
+						<label class="label-name" for="created_at" data-lan-eng="Registration date/time">등록일시</label>
+						<input id="created_at" type="text" class="form-control" value="2025-06-20 12:12" disabled>
+					</div>
+					<div class="grid-item"></div>
+					<div class="grid-item"></div>
+
+					<!-- 4행: 메모(에디터, 전체폭) -->
+					<!-- multi-editor.js -->
+					<div class="grid-item col-span-3">
+						<label class="label-name" for="content" data-lan-eng="Note">메모</label>
+						<div class="editor-box-wrap">
+						  <div class="jw-editor">
+							<div class="toolbar">
+							  <div class="group">
+								<button type="button" class="editor-btn ql-bold">
+								  <img src="../image/editer_bold.svg">
+								</button>
+								<button type="button" class="editor-btn ql-italic">
+								  <img src="../image/editer_italic.svg">
+								</button>
+								<button type="button" class="editor-btn ql-underline">
+								  <img src="../image/editer_underline.svg">
+								</button>
+								<button type="button" class="editor-btn ql-strike">
+								  <img src="../image/editer_strikethrough.svg">
+								</button>
+					  
+								<!-- 색상 버튼은 this 넘겨주기 -->
+								<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+								<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+							  </div>
+					  
+							  <div class="group">
+								<!-- select도 this 넘겨주기 -->
+								<select class="editor-font-size" onchange="fontsize(this);">
+								  <option value="" selected>폰트</option>
+								  <option value="12px">12px</option>
+								  <option value="14px">14px</option>
+								  <option value="16px">16px</option>
+								  <option value="18px">18px</option>
+								  <option value="24px">24px</option>
+								</select>
+							  </div>
+					  
+							  <div class="group">
+								<button type="button" class="editor-btn ql-align" value="">
+								  <img src="../image/editer_left.svg">
+								</button>
+								<button type="button" class="editor-btn ql-align" value="center">
+								  <img src="../image/editer_center.svg">
+								</button>
+								<button type="button" class="editor-btn ql-align" value="right">
+								  <img src="../image/editer_right.svg">
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<button type="button" class="editor-btn ql-list" value="ordered">
+								  <img src="../image/editer_ordered.svg">
+								</button>
+								<button type="button" class="editor-btn ql-list" value="bullet">
+								  <img src="../image/editer_unordered.svg">
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<!-- 이것도 this 넘기게 변경 -->
+								<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+								  <img src="../image/editer_removeHtmlTags.svg">
+								</button>
+								<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+								  HTML
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<label class="inputFile">
+								  <!-- this 넘기기 -->
+								  <input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+								  <span class="text">이미지</span>
+								  <i class="progress"></i>
+								</label>
+							  </div>
+							</div>
+					  
+							<div class="jweditor" data-placeholder="내용을 입력해주세요"></div>
+						  </div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Traveler Information">여행자 정보</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+
+					<div class="grid-item">
+						<label class="label-name" for="gender" data-lan-eng="Title">호칭</label>
+						<select id="gender" class="select">
+							<option selected>MR</option>
+							<option>MS</option>
+							<option>MRS</option>
+							<option>MISS</option>
+						</select>
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="first_name" data-lan-eng="Name">이름</label>
+						<input id="first_name" type="text" class="form-control" value="Jose" placeholder="이름">
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="last_name" data-lan-eng="Nature">성</label>
+						<input id="last_name" type="text" class="form-control" value="Ramirez" placeholder="성">
+					</div>
+
+					<!-- 2행: 성별 / 나이 / 생년월일 -->
+					<div class="grid-item">
+						<label class="label-name" for="gender" data-lan-eng="Gender">성별</label>
+						<select id="gender" class="select">
+							<option selected>Male</option>
+							<option>Female</option>
+							<option>Other</option>
+						</select>
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="age" data-lan-eng="Age">나이</label>
+						<input id="age" type="number" class="form-control" value="40" min="0" placeholder="age">
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="birth" data-lan-eng="Date of birth">생년월일</label>
+						<input id="birth" type="text" class="form-control" value="19710101" placeholder="YYYYMMDD"
+							inputmode="numeric">
+					</div>
+
+					<!-- 3행: 출신국가 / 여권번호 / 여권 발행일 -->
+					<div class="grid-item">
+						<label class="label-name" for="nationality" data-lan-eng="Country of origin">출신국가</label>
+						<input id="nationality" type="text" class="form-control" value="Philippines" placeholder="Country">
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="passport_no" data-lan-eng="Passport number">여권번호</label>
+						<input id="passport_no" type="text" class="form-control" value="P1234567" placeholder="여권번호">
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="passport_issue" data-lan-eng="Passport Issue Date">여권 발행일</label>
+						<input id="passport_issue" type="text" class="form-control" value="20200101" placeholder="YYYYMMDD"
+							inputmode="numeric">
+					</div>
+
+					<!-- 4행: 여권 만료일 / 여권 사진(중간 컬럼) / 여분 -->
+					<div class="grid-item">
+						<label class="label-name" for="passport_expire" data-lan-eng="Passport expiration date">여권 만료일</label>
+						<input id="passport_expire" type="text" class="form-control" value="20300101" placeholder="YYYYMMDD"
+							inputmode="numeric">
+					</div>
+
+					<!-- 여권 사진 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Passport photo">여권 사진</label>
+						<div class="upload-box">
+							<input id="file-passport" type="file" accept="image/*">
+							<label for="file-passport" class="thumb" aria-label="preview"></label>
+							<div class="upload-meta">
+								<div class="file-title">Image</div>
+								<div class="file-info">jpg, 328KB</div>
+								<div class="file-controller">
+									<button type="button" class="btn-icon" aria-label="다운로드"><img src="../image/button-download.svg" alt=""></button>
+									<button type="button" class="btn-icon" aria-label="삭제" onclick="deletePassportFile_withPreview(this)"><img src="../image/button-close2.svg" alt=""></button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="grid-item"></div>
+
+				</div>
+			</div>
+
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Reservation Details">예약 내역</h2>
+			<div class="card-panel jw-mgt16">
+				<table class="jw-tableA">
+					<colgroup>
+						<col class="col-60"> <!-- No -->
+						<col> <!-- 상품명 (auto) -->
+						<col> <!-- 예약일 -->
+						<col> <!-- 여행 시작일 -->
+						<col> <!-- 예약 상태 -->
+						<col> <!-- 예약 인원 -->
+						<col> <!-- 주문 금액 -->
+					</colgroup>
+					<thead>
+						<tr>
+							<th class="no is-center">No</th>
+							<th data-lan-eng="Product Name">상품명</th>
+							<th data-lan-eng="Reservation date">예약일</th>
+							<th data-lan-eng="Travel start date">여행 시작일</th>
+							<th data-lan-eng="Reservation Status">예약 상태</th>
+							<th data-lan-eng="Number of people for reservation">예약 인원</th>
+							<th data-lan-eng="Order Amount (₱)">주문 금액 (₱)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="no is-center">5</td>
+							<td class="ellipsis">Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</td>
+							<td class="is-center">2024-12-01</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Reservation confirmed</td>
+							<td class="is-center">5</td>
+							<td class="is-center">102,000</td>
+						</tr>
+						<tr>
+							<td class="no is-center">4</td>
+							<td class="ellipsis">Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</td>
+							<td class="is-center">2024-12-01</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Reservation confirmed</td>
+							<td class="is-center">5</td>
+							<td class="is-center">102,000</td>
+						</tr>
+						<tr>
+							<td class="no is-center">3</td>
+							<td class="ellipsis">Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</td>
+							<td class="is-center">2024-12-01</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Reservation confirmed</td>
+							<td class="is-center">5</td>
+							<td class="is-center">102,000</td>
+						</tr>
+						<tr>
+							<td class="no is-center">2</td>
+							<td class="ellipsis">Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</td>
+							<td class="is-center">2024-12-01</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Reservation confirmed</td>
+							<td class="is-center">5</td>
+							<td class="is-center">102,000</td>
+						</tr>
+						<tr>
+							<td class="no is-center">1</td>
+							<td class="ellipsis">Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</td>
+							<td class="is-center">2024-12-01</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Reservation confirmed</td>
+							<td class="is-center">5</td>
+							<td class="is-center">102,000</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<div class="jw-pagebox" role="navigation" aria-label="페이지네이션">
+					<div class="contents">
+						<button type="button" class="first" aria-label="첫 페이지" aria-disabled="false">
+							<img src="../image/first.svg" alt="">
+						</button>
+						<button type="button" class="prev" aria-label="이전 페이지" aria-disabled="false">
+							<img src="../image/prev.svg" alt="">
+						</button>
+
+						<div class="page" role="list">
+							<button type="button" class="p" role="listitem">1</button>
+							<button type="button" class="p" role="listitem">2</button>
+							<button type="button" class="p show" role="listitem" aria-current="page">3</button>
+							<button type="button" class="p" role="listitem">4</button>
+							<button type="button" class="p" role="listitem">5</button>
+						</div>
+
+						<button type="button" class="next" aria-label="다음 페이지" aria-disabled="false">
+							<img src="../image/next.svg" alt="">
+						</button>
+						<button type="button" class="last" aria-label="마지막 페이지" aria-disabled="false">
+							<img src="../image/last.svg" alt="">
+						</button>
+					</div>
+				</div>
+
+			</div>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="">문의 내역</h2>
+			<div class="card-panel jw-mgt16">
+				<table class="jw-tableA">
+					<colgroup>
+						<col class="col-60"> <!-- No -->
+						<col> <!-- 문의 유형 -->
+						<col> <!-- 문의 제목 (auto) -->
+						<col> <!-- 작성일 -->
+						<col> <!-- 답변 여부 -->
+						<col> <!-- 처리 상태 -->
+					</colgroup>
+					<thead>
+						<tr>
+							<th class="no is-center">No</th>
+							<th data-lan-eng="Inquiry type">문의 유형</th>
+							<th data-lan-eng="Inquiry Title">문의 제목</th>
+							<th data-lan-eng="Date created">작성일</th>
+							<th data-lan-eng="Response status">답변 여부</th>
+							<th data-lan-eng="Processing status">처리 상태</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="no is-center">5</td>
+							<td class="is-center">Product Inquiry</td>
+							<td class="is-center ellipsis">Inquiry title</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Unanswered</td>
+							<td class="is-center">Received</td>
+						</tr>
+						<tr>
+							<td class="no is-center">4</td>
+							<td class="is-center">Product Inquiry</td>
+							<td class="is-center ellipsis">Inquiry title</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Unanswered</td>
+							<td class="is-center">Received</td>
+						</tr>
+						<tr>
+							<td class="no is-center">3</td>
+							<td class="is-center">Product Inquiry</td>
+							<td class="is-center ellipsis">Inquiry title</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Unanswered</td>
+							<td class="is-center">Received</td>
+						</tr>
+						<tr>
+							<td class="no is-center">2</td>
+							<td class="is-center">Product Inquiry</td>
+							<td class="is-center ellipsis">Inquiry title</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Unanswered</td>
+							<td class="is-center">Received</td>
+						</tr>
+						<tr>
+							<td class="no is-center">1</td>
+							<td class="is-center">Product Inquiry</td>
+							<td class="is-center ellipsis">Inquiry title</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Unanswered</td>
+							<td class="is-center">Received</td>
+						</tr>
+					</tbody>
+				</table>
+
+				
+				<div class="jw-pagebox" role="navigation" aria-label="페이지네이션">
+					<div class="contents">
+						<button type="button" class="first" aria-label="첫 페이지" aria-disabled="false">
+							<img src="../image/first.svg" alt="">
+						</button>
+						<button type="button" class="prev" aria-label="이전 페이지" aria-disabled="false">
+							<img src="../image/prev.svg" alt="">
+						</button>
+
+						<div class="page" role="list">
+							<button type="button" class="p" role="listitem">1</button>
+							<button type="button" class="p" role="listitem">2</button>
+							<button type="button" class="p show" role="listitem" aria-current="page">3</button>
+							<button type="button" class="p" role="listitem">4</button>
+							<button type="button" class="p" role="listitem">5</button>
+						</div>
+
+						<button type="button" class="next" aria-label="다음 페이지" aria-disabled="false">
+							<img src="../image/next.svg" alt="">
+						</button>
+						<button type="button" class="last" aria-label="마지막 페이지" aria-disabled="false">
+							<img src="../image/last.svg" alt="">
+						</button>
+					</div>
+				</div>
+
+			</div>
+
+		</section>
+
+	</main>
+
+	<!-- 기본 스크립트 -->
+	<script src="../js/default.js"></script>
+	<script src="../js/agent.js"></script>
+	<script src="../js/passport-photo.js"></script>
+	<script src="../js/multi-editor.js"></script>
+	
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_agent.html'
+		});
+	</script>
+</body>
+
+</html>

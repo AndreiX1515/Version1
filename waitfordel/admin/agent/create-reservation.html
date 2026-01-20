@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN</title>
+
+	<!-- 공통 스타일 -->
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+	
+	<!-- calendar -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+	<!-- editor -->
+	<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+</head>
+
+<body>
+
+	<!-- header 들어올 자리 -->
+	<header class="layout-header"></header>
+
+	<!-- 본문 영역 -->
+	<main class="layout-main">
+		<!-- nav 들어올 자리 -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content">
+		
+			<div class="jw-cols jw-between">
+				<h1 class="page-title" data-lan-eng="Create Reservation">예약 생성</h1>
+				<button type="button" class="jw-button typeB" data-lan-eng="Save">저장</button>
+			</div>
+		
+			<h2 class="section-title jw-mgt32" data-lan-eng="Product Information">상품 정보</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+					<div class="grid-item col-span-3">
+						<label class="label-name"><span data-lan-eng="Product Name">상품명</span> <span class="req">*</span></label>
+						<div class="jw-center jw-gap20">
+							<input type="text" class="form-control jw-wf" placeholder="Please select a product" aria-required="true" disabled>
+							<button type="button" class="jw-button typeA"><img src="../image/search2.svg" alt=""><span data-lan-eng="Product Search">상품 검색</span></button>
+						</div>
+					</div>
+					<div class="grid-item">
+						<label class="label-name"><span data-lan-eng="Travel start date">여행 시작일</span> <span class="req">*</span></label>
+						<div class="field-row">
+							<input id="travelStartDate" type="text" class="jw-w form-control" placeholder="Please select a date" readonly>
+							<button type="button" class="btn-icon calendar" aria-label="달력 열기" data-target="#travelStartDate"></button>
+						</div>
+					</div>
+					<div class="grid-item"></div>
+					<div class="grid-item"></div>
+					<div class="grid-item hidden">
+						<label class="label-name" for="trip_range" data-lan-eng="Travel period">여행 기간</label>
+						<input id="trip_range" type="text" class="form-control" value="2025-04-19 - 2025-04-24" disabled>
+					</div>
+
+					<div class="grid-item hidden">
+						<label class="label-name" for="meet_time" data-lan-eng="Meeting time">미팅 시간</label>
+						<input id="meet_time" type="text" class="form-control" value="2025-04-19 09:00" disabled>
+					</div>
+
+					<div class="grid-item hidden">
+						<label class="label-name" for="meet_place" data-lan-eng="Meeting place">미팅 장소</label>
+						<input id="meet_place" type="text" class="form-control" value="Incheon International Airport Terminal 2" disabled>
+					</div>
+					<div class="grid-item"></div>
+					<div class="grid-item"></div>
+				</div>
+			</div>
+
+			<h2 class="section-title jw-mgt32 hidden" data-lan-eng="Flight Information">항공편 정보</h2>
+			<div class="card-panel jw-mgt16 hidden">
+				<h3 class="grid-wrap-title" data-lan-eng="Departure flight">출국편</h3>
+
+				<div class="grid-wrap jw-mgt12">
+					<div class="grid-item">
+						<label class="label-name" for="out_flight_no" data-lan-eng="Flight number">항공편명</label>
+						<input id="out_flight_no" type="text" class="form-control" value="PR467" disabled>
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="out_depart_dt" data-lan-eng="Departure date and time">출발일시</label>
+						<input id="out_depart_dt" type="text" class="form-control" value="2025-04-19 12:20" disabled>
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="out_arrive_dt" data-lan-eng="Arrival time">도착일시</label>
+						<input id="out_arrive_dt" type="text" class="form-control" value="2025-04-19 14:20" disabled>
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="out_depart_airport" data-lan-eng="Departure point">출발지</label>
+						<input id="out_depart_airport" type="text" class="form-control" value="Manila (MNL)" disabled>
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="out_arrive_airport" data-lan-eng="Destination">도착지</label>
+						<input id="out_arrive_airport" type="text" class="form-control" value="Incheon (ICN)" disabled>
+					</div>
+
+					<div class="grid-item"></div>
+				</div>
+			</div>
+
+			<div class="jw-cols jw-between jw-mgt32">
+				<h2 class="section-title" data-lan-eng="Customer Information">
+					예약 고객 정보
+				</h2>
+				<button type="button" class="jw-button typeA" onclick="">Loading customer information</button>
+			</div>
+			
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+					<div class="grid-item">
+						<label for="user_name" class="form-label required"><span data-lan-eng="Name">이름</span> <span class="req">*</span></label>
+						<input type="text" id="user_name" class="form-control" placeholder="Name" aria-required="true">
+					</div>
+					<div class="grid-item">
+						<label for="user_email" class="form-label required"><span data-lan-eng="Email">이메일</span> <span class="req">*</span></label>
+						<input type="email" id="user_email" class="form-control" placeholder="Email" aria-required="true">
+					</div>
+					<div class="grid-item">
+						<label for="user_phone" class="form-label required"><span data-lan-eng="Contact">연락처</span> <span class="req">*</span></label>
+						<div class="field-row">
+							<select class="select">
+								<option>+63</option>
+							</select>
+							<input type="text" value="" placeholder="Enter numbers">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="jw-cols jw-between jw-mgt32">
+				<h2 class="section-title" data-lan-eng="Travel Customer Information">여행 고객 정보</h2>
+				<button type="button" class="jw-button typeA" onclick="">Loading customer information</button>
+			</div>
+	
+			
+			<div class="card-panel jw-mgt16">
+				<div class="jw-mgb12">
+					<button type="button" class="jw-button typeA" data-lan-eng="＋ Add Customer">＋ 고객 추가</button>
+				</div>
+				<div class="tableA-scroll jw-mgt20">
+				
+					<table class="jw-tableA booking-detail">
+						<colgroup>
+							<col style="width:60px;"><!-- No -->
+							<col style="width:120px;"><!-- 대표 여행자 -->
+							<col style="width:200px;"><!-- 인원 옵션 -->
+							<col style="width:220px;"><!-- 비자 신청 여부 -->
+							<col style="width:160px;"><!-- 호칭 -->
+							<col style="width:220px;"><!-- 이름 -->
+							<col style="width:220px;"><!-- 성 -->
+							<col style="width:200px;"><!-- 성별 -->
+							<col style="width:200px;"><!-- 나이 -->
+							
+							<col style="width:200px;"><!-- 생년월일 -->
+							<col style="width:200px;"><!-- 출신국가 -->
+							<col style="width:200px;"><!-- 여권번호 -->
+							<col style="width:200px;"><!-- 여권 발행일 -->
+							<col style="width:200px;"><!-- 여권 만료일 -->
+							<col style="width:200px;"><!-- 여권 사진 -->
+							<col style="width:200px;"><!-- 삭제 -->
+						</colgroup>
+
+						<thead>
+							<tr>
+								<th>No</th>
+								<th data-lan-eng="Main traveler">대표 여행자</th>
+								<th data-lan-eng="Number of people option">인원 옵션</th>
+								<th data-lan-eng="Visa application status">비자 신청 여부</th>
+								<th data-lan-eng="Title">호칭</th>
+								<th data-lan-eng="Name">이름</th>
+								<th data-lan-eng="Nature">성</th>
+								<th data-lan-eng="Gender">성별</th>
+								<th data-lan-eng="Age">나이</th>
+								
+								<th data-lan-eng="Date of birth">생년월일</th>
+								<th data-lan-eng="Country of origin">출신국가</th>
+								<th data-lan-eng="Passport number">여권번호</th>
+								<th data-lan-eng="Passport Issue Date">여권 발행일</th>
+								<th data-lan-eng="Passport expiration date">여권 만료일</th>
+								<th data-lan-eng="Passport photo">여권 사진</th>
+								<th data-lan-eng="Delete">삭제</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<!-- row 1 -->
+							<tr>
+								<td class="is-center">1</td>
+								<td class="is-center"><input type="radio" name="lead_traveler" checked></td>
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected>Adult</option>
+											<option>Child</option>
+											<option>유아</option>
+										</select>
+									</div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select">
+											<option selected data-lan-eng="Not applied">Not applied</option>
+											<option>applied</option>
+										</select>
+									</div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected>MR</option>
+											<option>MRS</option>
+											<option>MS</option>
+										</select>
+									</div>
+								</td>
+								<td class="is-center">
+									<div class="cell"><input type="text" class="form-control" placeholder="Name"></div>
+								</td>
+								<td class="is-center">
+									<div class="cell"><input type="text" class="form-control" placeholder="Nature"></div>
+								</td>
+								<td class="show">
+									<div class="cell">
+										<select class="select w-auto">
+											<option selected>Male</option>
+											<option>Female</option>
+										</select>
+									</div>
+								</td>
+								<td class="is-center">
+									<div class="cell"><input type="text" class="form-control" placeholder="Enter numbers"></div>
+								</td>
+								
+								<td class="is-center">
+									<div class="cell"><input type="text" class="form-control" placeholder="YYYYMMDD"></div>
+								</td>
+								<td class="is-center">
+									<div class="cell"><input type="text" class="form-control" placeholder="Country of origin"></div>
+								</td>
+								<td class="is-center">
+									<div class="cell"><input type="text" class="form-control" placeholder="Passport number"></div>
+								</td>
+								<td class="is-center">
+									<div class="cell"><input type="text" class="form-control" placeholder="YYYYMMDD"></div>
+								</td>
+								<td class="is-center">
+									<div class="cell"><input type="text" class="form-control" placeholder="YYYYMMDD"></div>
+								</td>
+								<td class="is-center">
+									<label class="inputFile">
+										<input name="" type="file" data-essential="y" onchange="filePreview(this); essentialCheck(this);" >
+										<button type="button" class="btn-upload"><img src="../image/upload3.svg" alt=""> <span data-lan-eng="Image upload">Image upload</span></button>
+									</label>
+								</td>
+								<td class="is-center">
+									<div class="jw-center"><button type="button" class="jw-button" aria-label="row delete" onclick=""><img src="../image/trash.svg" alt=""></button></div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				
+				</div>
+
+				<div class="jw-pagebox" role="navigation" aria-label="페이지네이션">
+					<div class="contents">
+						<button type="button" class="first" aria-label="첫 페이지" aria-disabled="false">
+							<img src="../image/first.svg" alt="">
+						</button>
+						<button type="button" class="prev" aria-label="이전 페이지" aria-disabled="false">
+							<img src="../image/prev.svg" alt="">
+						</button>
+
+						<div class="page" role="list">
+							<button type="button" class="p" role="listitem">1</button>
+							<button type="button" class="p" role="listitem">2</button>
+							<button type="button" class="p show" role="listitem" aria-current="page">3</button>
+							<button type="button" class="p" role="listitem">4</button>
+							<button type="button" class="p" role="listitem">5</button>
+						</div>
+
+						<button type="button" class="next" aria-label="다음 페이지" aria-disabled="false">
+							<img src="../image/next.svg" alt="">
+						</button>
+						<button type="button" class="last" aria-label="마지막 페이지" aria-disabled="false">
+							<img src="../image/last.svg" alt="">
+						</button>
+					</div>
+				</div>
+
+			</div>
+
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Reservation Information">예약 정보</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+
+					<div class="grid-item">
+						<label class="label-name"><span data-lan-eng="Room Options">룸 옵션 </span><span class="req">*</span></label>
+						<div><button type="button" class="jw-button typeA" data-lan-eng="Select Room Options">룸 옵션 선택</button></div>
+					</div>
+					
+					<div class="grid-item"></div>
+					<div class="grid-item"></div>
+
+					<div class="grid-item">
+						<label class="label-name" for="opt_breakfast"><span data-lan-eng="Carry-on baggage additional">기내 수화물 추가</span><span class="req">*</span></label>
+						<select id="opt_breakfast" class="select">
+							<option selected data-lan-eng="Not selected">선택안함</option>
+							<option></option>
+						</select>
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="opt_breakfast"><span data-lan-eng="Breakfast Request">조식 신청</span><span class="req">*</span></label>
+						<select id="opt_breakfast" class="select">
+							<option selected data-lan-eng="Not applied">Not applied</option>
+							<option>Apply</option>
+						</select>
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="opt_wifi"><span data-lan-eng="WiFi Rental">와이파이 대여</span> <span class="req">*</span></label>
+						<select id="opt_wifi" class="select">
+							<option selected data-lan-eng="Not applied">Not applied</option>
+							<option>Apply</option>
+						</select>
+					</div>
+
+					<!-- multi-editor.js -->
+					<div class="grid-item col-span-3">
+						<label class="label-name" for="seat_req" data-lan-eng="Airline seat request details">항공 좌석 요청사항</label>
+						<div class="editor-box-wrap">
+						  <div class="jw-editor">
+							<div class="toolbar">
+							  <div class="group">
+								<button type="button" class="editor-btn ql-bold">
+								  <img src="../image/editer_bold.svg">
+								</button>
+								<button type="button" class="editor-btn ql-italic">
+								  <img src="../image/editer_italic.svg">
+								</button>
+								<button type="button" class="editor-btn ql-underline">
+								  <img src="../image/editer_underline.svg">
+								</button>
+								<button type="button" class="editor-btn ql-strike">
+								  <img src="../image/editer_strikethrough.svg">
+								</button>
+					  
+								<!-- 색상 버튼은 this 넘겨주기 -->
+								<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+								<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+							  </div>
+					  
+							  <div class="group">
+								<!-- select도 this 넘겨주기 -->
+								<select class="editor-font-size" onchange="fontsize(this);">
+								  <option value="" selected>폰트</option>
+								  <option value="12px">12px</option>
+								  <option value="14px">14px</option>
+								  <option value="16px">16px</option>
+								  <option value="18px">18px</option>
+								  <option value="24px">24px</option>
+								</select>
+							  </div>
+					  
+							  <div class="group">
+								<button type="button" class="editor-btn ql-align" value="">
+								  <img src="../image/editer_left.svg">
+								</button>
+								<button type="button" class="editor-btn ql-align" value="center">
+								  <img src="../image/editer_center.svg">
+								</button>
+								<button type="button" class="editor-btn ql-align" value="right">
+								  <img src="../image/editer_right.svg">
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<button type="button" class="editor-btn ql-list" value="ordered">
+								  <img src="../image/editer_ordered.svg">
+								</button>
+								<button type="button" class="editor-btn ql-list" value="bullet">
+								  <img src="../image/editer_unordered.svg">
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<!-- 이것도 this 넘기게 변경 -->
+								<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+								  <img src="../image/editer_removeHtmlTags.svg">
+								</button>
+								<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+								  HTML
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<label class="inputFile">
+								  <!-- this 넘기기 -->
+								  <input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+								  <span class="text">이미지</span>
+								  <i class="progress"></i>
+								</label>
+							  </div>
+							</div>
+					  
+							<div class="jweditor" data-placeholder="내용을 입력해주세요"></div>
+						  </div>
+						</div>
+					</div>
+					
+					<!-- multi-editor.js -->
+					<div class="grid-item col-span-3">
+						<label class="label-name" for="etc_req" data-lan-eng="Other requests">기타 요청사항</label>
+						<div class="editor-box-wrap">
+						  <div class="jw-editor">
+							<div class="toolbar">
+							  <div class="group">
+								<button type="button" class="editor-btn ql-bold">
+								  <img src="../image/editer_bold.svg">
+								</button>
+								<button type="button" class="editor-btn ql-italic">
+								  <img src="../image/editer_italic.svg">
+								</button>
+								<button type="button" class="editor-btn ql-underline">
+								  <img src="../image/editer_underline.svg">
+								</button>
+								<button type="button" class="editor-btn ql-strike">
+								  <img src="../image/editer_strikethrough.svg">
+								</button>
+					  
+								<!-- 색상 버튼은 this 넘겨주기 -->
+								<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+								<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+							  </div>
+					  
+							  <div class="group">
+								<!-- select도 this 넘겨주기 -->
+								<select class="editor-font-size" onchange="fontsize(this);">
+								  <option value="" selected>폰트</option>
+								  <option value="12px">12px</option>
+								  <option value="14px">14px</option>
+								  <option value="16px">16px</option>
+								  <option value="18px">18px</option>
+								  <option value="24px">24px</option>
+								</select>
+							  </div>
+					  
+							  <div class="group">
+								<button type="button" class="editor-btn ql-align" value="">
+								  <img src="../image/editer_left.svg">
+								</button>
+								<button type="button" class="editor-btn ql-align" value="center">
+								  <img src="../image/editer_center.svg">
+								</button>
+								<button type="button" class="editor-btn ql-align" value="right">
+								  <img src="../image/editer_right.svg">
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<button type="button" class="editor-btn ql-list" value="ordered">
+								  <img src="../image/editer_ordered.svg">
+								</button>
+								<button type="button" class="editor-btn ql-list" value="bullet">
+								  <img src="../image/editer_unordered.svg">
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<!-- 이것도 this 넘기게 변경 -->
+								<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+								  <img src="../image/editer_removeHtmlTags.svg">
+								</button>
+								<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+								  HTML
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<label class="inputFile">
+								  <!-- this 넘기기 -->
+								  <input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+								  <span class="text">이미지</span>
+								  <i class="progress"></i>
+								</label>
+							  </div>
+							</div>
+					  
+							<div class="jweditor" data-placeholder="내용을 입력해주세요"></div>
+						  </div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Agent Notes">Agent Note</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+					<!-- multi-editor.js -->
+					<div class="grid-item col-span-3">
+						<label class="label-name" for="memo_text" data-lan-eng="Note">메모</label>
+						<div class="editor-box-wrap">
+						  <div class="jw-editor">
+							<div class="toolbar">
+							  <div class="group">
+								<button type="button" class="editor-btn ql-bold">
+								  <img src="../image/editer_bold.svg">
+								</button>
+								<button type="button" class="editor-btn ql-italic">
+								  <img src="../image/editer_italic.svg">
+								</button>
+								<button type="button" class="editor-btn ql-underline">
+								  <img src="../image/editer_underline.svg">
+								</button>
+								<button type="button" class="editor-btn ql-strike">
+								  <img src="../image/editer_strikethrough.svg">
+								</button>
+					  
+								<!-- 색상 버튼은 this 넘겨주기 -->
+								<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+								<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+							  </div>
+					  
+							  <div class="group">
+								<!-- select도 this 넘겨주기 -->
+								<select class="editor-font-size" onchange="fontsize(this);">
+								  <option value="" selected>폰트</option>
+								  <option value="12px">12px</option>
+								  <option value="14px">14px</option>
+								  <option value="16px">16px</option>
+								  <option value="18px">18px</option>
+								  <option value="24px">24px</option>
+								</select>
+							  </div>
+					  
+							  <div class="group">
+								<button type="button" class="editor-btn ql-align" value="">
+								  <img src="../image/editer_left.svg">
+								</button>
+								<button type="button" class="editor-btn ql-align" value="center">
+								  <img src="../image/editer_center.svg">
+								</button>
+								<button type="button" class="editor-btn ql-align" value="right">
+								  <img src="../image/editer_right.svg">
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<button type="button" class="editor-btn ql-list" value="ordered">
+								  <img src="../image/editer_ordered.svg">
+								</button>
+								<button type="button" class="editor-btn ql-list" value="bullet">
+								  <img src="../image/editer_unordered.svg">
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<!-- 이것도 this 넘기게 변경 -->
+								<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+								  <img src="../image/editer_removeHtmlTags.svg">
+								</button>
+								<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+								  HTML
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<label class="inputFile">
+								  <!-- this 넘기기 -->
+								  <input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+								  <span class="text">이미지</span>
+								  <i class="progress"></i>
+								</label>
+							  </div>
+							</div>
+					  
+							<div class="jweditor" data-placeholder="내용을 입력해주세요"></div>
+						  </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<h2 class="section-title jw-mgt32" data-lan-eng="Payment Information">결제 정보</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+
+					<div class="grid-item">
+						<label class="label-name" for="pay_total" data-lan-eng="Order Amount (₱)">주문 금액 (₱)</label>
+						<input id="pay_total" type="text" class="form-control" value="0" disabled>
+					</div>
+					<div class="grid-item"></div>
+					<div class="grid-item"></div>
+
+					<div class="grid-item">
+						<label class="label-name req" for="pay_deposit"><span data-lan-eng="Advance payment (₱)">선금 (₱)</span> <span class="reqmark">*</span></label>
+						<input id="pay_deposit" type="number" inputmode="numeric" class="form-control" placeholder="Enter numbers">
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name req" for="deposit_due"><span data-lan-eng="Advance payment deposit deadline">선금 입금 기한 </span><span class="reqmark">*</span></label>
+						<div class="field-row">
+							<input id="deposit_due" type="text" class="jw-w form-control" placeholder="Please select a date" readonly>
+							<button type="button" class="btn-icon calendar" aria-label="달력 열기" data-target="#deposit_due"></button>
+						</div>
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="deposit_file"><span data-lan-eng="Advance payment proof file">선금 증빙 파일</span></label>
+						<div class="field-col">
+							<div class="grid-item">
+								<label class="inputFile">
+									<input name="" type="file" data-essential="y" onchange="noticeUploadChange(this)" >
+									<button type="button" class="jw-button typeE"><img src="../image/upload.svg" alt=""> <span data-lan-eng="File upload">파일 업로드</span></button>
+								</label>
+							</div>
+
+							<p class="help-text" style="color:#d58b00; margin-top:8px;" data-lan-eng="Please upload the file within the set deposit deadline.">
+								설정한 선금 입금 기한 내에 파일을 업로드 해주세요.
+							</p>
+
+							<p class="help-text" style="color:#d58b00;" data-lan-eng="If not uploaded within the deadline, your reservation will be canceled.">
+								기한 내에 업로드 되지 않을 시 예약이 취소됩니다.
+							</p>
+						</div>
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="pay_balance" data-lan-eng="Balance (₱)">잔금 (₱)</label>
+						<input id="pay_balance" type="text" class="form-control" value="0" disabled>
+					</div>
+
+				</div>
+			</div>
+
+
+			<div class="temporary-guide" style="position:relative; margin-top:50px; ">
+				<button type="button" class="jw-button" onclick="modal('create-reservation-m1.html', '580px', '508px')">상품 검색 모달</button>
+				<button type="button" class="jw-button" onclick="modal('create-reservation-m2.html', '1620px', '948px')">고객 검색 모달</button>
+				<button type="button" class="jw-button" onclick="modal('create-reservation-m3.html', '600px', '660px')">룸 옵션 선택 모달</button>
+				<button type="button" class="jw-button" onclick="modal('create-reservation-m4.html', '600px', '252px')">필수값 입력 요청</button>
+				<button type="button" class="jw-button" onclick="modal('create-reservation-m5.html', '600px', '252px')">룸 옵션 선택 후 인원 변경 시</button>
+				<button type="button" class="jw-button" onclick="modal('create-reservation-m6.html', '600px', '252px')">테이블 삭제 시</button>
+			</div>
+
+
+		</section>
+
+	</main>
+
+	<!-- 기본 스크립트 -->
+	<script src="../js/default.js"></script>
+	<script src="../js/agent.js"></script>
+	<script src="../js/datepicker.js"></script>
+	<script src="../js/multi-editor.js"></script>
+
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_agent.html'
+		});
+	</script>
+</body>
+
+</html>

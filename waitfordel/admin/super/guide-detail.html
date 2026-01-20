@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN</title>
+
+	<!-- 공통 스타일 -->
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+
+	<!-- calendar -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+	<!-- editor -->
+	<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+</head>
+
+<body>
+
+	<!-- header 들어올 자리 -->
+	<header class="layout-header"></header>
+
+	<!-- 본문 영역 -->
+	<main class="layout-main">
+		<!-- nav 들어올 자리 -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content">
+		
+			<div class="page-toolbar">
+				<a href="guide-list.html" class="jw-button" aria-label="목록으로 돌아가기">
+					<img src="../image/arrow4.svg" alt="">
+					<span data-lan-eng="Return to list">목록으로 돌아가기</span>
+				</a>
+
+				<div class="page-toolbar-actions">
+					<select class="select" disabled>
+						<option value="contract" selected data-lan-eng="Under contract">계약중</option>
+						<option value="review">검토중</option>
+						<option value="paused">중지</option>
+						<option value="terminated">해지</option>
+					</select>
+					
+					<button type="button" class="jw-button typeB" data-lan-eng="Save">저장</button>
+				</div>
+			</div>
+
+			<h1 class="page-title" data-lan-eng="Guide Details">가이드 상세</h1>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Basic Information">기본 정보</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+					<!-- 1행 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Guide Name">가이드명</label>
+						<input type="text" class="form-control" value="Hyunwoo Park">
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Email">이메일</label>
+						<input type="email" class="form-control" value="hyunwoo@gmail.com">
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Contacts">연락처</label>
+						<div class="field-row">
+							<select class="select w-auto">
+								<option selected>+82</option>
+							</select>
+							<input type="text" class="form-control" value="1234 5678" placeholder="숫자 입력">
+						</div>
+					</div>
+
+					<!-- 2행 -->
+					<div class="grid-item">
+						<label class="label-name">ID</label>
+						<input type="text" class="form-control" value="abc123">
+					</div>
+					<div class="grid-item">
+						<label class="label-name">PW</label>
+						<div class="input-box">
+							<input type="password" value="*********" placeholder="8~12자, 영문/숫자/특수문자 포함">
+							<button type="button" class="jw-button typeD"><img src="../image/replay.svg" alt=""><span data-lan-eng="Reset">초기화</span></button>
+						</div>
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Registration date/time">등록일시</label>
+						<input type="text" class="form-control" value="2025-06-20 12:12" disabled>
+					</div>
+
+					<!-- 3행 : 증명사진 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="ID Photo">증명사진</label>
+						<div class="upload-box">
+							<input id="file-passport" type="file" accept="image/*">
+							<label for="file-passport" class="thumb" aria-label="preview"></label>
+							<div class="upload-meta">
+								<div class="file-title">Image</div>
+								<div class="file-info">jpg, 328KB</div>
+								<div class="file-controller">
+									<button type="button" class="btn-icon" aria-label="다운로드"><img src="../image/button-download.svg" alt=""></button>
+									<button type="button" class="btn-icon" aria-label="삭제" onclick="deletePassportFile_withPreview(this)"><img src="../image/button-close2.svg" alt=""></button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="grid-item"></div>
+					<div class="grid-item"></div>
+
+					<!-- 4행 : 가이드 소개 전체폭 -->
+					<!-- multi-editor.js -->
+					<div class="grid-item col-span-3">
+						<label class="label-name" for="content" data-lan-eng="Guide Introduction">가이드 소개</label>
+						<div class="editor-box-wrap">
+						  <div class="jw-editor">
+							<div class="toolbar">
+							  <div class="group">
+								<button type="button" class="editor-btn ql-bold">
+								  <img src="../image/editer_bold.svg">
+								</button>
+								<button type="button" class="editor-btn ql-italic">
+								  <img src="../image/editer_italic.svg">
+								</button>
+								<button type="button" class="editor-btn ql-underline">
+								  <img src="../image/editer_underline.svg">
+								</button>
+								<button type="button" class="editor-btn ql-strike">
+								  <img src="../image/editer_strikethrough.svg">
+								</button>
+					  
+								<!-- 색상 버튼은 this 넘겨주기 -->
+								<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+								<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+							  </div>
+					  
+							  <div class="group">
+								<!-- select도 this 넘겨주기 -->
+								<select class="editor-font-size" onchange="fontsize(this);">
+								  <option value="" selected>폰트</option>
+								  <option value="12px">12px</option>
+								  <option value="14px">14px</option>
+								  <option value="16px">16px</option>
+								  <option value="18px">18px</option>
+								  <option value="24px">24px</option>
+								</select>
+							  </div>
+					  
+							  <div class="group">
+								<button type="button" class="editor-btn ql-align" value="">
+								  <img src="../image/editer_left.svg">
+								</button>
+								<button type="button" class="editor-btn ql-align" value="center">
+								  <img src="../image/editer_center.svg">
+								</button>
+								<button type="button" class="editor-btn ql-align" value="right">
+								  <img src="../image/editer_right.svg">
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<button type="button" class="editor-btn ql-list" value="ordered">
+								  <img src="../image/editer_ordered.svg">
+								</button>
+								<button type="button" class="editor-btn ql-list" value="bullet">
+								  <img src="../image/editer_unordered.svg">
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<!-- 이것도 this 넘기게 변경 -->
+								<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+								  <img src="../image/editer_removeHtmlTags.svg">
+								</button>
+								<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+								  HTML
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<label class="inputFile">
+								  <!-- this 넘기기 -->
+								  <input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+								  <span class="text">이미지</span>
+								  <i class="progress"></i>
+								</label>
+							  </div>
+							</div>
+					  
+							<div class="jweditor" data-placeholder="내용을 입력해주세요"></div>
+						  </div>
+						</div>
+					</div>
+
+					<!-- 5행 : 메모 전체폭 -->
+					<!-- multi-editor.js -->
+					<div class="grid-item col-span-3">
+						<label class="label-name" for="content" data-lan-eng="Note">메모</label>
+						<div class="editor-box-wrap">
+						  <div class="jw-editor">
+							<div class="toolbar">
+							  <div class="group">
+								<button type="button" class="editor-btn ql-bold">
+								  <img src="../image/editer_bold.svg">
+								</button>
+								<button type="button" class="editor-btn ql-italic">
+								  <img src="../image/editer_italic.svg">
+								</button>
+								<button type="button" class="editor-btn ql-underline">
+								  <img src="../image/editer_underline.svg">
+								</button>
+								<button type="button" class="editor-btn ql-strike">
+								  <img src="../image/editer_strikethrough.svg">
+								</button>
+					  
+								<!-- 색상 버튼은 this 넘겨주기 -->
+								<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+								<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+							  </div>
+					  
+							  <div class="group">
+								<!-- select도 this 넘겨주기 -->
+								<select class="editor-font-size" onchange="fontsize(this);">
+								  <option value="" selected>폰트</option>
+								  <option value="12px">12px</option>
+								  <option value="14px">14px</option>
+								  <option value="16px">16px</option>
+								  <option value="18px">18px</option>
+								  <option value="24px">24px</option>
+								</select>
+							  </div>
+					  
+							  <div class="group">
+								<button type="button" class="editor-btn ql-align" value="">
+								  <img src="../image/editer_left.svg">
+								</button>
+								<button type="button" class="editor-btn ql-align" value="center">
+								  <img src="../image/editer_center.svg">
+								</button>
+								<button type="button" class="editor-btn ql-align" value="right">
+								  <img src="../image/editer_right.svg">
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<button type="button" class="editor-btn ql-list" value="ordered">
+								  <img src="../image/editer_ordered.svg">
+								</button>
+								<button type="button" class="editor-btn ql-list" value="bullet">
+								  <img src="../image/editer_unordered.svg">
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<!-- 이것도 this 넘기게 변경 -->
+								<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+								  <img src="../image/editer_removeHtmlTags.svg">
+								</button>
+								<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+								  HTML
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<label class="inputFile">
+								  <!-- this 넘기기 -->
+								  <input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+								  <span class="text">이미지</span>
+								  <i class="progress"></i>
+								</label>
+							  </div>
+							</div>
+					  
+							<div class="jweditor" data-placeholder="내용을 입력해주세요"></div>
+						  </div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Contract Information">계약 정보</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Contract period">계약 기간</label>
+						<div class="field-row">
+							<input id="contract-period" type="text" class="jw-w form-control" placeholder="Please select a date" readonly>
+							<button type="button" class="btn-icon calendar" aria-label="달력 열기" data-target="#contract-period"></button>
+						</div>
+					</div>
+					<div class="grid-item"></div>
+					<div class="grid-item"></div>
+				</div>
+			</div>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Assigned schedule list">배정된 일정 목록</h2>
+			<div class="card-panel jw-mgt16">
+				<table class="jw-tableA">
+					<colgroup>
+						<col class="col-60"> <!-- No -->
+						<col> <!-- 상품명 (auto) -->
+						<col> <!-- 여행 시작일 -->
+						<col> <!-- 예약자명 -->
+						<col> <!-- 예약 인원 -->
+						<col> <!-- 여행 상태 -->
+					</colgroup>
+					<thead>
+						<tr>
+							<th class="no is-center">No</th>
+							<th data-lan-eng="Product Name">상품명</th>
+							<th data-lan-eng="Travel start date">여행 시작일</th>
+							<th data-lan-eng="Reserver's name">예약자명</th>
+							<th data-lan-eng="Number of people for reservation">예약 인원</th>
+							<th data-lan-eng="Travel status">여행 상태</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="no is-center">10</td>
+							<td class="td-ellipsis">
+								<span>Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</span>
+							</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Jose Ramirez</td>
+							<td class="is-center">5</td>
+							<td class="is-center">Scheduled departure</td>
+						</tr>
+						<tr>
+							<td class="no is-center">9</td>
+							<td class="td-ellipsis">
+								<span>Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</span>
+							</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Jose Ramirez</td>
+							<td class="is-center">5</td>
+							<td class="is-center">Traveling</td>
+						</tr>
+						<tr>
+							<td class="no is-center">8</td>
+							<td class="td-ellipsis">
+								<span>Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</span>
+							</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Jose Ramirez</td>
+							<td class="is-center">5</td>
+							<td class="is-center">Trip completed</td>
+						</tr>
+						<tr>
+							<td class="no is-center">7</td>
+							<td class="td-ellipsis">
+								<span>Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</span>
+							</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Jose Ramirez</td>
+							<td class="is-center">5</td>
+							<td class="is-center">Trip completed</td>
+						</tr>
+						<tr>
+							<td class="no is-center">6</td>
+							<td class="td-ellipsis">
+								<span>Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</span>
+							</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Jose Ramirez</td>
+							<td class="is-center">5</td>
+							<td class="is-center">Trip completed</td>
+						</tr>
+						<tr>
+							<td class="no is-center">5</td>
+							<td class="td-ellipsis">
+								<span>Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</span>
+							</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Jose Ramirez</td>
+							<td class="is-center">5</td>
+							<td class="is-center">Trip completed</td>
+						</tr>
+						<tr>
+							<td class="no is-center">4</td>
+							<td class="td-ellipsis">
+								<span>Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</span>
+							</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Jose Ramirez</td>
+							<td class="is-center">5</td>
+							<td class="is-center">Trip completed</td>
+						</tr>
+						<tr>
+							<td class="no is-center">3</td>
+							<td class="td-ellipsis">
+								<span>Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</span>
+							</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Jose Ramirez</td>
+							<td class="is-center">5</td>
+							<td class="is-center">Trip completed</td>
+						</tr>
+						<tr>
+							<td class="no is-center">2</td>
+							<td class="td-ellipsis">
+								<span>Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</span>
+							</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Jose Ramirez</td>
+							<td class="is-center">5</td>
+							<td class="is-center">Trip completed</td>
+						</tr>
+						<tr>
+							<td class="no is-center">1</td>
+							<td class="td-ellipsis">
+								<span>Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</span>
+							</td>
+							<td class="is-center">2025-04-19</td>
+							<td class="is-center">Jose Ramirez</td>
+							<td class="is-center">5</td>
+							<td class="is-center">Trip completed</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<div class="jw-pagebox" role="navigation" aria-label="페이지네이션">
+					<div class="contents">
+						<button type="button" class="first" aria-label="첫 페이지" aria-disabled="false">
+							<img src="../image/first.svg" alt="">
+						</button>
+						<button type="button" class="prev" aria-label="이전 페이지" aria-disabled="false">
+							<img src="../image/prev.svg" alt="">
+						</button>
+
+						<div class="page" role="list">
+							<button type="button" class="p" role="listitem">1</button>
+							<button type="button" class="p" role="listitem">2</button>
+							<button type="button" class="p show" role="listitem" aria-current="page">3</button>
+							<button type="button" class="p" role="listitem">4</button>
+							<button type="button" class="p" role="listitem">5</button>
+						</div>
+
+						<button type="button" class="next" aria-label="다음 페이지" aria-disabled="false">
+							<img src="../image/next.svg" alt="">
+						</button>
+						<button type="button" class="last" aria-label="마지막 페이지" aria-disabled="false">
+							<img src="../image/last.svg" alt="">
+						</button>
+					</div>
+				</div>
+
+			</div>
+
+
+		</section>
+
+	</main>
+
+	<!-- 기본 스크립트 -->
+	<script src="../js/default.js"></script>
+	<script src="../js/super.js"></script>
+	<script src="../js/datepicker.js"></script>
+	<script src="../js/multi-editor.js"></script>
+	<script src="../js/passport-photo.js"></script>
+
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_super.html'
+		});
+	</script>
+</body>
+
+</html>

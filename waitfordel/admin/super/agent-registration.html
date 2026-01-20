@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN</title>
+
+	<!-- 공통 스타일 -->
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+
+	<!-- calendar -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+	<!-- editor -->
+	<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+</head>
+
+<body>
+
+	<!-- header 들어올 자리 -->
+	<header class="layout-header"></header>
+
+	<!-- 본문 영역 -->
+	<main class="layout-main">
+		<!-- nav 들어올 자리 -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content">
+			<div class="page-toolbar">
+				<a href="agent-list.html" class="jw-button" aria-label="목록으로 돌아가기">
+					<img src="../image/arrow4.svg" alt="">
+					<span data-lan-eng="Return to list">목록으로 돌아가기</span>
+				</a>
+
+				<div class="page-toolbar-actions">
+					<button type="button" class="jw-button typeB" data-lan-eng="Save">저장</button>
+				</div>
+			</div>
+
+			<h1 class="page-title" data-lan-eng="Agent Registration">에이전트 등록</h1>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Basic Information">기본 정보</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+					<!-- 1행 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Agent Name">지점명</label>
+						<input type="text" class="form-control" placeholder="Agent Name">
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Area">지역</label>
+						<input type="text" class="form-control" placeholder="Area">
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Person in charge">담당자명</label>
+						<input type="text" class="form-control" placeholder="Person in charge">
+					</div>
+
+					<!-- 2행 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Person in charge email">담당자 이메일</label>
+						<input type="email" class="form-control" placeholder="Person in charge email">
+					</div>
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Contact information">담당자 연락처</label>
+						<div class="field-row">
+							<select class="select w-auto">
+								<option selected>+63</option>
+							</select>
+							<input type="text" class="form-control" placeholder="Enter numbers">
+						</div>
+					</div>
+					<div class="grid-item">
+						<label class="label-name">ID</label>
+						<input type="text" class="form-control" placeholder="ID">
+					</div>
+
+					<!-- 3행 -->
+					<div class="grid-item">
+						<label class="label-name">PW</label>
+						<div class="input-box">
+							<input type="password" value="" placeholder="8~12 characters with letters, numbers and symbols">
+							<button type="button" class="jw-button typeD"><img src="../image/replay.svg" alt="">Auto Input</button>
+						</div>
+					</div>
+					<div class="grid-item"></div>
+					<div class="grid-item"></div>
+
+					<!-- 4행 : 메모 전체폭 -->
+					<!-- multi-editor.js -->
+					<div class="grid-item col-span-3">
+						<label class="label-name" for="content" data-lan-eng="Note">Note</label>
+						<div class="editor-box-wrap">
+						  <div class="jw-editor">
+							<div class="toolbar">
+							  <div class="group">
+								<button type="button" class="editor-btn ql-bold">
+								  <img src="../image/editer_bold.svg">
+								</button>
+								<button type="button" class="editor-btn ql-italic">
+								  <img src="../image/editer_italic.svg">
+								</button>
+								<button type="button" class="editor-btn ql-underline">
+								  <img src="../image/editer_underline.svg">
+								</button>
+								<button type="button" class="editor-btn ql-strike">
+								  <img src="../image/editer_strikethrough.svg">
+								</button>
+					  
+								<!-- 색상 버튼은 this 넘겨주기 -->
+								<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+								<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+							  </div>
+					  
+							  <div class="group">
+								<!-- select도 this 넘겨주기 -->
+								<select class="editor-font-size" onchange="fontsize(this);">
+								  <option value="" selected>폰트</option>
+								  <option value="12px">12px</option>
+								  <option value="14px">14px</option>
+								  <option value="16px">16px</option>
+								  <option value="18px">18px</option>
+								  <option value="24px">24px</option>
+								</select>
+							  </div>
+					  
+							  <div class="group">
+								<button type="button" class="editor-btn ql-align" value="">
+								  <img src="../image/editer_left.svg">
+								</button>
+								<button type="button" class="editor-btn ql-align" value="center">
+								  <img src="../image/editer_center.svg">
+								</button>
+								<button type="button" class="editor-btn ql-align" value="right">
+								  <img src="../image/editer_right.svg">
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<button type="button" class="editor-btn ql-list" value="ordered">
+								  <img src="../image/editer_ordered.svg">
+								</button>
+								<button type="button" class="editor-btn ql-list" value="bullet">
+								  <img src="../image/editer_unordered.svg">
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<!-- 이것도 this 넘기게 변경 -->
+								<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+								  <img src="../image/editer_removeHtmlTags.svg">
+								</button>
+								<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+								  HTML
+								</button>
+							  </div>
+					  
+							  <div class="group">
+								<label class="inputFile">
+								  <!-- this 넘기기 -->
+								  <input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+								  <span class="text">이미지</span>
+								  <i class="progress"></i>
+								</label>
+							  </div>
+							</div>
+					  
+							<div class="jweditor" data-placeholder="내용을 입력해주세요"></div>
+						  </div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Contract Information">계약 정보</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+					<!-- 계약 기간 -->
+					<div class="grid-item">
+						<label class="label-name" data-lan-eng="Contract period">계약 기간</label>
+						<div class="field-row">
+							<input id="contract-period" type="text" class="jw-w form-control" placeholder="Please select a date" readonly>
+							<button type="button" class="btn-icon calendar" aria-label="달력 열기" data-target="#contract-period"></button>
+						</div>
+					</div>
+
+					<!-- 예약금 비율(%) -->
+					<div class="grid-item">
+						<label class="label-name" dPata-lan-eng="Deposit ratio (%)">Deposit ratio (%)</label>
+						<input type="number" class="form-control" value="15" min="0" max="100" step="1" placeholder="0">
+					</div>
+				</div>
+			</div>
+
+
+
+		</section>
+
+	</main>
+
+	<!-- 기본 스크립트 -->
+	<script src="../js/default.js"></script>
+	<script src="../js/super.js"></script>
+	<script src="../js/datepicker.js"></script>
+	<script src="../js/multi-editor.js"></script>
+
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_super.html'
+		});
+	</script>
+</body>
+
+</html>

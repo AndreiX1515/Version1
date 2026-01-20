@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel | Location Registration</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="/css/i18n-boot.css">
+    <script src="/js/i18n-boot.js"></script>
+    <script src="../js/i18n.js" defer></script>
+
+    <!-- Kakao Maps only -->
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=c9d9068a507832cb391cf6ed52897501&libraries=services&autoload=false" defer></script>
+</head>
+<body>
+    <div class="main">
+        <header class="header-type1">
+            <a class="btn-mypage" id="backToMeetingLocation" href="javascript:history.back();"><img src="../images/ico_close_black.svg"></a>
+            <div class="title">Location Registration</div>
+            <div></div>
+        </header>
+        <div>
+            <div class="map-type1" id="mapContainer">
+                <div id="map" style="width: 100%; height: 300px; background: #f0f0f0;"></div>
+                <button class="btn-location btn primary sm ico-location" type="button" id="setLocationBtn">Set to this location</button>
+            </div>
+            <div class="px20 pb100 mt28">
+                <label class="label-input mb6" for="meetingTimeHour">Meeting time<span class="text fz14 fw500 reded lh22 ml3">*</span></label>
+                <div class="align vm gap6 mt6">
+                    <div class="custom-select flex-1" id="hourSelect">
+                        <div class="select-trigger" id="hourTrigger">
+                            <span class="placeholder" id="hourValue">00</span>
+                        </div>
+                        <ul class="select-options" id="hourOptions" style="display: none;">
+                            <!-- NOTE -->
+                        </ul>
+                    </div>
+                    <div class="custom-select flex-1" id="minuteSelect">
+                        <div class="select-trigger" id="minuteTrigger">
+                            <span class="placeholder" id="minuteValue">00</span>
+                        </div>
+                        <ul class="select-options" id="minuteOptions" style="display: none;">
+                            <!-- NOTE -->
+                        </ul>
+                    </div>
+                </div>
+                <label class="label-input mb6 mt16" for="locationName">Location name<span class="text fz14 fw500 reded lh22 ml3">*</span></label>
+                <input class="input-type1" id="locationName" type="text" placeholder="Place name" value="">
+                <label class="label-input gray mb6 mt16" for="address">Address<span class="text fz14 fw500 gray96 lh22 ml3">*</span></label>
+                <input class="input-type1" id="address" type="text" placeholder="It will be automatically entered when you set the location." value="" readonly style="background:transparent; border:none; border-bottom:1px solid #eaeaea; border-radius:0; color:#b0b0b0;">
+                <label class="label-input mb6 mt16" for="content">Content<span class="text fz14 fw500 reded lh22 ml3">*</span></label>
+                <textarea class="textarea-type1 mt16" id="content" name="" cols="30" rows="10" placeholder="Please enter your content"></textarea>
+
+                <div class="mt105"><button class="btn primary lg" type="button" id="registerBtn" disabled>Register</button></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let map = null;
+        let marker = null;
+        let selectedLatitude = null;
+        let selectedLongitude = null;
+        let selectedAddress = '';
+        let selectedHour = '00';
+        let selectedMinute = '00';
+
+        document.addEventListener("DOMContentLoaded", function () {
+            initSelectOptions();
+            if (typeof kakao !== 'undefined' && kakao.maps && typeof kakao.maps.load === 'function') {
+                kakao.maps.load(initMap);
+            } else {
+                initMap();
+            }
+            initSelects();
+            initFormValidation();
+            ensureGuideSession();
+
+            // NOTE - back button uses history.back() to avoid creating duplicate history entries
+        });
+
+        async function ensureGuideSession() {
+            try {
+                const r = await fetch('../backend/api/check-session.php', { credentials: 'same-origin' });
+                const j = await r.json();
+                if (!j || !j.success || !j.isLoggedIn) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+                const accountType = (j?.user?.accountType || j?.user?.account_type || '').toLowerCase();
+                if (accountType !== 'guide') {
+                    alert('Only guide accounts can access this page.');
+                    window.location.href = '../home.html';
+                }
+            } catch (_) {
+                // ignore
+            }
+        }
+        
+        function initSelectOptions() {
+            // NOTE
+            const hourOptions = document.getElementById('hourOptions');
+            if (hourOptions) {
+                hourOptions.innerHTML = Array.from({length: 24}, (_, i) => {
+                    const value = String(i).padStart(2, '0');
+                    return `<li data-value="${value}">${value}</li>`;
+                }).join('');
+            }
+            
+            // NOTE
+            const minuteOptions = document.getElementById('minuteOptions');
+            if (minuteOptions) {
+                minuteOptions.innerHTML = Array.from({length: 60}, (_, i) => {
+                    const value = String(i).padStart(2, '0');
+                    return `<li data-value="${value}">${value}</li>`;
+                }).join('');
+            }
+        }
+        
+        function initMap() {
+            // NOTE
+            const defaultLat = 37.5665;
+            const defaultLng = 126.9780;
+
+            // NOTE
+            const mapContainer = document.getElementById('map');
+            if (mapContainer) {
+                if (!(typeof kakao !== 'undefined' && kakao.maps)) {
+                    mapContainer.innerHTML = '<div style="width:100%;height:300px;display:flex;align-items:center;justify-content:center;background:#f0f0f0;color:#6b7684;border-radius:16px;">Kakao Map is not available.</div>';
+                    return;
+                }
+
+                const center = new kakao.maps.LatLng(defaultLat, defaultLng);
+                map = new kakao.maps.Map(mapContainer, { center, level: 4 });
+                marker = new kakao.maps.Marker({ position: center, draggable: true });
+                marker.setMap(map);
+                geocoder = kakao.maps.services ? new kakao.maps.services.Geocoder() : null;
+
+                kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+                    const ll = mouseEvent.latLng;
+                    updateLocation(ll.getLat(), ll.getLng());
+                });
+                kakao.maps.event.addListener(marker, 'dragend', function() {
+                    const ll = marker.getPosition();
+                    updateLocation(ll.getLat(), ll.getLng());
+                });
+
+                updateLocation(defaultLat, defaultLng);
+            }
+
+            // Checklist: center map on guide's current location if available
+            try {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        (pos) => {
+                            const lat = pos?.coords?.latitude;
+                            const lng = pos?.coords?.longitude;
+                            if (typeof lat === 'number' && typeof lng === 'number') {
+                                // Kakao maps
+                                if (map && marker && typeof kakao !== 'undefined' && kakao.maps) {
+                                    const pos = new kakao.maps.LatLng(lat, lng);
+                                    try { map.setCenter(pos); } catch (_) {}
+                                    try { marker.setPosition(pos); } catch (_) {}
+                                }
+                                updateLocation(lat, lng);
+                            }
+                        },
+                        () => {
+                            // ignore permission/timeout errors, keep default
+                        },
+                        { enableHighAccuracy: true, timeout: 5000, maximumAge: 60000 }
+                    );
+                }
+            } catch (_) {}
+
+            // NOTE
+            const setLocationBtn = document.getElementById('setLocationBtn');
+            if (setLocationBtn) {
+                setLocationBtn.addEventListener('click', () => {
+                    if (map && marker && typeof kakao !== 'undefined' && kakao.maps) {
+                        const position = marker.getPosition();
+                        updateLocation(position.getLat(), position.getLng());
+                    } else {
+                        // NOTE
+                        updateLocation(defaultLat, defaultLng);
+                    }
+                });
+            }
+        }
+        
+        async function updateLocation(lat, lng) {
+            selectedLatitude = lat;
+            selectedLongitude = lng;
+
+            // marker sync
+            try {
+                if (map && marker && typeof kakao !== 'undefined' && kakao.maps) {
+                    const pos = new kakao.maps.LatLng(lat, lng);
+                    marker.setPosition(pos);
+                    map.setCenter(pos);
+                }
+            } catch (_) {}
+
+            // Reverse geocode (Kakao only). If unavailable, fallback to coord string.
+            if (geocoder && typeof kakao !== 'undefined' && kakao.maps && kakao.maps.services) {
+                geocoder.coord2Address(lng, lat, (result, status) => {
+                    if (status === kakao.maps.services.Status.OK && result && result[0]) {
+                        const r0 = result[0];
+                        selectedAddress = r0.road_address?.address_name || r0.address?.address_name || `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                    } else {
+                        selectedAddress = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                    }
+                    const addressEl = document.getElementById('address');
+                    if (addressEl) addressEl.value = selectedAddress;
+                    validateForm();
+                });
+            } else {
+                selectedAddress = `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                const addressEl = document.getElementById('address');
+                if (addressEl) addressEl.value = selectedAddress;
+                validateForm();
+            }
+        }
+        
+        function initSelects() {
+            // NOTE
+            const hourSelect = document.getElementById('hourSelect');
+            const hourTrigger = document.getElementById('hourTrigger');
+            const hourOptions = document.getElementById('hourOptions');
+            const hourValue = document.getElementById('hourValue');
+            
+            if (hourTrigger && hourOptions) {
+                hourTrigger.addEventListener('click', () => {
+                    const isOpen = hourOptions.style.display !== 'none';
+                    hourOptions.style.display = isOpen ? 'none' : 'block';
+                    
+                    // NOTE
+                    const minuteOptions = document.getElementById('minuteOptions');
+                    if (minuteOptions) minuteOptions.style.display = 'none';
+                });
+                
+                hourOptions.addEventListener('click', (e) => {
+                    if (e.target.tagName === 'LI') {
+                        selectedHour = e.target.getAttribute('data-value');
+                        hourValue.textContent = selectedHour;
+                        hourOptions.style.display = 'none';
+                        validateForm();
+                    }
+                });
+            }
+            
+            // NOTE
+            const minuteSelect = document.getElementById('minuteSelect');
+            const minuteTrigger = document.getElementById('minuteTrigger');
+            const minuteOptions = document.getElementById('minuteOptions');
+            const minuteValue = document.getElementById('minuteValue');
+            
+            if (minuteTrigger && minuteOptions) {
+                minuteTrigger.addEventListener('click', () => {
+                    const isOpen = minuteOptions.style.display !== 'none';
+                    minuteOptions.style.display = isOpen ? 'none' : 'block';
+                    
+                    // NOTE
+                    if (hourOptions) hourOptions.style.display = 'none';
+                });
+                
+                minuteOptions.addEventListener('click', (e) => {
+                    if (e.target.tagName === 'LI') {
+                        selectedMinute = e.target.getAttribute('data-value');
+                        minuteValue.textContent = selectedMinute;
+                        minuteOptions.style.display = 'none';
+                        validateForm();
+                    }
+                });
+            }
+            
+            // NOTE
+            document.addEventListener('click', (e) => {
+                if (!hourSelect.contains(e.target) && !minuteSelect.contains(e.target)) {
+                    if (hourOptions) hourOptions.style.display = 'none';
+                    if (minuteOptions) minuteOptions.style.display = 'none';
+                }
+            });
+        }
+        
+        function initFormValidation() {
+            const locationName = document.getElementById('locationName');
+            const content = document.getElementById('content');
+            const registerBtn = document.getElementById('registerBtn');
+            
+            // NOTE
+            [locationName, content].forEach(input => {
+                if (input) {
+                    input.addEventListener('input', validateForm);
+                    input.addEventListener('change', validateForm);
+                }
+            });
+            
+            // NOTE
+            if (registerBtn) {
+                registerBtn.addEventListener('click', handleRegister);
+            }
+        }
+        
+        function validateForm() {
+            const locationName = document.getElementById('locationName').value.trim();
+            const address = document.getElementById('address').value.trim();
+            const content = document.getElementById('content').value.trim();
+            const registerBtn = document.getElementById('registerBtn');
+            
+            // NOTE
+            const hasMeetingTime = selectedHour !== '00' || selectedMinute !== '00';
+            const isValid = locationName && 
+                           address && 
+                           content && 
+                           hasMeetingTime &&
+                           selectedLatitude && 
+                           selectedLongitude;
+            
+            if (registerBtn) {
+                registerBtn.disabled = !isValid;
+                if (isValid) {
+                    registerBtn.classList.remove('disabled');
+                } else {
+                    registerBtn.classList.add('disabled');
+                }
+            }
+        }
+        
+        async function handleRegister() {
+            const locationName = document.getElementById('locationName').value.trim();
+            const address = document.getElementById('address').value.trim();
+            const content = document.getElementById('content').value.trim();
+            
+            if (!locationName || !address || !content) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            if (!selectedLatitude || !selectedLongitude) {
+                alert('Please select a location on the map.');
+                return;
+            }
+            
+            const meetingTime = `${selectedHour}:${selectedMinute}`;
+
+            // NOTE
+            const urlParams = new URLSearchParams(window.location.search);
+            let bookingId = urlParams.get('booking_id') || urlParams.get('bookingId') || '';
+
+            // NOTE
+            // NOTE
+            // Checklist: always bind locations to today's itinerary (ignore other bookings)
+            try {
+                const r = await fetch('../backend/api/meeting-locations.php?action=getMeetingLocations&todayOnly=1', { credentials: 'same-origin' });
+                const j = r.ok ? await r.json() : null;
+                const resolved = j?.data?.resolvedBookingId || '';
+                if (resolved) bookingId = resolved;
+            } catch (_) {}
+            if (!bookingId) {
+                alert('There is no schedule planned for today.');
+                return;
+            }
+            
+            try {
+                const response = await fetch('../backend/api/meeting-locations.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify({
+                        action: 'createMeetingLocation',
+                        bookingId: bookingId || undefined,
+                        meetingTime: meetingTime,
+                        locationName: locationName,
+                        address: address,
+                        latitude: selectedLatitude,
+                        longitude: selectedLongitude,
+                        content: content
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('HTTP ' + response.status);
+                }
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('Location has been registered.');
+                    // 등록 완료 플래그 설정 (meeting-location에서 데이터 새로고침용)
+                    sessionStorage.setItem('locationRegistered', '1');
+                    // history.back()을 사용하여 히스토리 스택 중복 방지
+                    history.back();
+                } else {
+                    alert(result.message || 'Failed to register.');
+                }
+            } catch (error) {
+                console.error('Error registering location:', error);
+                alert('An error occurred while registering.');
+            }
+        }
+    </script>
+    
+    <style>
+        .custom-select.flex-1 {
+            flex: 1;
+        }
+
+        .select-options {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .select-options li {
+            list-style: none;
+        }
+
+        .btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        #map {
+            width: 100%;
+            height: 300px;
+            border-radius: 16px;
+        }
+
+        /* Address input - underline style for readonly */
+        #address,
+        #address[readonly],
+        input#address[readonly] {
+            background-color: transparent !important;
+            border: none !important;
+            border-top: none !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-bottom: 1px solid #eaeaea !important;
+            border-radius: 0 !important;
+            color: #b0b0b0 !important;
+            padding: 10px 0 !important;
+        }
+
+        /* Ensure scroll works to bottom */
+        .pb100 {
+            padding-bottom: 100px;
+        }
+    </style>
+</body>
+</html>

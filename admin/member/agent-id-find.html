@@ -1,0 +1,113 @@
+<div class="dialog-container">
+	<button type="button" class="dialog-close" id="closeDialog" onclick="modal_close()"><i class="ic-close"></i></button>
+	
+	<h1 data-lan-eng="Find ID">아이디 찾기</h1>
+	
+	<div class="dialog-content jw-mgt50">
+
+		<div class="field">
+			<label class="label-name" data-lan-eng="Name">이름 <span class="req">*</span></label>
+			<div class="input-box">
+				<input type="text" id="managerName" value="" placeholder="Please Enter" required>
+			</div>
+		</div>
+		
+		<div class="field jw-mgt32">
+			<label class="label-name" data-lan-eng="Email">이메일 <span class="req">*</span></label>
+			<div class="input-box">
+				<input type="email" id="managerEmail" value="" placeholder="Please Enter" required>
+			</div>
+		</div>
+		
+		<div id="findIdError" class="error-message" style="display:none; color:#ef4444; font-size:14px; margin-top:16px;"></div>
+
+	</div>
+	
+	<div class="dialog-controls jw-mgt50">
+	<button type="button" class="jw-button typeB" id="findIdBtn" data-lan-eng="Find ID" onclick="findUnifiedId()">아이디 찾기</button>
+	</div>
+</div>
+
+<script>
+	// 아이디 찾기 (에이전트/가이드 구분 없이)
+	async function findUnifiedId() {
+		const managerName = document.getElementById('managerName').value.trim();
+		const managerEmail = document.getElementById('managerEmail').value.trim();
+		const errorDiv = document.getElementById('findIdError');
+		const findBtn = document.getElementById('findIdBtn');
+		
+		// 입력 검증
+		if (!managerName || !managerEmail) {
+			errorDiv.textContent = 'Please enter your name and email correctly.';
+			errorDiv.style.display = 'block';
+			return;
+		}
+		
+		// 이메일 형식 검증
+		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		if (!emailRegex.test(managerEmail)) {
+			errorDiv.textContent = 'Please enter your name and email correctly.';
+			errorDiv.style.display = 'block';
+			return;
+		}
+		
+		errorDiv.style.display = 'none';
+		findBtn.disabled = true;
+		findBtn.textContent = 'Searching...';
+		
+		try {
+			const formData = new FormData();
+			formData.append('managerName', managerName);
+			formData.append('managerEmail', managerEmail);
+			
+			const tryPost = async (url, fd) => {
+				const res = await fetch(url, { method: 'POST', body: fd, credentials: 'same-origin' });
+				const json = await res.json().catch(() => ({}));
+				return { ok: res.ok, status: res.status, json };
+			};
+
+			// agent 먼저 → 실패하면 guide 시도
+			const base = window.location.pathname.includes('/member/') ? '../backend/api/' : './backend/api/';
+			const r1 = await tryPost(base + 'find-agent-id.php', formData);
+			if (r1.ok && r1.json?.success) {
+				const resultModal = modal('../member/agent-id-find-result.html', '580px', '358px');
+				document.addEventListener('modal:loaded', function setEmail(e) {
+					if (e.detail && e.detail.action && e.detail.action.includes('agent-id-find-result')) {
+						const emailInput = document.querySelector('#foundEmail');
+						if (emailInput) emailInput.value = r1.json.email || '';
+						document.removeEventListener('modal:loaded', setEmail);
+					}
+				});
+				return;
+			}
+
+			// guide API는 파라미터명이 다름 → 새 FormData 생성
+			const fd2 = new FormData();
+			fd2.append('guideName', managerName);
+			fd2.append('guideEmail', managerEmail);
+			const r2 = await tryPost(base + 'find-guide-id.php', fd2);
+			if (r2.ok && r2.json?.success) {
+				const resultModal = modal('../member/agent-id-find-result.html', '580px', '358px');
+				document.addEventListener('modal:loaded', function setEmail2(e) {
+					if (e.detail && e.detail.action && e.detail.action.includes('agent-id-find-result')) {
+						const emailInput = document.querySelector('#foundEmail');
+						if (emailInput) emailInput.value = r2.json.email || '';
+						document.removeEventListener('modal:loaded', setEmail2);
+					}
+				});
+				return;
+			}
+
+			errorDiv.textContent = (r2.json?.message || r1.json?.message || 'Member information cannot be found.');
+			errorDiv.style.display = 'block';
+			findBtn.disabled = false;
+			findBtn.textContent = '아이디 찾기';
+		} catch (error) {
+			console.error('Find ID error:', error);
+			errorDiv.textContent = 'An error occurred while finding your ID.';
+			errorDiv.style.display = 'block';
+			findBtn.disabled = false;
+			findBtn.textContent = '아이디 찾기';
+		}
+	}
+</script>

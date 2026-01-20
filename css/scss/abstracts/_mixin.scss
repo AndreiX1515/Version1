@@ -1,0 +1,87 @@
+
+
+@mixin center-absolute {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+@mixin top-center {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+@mixin content {
+   display: block;
+   content: "";
+}
+@mixin ico-14 {
+   width: 1.4rem;
+   height: 1.4rem;
+}
+@mixin ico-16 {
+   width: 1.6rem;
+   height: 1.6rem;
+}
+@mixin ico-18 {
+   width: 1.8rem;
+   height: 1.8rem;
+}
+@mixin ico-24 {
+   width: 2.4rem;
+   height: 2.4rem;
+}
+
+@mixin custom-scrollbar($thumb-color: #888, $track-color: #f1f1f1, $thumb-hover-color: #555) {
+    /* 스크롤바 너비 */
+    &::-webkit-scrollbar {
+        width: 5px; /* 가로 스크롤은 height 속성을 사용 */
+    }
+
+    /* 스크롤바 트랙 */
+    &::-webkit-scrollbar-track {
+        background-color: $track-color; /* 트랙 색상 */
+        border-radius: 10px; /* 둥근 모서리 */
+    }
+
+    /* 스크롤바 핸들(thumb) */
+    &::-webkit-scrollbar-thumb {
+        background-color: $thumb-color; /* 스크롤바 색상 */
+        border-radius: 10px; /* 둥근 모서리 */
+    }
+
+    /* 스크롤바 핸들에 마우스를 올렸을 때 */
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: $thumb-hover-color; /* hover 시 더 진한 색상 */
+    }
+}
+
+@mixin custom-horizontal-scrollbar(
+  $thumb-color: #888,
+  $track-color: #f1f1f1,
+  $thumb-hover-color: #555
+) {
+  /* 가로 스크롤바 높이 */
+  &::-webkit-scrollbar {
+    height: 8px; /* 가로 스크롤의 높이를 지정 */
+  }
+
+  /* 가로 스크롤바 트랙 */
+  &::-webkit-scrollbar-track {
+    background-color: $track-color;
+    border-radius: 10px;
+  }
+
+  /* 가로 스크롤바 핸들(thumb) */
+  &::-webkit-scrollbar-thumb {
+    background-color: $thumb-color;
+    border-radius: 10px;
+  }
+
+  /* 가로 스크롤바 핸들 hover 시 */
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: $thumb-hover-color;
+  }
+}
+
+

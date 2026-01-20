@@ -1,0 +1,315 @@
+
+
+@layer Reset {
+    @import url('https://cdn.jsdelivr.net/npm/pretendard@latest/dist/web/pretendard.css');
+    * { 
+      box-sizing: border-box;
+    }
+  
+    html,body {  
+      position: relative;
+      font-size: 62.5%;
+      font-family: 'Noto Sans'; 
+      overflow-x: hidden;
+    }
+    
+    /* Reset */
+    html,
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    div,
+    p,
+    blockquote,
+    pre,
+    code,
+    address,
+    ul,
+    ol,
+    li,
+    nav,
+    section,
+    article,
+    header,
+    footer,
+    main,
+    aside,
+    dl,
+    dt,
+    dd,
+    table,
+    thead,
+    tbody,
+    tfoot,
+    label,
+    caption,
+    th,
+    td,
+    form,
+    fieldset,
+    legend,
+    hr,
+    input,
+    button,
+    textarea,
+    object,
+    figure,
+    figcaption {
+      margin: 0;
+      padding: 0;
+    }
+  
+    body,
+    input,
+    select,
+    textarea,
+    button,
+    img,
+    fieldset {
+      border: none;
+    }
+    button, input, textarea, select {
+      font-family: inherit; /* 부모 요소(html, body)에서 설정한 폰트 사용 */
+  }
+    
+    // img { width: 100%; }
+    ul,
+    ol,
+    li {
+      list-style: none;
+    }
+  
+    table {
+      width: 100%;
+      border-spacing: 0;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+  
+    address,
+    cite,
+    code,
+    em,
+    i {
+      font-style: normal;
+      font-weight: normal;
+    }
+  
+    label,
+    img,
+    input,
+    select,
+    textarea,
+    button,
+    a {
+      vertical-align: middle;
+    }
+  
+    u,
+    ins,
+    a {
+      text-decoration: none;
+    }
+  
+    button {
+      cursor: pointer;
+      background: transparent;
+    }
+  
+    a {
+      color: inherit;
+    }
+  
+    /* Normalize */
+    // input[type="number"]::-webkit-inner-spin-button,
+    // input[type="number"]::-webkit-outer-spin-button {
+    //   -webkit-appearance: none;
+    // }
+  
+    // input[type="number"] {
+    //   -moz-appearance: textfield;
+    // }
+  
+    // input[type="number"],
+    // input[type="text"],
+    // input[type="password"],
+    // input[type="url"],
+    // input[type="email"],
+    // input[type="tel"],
+    // input[type="date"],
+    // textarea {
+    //   -webkit-appearance: none;
+    //   -moz-appearance: none;
+    //   appearance: none;
+    //   border-radius: 0;
+    //   resize: none;
+    // }
+  input[type="text"],
+  input[type="number"],
+  input[type="password"],
+  input[type="email"],
+  input[type="url"],
+  input[type="tel"],
+  input[type="date"] {
+    border: none;
+    // border-bottom: 1px solid #ccc;
+    background-color: #fff;
+    padding: 8px;
+  }
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  input[type="password"]:focus,
+  input[type="email"]:focus,
+  input[type="url"]:focus,
+  input[type="tel"]:focus,
+  input[type="date"]:focus {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--gray6b); /* 또는 #6B6B6B */
+  }
+  
+
+    textarea:focus {
+      outline: 1px solid #6B6B6B; /* 파란색 아웃라인 */
+      border-color: #6B6B6B; /* 테두리 색상 변경 */
+    }
+  
+    input[type="search"]::-webkit-search-decoration,
+    input[type="search"]::-webkit-search-cancel-button,
+    input[type="search"]::-webkit-search-results-button,
+    input[type="search"]::-webkit-search-results-decoration {
+      -webkit-appearance: none;
+    }
+  
+    input[type="date"] {
+      position: relative;
+    }
+  
+    input[type="date"]::-webkit-clear-button,
+    input[type="date"]::-webkit-inner-spin-button {
+      display: none;
+    }
+  
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: transparent;
+      color: transparent;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+  
+    input[type="date"] {
+      position: relative;
+      width: 100px;
+    }
+  
+    input[type="date"]::before {
+      content: attr(data-placeholder);
+      width: 100%;
+    }
+  
+    input[type="date"]:valid::before {
+      display: none;
+    }
+    input[type="time"] { 
+      width: 100%;
+      appearance: none; /* 브라우저 기본 스타일 제거 */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+  
+  
+    input[readonly] {
+      background-color: #f0f0f0; /* 배경색 변경 */
+      color: #888; /* 글자 색상 변경 */
+      border: 1px solid #ccc; /* 테두리 색상 변경 */
+      cursor: not-allowed; /* 커서 변경 */
+    }
+  
+    select {
+      appearance: none;
+    }
+    select:focus {
+      outline: 1px solid #6B6B6B; /* 파란색 아웃라인 */
+      border-color: #6B6B6B; /* 테두리 색상 변경 */
+      border-radius: 4px;
+    }
+  
+    html {
+      font-size: 62.5%;
+      -webkit-text-size-adjust: none;
+      font-family: $font-primary;
+    }
+  
+    body {
+      font-size: 1rem;
+      // cursor: url('../../images/ico_thanks.svg') 16 16, auto;
+        /* 스크롤바 전체 스타일 */
+        &::-webkit-scrollbar {
+          width: 10px; /* 세로 스크롤바 너비 */
+          height: 10px; /* 가로 스크롤바 높이 */
+        }
+  
+        /* 스크롤바 트랙 (배경) */
+        &::-webkit-scrollbar-track {
+          background: #f1f1f1; /* 연한 회색 */
+          border-radius: 4px;
+        }
+  
+        /* 스크롤바 핸들 (움직이는 부분) */
+        &::-webkit-scrollbar-thumb {
+          background: #134191; /* 중간 회색 */
+          border-radius: 4px;
+        }
+  
+        /* 스크롤바 핸들에 마우스 오버 시 */
+        &::-webkit-scrollbar-thumb:hover {
+          background: #09388B; /* 더 진한 회색 */
+        }
+    }
+  
+  
+  
+    caption,
+    legend,
+    .a11y-hidden {
+      overflow: hidden;
+      display: block;
+      position: absolute;
+      border: 0;
+      width: 1px;
+      height: 1px;
+      clip: rect(1px, 1px, 1px, 1px);
+    }
+  
+    @media print {
+      .header,
+      .footer,
+      .visual {
+        display: none;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+    }
+    @page {
+      margin: 1cm 2cm;
+    }
+    .print {
+      display: block;
+    }
+    @media screen {
+      .print {
+        display: none;
+      }
+    }
+
+  }
+  

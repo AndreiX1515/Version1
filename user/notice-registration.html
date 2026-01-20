@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel | Notice Registration</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="/css/i18n-boot.css">
+    <script src="/js/i18n-boot.js"></script>
+    <script src="../js/i18n.js" defer></script>
+</head>
+<body>
+    <div class="main">
+        <header class="header-type1">
+            <a class="btn-mypage" id="closeBtn" href="#none"><img src="../images/ico_close_black.svg"></a>
+            <div class="title">Notice Registration</div>
+            <div></div>
+        </header>
+        <div>
+            <div class="px20 pb20 mt28">
+               
+                <label class="label-input mb6 mt16" for="txt1">Title<span class="text fz14 fw500 reded lh22 ml3">*</span></label>
+                <input class="input-type1" id="txt1" type="text" placeholder="Please enter a title" value="">
+                <textarea class="textarea-type1 mt16" id="content" name="" cols="30" rows="10" placeholder="Please enter your content"></textarea>
+
+                <div class="mt105"><button class="btn primary lg" type="button" id="registerBtn">Register</button></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let isEditMode = false;
+        let currentAnnouncementId = null;
+        let currentBookingId = '';
+        let currentLang = '';
+        
+        document.addEventListener("DOMContentLoaded", async function () {
+            const ok = await ensureGuideSession();
+            if (!ok) return;
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            currentBookingId = urlParams.get('booking_id') || urlParams.get('bookingId') || '';
+            currentLang = urlParams.get('lang') || '';
+
+            const closeBtn = document.getElementById('closeBtn');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    history.back();
+                });
+            }
+            
+            if (id) {
+                isEditMode = true;
+                currentAnnouncementId = parseInt(id);
+                await loadNoticeDetail(id);
+            }
+            
+            initEvents();
+        });
+
+        async function ensureGuideSession() {
+            try {
+                const r = await fetch('../backend/api/check-session.php', { credentials: 'same-origin' });
+                const j = await r.json();
+                if (!j || !j.success || !j.isLoggedIn) {
+                    window.location.href = 'login.html';
+                    return false;
+                }
+                const accountType = (j?.user?.accountType || j?.user?.account_type || '').toLowerCase();
+                if (accountType !== 'guide') {
+                    alert('Only guide accounts can access this page.');
+                    window.location.href = '../home.html';
+                    return false;
+                }
+                return true;
+            } catch (e) {
+                console.error('Session check error:', e);
+                window.location.href = 'login.html';
+                return false;
+            }
+        }
+        
+        async function loadNoticeDetail(announcementId) {
+            try {
+                const qs = currentBookingId ? `&bookingId=${encodeURIComponent(currentBookingId)}` : '';
+                const response = await fetch(`../backend/api/guide-notices.php?action=getGuideNotices${qs}`, {
+                    credentials: 'same-origin'
+                });
+
+                if (response.status === 401) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+                
+                if (!response.ok) {
+                    throw new Error('HTTP ' + response.status);
+                }
+                
+                const result = await response.json();
+                
+                if (result.success && result.data && result.data.notices) {
+                    const notice = result.data.notices.find(n => n.announcementId === parseInt(announcementId));
+                    
+                    if (notice) {
+                        const titleEl = document.getElementById('txt1');
+                        const contentEl = document.getElementById('content');
+                        if (titleEl) titleEl.value = notice.title || '';
+                        if (contentEl) contentEl.value = notice.content || '';
+                    } else {
+                        alert('Unable to find the notice.');
+                        window.location.replace(currentBookingId ? `notice-info.html?booking_id=${encodeURIComponent(currentBookingId)}` : 'notice-info.html');
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading notice detail:', error);
+                alert('An error occurred while loading the notice.');
+                window.location.replace(currentBookingId ? `notice-info.html?booking_id=${encodeURIComponent(currentBookingId)}` : 'notice-info.html');
+            }
+        }
+        
+        function initEvents() {
+            const title = document.getElementById('txt1');
+            const content = document.getElementById('content');
+            const registerBtn = document.getElementById('registerBtn');
+            
+            if (registerBtn) {
+                registerBtn.addEventListener('click', handleRegister);
+            }
+
+            // 요구사항: 제목/내용 입력 시에만 Register 버튼 활성화
+            const toggleRegisterButton = () => {
+                const t = (title?.value || '').trim();
+                const c = (content?.value || '').trim();
+                const ok = Boolean(t && c);
+                if (!registerBtn) return;
+                registerBtn.disabled = !ok;
+                // 기존 UI 패턴(inactive + pointer-events none) 보조 적용
+                try { registerBtn.classList.toggle('inactive', !ok); } catch (_) {}
+                try { registerBtn.style.pointerEvents = ok ? 'auto' : 'none'; } catch (_) {}
+            };
+
+            if (title) title.addEventListener('input', toggleRegisterButton);
+            if (content) content.addEventListener('input', toggleRegisterButton);
+
+            // 초기 1회 반영(편집 모드에서 loadNoticeDetail로 값이 채워진 뒤에도 다시 호출됨)
+            toggleRegisterButton();
+        }
+        
+        async function handleRegister() {
+            const title = (document.getElementById('txt1')?.value || '').trim();
+            const content = (document.getElementById('content')?.value || '').trim();
+            
+            if (!title || !content) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            let bookingId = urlParams.get('booking_id') || urlParams.get('bookingId') || currentBookingId || '';
+            // Checklist: always bind notices to today's itinerary (ignore other bookings)
+            try {
+                const r = await fetch(`../backend/api/guide-notices.php?action=getGuideNotices&todayOnly=1`, { credentials: 'same-origin' });
+                const j = r.ok ? await r.json() : null;
+                const resolved = j?.data?.resolvedBookingId || '';
+                if (resolved) bookingId = resolved;
+            } catch (_) {}
+            if (!bookingId) {
+                alert('There is no schedule planned for today.');
+                return;
+            }
+            
+            try {
+                const action = isEditMode ? 'updateGuideNotice' : 'createGuideNotice';
+                const body = {
+                    action: action,
+                    bookingId: bookingId || undefined,
+                    title: title,
+                    content: content
+                };
+                
+                if (isEditMode && currentAnnouncementId) {
+                    body.announcementId = currentAnnouncementId;
+                }
+                
+                const response = await fetch('../backend/api/guide-notices.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify(body)
+                });
+                
+                if (!response.ok) {
+                    throw new Error('HTTP ' + response.status);
+                }
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert(isEditMode ? 'Notice updated.' : 'Notice created.');
+                    // 등록/수정 완료 플래그 설정 (notice-info에서 데이터 새로고침용)
+                    sessionStorage.setItem('noticeRegistered', '1');
+                    // history.back()을 사용하여 히스토리 스택 중복 방지
+                    history.back();
+                } else {
+                    alert(result.message || (isEditMode ? 'Failed to update.' : 'Failed to create.'));
+                }
+            } catch (error) {
+                console.error('Error registering notice:', error);
+                alert('An error occurred while ' + (isEditMode ? 'updating' : 'creating') + '.');
+            }
+        }
+    </script>
+
+    <div class="layer"></div>
+    <div class="profile-modal">
+        <div class="header align both vm">
+            <div class="text fz16 fw600 lh24 white">Certified Guide</div>
+            <button class="btn-close-modal" type="button"><img src="../images/ico_close_white.svg" alt=""></button>
+        </div>
+        <div>
+            <img class="img-profile" src="../images/@img_profile.png" alt="">
+        </div>
+        <div class="form-wrap">
+            <div class="input-wrap">
+                <img src="../images/ico_mem_red.svg" alt="">
+                <input type="text" value="Hyunwoo Park">
+            </div>
+            <div class="input-wrap">
+                <img src="../images/ico_tel_red.svg" alt="">
+                <input type="tel" value="+82 1012345678">
+            </div>
+            <div class="about">
+                <img src="../images/ico_docu_red.svg" alt="">
+                <div class="text fz14 fw500 lh22 black12 ml8" >About Me</div>
+            </div>
+            <p class="text fz13 fw400 lh19 black4e">
+                I am a certified guide with years of experience. I provide tours tailored to each traveler’s style.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

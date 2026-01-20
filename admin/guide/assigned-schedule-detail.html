@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN</title>
+
+	<!-- Common styles -->
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+</head>
+
+<body>
+
+	<!-- Header slot -->
+	<header class="layout-header"></header>
+
+	<!-- Main content -->
+	<main class="layout-main">
+		<!-- Nav slot -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content">
+		
+			<div class="page-toolbar">
+				<a href="full-list.html" class="jw-button" aria-label="Return to list">
+					<img src="../image/arrow4.svg" alt="">
+					<span data-lan-eng="Return to list">Return to list</span>
+				</a>
+			</div>
+
+			<h1 class="page-title" data-lan-eng="Detailed Itinerary">Detailed Itinerary</h1>
+
+			<div class="tab-wrap jw-mgt32">
+				<p>Product and Reservation Information</p>
+				<a href="../common/reservation-location.html" target="_blank" id="meetingLocationLink"><span data-lan-eng="Meeting location">Meeting location</span><img src="../image/linkout.svg" alt=""></a>
+				<a href="../common/reservation-notices.html" target="_blank" id="announcementsLink"><span data-lan-eng="Announcements">Announcements</span><img src="../image/linkout.svg" alt=""></a>
+			</div>
+
+				<h2 class="section-title jw-mgt32" data-lan-eng="Product Information">Product Information</h2>
+				<div class="card-panel jw-mgt16">
+					<div class="grid-wrap">
+						<!-- Row 1: Product name (full width) -->
+						<div class="grid-item col-span-3">
+							<label class="label-name" data-lan-eng="Product Name">Product Name</label>
+							<input type="text" class="form-control" id="packageName" disabled>
+						</div>
+
+						<!-- Row 2: Period / time / location -->
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Travel Period">Travel period</label>
+							<input type="text" class="form-control" id="travelPeriod" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Meeting Time">Meeting time</label>
+							<input type="text" class="form-control" id="meetingTime" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Meeting Location">Meeting place</label>
+							<input type="text" class="form-control" id="meetingLocation" placeholder="Incheon International Airport Terminal 2" disabled>
+						</div>
+					</div>
+				</div>
+
+				<h2 class="section-title jw-mgt32" data-lan-eng="Flight Information">Flight Information</h2>
+				<div class="card-panel jw-mgt16">
+					<h3 class="grid-wrap-title" data-lan-eng="Departure Flight">Departure flight</h3>
+					<div class="grid-wrap jw-mgt16">
+						<!-- Row 1 -->
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Flight Number">Flight number</label>
+							<input type="text" class="form-control" id="departureFlightNumber" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Departure Date/Time">Departure date and time</label>
+							<input type="text" class="form-control" id="departureDateTime" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Arrival Date/Time">Arrival time</label>
+							<input type="text" class="form-control" id="departureArrivalDateTime" disabled>
+						</div>
+
+						<!-- Row 2 -->
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Departure Point">Departure point</label>
+							<input type="text" class="form-control" id="departurePoint" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Destination">Destination</label>
+							<input type="text" class="form-control" id="departureDestination" disabled>
+						</div>
+						<div class="grid-item"></div>
+					</div>
+				</div>
+				<div class="card-panel jw-mgt16">
+					<h3 class="grid-wrap-title" data-lan-eng="Return Flight">Return trip</h3>
+					<div class="grid-wrap jw-mgt16">
+						<!-- Row 1 -->
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Flight Number">Flight number</label>
+							<input type="text" class="form-control" id="returnFlightNumber" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Departure Date/Time">Departure date and time</label>
+							<input type="text" class="form-control" id="returnDepartureDateTime" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Arrival Date/Time">Arrival time</label>
+							<input type="text" class="form-control" id="returnArrivalDateTime" disabled>
+						</div>
+
+						<!-- Row 2 -->
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Departure Point">Departure point</label>
+							<input type="text" class="form-control" id="returnDeparturePoint" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Destination">Destination</label>
+							<input type="text" class="form-control" id="returnDestination" disabled>
+						</div>
+						<div class="grid-item"></div>
+					</div>
+				</div>
+
+				<h2 class="section-title jw-mgt32" data-lan-eng="Reservation Information">Reservation Information</h2>
+				<div class="card-panel jw-mgt16">
+					<div class="grid-wrap">
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Number of People">Number of people for reservation</label>
+							<input type="text" class="form-control" id="reservationPeople" disabled>
+						</div>
+						<div class="grid-item">
+							<label class="label-name" data-lan-eng="Room Option">Room options</label>
+							<input type="text" class="form-control" id="roomOption" disabled>
+						</div>
+					</div>
+				</div>
+
+				<h2 class="section-title jw-mgt32" data-lan-eng="Travel Customer Information">Travel Customer Information</h2>
+				<div class="card-panel jw-mgt16">
+					<table class="jw-tableA">
+						<colgroup>
+							<col class="col-60"> <!-- No -->
+							<col><!-- Name -->
+							<col><!-- Last Name -->
+							<col><!-- Passport number -->
+							<col><!-- People option -->
+						</colgroup>
+
+						<thead>
+							<tr>
+								<th class="is-center">No</th>
+								<th data-lan-eng="Name">Name</th>
+								<th data-lan-eng="Last Name">Last Name</th>
+								<th data-lan-eng="Passport number">Passport number</th>
+								<th data-lan-eng="Age options">Age options</th>
+							</tr>
+						</thead>
+
+						<tbody id="travelersTableBody">
+							<tr>
+								<td colspan="5" class="is-center">Loading...</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<div class="jw-pagebox" role="navigation" aria-label="Pagination" id="travelersPagination">
+						<div class="contents">
+							<button type="button" class="first" aria-label="First page" aria-disabled="true" id="travelersFirstPage">
+								<img src="../image/first.svg" alt="">
+							</button>
+							<button type="button" class="prev" aria-label="Previous page" aria-disabled="true" id="travelersPrevPage">
+								<img src="../image/prev.svg" alt="">
+							</button>
+
+							<div class="page" role="list" id="travelersPageNumbers">
+								<!-- Page numbers are generated by JavaScript -->
+							</div>
+
+							<button type="button" class="next" aria-label="Next page" aria-disabled="true" id="travelersNextPage">
+								<img src="../image/next.svg" alt="">
+							</button>
+							<button type="button" class="last" aria-label="Last page" aria-disabled="true" id="travelersLastPage">
+								<img src="../image/last.svg" alt="">
+							</button>
+						</div>
+					</div>
+				</div>
+
+		</section>
+
+	</main>
+
+	<!-- Base scripts -->
+	<script src="../js/default.js"></script>
+	<script src="../js/guide.js"></script>
+
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_guide.html'
+		});
+
+		let bookingId = null;
+		let currentBookingData = null;
+		let travelersCurrentPage = 1;
+		const travelersLimit = 10;
+
+		document.addEventListener('DOMContentLoaded', async () => {
+			try {
+				const __testGuide = new URLSearchParams(window.location.search).get('test_guide');
+				const __qs = __testGuide ? `?test_guide=${encodeURIComponent(__testGuide)}` : '';
+				const sessionResponse = await fetch('../backend/api/check-session.php' + __qs, {
+					credentials: 'same-origin'
+				});
+				const sessionData = await sessionResponse.json();
+				
+				if (!sessionData.authenticated || (sessionData.userType && sessionData.userType !== 'guide')) {
+					window.location.href = '../index.html';
+					return;
+				}
+				
+				const urlParams = new URLSearchParams(window.location.search);
+				bookingId = urlParams.get('id') || urlParams.get('bookingId');
+				
+				if (bookingId) {
+					await loadBookingDetail();
+				}
+			} catch (error) {
+				console.error('Session check error:', error);
+				window.location.href = '../index.html';
+				return;
+			}
+		});
+
+		function formatDateTime(raw) {
+			if (!raw) return '';
+			const s = String(raw);
+			// common formats: "YYYY-MM-DD HH:mm:ss" or ISO
+			if (s.includes('T')) return s.replace('T', ' ').slice(0, 16);
+			return s.slice(0, 16);
+		}
+
+		async function loadBookingDetail() {
+			try {
+				const __testGuide = new URLSearchParams(window.location.search).get('test_guide');
+				const __tq = __testGuide ? `&test_guide=${encodeURIComponent(__testGuide)}` : '';
+				const response = await fetch(`../backend/api/guide-api.php?action=getAssignedBookingDetail&id=${bookingId}${__tq}`, {
+					credentials: 'same-origin'
+				});
+
+				if (!response.ok) throw new Error('HTTP ' + response.status);
+
+				const result = await response.json();
+
+				if (result.success && result.data && result.data.booking) {
+					currentBookingData = result.data.booking;
+					const booking = result.data.booking;
+
+					// Admin common pages (meeting location / announcements)
+					try {
+						const loc = document.getElementById('meetingLocationLink');
+						const noti = document.getElementById('announcementsLink');
+						if (loc) loc.href = `../common/reservation-location.html?bookingId=${encodeURIComponent(bookingId)}`;
+						if (noti) noti.href = `../common/reservation-notices.html?bookingId=${encodeURIComponent(bookingId)}`;
+					} catch (_) {}
+					
+					// Product info
+					document.getElementById('packageName').value = booking.packageName || '';
+					
+					// Travel period
+					if (booking.travelStartDate && booking.travelEndDate) {
+						document.getElementById('travelPeriod').value = `${booking.travelStartDate} - ${booking.travelEndDate}`;
+					} else if (booking.travelStartDate) {
+						document.getElementById('travelPeriod').value = booking.travelStartDate;
+					}
+					
+					// Meeting time and location
+					const meetingTime = booking.meetingTime || booking.departureTime || booking.travelStartDate;
+					document.getElementById('meetingTime').value = formatDateTime(meetingTime);
+					document.getElementById('meetingLocation').value = booking.meetingLocation || booking.meetingPoint || '';
+					
+					// Flight info
+					const flights = booking.flights || {};
+					const departureFlight = flights['departure'] || flights['outbound'] || {};
+					const returnFlight = flights['return'] || {};
+					
+					// Departure flight
+					document.getElementById('departureFlightNumber').value = departureFlight.flight_number || '';
+					document.getElementById('departureDateTime').value = formatDateTime(departureFlight.departure_time);
+					document.getElementById('departureArrivalDateTime').value = formatDateTime(departureFlight.arrival_time);
+					document.getElementById('departurePoint').value = departureFlight.departure_point || '';
+					document.getElementById('departureDestination').value = departureFlight.destination || '';
+					
+					// Return flight
+					document.getElementById('returnFlightNumber').value = returnFlight.flight_number || '';
+					document.getElementById('returnDepartureDateTime').value = formatDateTime(returnFlight.departure_time);
+					document.getElementById('returnArrivalDateTime').value = formatDateTime(returnFlight.arrival_time);
+					document.getElementById('returnDeparturePoint').value = returnFlight.departure_point || '';
+					document.getElementById('returnDestination').value = returnFlight.destination || '';
+					
+					// Reservation info - 상품 인원 옵션명 사용
+					const reservationPeople = booking.reservationPeople || {};
+					const peopleOptions = booking.peopleOptions || [];
+					
+					// peopleOptions가 있으면 사용, 없으면 기본값 사용
+					const getOptionName = (type) => {
+						const t = type.toLowerCase();
+						if (peopleOptions.length > 0) {
+							const needle = t === 'adult' ? 'adult' : (t === 'child' ? 'child' : 'infant');
+							for (const opt of peopleOptions) {
+								if (opt && opt.toLowerCase().includes(needle)) {
+									return opt;
+								}
+							}
+							// 매칭 실패 시 순서 기반
+							if (t === 'adult') return peopleOptions[0] || 'Adult';
+							if (t === 'child') return peopleOptions[1] || (peopleOptions[0] || 'Child');
+							if (t === 'infant') return peopleOptions[2] || (peopleOptions[0] || 'Infant');
+						}
+						// 기본값
+						return t === 'adult' ? 'Adult' : (t === 'child' ? 'Child' : 'Infant');
+					};
+					
+					const peopleText = [];
+					if (reservationPeople.adults > 0) {
+						const optionName = getOptionName('adult');
+						peopleText.push(`${optionName} x${reservationPeople.adults}`);
+					}
+					if (reservationPeople.children > 0) {
+						const optionName = getOptionName('child');
+						peopleText.push(`${optionName} x${reservationPeople.children}`);
+					}
+					if (reservationPeople.infants > 0) {
+						const optionName = getOptionName('infant');
+						peopleText.push(`${optionName} x${reservationPeople.infants}`);
+					}
+					document.getElementById('reservationPeople').value = peopleText.join(', ') || '-';
+					
+					const rooms = booking.rooms || [];
+					const roomText = rooms.map(room => `${room.roomType || ''}x${room.roomCount || 1}`).join(', ');
+					document.getElementById('roomOption').value = roomText || '-';
+					
+					// Travelers
+					renderTravelers(booking.travelers || []);
+				}
+			} catch (error) {
+				console.error('Error loading booking detail:', error);
+			}
+		}
+
+		function renderTravelers(travelers, page = 1) {
+			const tbody = document.getElementById('travelersTableBody');
+			if (!tbody) return;
+			
+			if (!travelers || travelers.length === 0) {
+				tbody.innerHTML = '<tr><td colspan="5" class="is-center">No travelers.</td></tr>';
+				return;
+			}
+			
+			// Pagination
+			const totalPages = Math.ceil(travelers.length / travelersLimit);
+			const startIndex = (page - 1) * travelersLimit;
+			const endIndex = startIndex + travelersLimit;
+			const pageTravelers = travelers.slice(startIndex, endIndex);
+			
+			tbody.innerHTML = pageTravelers.map((traveler, index) => {
+				const rowNumber = startIndex + index + 1;
+				// peopleOption이 없으면 travelerType 기반으로 표시
+				let ageOption = traveler.peopleOption || '';
+				if (!ageOption && traveler.travelerType) {
+					const t = String(traveler.travelerType).toLowerCase();
+					ageOption = t === 'adult' ? 'Adult' : (t === 'child' ? 'Child' : (t === 'infant' ? 'Infant' : ''));
+				}
+				return `
+					<tr>
+						<td class="is-center">${rowNumber}</td>
+						<td class="is-center">${escapeHtml(traveler.firstName || '')}</td>
+						<td class="is-center">${escapeHtml(traveler.lastName || '')}</td>
+						<td class="is-center">${escapeHtml(traveler.passportNumber || '')}</td>
+						<td class="is-center">${escapeHtml(ageOption || '-')}</td>
+					</tr>
+				`;
+			}).join('');
+			
+			// Update pagination
+			updateTravelersPagination(page, totalPages);
+		}
+
+		function updateTravelersPagination(currentPage, totalPages) {
+			// Build page numbers
+			const pageNumbersEl = document.getElementById('travelersPageNumbers');
+			if (pageNumbersEl) {
+				pageNumbersEl.innerHTML = '';
+				
+				const maxVisiblePages = 5;
+				let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+				let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+				
+				if (endPage - startPage < maxVisiblePages - 1) {
+					startPage = Math.max(1, endPage - maxVisiblePages + 1);
+				}
+				
+				for (let i = startPage; i <= endPage; i++) {
+					const button = document.createElement('button');
+					button.type = 'button';
+					button.className = 'p' + (i === currentPage ? ' show' : '');
+					button.setAttribute('role', 'listitem');
+					if (i === currentPage) {
+						button.setAttribute('aria-current', 'page');
+					}
+					button.textContent = i;
+					button.onclick = () => {
+						travelersCurrentPage = i;
+						if (currentBookingData && currentBookingData.travelers) {
+							renderTravelers(currentBookingData.travelers, i);
+						}
+					};
+					pageNumbersEl.appendChild(button);
+				}
+			}
+			
+			// First page button
+			const firstPageBtn = document.getElementById('travelersFirstPage');
+			if (firstPageBtn) {
+				firstPageBtn.disabled = currentPage === 1;
+				firstPageBtn.setAttribute('aria-disabled', currentPage === 1);
+				firstPageBtn.onclick = currentPage === 1 ? null : () => {
+					travelersCurrentPage = 1;
+					if (currentBookingData && currentBookingData.travelers) {
+						renderTravelers(currentBookingData.travelers, 1);
+					}
+				};
+			}
+			
+			// Previous page button
+			const prevPageBtn = document.getElementById('travelersPrevPage');
+			if (prevPageBtn) {
+				prevPageBtn.disabled = currentPage === 1;
+				prevPageBtn.setAttribute('aria-disabled', currentPage === 1);
+				prevPageBtn.onclick = currentPage === 1 ? null : () => {
+					travelersCurrentPage = currentPage - 1;
+					if (currentBookingData && currentBookingData.travelers) {
+						renderTravelers(currentBookingData.travelers, travelersCurrentPage);
+					}
+				};
+			}
+			
+			// Next page button
+			const nextPageBtn = document.getElementById('travelersNextPage');
+			if (nextPageBtn) {
+				nextPageBtn.disabled = currentPage >= totalPages;
+				nextPageBtn.setAttribute('aria-disabled', currentPage >= totalPages);
+				nextPageBtn.onclick = currentPage >= totalPages ? null : () => {
+					travelersCurrentPage = currentPage + 1;
+					if (currentBookingData && currentBookingData.travelers) {
+						renderTravelers(currentBookingData.travelers, travelersCurrentPage);
+					}
+				};
+			}
+			
+			// Last page button
+			const lastPageBtn = document.getElementById('travelersLastPage');
+			if (lastPageBtn) {
+				lastPageBtn.disabled = currentPage >= totalPages;
+				lastPageBtn.setAttribute('aria-disabled', currentPage >= totalPages);
+				lastPageBtn.onclick = currentPage >= totalPages ? null : () => {
+					travelersCurrentPage = totalPages;
+					if (currentBookingData && currentBookingData.travelers) {
+						renderTravelers(currentBookingData.travelers, totalPages);
+					}
+				};
+			}
+		}
+
+		function escapeHtml(text) {
+			const div = document.createElement('div');
+			div.textContent = text;
+			return div.innerHTML;
+		}
+	</script>
+</body>
+
+</html>

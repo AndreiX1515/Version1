@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel | Home</title>
+    <link rel="stylesheet" href="css/main.css">
+    <!-- slider -->
+    <link rel="stylesheet" type="text/css" href="js/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="js/slick/slick-theme.css"/>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js" defer></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js" defer></script>
+    <script type="text/javascript" src="js/slick/slick.min.js" defer></script>
+    <script src="js/slider.js" defer></script>
+
+    <script src="js/button.js" defer></script>
+    <script src="js/api.js?v=20260104_b2b" defer></script>
+    <script src="js/auth-guard.js" defer></script>
+    <link rel="stylesheet" href="/css/i18n-boot.css">
+    <script src="/js/i18n-boot.js"></script>
+    <script src="js/i18n.js" defer></script>
+    <script src="js/home.js?v=20260104_b2b" defer></script>
+</head>
+<body>
+    <div class="main">
+        <header class="header-type1">
+            <a class="btn-mypage" id="mypageLink" href="user/mypage.html"><img src="images/ico_mypage.svg"></a>
+            <div class="title"><img class="img-logo" src="images/logo_txt.svg"></div>
+            <a class="btn-bell" id="bellLink" href="user/alarm.html">
+                <img src="images/ico_bell.svg">
+                <i class="num" style="display:none;">0</i>
+            </a>
+        </header>
+       <div class="slider-wrap type1">
+           <div class="slider mt30 px20" id="homeBannerSlider" data-dynamic="1">
+                <!--  (banners)   -->
+           </div>
+            <div class="slick-counter"></div>
+       </div>
+       <!-- case2     -->
+       <div class="board-type1 px20 mt32" id="todaysTripSection" style="display: none;">
+            <div class="text fz20 fw500 lh26 black12" data-i18n="todaysTrip">Today’s Trip</div>
+            <div class="card-type2 mt16">
+                <!--        -->
+            </div>
+       </div>
+       <!-- case3  3     -->
+       <div class="board-type1 px20 mt32" id="upcomingTripSection" style="display: none;">
+            <div class="text fz20 fw500 lh26 black12" data-i18n="upcomingTrip">Upcoming Trip</div>
+            <div class="card-type2 mt16">
+                <!--        -->
+            </div>
+       </div>
+       <!--   :   () -->
+       <div id="homeCategorySections"></div>
+       <div class="px20  mt50 mb88">
+            <div class="py16">
+                <div class="text fz16 fw500 lh26 black12" data-i18n="aboutUs">About us</div>
+            </div>
+            <div class="align gap16">
+                <a class="card-type3 w100" href="user/company-intro.html" id="companyIntroLink">
+                    <div>
+                        <div class="text fz14 fw600 lh22 black12" data-i18n="companyIntroduction">Company Introduction</div>
+                        <p class="text fz12 fw600 lh22 gray6b" data-i18n="brandPhilosophy">Brand and Philosophy</p>
+                    </div>
+                    <div class="align right">
+                        <img class="ico" src="images/ico_company.svg" alt="">
+                    </div>
+                </a>
+                
+                <a class="card-type3 w100" href="user/partnership-information.php" id="partnershipLink">
+                    <div>
+                        <div class="text fz14 fw600 lh22 black12" data-i18n="partnershipInformation">Partnership Information</div>
+                        <p class="text fz12 fw600 lh22 gray6b" data-i18n="partnershipInfo">Partnership</p>
+                    </div>
+                    <div class="align right">
+                        <img class="ico" src="images/ico_partnership.svg" alt="">
+                    </div>
+                </a>
+            </div>
+       </div>
+    </div>
+    <footer class="footer">
+        <div class="border-bottomb0 pb10">
+            <a class="logo" href="#none"><img src="images/logo.svg" alt=""></a>
+        </div>
+        <ul class="footer__terms">
+            <li>
+                <a id="privacyPolicyLink" href="user/terms.php?category=privacy_collection" data-i18n="privacyPolicy">Privacy Policy</a>
+            </li>
+            <li>
+                <a id="termsOfUseLink" href="user/terms.php?category=terms" data-i18n="termsOfUse">Terms of Use</a>
+            </li>
+            <li>
+                <a id="footerPartnershipLink" href="user/partnership-information.php" data-i18n="partnershipInformation">Partnership Information</a>
+            </li>
+        </ul>
+        <button class="footer-fold-btn" type="button"><span id="footerCompanyNameBtn">()SMART TRAVEL</span> <img src="images/ico_arrow_down_gray2.svg" alt=""></button>
+        <div class="folding-bx" id="footer_cont">
+            <ul class="footer__info">
+                <li id="footerCeo">CEO</li>
+                <li id="footerAddress">Address</li>
+                <li id="footerBusinessReg">Business Registration Number</li>
+                <li id="footerTelecomReg">Mail-Order Business Registration Number</li>
+                <li>&nbsp;</li>
+            </ul>
+            <ul class="footer__info">
+                <li><p id="footerCsDomestic">CS Domestic:</p></li>
+                <li><p id="footerCsInternational">&nbsp;&nbsp;&nbsp;&nbsp;International:</p></li>
+                <li>
+                    <p id="footerEmailDomestic">E-mail:</p>
+                    <p id="footerEmailInternational">&nbsp;&nbsp;&nbsp;&nbsp;International:</p>
+                </li>
+                <li id="footerFax">FAX</li>
+                <li>&nbsp;</li>
+            </ul>
+            <ul class="footer__info" style="border: 0;">
+                <li id="footerEtc1"></li>
+                <li id="footerEtc2"></li>
+                <li id="footerEtc3"></li>
+            </ul>
+        </div>
+        <p class="copyright">COPYRIGHT ⓒ SMART TRAVEL ALL RIGHTS RESERVED.</p>
+    </footer>
+    <div class="permit">
+        <div>
+            <div class="text fz18 fw500 lh26 black12" data-i18n="serviceRequiresPermission">This service requires permission to proceed</div>
+            <div class="card mt20">
+                <img class="ico" src="images/ico_location2.svg" alt="">
+                <div>
+                    <div class="text fz14 fw600 lh22 black12" data-i18n="locationOptional">Location (Optional)</div>
+                    <p class="text fz14 fw400 lh22 gray6b" data-i18n="locationDesc">Used for providing nearby information and services</p>
+                </div>
+            </div>
+            <div class="card mt12">
+                <img class="ico" src="images/ico_bell2.svg" alt="">
+                <div>
+                    <div class="text fz14 fw600 lh22 black12" data-i18n="notificationOptional">Notification (Optional)</div>
+                    <p class="text fz14 fw400 lh22 gray6b" data-i18n="notificationDesc">Push notification alerts</p>
+                </div>
+            </div>
+        </div> 
+        <button class="btn primary lg mt28" type="button" data-i18n="confirm">Confirm</button>
+
+
+    </div>
+</body>
+</html>

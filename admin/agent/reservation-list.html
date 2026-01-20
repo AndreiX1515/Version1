@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN</title>
+
+	<!-- 공통 스타일 -->
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+
+	<!-- 날짜 범위 선택용 라이브러리 -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+	<style>
+		/* 정렬 가능 컬럼 스타일 */
+		th.sortable {
+			user-select: none;
+		}
+		th.sortable:hover {
+			background-color: #f5f5f5;
+		}
+		th.sortable .th-content {
+			display: inline-flex;
+			align-items: center;
+			gap: 4px;
+		}
+		th.sortable .sort-icon {
+			display: inline-block;
+			width: 16px;
+			height: 16px;
+			vertical-align: middle;
+		}
+		th.sortable .sort-icon::after {
+			content: '⇅';
+			font-size: 12px;
+			color: #999;
+		}
+		th.sortable.sort-asc .sort-icon::after {
+			content: '▲';
+			color: #333;
+		}
+		th.sortable.sort-desc .sort-icon::after {
+			content: '▼';
+			color: #333;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- header 들어올 자리 -->
+	<header class="layout-header"></header>
+
+	<!-- 본문 영역 -->
+	<main class="layout-main">
+		<!-- nav 들어올 자리 -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content">
+			<h1 class="page-title" data-lan-eng="Reservation List">예약 목록</h1>
+
+			<div class="card-panel jw-mgt32">
+
+
+				<div class="list-header">
+					<div class="result-count">
+						<span data-lan-eng="Search results">검색결과</span> <span class="result-count__num">999</span><span data-lan-eng="items">개</span>
+					</div>
+					<form class="search-form" action="" method="get">
+						<div class="grid-item">
+							<!-- 퍼블리싱 원본: travelStartDate - 단일 날짜 선택, 달력 아이콘 내부 -->
+							<input id="travelStartDate" type="text" placeholder="Travel start date" readonly data-lan-eng-placeholder="Travel start date" style="width:260px; height:46px; border:1px solid #D4D4D4; border-radius:12px; padding:0 40px 0 16px; background:#fff url('../image/calendar.svg') no-repeat right 12px center; background-size:24px 24px; font-size:16px; color:#121212; cursor:pointer;">
+						</div>
+						
+						<!-- 퍼블리싱 원본: Overall status 셀렉트 1개 -->
+						<select class="select" name="reservationStatus" id="reservationStatus">
+							<option value="" data-lan-eng="Overall status">Overall status</option>
+							<option value="waiting_down_payment" data-lan-eng="Waiting for Down Payment">Down Payment 대기</option>
+							<option value="checking_down_payment" data-lan-eng="Checking Down Payment">Down Payment 확인중</option>
+							<option value="waiting_second_payment" data-lan-eng="Waiting for Second Payment">Second Payment 대기</option>
+							<option value="checking_second_payment" data-lan-eng="Checking Second Payment">Second Payment 확인중</option>
+							<option value="waiting_balance" data-lan-eng="Waiting for Balance">Balance 대기</option>
+							<option value="checking_balance" data-lan-eng="Checking Balance">Balance 확인중</option>
+							<option value="rejected" data-lan-eng="Payment Rejected">증빙 거절</option>
+							<option value="confirmed" data-lan-eng="Reservation Confirmed">예약 확정</option>
+							<option value="completed" data-lan-eng="Trip Completed">여행 완료</option>
+							<option value="cancelled" data-lan-eng="Reservation Cancelled">예약 취소</option>
+							<option value="refunded" data-lan-eng="Refund Completed">환불 완료</option>
+						</select>
+
+						<div class="search-field">
+							<!-- 퍼블리싱 원본: 검색 타입 셀렉트 + 입력 -->
+							<select class="select" name="searchType" id="searchType">
+								<option value="" data-lan-eng="All">All</option>
+								<option value="product" data-lan-eng="Product Name">Product Name</option>
+								<option value="customer" data-lan-eng="Reservation Name">Reservation Name</option>
+							</select>
+							<input type="text" class="search-input" name="search" placeholder=" search" data-lan-eng="Search">
+							<button type="submit" class="jw-button search-btn" aria-label="검색">
+								<span class="search-ico"><img src="../image/search.svg" alt=""></span>
+							</button>
+						</div>
+					</form>
+				</div>
+
+				
+				<table class="jw-tableA">
+					<colgroup>
+						<col class="col-60"> <!-- No -->
+						<col> <!-- 상품명 (auto) -->
+						<col> <!-- 여행 시작일 -->
+						<col> <!-- 예약자명 -->
+						<col> <!-- 예약 인원 -->
+						<col> <!-- 상태 -->
+					</colgroup>
+					<thead>
+						<tr>
+							<th class="no is-center">No</th>
+							<th data-lan-eng="Product Name">상품명</th>
+							<th data-lan-eng="Travel start date" class="sortable" id="th-travel-start-date" onclick="toggleTravelDateSort()" style="cursor:pointer;">
+								<span class="th-content">
+									<span class="th-text">여행 시작일</span>
+									<span class="sort-icon" id="sort-icon-travel-date"></span>
+								</span>
+							</th>
+							<th data-lan-eng="Reserver's name">예약자명</th>
+							<th data-lan-eng="Number of people for reservation">예약 인원</th>
+							<th data-lan-eng="Status">상태</th>
+						</tr>
+					</thead>
+					<tbody id="reservations-tbody">
+						<!-- 데이터는 JavaScript에서 동적으로 로드됩니다 -->
+						<tr>
+							<td colspan="6" class="is-center">로딩 중...</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="jw-pagebox" role="navigation" aria-label="페이지네이션">
+					<div class="contents">
+						<button type="button" class="first" aria-label="첫 페이지" aria-disabled="false">
+							<img src="../image/first.svg" alt="">
+						</button>
+						<button type="button" class="prev" aria-label="이전 페이지" aria-disabled="false">
+							<img src="../image/prev.svg" alt="">
+						</button>
+
+						<div class="page" role="list">
+							<button type="button" class="p" role="listitem">1</button>
+							<button type="button" class="p" role="listitem">2</button>
+							<button type="button" class="p show" role="listitem" aria-current="page">3</button>
+							<button type="button" class="p" role="listitem">4</button>
+							<button type="button" class="p" role="listitem">5</button>
+						</div>
+
+						<button type="button" class="next" aria-label="다음 페이지" aria-disabled="false">
+							<img src="../image/next.svg" alt="">
+						</button>
+						<button type="button" class="last" aria-label="마지막 페이지" aria-disabled="false">
+							<img src="../image/last.svg" alt="">
+						</button>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="controller">
+				<button type="button" class="jw-button typeA" onclick="downloadReservations()" data-lan-eng="Download">다운로드</button>
+				<button type="button" class="jw-button typeB" onclick="window.location.href='create-reservation.html'"><img src="../image/buttonB.svg" alt="">Create Booking</button>
+			</div>
+
+		</section>
+
+	</main>
+
+	<!-- 기본 스크립트 -->
+	<script src="../js/default.js"></script>
+	<script src="../js/agent.js"></script>
+	<script src="../js/datepicker.js"></script>
+	<script src="../js/agent-reservation-list.js"></script>
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_agent.html'
+		});
+	</script>
+</body>
+
+</html>

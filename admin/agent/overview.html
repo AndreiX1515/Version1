@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN</title>
+
+	<!--   -->
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+</head>
+
+<body>
+
+	<!-- header   -->
+	<header class="layout-header"></header>
+
+	<!--   -->
+	<main class="layout-main">
+		<!-- nav   -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content">
+			<time class="page-date" id="current-date" datetime=""></time>
+
+			<h1 class="page-title" data-lan-eng="Operating Status">Operating Status</h1>
+			
+						
+			<div class="overview-card-grid jw-mgt32">
+				<!--   -->
+				<article class="card">
+					<div>
+						<h2 class="card-title" data-lan-eng="Reservation Status">Reservation Status</h2>
+						<a href="reservation-list.html" class="card-link">See All →</a>
+					</div>
+					<div>
+						<ul class="status-list">
+							<li class="status-item">
+								<i class="dot" style="background:#8b5cf6;" aria-hidden="true"></i>
+								<span class="label" data-lan-eng="Pending">Pending</span>
+								<strong class="count" id="pendingCount">0</strong>
+							</li>
+							<li class="status-item">
+								<i class="dot dot-blue" aria-hidden="true"></i>
+								<span class="label" data-lan-eng="Waiting for Down Payment">Waiting for Down Payment</span>
+								<strong class="count" id="waitingDownCount">0</strong>
+							</li>
+							<li class="status-item">
+								<i class="dot dot-orange" aria-hidden="true"></i>
+								<span class="label" data-lan-eng="Waiting for Second Payment">Waiting for Second Payment</span>
+								<strong class="count" id="waitingSecondCount">0</strong>
+							</li>
+							<li class="status-item">
+								<i class="dot dot-purple" aria-hidden="true"></i>
+								<span class="label" data-lan-eng="Waiting for Balance">Waiting for Balance</span>
+								<strong class="count" id="waitingBalanceCount">0</strong>
+							</li>
+							<li class="status-item">
+								<i class="dot dot-red" aria-hidden="true"></i>
+								<span class="label" data-lan-eng="Payment Rejected">Payment Rejected</span>
+								<strong class="count" id="rejectedCount">0</strong>
+							</li>
+						</ul>
+					</div>
+				</article>
+
+				<!--   -->
+				<article class="card">
+					<div>
+						<h2 class="card-title" data-lan-eng="Inquiry Status">Inquiry Status</h2>
+						<a href="inquiry-list.html" class="card-link">See All →</a>
+					</div>
+					<div>
+						<ul class="status-list">
+							<li class="status-item">
+								<i class="dot dot-blue" aria-hidden="true"></i>
+								<span class="label" data-lan-eng="Unanswered">Unanswered</span>
+								<strong class="count" id="unansweredCount">0<span data-lan-eng="cases">cases</span></strong>
+							</li>
+							<li class="status-item">
+								<i class="dot dot-green" aria-hidden="true"></i>
+								<span class="label" data-lan-eng="Processing">Processing</span>
+								<strong class="count" id="processingCount">0<span data-lan-eng="cases">cases</span></strong>
+							</li>
+						</ul>
+					</div>
+				</article>
+			</div>
+
+			<!-- Best Price Packages -->
+			<div class="card-panel jw-mgt32">
+				<div style="margin-bottom: 16px;">
+					<h2 class="card-title" data-lan-eng="Best Price Packages">Best Price Packages</h2>
+					<p class="card-subtitle" style="color: #666; font-size: 13px;" data-lan-eng="Packages available at the lowest price">Packages available at the lowest price</p>
+				</div>
+
+				<div class="tableA-scroll">
+					<div class="jw-tableA typeB">
+						<table>
+							<colgroup>
+								<col style="width:50px;"><!-- No -->
+								<col><!-- Package Name -->
+								<col style="width:120px;"><!-- Best Date -->
+								<col style="width:100px;"><!-- Price -->
+								<col style="width:80px;"><!-- Capacity -->
+								<col style="width:80px;"><!-- Action -->
+							</colgroup>
+							<thead>
+								<tr>
+									<th>No</th>
+									<th data-lan-eng="Package Name">Package Name</th>
+									<th data-lan-eng="Best Date">Best Date</th>
+									<th data-lan-eng="Price">Price</th>
+									<th data-lan-eng="Seats">Seats</th>
+									<th data-lan-eng="Book">Book</th>
+								</tr>
+							</thead>
+							<tbody id="bestPricePackagesTableBody">
+								<tr>
+									<td colspan="6" class="is-center" data-lan-eng="Loading...">Loading...</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-panel jw-mgt68">
+				<h2 class="card-title" data-lan-eng="Today's Travel Itinerary">Today's Travel Itinerary</h2>
+				<p class="card-subtitle"><strong id="todayBookingsCount">0<span data-lan-eng="cases">cases</span></strong></p>
+
+				<div class="tableA-scroll">
+					<div class="jw-tableA typeB">
+						<table>
+							<colgroup>
+								<col style="width:60px;"><!-- No -->
+								<col><!--  -->
+								<col style="width:220px;"><!--   -->
+								<col style="width:120px;"><!--   -->
+								<col style="width:100px;"><!--   -->
+								<col style="width:140px;"><!--   -->
+							</colgroup>
+							<thead>
+								<tr>
+									<th>No</th>
+									<th data-lan-eng="Product Name">Product Name</th>
+									<th data-lan-eng="Travel period">Travel period</th>
+									<th data-lan-eng="Customer Type">Customer Type</th>
+									<th data-lan-eng="Number of people">Number of people</th>
+									<th data-lan-eng="Assignment Guide">Assignment Guide</th>
+								</tr>
+							</thead>
+							<tbody id="todayBookingsTableBody">
+								<!--  JavaScript   -->
+								<tr>
+									<td colspan="6" class="is-center" data-lan-eng="No travel itineraries for today.">No travel itineraries for today.</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+			</div>
+
+
+
+		</section>
+
+	</main>
+
+	<!--   -->
+	<!-- cache-bust: Change Password   / -->
+	<script src="../js/default.js?v=20251227_change_pw_1"></script>
+	<script src="../js/agent.js"></script>
+	<script src="../js/agent-overview.js"></script>
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_agent.html'
+		});
+
+		//     
+		document.addEventListener('DOMContentLoaded', async () => {
+			//  
+			try {
+				const sessionResponse = await fetch('../backend/api/check-session.php', {
+					credentials: 'same-origin'
+				});
+				const sessionData = await sessionResponse.json();
+				
+				// agent   (admin  agent   )
+				//  authenticated false 
+				if (!sessionData.authenticated) {
+					window.location.href = '../index.html';
+					return;
+				}
+				
+				// show agent id
+				waitForHeaderUserNameAndHydrate();
+
+				//
+				await loadOverviewData();
+				await loadBestPricePackages();
+				await loadTodayItineraries();
+			} catch (error) {
+				console.error('Session check error:', error);
+				window.location.href = '../index.html';
+				return;
+			}
+		});
+		
+		//    (agent-overview.js   )
+		async function loadOverviewData() {
+			try {
+				const response = await fetch('../backend/api/agent-api.php?action=getOverview', {
+					credentials: 'same-origin'
+				});
+				const result = await response.json();
+
+				if (result.success && result.data) {
+					const data = result.data;
+
+					// 예약 현황 - 새로운 상태값 적용
+					if (data.bookingStatus) {
+						const pendingCount = document.getElementById('pendingCount');
+						const waitingDownCount = document.getElementById('waitingDownCount');
+						const waitingSecondCount = document.getElementById('waitingSecondCount');
+						const waitingBalanceCount = document.getElementById('waitingBalanceCount');
+						const rejectedCount = document.getElementById('rejectedCount');
+
+						if (pendingCount) {
+							pendingCount.textContent = data.bookingStatus.pending || 0;
+						}
+						if (waitingDownCount) {
+							waitingDownCount.textContent = data.bookingStatus.waitingDown || 0;
+						}
+						if (waitingSecondCount) {
+							waitingSecondCount.textContent = data.bookingStatus.waitingSecond || 0;
+						}
+						if (waitingBalanceCount) {
+							waitingBalanceCount.textContent = data.bookingStatus.waitingBalance || 0;
+						}
+						if (rejectedCount) {
+							rejectedCount.textContent = data.bookingStatus.rejected || 0;
+						}
+					}
+
+					// 문의 현황
+					if (data.inquiryStatus) {
+						const unansweredCount = document.getElementById('unansweredCount');
+						const processingCount = document.getElementById('processingCount');
+						if (unansweredCount) {
+							const lang = getCookie('lang') || 'eng';
+							if (lang === 'eng') {
+								unansweredCount.textContent = data.inquiryStatus.unanswered || 0;
+							} else {
+								unansweredCount.innerHTML = (data.inquiryStatus.unanswered || 0) + '<span>건</span>';
+							}
+						}
+						if (processingCount) {
+							const lang = getCookie('lang') || 'eng';
+							if (lang === 'eng') {
+								processingCount.textContent = data.inquiryStatus.processing || 0;
+							} else {
+								processingCount.innerHTML = (data.inquiryStatus.processing || 0) + '<span>건</span>';
+							}
+						}
+					}
+				}
+			} catch (error) {
+				console.error('Error loading overview data:', error);
+			}
+		}
+
+		async function loadBestPricePackages() {
+			const tbody = document.getElementById('bestPricePackagesTableBody');
+			try {
+				const response = await fetch('../backend/api/agent-api.php?action=getBestPricePackages', {
+					credentials: 'same-origin'
+				});
+				const result = await response.json();
+
+				if (result.success && result.data) {
+					const packages = result.data;
+
+					if (packages.length === 0) {
+						const lang = getCookie('lang') || 'eng';
+						const noDataMsg = lang === 'eng' ? 'No packages available.' : '이용 가능한 패키지가 없습니다.';
+						tbody.innerHTML = `<tr><td colspan="6" class="is-center">${noDataMsg}</td></tr>`;
+					} else {
+						tbody.innerHTML = packages.map((item, index) => {
+							return `
+								<tr>
+									<td class="is-center">${index + 1}</td>
+									<td class="ellipsis" title="${escapeHtml(item.packageName || '')}">${escapeHtml(item.packageName || '')}</td>
+									<td class="is-center">${escapeHtml(item.bestDate || '')}</td>
+									<td class="is-center" style="font-weight: 600; color: #2563eb;">${escapeHtml(item.formattedPrice || '')}</td>
+									<td class="is-center">${item.remainingSeats || '-'}</td>
+									<td class="is-center">
+										<a href="create-reservation.html?packageId=${item.packageId}&date=${item.bestDate}" class="btn-link" style="color: #2563eb; text-decoration: underline; font-weight: 600;">Book</a>
+									</td>
+								</tr>
+							`;
+						}).join('');
+					}
+				} else {
+					tbody.innerHTML = '<tr><td colspan="6" class="is-center">Failed to load packages.</td></tr>';
+				}
+			} catch (error) {
+				console.error('Error loading best price packages:', error);
+				tbody.innerHTML = '<tr><td colspan="6" class="is-center">Error loading packages.</td></tr>';
+			}
+		}
+
+		async function loadTodayItineraries() {
+			try {
+				const response = await fetch('../backend/api/agent-api.php?action=getTodayItineraries', {
+					credentials: 'same-origin'
+				});
+				const result = await response.json();
+				
+				if (result.success && result.data) {
+					const itineraries = result.data;
+					const tbody = document.getElementById('todayBookingsTableBody');
+					const countEl = document.getElementById('todayBookingsCount');
+					
+					if (countEl) {
+						const lang = getCookie('lang') || 'eng';
+						if (lang === 'eng') {
+							countEl.textContent = itineraries.length;
+						} else {
+							countEl.innerHTML = itineraries.length + '<span></span>';
+						}
+					}
+					
+					if (tbody) {
+						if (itineraries.length === 0) {
+							tbody.innerHTML = '<tr><td colspan="6" class="is-center">   .</td></tr>';
+						} else {
+							tbody.innerHTML = itineraries.map((item, index) => {
+								return `
+									<tr style="cursor: pointer;">
+										<td class="is-center">${index + 1}</td>
+										<td class="ellipsis" onclick="goToReservationDetail('${escapeHtml(item.bookingId)}')">${escapeHtml(item.packageName || '')}</td>
+										<td class="is-center">${escapeHtml(item.travelPeriod || '')}</td>
+										<td class="is-center">${escapeHtml(item.customerType || '')}</td>
+										<td class="is-center">${item.numPeople || 0}</td>
+										<td class="is-center">${escapeHtml(item.guideName || '')}</td>
+									</tr>
+								`;
+							}).join('');
+						}
+					}
+				} else {
+					const tbody = document.getElementById('todayBookingsTableBody');
+					if (tbody) {
+						tbody.innerHTML = '<tr><td colspan="6" class="is-center">   .</td></tr>';
+					}
+				}
+			} catch (error) {
+				console.error('Error loading today itineraries:', error);
+				const tbody = document.getElementById('todayBookingsTableBody');
+				if (tbody) {
+					tbody.innerHTML = '<tr><td colspan="6" class="is-center">    .</td></tr>';
+				}
+			}
+		}
+		
+		function escapeHtml(text) {
+			const div = document.createElement('div');
+			div.textContent = text;
+			return div.innerHTML;
+		}
+		
+		function getCookie(name) {
+			const nameEQ = name + "=";
+			const ca = document.cookie.split(';');
+			for(let i = 0; i < ca.length; i++) {
+				let c = ca[i];
+				while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+				if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+			}
+			return null;
+		}
+		
+		function goToReservationDetail(bookingId) {
+			window.location.href = `reservation-detail.html?id=${escapeHtml(bookingId)}`;
+		}
+
+	</script>
+</body>
+
+</html>

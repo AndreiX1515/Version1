@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN</title>
+
+	<!--   -->
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+
+	<!-- editor -->
+	<link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.js"></script>
+</head>
+
+<body>
+
+	<!-- header   -->
+	<header class="layout-header"></header>
+
+	<!--   -->
+	<main class="layout-main">
+		<!-- nav   -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content">
+			<div class="page-toolbar">
+				<h1 class="page-title" data-lan-eng="Customer Registration">Customer Registration</h1>
+
+				<div class="page-toolbar-actions">
+				</div>
+			</div>
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Basic Information">Basic Information</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+
+					<!-- 1:  /  /  -->
+					<div class="grid-item">
+						<label class="label-name" for="cust_name" data-lan-eng="Customer Name">Customer Name</label>
+						<input id="cust_name" type="text" class="form-control" placeholder="" data-lan-eng-placeholder="Customer Name">
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="cust_phone" data-lan-eng="Contact">Contact</label>
+						<div class="field-row">
+							<select id="country_code" class="select w-auto" aria-label=" " data-lan-eng-aria-label="Country Code">
+								<option value="+63" selected>+63</option>
+								<option value="+82">+82</option>
+								<option value="+81">+81</option>
+								<option value="+1">+1</option>
+							</select>
+							<input id="cust_phone" type="tel" class="form-control" placeholder=" " inputmode="numeric" data-lan-eng-placeholder="Enter number">
+						</div>
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="cust_email" data-lan-eng="Email">Email</label>
+						<input id="cust_email" type="email" class="form-control" placeholder="" data-lan-eng-placeholder="Email">
+					</div>
+
+					<!-- 2: PW (  ) -->
+					<div class="grid-item">
+						<label class="label-name" for="cust_pw">PW</label>
+						<div class="input-box">
+							<input id="cust_pw" type="password" value="">
+							<button type="button" class="jw-button typeD"><img src="../image/replay.svg" alt=""><span data-lan-eng="Auto Input">Auto Input</span></button>
+						</div>
+					</div>
+					<div class="grid-item"></div>
+					<div class="grid-item"></div>
+
+					<!-- 3: Note ( ) -->
+					<!-- multi-editor.js -->
+					<div class="grid-item col-span-3">
+						<label class="label-name" for="content" data-lan-eng="Note">Note</label>
+						<div class="editor-box-wrap">
+						  <div class="jw-editor">
+							<div class="toolbar">
+							  <div class="group">
+								<button type="button" class="editor-btn ql-bold"><img src="../image/editer_bold.svg" alt=""></button>
+								<button type="button" class="editor-btn ql-italic"><img src="../image/editer_italic.svg" alt=""></button>
+								<button type="button" class="editor-btn ql-underline"><img src="../image/editer_underline.svg" alt=""></button>
+								<button type="button" class="editor-btn ql-strike"><img src="../image/editer_strikethrough.svg" alt=""></button>
+								<button type="button" class="editor-btn font-color" onclick="setColor(this);">A</button>
+								<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+							  </div>
+							  <div class="group">
+								<select class="ql-size">
+								  <option value="" selected>Font</option>
+								  <option value="12px">12px</option>
+								  <option value="14px">14px</option>
+								  <option value="16px">16px</option>
+								  <option value="18px">18px</option>
+								  <option value="24px">24px</option>
+								</select>
+							  </div>
+							  <div class="group">
+								<button type="button" class="editor-btn ql-align" value=""><img src="../image/editer_left.svg" alt=""></button>
+								<button type="button" class="editor-btn ql-align" value="center"><img src="../image/editer_center.svg" alt=""></button>
+								<button type="button" class="editor-btn ql-align" value="right"><img src="../image/editer_right.svg" alt=""></button>
+							  </div>
+							  <div class="group">
+								<button type="button" class="editor-btn ql-list" value="ordered"><img src="../image/editer_ordered.svg" alt=""></button>
+								<button type="button" class="editor-btn ql-list" value="bullet"><img src="../image/editer_bullet.svg" alt=""></button>
+							  </div>
+							</div>
+					  
+							<div class="jweditor" data-placeholder=" "></div>
+						  </div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<!-- SMT :   - Customer Registration Contract Information   -->
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Traveler Information">Traveler Information</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+
+					<div class="grid-item">
+						<label class="label-name" for="title" data-lan-eng="Title">Title</label>
+						<select id="title" class="select">
+							<option value="MR" selected>MR</option>
+							<option value="MS">MS</option>
+						</select>
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="first_name" data-lan-eng="Name">Name</label>
+						<input id="first_name" type="text" class="form-control" placeholder="Name">
+					</div>
+
+					<div class="grid-item">
+						<!-- SMT   -->
+						<label class="label-name" for="last_name" data-lan-eng="Last Name">Last Name</label>
+						<!-- SMT   -->
+						<input id="last_name" type="text" class="form-control" placeholder="Nature">
+					</div>
+
+					<!-- 2:  /  /  -->
+					<div class="grid-item">
+						<label class="label-name" for="gender" data-lan-eng="Gender">Gender</label>
+						<select id="gender" class="select">
+							<option value="Male" selected>Male</option>
+							<option value="Female">Female</option>
+						</select>
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="age" data-lan-eng="Age">Age</label>
+						<input id="age" type="number" class="form-control" placeholder="Enter numbers" min="0">
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="birth" data-lan-eng="Date of birth">Date of birth</label>
+						<input id="birth" type="text" class="form-control" placeholder="YYYYMMDD" inputmode="numeric">
+					</div>
+
+					<!-- 3:  /  /   -->
+					<div class="grid-item">
+						<label class="label-name" for="nationality" data-lan-eng="Country of origin">Country of origin</label>
+						<input id="nationality" type="text" class="form-control" placeholder="Country of origin">
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="passport_no" data-lan-eng="Passport number">Passport number</label>
+						<input id="passport_no" type="text" class="form-control" placeholder="Passport number">
+					</div>
+
+					<div class="grid-item">
+						<label class="label-name" for="passport_issue" data-lan-eng="Passport Issue Date">Passport Issue Date</label>
+						<input id="passport_issue" type="text" class="form-control" placeholder="YYYYMMDD" inputmode="numeric">
+					</div>
+
+					<!-- 4:   /   /  -->
+					<div class="grid-item">
+						<label class="label-name" for="passport_expire" data-lan-eng="Passport expiration date">Passport expiration date</label>
+						<input id="passport_expire" type="text" class="form-control" placeholder="YYYYMMDD" inputmode="numeric">
+					</div>
+
+					<div class="grid-item" id="passportUploadContainer">
+						<label class="label-name" data-lan-eng="Passport photo">Passport photo</label>
+						<div class="upload-box" id="passportUploadBox">
+							<input id="file-passport" type="file" accept="image/*" style="display: none;" onchange="handlePassportUpload(this)">
+							<label for="file-passport" class="jw-button typeD">
+								<img src="../image/upload.svg" alt="">
+								<span data-lan-eng="Image upload">Image upload</span>
+							</label>
+						</div>
+					</div>
+
+					<div class="grid-item" id="passportPreviewContainer" style="display:none;">
+						<label class="label-name" data-lan-eng="Passport photo">Passport photo</label>
+						<div class="upload-meta">
+							<div class="thumb" id="passportPreview" aria-label="preview"></div>
+							<div class="file-title" id="passportFileName">이미지</div>
+							<div class="file-info" id="passportFileInfo">jpg, 0KB</div>
+							<div class="file-controller">
+								<button type="button" class="btn-icon" id="downloadPassportBtn" aria-label="download"><img src="../image/button-download.svg" alt=""></button>
+								<button type="button" class="btn-icon" id="deletePassportBtn" aria-label="delete" onclick="resetPassportUpload()"><img src="../image/button-close2.svg" alt=""></button>
+							</div>
+						</div>
+					</div>
+
+					<div class="grid-item"></div>
+
+				</div>
+			</div>
+
+
+		</section>
+
+	</main>
+
+	<!-- 하단 고정 액션 바 -->
+	<div class="fixed-bottom-bar">
+		<button type="button" class="jw-button typeB" id="saveBtn" data-lan-eng="Save">Save</button>
+	</div>
+
+	<style>
+		.layout-main {
+			padding-bottom: 60px !important;
+		}
+		.fixed-bottom-bar {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 60px;
+			background: #fff;
+			border-top: 1px solid #e0e0e0;
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			padding: 0 24px;
+			z-index: 100;
+		}
+	</style>
+
+	<!--   -->
+	<script src="../js/default.js"></script>
+	<script src="../js/agent.js"></script>
+	<script src="../js/passport-photo.js"></script>
+	<script src="../js/multi-editor.js"></script>
+	<script src="../js/agent-customer-register.js"></script>
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_agent.html'
+		});
+	</script>
+</body>
+
+</html>

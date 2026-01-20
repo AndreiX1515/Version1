@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel | My Page</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="/css/i18n-boot.css">
+    <script src="/js/i18n-boot.js"></script>
+    <script src="../js/i18n.js" defer></script>
+    <script src="../js/auth-guard.js" defer></script>
+    <script src="../js/button.js" defer></script>
+    <!-- <script src="../js/check.js" defer></script> -->
+    <script src="../js/profile.js" defer></script>
+    <script src="../js/mypage.js?v=20241226" defer></script>
+</head>
+<body>
+    <div class="main bg grayfa mh100">
+        <header class="header-type2" style="box-shadow: none;">
+            <a class="btn-mypage" href="../home.html"><img src="../images/ico_back_black.svg"></a>
+            <div class="title">My Page</div>
+            <div></div>
+        </header>
+        <div class="mt20 px20 pb24">
+            <!-- NOTE -->
+            <div class="text fz20 fw600 black12 mb16" id="loginPrompt" data-i18n="loginPrompt">
+                Log in and<br>
+                plan your next trip
+            </div>
+            <!-- NOTE -->
+            <div class="text fz20 fw600 black12 mb16" id="welcomeMessage" style="display: none;" data-i18n="welcomeMessage">
+                Welcome, <span id="userName">User</span>!
+            </div>
+            <!-- NOTE -->
+            <div class="align vm" id="loginLinkWrapper" style="justify-content: flex-start; gap: 4px;">
+                <a class="text fz14 fw500 lh22 gray6b" href="login.html" id="loginLink" data-i18n="loginSignup">Login/Sign Up</a>
+                <img src="../images/ico_right_gray2.svg" alt="" style="display: inline-block; vertical-align: middle;">
+            </div>
+            <!-- NOTE -->
+            <div class="align vm" id="accountLinkWrapper" style="display: none; justify-content: flex-start; gap: 4px;">
+                <a class="text fz14 fw500 lh22 gray6b" href="account-setting.html" id="accountLink" data-i18n="accountSetting">Account Settings</a>
+                <img src="../images/ico_right_gray2.svg" alt="" style="display: inline-block; vertical-align: middle;">
+            </div>
+
+            <!-- NOTE -->
+            <div class="text fz16 fw600 lh24 black12 mt44" data-i18n="recentActivity">Recent Activity</div>
+            <div class="card-type10" id="recentActivityCard">
+                <!-- NOTE -->
+            </div>
+            
+            <div class="text fz16 fw600 lh24 reded mt32 ico3" data-i18n="packageTours">Package Tours</div>
+            <div class="card-type9 mt12">
+                <ul id="mypageCategoryList"></ul>
+            </div>
+            
+            <div class="text fz16 fw600 lh24 black12 mt32" data-i18n="manageMyTrips">Manage My Trips</div>
+            <div class="card-type9 mt12">
+                <ul>
+                    <li class="py12">
+                        <a class="align both vm" href="reservation-history.php">
+                            <div class="text fz14 fw500 lh22 black12 w100" data-i18n="reservationHistory">Reservation History</div>
+                            <img src="../images/ico_arrow_right_black.svg" alt="">
+                        </a>
+                    </li>
+                    <li class="py12">
+                        <a class="align both vm" href="visa-history.html">
+                            <div class="text fz14 fw500 lh22 black12 w100" data-i18n="visaApplicationHistory">Visa Application History</div>
+                            <img src="../images/ico_arrow_right_black.svg" alt="">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="text fz16 fw600 lh24 black12 mt32" id="settingsSupportTitle" data-i18n="settingsSupport">Settings & Support</div>
+            <div class="card-type9 mt12" id="settingsSupportContent">
+                <ul>
+                    <li class="py12">
+                        <a class="align both vm" href="notice.html">
+                            <div class="text fz14 fw500 lh22 black12 w100" data-i18n="notice">Notices</div>
+                            <img src="../images/ico_arrow_right_black.svg" alt="">
+                        </a>
+                    </li>
+                    <li class="py12">
+                        <a class="align both vm" href="inquiry.html">
+                            <div class="text fz14 fw500 lh22 black12 w100" data-i18n="customerCenter">Customer Service</div>
+                            <img src="../images/ico_arrow_right_black.svg" alt="">
+                        </a>
+                    </li>
+                    <li class="py12">
+                        <a class="align both vm" href="setting.html">
+                            <div class="text fz14 fw500 lh22 black12 w100" data-i18n="settings">Settings</div>
+                            <img src="../images/ico_arrow_right_black.svg" alt="">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

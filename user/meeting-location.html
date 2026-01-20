@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel | Meeting Locations</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="/css/i18n-boot.css">
+    <script src="/js/i18n-boot.js"></script>
+    <script src="../js/i18n.js" defer></script>
+</head>
+<body>
+    <div class="main bg white mh100">
+        <header class="header-type2 bg white">
+            <a class="btn-mypage" href="javascript:history.back();"><img src="../images/ico_back_black.svg"></a>
+            <div class="title">Meeting Location Guide</div>
+            <div style="width:50px;"><a class="btn-registration" href="location-registration.html" style="font-size: 12px; line-height: 6px;">Location Registration</a></div>
+        </header>
+        
+        <div id="locationsContainer">
+            <!-- NOTE -->
+            <div class="px20 pb20 border-bottom10">
+                <div class="text fz14 fw400 lh22 black12 mt16" style="text-align: center; padding: 40px 0;">
+                    Loading...
+                </div>
+            </div>
+        </div>
+        
+        <!-- NOTE -->
+        <div class="layer" id="deleteModalLayer"></div>
+        <div class="permit type2" id="deleteModal">
+            <div>
+                <div class="align both vm">
+                    <div></div>
+                    <button class="btn-close" type="button" id="closeDeleteModal"><img src="../images/ico_close_black.svg" alt=""></button>
+                </div>
+                <button class="btn-delete" type="button" id="confirmDeleteBtn">Delete</button>
+            </div> 
+        </div>
+        
+        <!-- NOTE -->
+        <div class="layer" id="confirmPopupLayer"></div>
+        <div class="popup" id="confirmPopup">
+            <div class="popup-content">
+                <p class="text fz16 fw500 lh24 black12">Do you want to delete the post?</p>
+                <div class="popup-buttons">
+                    <button class="btn-cancel" type="button" id="cancelDeleteBtn">Cancel</button>
+                    <button class="btn-delete-popup" type="button" id="finalDeleteBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- NOTE -->
+        <div class="layer" id="deletedPopupLayer"></div>
+        <div class="popup" id="deletedPopup">
+            <div class="popup-content">
+                <p class="text fz16 fw500 lh24 black12">Deleted</p>
+                <div class="popup-buttons">
+                    <button class="btn-confirm" type="button" id="closeDeletedPopupBtn">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let currentDeleteLocationId = null;
+        
+        document.addEventListener("DOMContentLoaded", async function () {
+            // NOTE
+            const ok = await ensureLoggedIn();
+            if (!ok) return;
+
+            // NOTE
+            await loadLocations();
+
+            // NOTE
+            setupModalEvents();
+        });
+
+        // 브라우저 뒤로가기(bfcache)로 돌아왔을 때 데이터 새로고침
+        window.addEventListener('pageshow', async function (event) {
+            // bfcache에서 복원되었거나 등록 완료 플래그가 있으면 데이터 새로고침
+            if (event.persisted || sessionStorage.getItem('locationRegistered') === '1') {
+                sessionStorage.removeItem('locationRegistered');
+                await loadLocations();
+            }
+        });
+
+        async function ensureLoggedIn() {
+            try {
+                const sessionResponse = await fetch('../backend/api/check-session.php', {
+                    credentials: 'same-origin'
+                });
+                const sessionData = await sessionResponse.json();
+
+                if (!sessionData || !sessionData.success || !sessionData.isLoggedIn) {
+                    window.location.href = 'login.html';
+                    return false;
+                }
+
+                // NOTE
+                const accountType = (sessionData?.user?.accountType || sessionData?.user?.account_type || '').toLowerCase();
+                if (accountType !== 'guide') {
+                    alert('Only guide accounts can access this page.');
+                    window.location.href = '../home.html';
+                    return false;
+                }
+                return true;
+            } catch (error) {
+                console.error('Session check error:', error);
+                window.location.href = 'login.html';
+                return false;
+            }
+        }
+        
+        async function loadLocations() {
+            try {
+                const container = document.getElementById('locationsContainer');
+                if (!container) return;
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const lang = urlParams.get('lang') || '';
+                // Checklist: show only today's itinerary (do not show other bookings)
+                const response = await fetch(`../backend/api/meeting-locations.php?action=getMeetingLocations&todayOnly=1`, {
+                    credentials: 'same-origin'
+                });
+                
+                if (response.status === 401) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                
+                const result = await response.json();
+                
+                if (result.success && result.data && result.data.locations) {
+                    const locations = result.data.locations;
+                    const resolvedBookingId = String(result?.data?.resolvedBookingId || '');
+
+                    const regLink = document.querySelector('a.btn-registration');
+                    if (regLink) {
+                        const langQs = lang ? `&lang=${encodeURIComponent(lang)}` : '';
+                        if (resolvedBookingId) {
+                            regLink.style.display = '';
+                            regLink.href = `location-registration.html?booking_id=${encodeURIComponent(resolvedBookingId)}${langQs}`;
+                        } else {
+                            // Checklist: if no schedule today, hide registration button and show popup
+                            regLink.style.display = 'none';
+                        }
+                    }
+
+                    if (!resolvedBookingId) {
+                        alert('There is no schedule planned for today.');
+                        container.innerHTML = `
+                            <div class="px20 pb20 border-bottom10">
+                                <div class="text fz14 fw400 lh22 black12 mt16" style="text-align: center; padding: 40px 0;">
+                                    No schedule today.
+                                </div>
+                            </div>
+                        `;
+                        return;
+                    }
+                    
+                    if (locations.length === 0) {
+                        container.innerHTML = `
+                            <div class="px20 pb20 border-bottom10">
+                                <div class="text fz14 fw400 lh22 black12 mt16" style="text-align: center; padding: 40px 0;">
+                                    No meeting locations have been registered.
+                                </div>
+                            </div>
+                        `;
+                        return;
+                    }
+                    
+                    container.innerHTML = locations.map((location) => {
+                        return `
+                            <div class="px20 pb20 border-bottom10" data-location-id="${location.locationId}">
+                                <div class="align both vm mt4">
+                                    <div class="text fz14 fw600 lh22 gray96 mt16">Registration date/time</div>
+                                    <button class="btn-more" data-location-id="${location.locationId}"><img src="../images/ico_more.svg" alt=""></button>
+                                </div>
+                                <div class="text fz14 fw400 lh22 black12 mt4">${escapeHtml(location.registrationDateTime || '')}</div>
+                                <div class="text fz14 fw600 lh22 gray96 mt20">Meeting time</div>
+                                <div class="text fz14 fw400 lh22 black12 mt4">${escapeHtml(location.meetingTime || '')}</div>
+                                <div class="text fz14 fw600 lh22 gray96 mt20">Place name</div>
+                                <div class="text fz14 fw400 lh22 black12 mt4">${escapeHtml(location.locationName || '')}</div>
+                                <div class="text fz14 fw600 lh22 gray96 mt20">Address</div>
+                                <div class="text fz14 fw400 lh22 black12 mt4">${escapeHtml(location.address || '')}</div>
+                                <div class="text fz14 fw600 lh22 gray96 mt20">Content</div>
+                                <div class="text fz14 fw400 lh22 black12 mt4">${escapeHtml(location.content || '').replace(/\n/g, '<br>')}</div>
+                            </div>
+                        `;
+                    }).join('');
+                    
+                    // NOTE
+                    document.querySelectorAll('.btn-more').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const locationId = btn.getAttribute('data-location-id');
+                            if (locationId) {
+                                showDeleteModal(parseInt(locationId));
+                            }
+                        });
+                    });
+                } else {
+                    container.innerHTML = `
+                        <div class="px20 pb20 border-bottom10">
+                            <div class="text fz14 fw400 lh22 black12 mt16" style="text-align: center; padding: 40px 0;">
+                                An error occurred while loading data.
+                            </div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading locations:', error);
+                const container = document.getElementById('locationsContainer');
+                if (container) {
+                    container.innerHTML = `
+                        <div class="px20 pb20 border-bottom10">
+                            <div class="text fz14 fw400 lh22 black12 mt16" style="text-align: center; padding: 40px 0;">
+                                An error occurred while loading data.
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+        }
+        
+        function setupModalEvents() {
+            // NOTE
+            const closeDeleteModal = document.getElementById('closeDeleteModal');
+            if (closeDeleteModal) {
+                closeDeleteModal.addEventListener('click', () => {
+                    hideDeleteModal();
+                });
+            }
+            
+            // NOTE
+            const deleteModalLayer = document.getElementById('deleteModalLayer');
+            if (deleteModalLayer) {
+                deleteModalLayer.addEventListener('click', () => {
+                    hideDeleteModal();
+                });
+            }
+            
+            // NOTE
+            const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+            if (confirmDeleteBtn) {
+                confirmDeleteBtn.addEventListener('click', () => {
+                    hideDeleteModal();
+                    showConfirmPopup();
+                });
+            }
+            
+            // NOTE
+            const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+            if (cancelDeleteBtn) {
+                cancelDeleteBtn.addEventListener('click', () => {
+                    hideConfirmPopup();
+                });
+            }
+            
+            // NOTE
+            const confirmPopupLayer = document.getElementById('confirmPopupLayer');
+            if (confirmPopupLayer) {
+                confirmPopupLayer.addEventListener('click', () => {
+                    hideConfirmPopup();
+                });
+            }
+            
+            // NOTE
+            const finalDeleteBtn = document.getElementById('finalDeleteBtn');
+            if (finalDeleteBtn) {
+                finalDeleteBtn.addEventListener('click', async () => {
+                    await deleteLocation();
+                });
+            }
+            
+            // NOTE
+            const closeDeletedPopupBtn = document.getElementById('closeDeletedPopupBtn');
+            if (closeDeletedPopupBtn) {
+                closeDeletedPopupBtn.addEventListener('click', () => {
+                    hideDeletedPopup();
+                    // NOTE
+                    loadLocations();
+                });
+            }
+            
+            // NOTE
+            const deletedPopupLayer = document.getElementById('deletedPopupLayer');
+            if (deletedPopupLayer) {
+                deletedPopupLayer.addEventListener('click', () => {
+                    hideDeletedPopup();
+                    loadLocations();
+                });
+            }
+        }
+        
+        function showDeleteModal(locationId) {
+            currentDeleteLocationId = locationId;
+            const layer = document.getElementById('deleteModalLayer');
+            const modal = document.getElementById('deleteModal');
+            if (layer) layer.classList.add('active');
+            if (modal) modal.classList.add('active');
+        }
+        
+        function hideDeleteModal() {
+            const layer = document.getElementById('deleteModalLayer');
+            const modal = document.getElementById('deleteModal');
+            if (layer) layer.classList.remove('active');
+            if (modal) modal.classList.remove('active');
+        }
+        
+        function showConfirmPopup() {
+            const layer = document.getElementById('confirmPopupLayer');
+            const popup = document.getElementById('confirmPopup');
+            if (layer) layer.classList.add('active');
+            if (popup) popup.classList.add('active');
+        }
+        
+        function hideConfirmPopup() {
+            const layer = document.getElementById('confirmPopupLayer');
+            const popup = document.getElementById('confirmPopup');
+            if (layer) layer.classList.remove('active');
+            if (popup) popup.classList.remove('active');
+        }
+        
+        function showDeletedPopup() {
+            const layer = document.getElementById('deletedPopupLayer');
+            const popup = document.getElementById('deletedPopup');
+            if (layer) layer.classList.add('active');
+            if (popup) popup.classList.add('active');
+        }
+        
+        function hideDeletedPopup() {
+            const layer = document.getElementById('deletedPopupLayer');
+            const popup = document.getElementById('deletedPopup');
+            if (layer) layer.classList.remove('active');
+            if (popup) popup.classList.remove('active');
+        }
+        
+        async function deleteLocation() {
+            if (!currentDeleteLocationId) return;
+            
+            try {
+                const response = await fetch('../backend/api/meeting-locations.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'same-origin',
+                    body: JSON.stringify({
+                        action: 'deleteMeetingLocation',
+                        locationId: currentDeleteLocationId
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('HTTP ' + response.status);
+                }
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    hideConfirmPopup();
+                    showDeletedPopup();
+                    currentDeleteLocationId = null;
+                } else {
+                    alert(result.message || 'Failed to delete.');
+                    hideConfirmPopup();
+                }
+            } catch (error) {
+                console.error('Error deleting location:', error);
+                alert('An error occurred while deleting.');
+                hideConfirmPopup();
+            }
+        }
+        
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+    
+    <style>
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            z-index: 10001;
+            min-width: 280px;
+            max-width: 90%;
+            display: none;
+        }
+        
+        .popup.active {
+            display: block;
+        }
+        
+        .popup-content {
+            text-align: center;
+        }
+        
+        .popup-content p {
+            margin-bottom: 24px;
+        }
+        
+        .popup-buttons {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .btn-cancel {
+            flex: 1;
+            padding: 12px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        .btn-delete-popup {
+            flex: 1;
+            padding: 12px;
+            background: #e74c3c;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .btn-confirm {
+            flex: 1;
+            padding: 12px;
+            background: #3498db;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .layer.active {
+            display: block;
+        }
+    </style>
+</body>
+</html>

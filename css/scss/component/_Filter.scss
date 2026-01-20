@@ -1,0 +1,103 @@
+@layer Filter { 
+    .filter-bx { 
+        border-radius: 6px;
+        border: 1px solid var(--graya6);
+        background: var(--white);
+        padding: 0 0 24px 0;
+        .title { 
+            color: var(--black1a);
+            font-size: 22px;
+            font-weight: 600;
+            padding-top: 24px;
+            padding-bottom: 24px;
+            padding-left: 24px;
+            padding-right: 24px;
+            border-bottom: 1px solid var(--grayec);
+            &.navy { 
+                color: var(--navy26);
+                border-bottom: none;
+            }
+        }
+        .filter-check { 
+            padding: 24px;
+            border-bottom: 1px solid var(--grayec);
+            .filter-check__title { 
+                min-width: 74px;
+            }
+            .news-name { 
+                display: grid;
+                grid-template-columns: repeat(9, 1fr);
+                flex-wrap: wrap;
+                gap: 8px;
+                li { 
+                    color: var(--gray85);
+                    font-size: 16px;
+                    padding: 10px 20px;
+                    text-align: center;
+                    white-space: nowrap;
+                    &.active { 
+                        color: var(--navy26);
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+        .filter-tab1 { 
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            li { 
+                button { 
+                    height: 35px;
+                    color: var(--gray85);
+                    font-size: 16px;
+                    padding: 0 20px;
+                    border-radius: 2px;
+                    border: 1px solid #A6A6A6;
+                    &.active { 
+                        color: var(--navy26);
+                        border: 1px solid var(--navy26);
+                    }
+                }
+            }
+        }
+        input { 
+            &.date { 
+                height: 56px;
+                border-radius: 6px;
+                border: 1px solid var(--graye4);
+                background: var(--white);
+                padding: 0 18px;
+                min-width: 344px;
+                background: url(../../images/ico_calendar.svg) no-repeat top 50% right 18px;
+            }
+        }
+        .filter-tag { 
+            display: flex;
+            gap: 14px 10px;
+            flex-wrap: wrap;
+            padding-right: 149px;
+            padding-left: 24px;
+            padding-right: 24px;
+            li { 
+                .tag { 
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    height: 40px;
+                    padding: 0 14px;
+                    border-radius: 2px;
+                    color: var(--black1a);
+                    font-size: 16px;
+                    background: var(--grayf8);
+                    .btn-close { 
+                        width: 12px;
+                        height: 12px;
+                        background: url(../../images/ico_close_gray.svg);
+                        
+                    }
+                }
+            }
+        }
+    }
+}

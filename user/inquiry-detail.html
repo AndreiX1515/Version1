@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel | 1:1 Inquiry Details</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/auth-guard.js" defer></script>
+    <script src="../js/api.js" defer></script>
+    <script src="../js/modal_bottom.js" defer></script>
+    <link rel="stylesheet" href="/css/i18n-boot.css">
+    <script src="/js/i18n-boot.js"></script>
+    <script src="../js/i18n.js" defer></script>
+    <script src="../js/inquiry-detail.js" defer></script>
+</head>
+<body>
+    <div class="main bg white mh100 pb20">
+        <header class="header-type2 bg white">
+            <a class="btn-mypage" href="javascript:history.back();"><img src="../images/ico_back_black.svg" alt=""></a>
+            <div class="title">Customer Support</div>
+            <div></div>
+        </header>
+       
+        <div class="px20 pb20 mt20">
+            <!-- NOTE -->
+            <div class="label secondary">Pending Reply</div>
+            <!-- NOTE -->
+            <div class="label primary">Replied</div>
+            <div class="align both vm mt20">
+                <div class="text fz16 fw500 lh26 black12" id="inquiryTitle">Inquiry Title</div>
+                <button class="btn-more" type="button"><img src="../images/ico_more.svg" alt=""></button>
+            </div>
+            <div class="mt8 pb14 border-bottom6b">
+                <div class="align vm">
+                    <p class="text fz13 fw400 lh19 gray96" id="inquiryCategory">Product Inquiry</p>
+                    <p class="text fz13 fw400 lh19 gray96 ico-bar" id="inquiryDate">2025-01-01</p>
+                </div>
+                <!-- NOTE: Required details -->
+                <div class="align vm mt6">
+                    <p class="text fz13 fw400 lh19 gray96" id="inquiryEmail">Email</p>
+                    <p class="text fz13 fw400 lh19 gray96 ico-bar" id="inquiryPhone">Phone</p>
+                    <p class="text fz13 fw400 lh19 gray96 ico-bar" id="inquiryNo">Inquiry No.</p>
+                </div>
+            </div>
+            <div class="pt14">
+                <p class="text fz14 fw500 lh22 black12" id="inquiryContent">Inquiry content area.</p>
+            </div>
+            <!-- NOTE -->
+            <div id="attachmentsContainer"></div>
+        </div>
+        <!-- NOTE -->
+        <div class="answer" id="answerBox" style="display:none;">
+            <p class="p" id="answerContent">Admin reply area.</p>
+            <span class="span" id="answerDate">2025-01-01</span>
+        </div>
+        <div class="layer"></div>
+        <div class="modal-bottom">
+            <div class="btn-wrap">
+                <button class="btn-close" type="button"><img src="../images/ico_close_black.svg" alt=""></button>
+            </div>
+            <div class="cont">
+                <button class="btn-edit" type="button">Edit</button>
+                <button class="btn-delete" type="button">Delete</button>
+            </div>
+        </div>
+    </div>
+       
+</body>
+</html>     

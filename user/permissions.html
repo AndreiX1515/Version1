@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel | Permission Settings</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <!-- i18n anti-flicker -->
+    <link rel="stylesheet" href="/css/i18n-boot.css">
+    <script src="/js/i18n-boot.js"></script>
+    <script src="../js/i18n.js" defer></script>
+    <script src="../js/api.js" defer></script>
+    <script src="../js/auth-guard.js" defer></script>
+    <script src="../js/permissions.js" defer></script>
+</head>
+<body>
+    <div class="main">
+        <header class="header-type2">
+            <a class="btn-mypage" href="#none"><img src="../images/ico_back_black.svg"></a>
+            <div class="title">Permission Settings</div>
+            <div></div>
+        </header>
+
+        <div class="px20">
+            <div class="mt28">
+                <div class="text fz16 fw600 lh24 black12 mb20">Account Permission Management</div>
+                <div class="text fz14 fw400 lh22 gray6 mb32">
+                    Configure account type and role<br>
+                    to manage service access permissions.
+                </div>
+                
+                <!-- NOTE -->
+                <div class="card-type9 mb24">
+                    <div class="text fz14 fw600 lh22 black12 mb16">Current permissions</div>
+                    <div id="currentPermissions">
+                        <div class="text fz12 fw400 lh18 gray6">Loading permission information...</div>
+                    </div>
+                </div>
+                
+                <!-- NOTE -->
+                <div class="card-type9">
+                    <div class="text fz14 fw600 lh22 black12 mb16">Change permissions</div>
+                    
+                    <!-- NOTE -->
+                    <label class="label-input mb6 mt16" for="accountType">Account type</label>
+                    <select class="select-type1" id="accountType">
+                        <option value="">No change</option>
+                        <option value="guest">General user</option>
+                        <option value="agent">Agent</option>
+                        <option value="employee">Staff</option>
+                    </select>
+                    
+                    <!-- NOTE -->
+                    <label class="label-input mb6 mt16" for="clientType">Client type</label>
+                    <select class="select-type1" id="clientType">
+                        <option value="">No change</option>
+                        <option value="Retailer">Retailer</option>
+                        <option value="Wholeseller">Wholesaler</option>
+                    </select>
+                    
+                    <!-- NOTE -->
+                    <label class="label-input mb6 mt16" for="clientRole">Client role</label>
+                    <select class="select-type1" id="clientRole">
+                        <option value="">No change</option>
+                        <option value="Sub-Agent">Sub Agent</option>
+                        <option value="Head Agent">Head Agent</option>
+                    </select>
+                    
+                    <!-- NOTE -->
+                    <label class="label-input mb6 mt16" for="seats">Seat count</label>
+                    <input class="input-type1" id="seats" type="number" placeholder="Enter seat count" min="1" max="100">
+                    
+                    <div class="text fz12 fw400 lh18 gray6 mt8 mb24">
+                        * Permission changes may require administrator approval.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fixed-bottom px20">
+                <button class="btn primary lg inactive mt32" type="button">Request permission change</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

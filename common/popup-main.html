@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel |  </title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/button.js" defer></script>
+</head>
+<body>
+    <div class="popup-overlay" id="mainPopup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2>Smart Travel </h2>
+                <button class="btn-close" onclick="closePopup()">
+                    <img src="../images/ico_close_black.svg" alt="">
+                </button>
+            </div>
+            <div class="popup-body">
+                <img src="../images/@img_popup_main.jpg" alt="  " class="popup-banner">
+                <div class="popup-text">
+                    <h3>   </h3>
+                    <p>  ,    !</p>
+                    <ul>
+                        <li>·    30% </li>
+                        <li>·      </li>
+                        <li>·    </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="popup-footer">
+                <div class="popup-buttons">
+                    <button class="btn secondary lg" onclick="closePopup()">   </button>
+                    <button class="btn primary lg" onclick="goToProducts()">  </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function closePopup() {
+            document.getElementById('mainPopup').style.display = 'none';
+        }
+
+        function goToProducts() {
+            window.location.href = '../user/product-info.html';
+        }
+
+        //     
+        document.getElementById('mainPopup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePopup();
+            }
+        });
+
+        // ESC  
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopup();
+            }
+        });
+    </script>
+
+    <style>
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .popup-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .btn-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .popup-body {
+            padding: 20px;
+        }
+
+        .popup-banner {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .popup-text h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .popup-text p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .popup-text ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .popup-text li {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .popup-footer {
+            padding: 20px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .popup-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .popup-buttons button {
+            flex: 1;
+        }
+    </style>
+</body>
+</html>

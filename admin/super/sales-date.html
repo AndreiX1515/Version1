@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN</title>
+
+	<!--   -->
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+</head>
+
+<body>
+
+	<!-- header   -->
+	<header class="layout-header"></header>
+
+	<!--   -->
+	<main class="layout-main">
+		<!-- nav   -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content">
+
+			<h1 class="page-title" data-lan-eng="Sales by date">Sales by date</h1>
+
+			<div class="card-panel jw-mgt32">
+
+				<h3 class="card-subtitle2" data-lan-eng="Select period">Select period</h3>
+				<div class="jw-cols jw-gap10 jw-mgt16">
+					<label class="jw-radio typeA">
+						<input type="radio" name="periodSelect" value="daily" checked onchange="handlePeriodChange()">
+						<p class="text" data-lan-eng="Daily">Daily</p>
+					</label>
+					<label class="jw-radio typeA">
+						<input type="radio" name="periodSelect" value="weekly" onchange="handlePeriodChange()">
+						<p class="text" data-lan-eng="Weekly">Weekly</p>
+					</label>
+					<label class="jw-radio typeA">
+						<input type="radio" name="periodSelect" value="monthly" onchange="handlePeriodChange()">
+						<p class="text" data-lan-eng="Monthly">Monthly</p>
+					</label>
+					<label class="jw-radio typeA">
+						<input type="radio" name="periodSelect" value="annual" onchange="handlePeriodChange()">
+						<p class="text" data-lan-eng="Annual">Annual</p>
+					</label>
+				</div>
+				<div class="input-box typeA jw-w400 jw-mgt16">
+					<input type="text" id="dateRangeDisplay" readonly>
+				</div>
+
+
+				<div class="list-header jw-mgt32">
+					<div class="result-count">
+						<span data-lan-eng="Search results">Search results</span> <span class="result-count__num" id="totalCount">0</span><span data-lan-eng="items">items</span>
+					</div>
+				</div>
+				
+				<table class="jw-tableA">
+					<style>
+						/* SMT (#166): ensure the amount column is truly centered (avoid right-shift) */
+						table.jw-tableA thead th:nth-child(3),
+						table.jw-tableA tbody td:nth-child(3) {
+							text-align: center !important;
+							padding-left: 0 !important;
+							padding-right: 0 !important;
+						}
+					</style>
+					<colgroup>
+						<col class="col-60"> <!-- No -->
+						<col> <!--  -->
+						<col> <!--   -->
+					</colgroup>
+					<thead>
+						<tr>
+							<th class="no is-center">No</th>
+							<th class="is-center" data-lan-eng="Time zone">Time zone</th>
+							<th class="is-center" data-lan-eng="Total sales amount (₩)">Total sales amount (₩)</th>
+						</tr>
+					</thead>
+					<tbody id="salesTableBody">
+						<tr>
+							<td colspan="3" class="is-center">  ...</td>
+						</tr>
+					</tbody>
+				</table>
+
+				
+				<div class="jw-pagebox" role="navigation" aria-label="">
+					<div class="contents">
+						<button type="button" class="first" aria-label=" " aria-disabled="false">
+							<img src="../image/first.svg" alt="">
+						</button>
+						<button type="button" class="prev" aria-label=" " aria-disabled="false">
+							<img src="../image/prev.svg" alt="">
+						</button>
+
+						<div class="page" role="list">
+							<button type="button" class="p" role="listitem">1</button>
+							<button type="button" class="p" role="listitem">2</button>
+							<button type="button" class="p show" role="listitem" aria-current="page">3</button>
+							<button type="button" class="p" role="listitem">4</button>
+							<button type="button" class="p" role="listitem">5</button>
+						</div>
+
+						<button type="button" class="next" aria-label=" " aria-disabled="false">
+							<img src="../image/next.svg" alt="">
+						</button>
+						<button type="button" class="last" aria-label=" " aria-disabled="false">
+							<img src="../image/last.svg" alt="">
+						</button>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="controller">
+				<button type="button" class="jw-button typeA" id="downloadBtn" onclick="handleDownload()" data-lan-eng="Download">Download</button>
+			</div>
+
+
+
+		</section>
+
+	</main>
+
+	<!--   -->
+	<script src="../js/default.js"></script>
+	<script src="../js/super.js"></script>
+
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_super.html'
+		});
+
+		let currentPage = 1;
+		const limit = 10;
+		let currentPeriod = 'daily';
+		let currentDateRange = { startDate: '', endDate: '' };
+
+		document.addEventListener('DOMContentLoaded', async () => {
+			try {
+				const sessionResponse = await fetch('../backend/api/check-session.php', {
+					credentials: 'same-origin'
+				});
+				const sessionData = await sessionResponse.json();
+				
+				// Super  admin  
+				const isAdmin = sessionData && sessionData.authenticated && (sessionData.userType === 'admin' || sessionData.userType === 'super');
+				if (!isAdmin) {
+					window.location.href = '../index.html';
+					return;
+				}
+				
+				handlePeriodChange();
+				await loadSalesByDate();
+			} catch (error) {
+				console.error('Session check error:', error);
+				window.location.href = '../index.html';
+				return;
+			}
+		});
+
+		function handlePeriodChange() {
+			const selectedPeriod = document.querySelector('input[name="periodSelect"]:checked')?.value || 'daily';
+			currentPeriod = selectedPeriod;
+			currentPage = 1;
+			updateLegendHeader(selectedPeriod);
+			
+			const today = new Date();
+			let startDate, endDate;
+			
+			switch(selectedPeriod) {
+				case 'daily':
+					startDate = new Date(today);
+					endDate = new Date(today);
+					break;
+				case 'weekly':
+					const dayOfWeek = today.getDay();
+					const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
+					startDate = new Date(today.setDate(diff));
+					endDate = new Date(startDate);
+					endDate.setDate(startDate.getDate() + 6);
+					break;
+				case 'monthly':
+					startDate = new Date(today.getFullYear(), today.getMonth(), 1);
+					endDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+					break;
+				case 'annual':
+					startDate = new Date(today.getFullYear(), 0, 1);
+					endDate = new Date(today.getFullYear(), 11, 31);
+					break;
+				default:
+					startDate = new Date(today);
+					endDate = new Date(today);
+			}
+			
+			currentDateRange.startDate = startDate.toISOString().split('T')[0];
+			currentDateRange.endDate = endDate.toISOString().split('T')[0];
+			
+			const dateRangeDisplay = document.getElementById('dateRangeDisplay');
+			if (dateRangeDisplay) {
+				dateRangeDisplay.value = `${currentDateRange.startDate} ~ ${currentDateRange.endDate}`;
+			}
+			
+			loadSalesByDate();
+		}
+
+		function updateLegendHeader(period) {
+			const th = document.querySelector('table.jw-tableA thead th:nth-child(2)');
+			if (!th) return;
+			const label = period === 'daily' ? 'Time'
+				: period === 'weekly' ? 'Day'
+				: period === 'monthly' ? 'Date'
+				: period === 'annual' ? 'Month'
+				: 'Time';
+			th.textContent = label;
+		}
+
+		async function loadSalesByDate(page = currentPage) {
+			try {
+				const tbody = document.getElementById('salesTableBody');
+				if (tbody) {
+					tbody.innerHTML = '<tr><td colspan="3" class="is-center">  ...</td></tr>';
+				}
+
+				const params = new URLSearchParams({
+					action: 'getSalesByDate',
+					period: currentPeriod,
+					startDate: currentDateRange.startDate,
+					endDate: currentDateRange.endDate,
+					page: page,
+					limit: limit
+				});
+
+				const response = await fetch(`../backend/api/super-api.php?${params.toString()}`, {
+					credentials: 'same-origin'
+				});
+
+				if (response.status === 401) {
+					alert(' .');
+					window.location.href = '../index.html';
+					return;
+				}
+				if (!response.ok) throw new Error('HTTP ' + response.status);
+
+				const result = await response.json();
+
+				if (result.success && result.data) {
+					const { sales, pagination } = result.data;
+					
+					const totalCountEl = document.getElementById('totalCount');
+					if (totalCountEl) totalCountEl.textContent = pagination?.totalCount || sales?.length || 0;
+
+					if (tbody) {
+						if (!sales || sales.length === 0) {
+							tbody.innerHTML = '<tr><td colspan="3" class="is-center">  .</td></tr>';
+						} else {
+							tbody.innerHTML = sales.map((item, index) => {
+								const rowNum = pagination ? (pagination.totalCount - (page - 1) * limit - index) : (sales.length - index);
+								return `
+									<tr>
+										<td class="no is-center">${rowNum}</td>
+										<td class="is-center">${escapeHtml(item.timePeriod || item.legend || '')}</td>
+										<td class="is-center">${Number(item.totalAmount || 0).toLocaleString()}</td>
+									</tr>
+								`;
+							}).join('');
+						}
+					}
+					
+					if (pagination) {
+						updatePagination(pagination);
+						currentPage = pagination.currentPage;
+					}
+				}
+			} catch (error) {
+				console.error('Error loading sales by date:', error);
+				const tbody = document.getElementById('salesTableBody');
+				if (tbody) {
+					tbody.innerHTML = '<tr><td colspan="3" class="is-center">    .</td></tr>';
+				}
+			}
+		}
+		
+		function updatePagination(pagination) {
+			const box = document.querySelector('.jw-pagebox');
+			if (!box) return;
+			const pageWrap = box.querySelector('.page');
+			if (!pageWrap) return;
+
+			const totalPages = Math.max(1, Number(pagination.totalPages || 1));
+			const current = Math.max(1, Number(pagination.currentPage || 1));
+			const groupSize = 5;
+			const groupStart = Math.floor((current - 1) / groupSize) * groupSize + 1;
+			const groupEnd = Math.min(totalPages, groupStart + groupSize - 1);
+
+			pageWrap.innerHTML = '';
+			for (let p = groupStart; p <= groupEnd; p++) {
+				const btn = document.createElement('button');
+				btn.type = 'button';
+				btn.className = 'p' + (p === current ? ' show' : '');
+				btn.setAttribute('role', 'listitem');
+				if (p === current) btn.setAttribute('aria-current', 'page');
+				btn.textContent = String(p);
+				btn.addEventListener('click', () => loadSalesByDate(p));
+				pageWrap.appendChild(btn);
+			}
+
+			const firstBtn = box.querySelector('.first');
+			const prevBtn = box.querySelector('.prev');
+			const nextBtn = box.querySelector('.next');
+			const lastBtn = box.querySelector('.last');
+
+			const prevTarget = Math.max(1, groupStart - groupSize);
+			const nextTarget = Math.min(totalPages, groupStart + groupSize);
+
+			if (firstBtn) firstBtn.onclick = () => loadSalesByDate(1);
+			if (lastBtn) lastBtn.onclick = () => loadSalesByDate(totalPages);
+			if (prevBtn) prevBtn.onclick = () => loadSalesByDate(prevTarget);
+			if (nextBtn) nextBtn.onclick = () => loadSalesByDate(nextTarget);
+		}
+		
+		async function handleDownload() {
+			try {
+				const params = new URLSearchParams({
+					action: 'downloadSalesByDate',
+					period: currentPeriod,
+					startDate: currentDateRange.startDate,
+					endDate: currentDateRange.endDate
+				});
+				
+				window.location.href = `../backend/api/super-api.php?${params.toString()}`;
+			} catch (error) {
+				console.error('Error downloading CSV:', error);
+				alert('   .');
+			}
+		}
+
+		function escapeHtml(text) {
+			const div = document.createElement('div');
+			div.textContent = text;
+			return div.innerHTML;
+		}
+	</script>
+</body>
+
+</html>

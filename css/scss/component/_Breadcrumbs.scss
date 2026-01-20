@@ -1,0 +1,24 @@
+@layer breadcrumbs { 
+   .breadcrumbs-type1 { 
+      display: flex;
+      gap: 4px;
+      li { 
+        color: var(--gray6b);
+        font-family: "Noto Sans";
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 16px;
+        letter-spacing: 0.2px;
+        & + li { 
+          display: flex;
+          &::before { 
+            display: block;
+            content: ">";
+            width: 10px;
+            height: 10px;
+            color: var(--gray6b);
+          }
+        }
+      }
+   }
+}

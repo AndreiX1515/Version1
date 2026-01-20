@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스마트 트래블 | 추가옵션 선택/요청 (step4)</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/button.js" defer></script>
+    <script src="../js/select.js" defer></script>
+</head>
+<body>
+    <div class="main">
+        <header class="header-type2">
+            <a class="btn-mypage" href="enter-customer-info.html"><img src="../images/ico_back_black.svg"></a>
+            <div class="title">Book Now</div>
+            <div></div>
+        </header>
+        <div class="mt16 px20 pb24">
+            <div class="progress-type1">
+                <i class="active"></i>
+                <i class="active"></i>
+                <i class="active"></i>
+                <i class="active"></i>
+                <i></i>
+            </div>
+            <div class="text fz14 fw600 lh22 black12 mt8">4.19(Sat) 12:20<span class="text fw 700">departure</span></div>
+            <h3 class="text fz20 fw600 lh28 black12 mt24">Add any extra options<br>
+                    or special requests.</h3>
+
+            <div class="mt32">
+                <ul class="mt12">
+                   <li>
+                        <label class="label-input mb6" for="">Add Cabin Baggage</label>
+                        <div class="custom-select">
+                            <div class="select-trigger">
+                                <span class="placeholder">Not selected</span>
+                            </div>
+                            <ul class="select-options" style="display: none;">
+                                <li>Option 1</li>
+                                <li>Option 2</li>
+                                <li>Option 3</li>
+                            </ul>
+                        </div>
+                   </li>
+                   <li class="mt20">
+                        <label class="label-input mb6" for="">Breakfast Request</label>
+                        <div class="align vm gap10 mt6">
+                            <button class="btn line lg btn-apply active" type="button">Apply</button>
+                            <button class="btn line lg btn-apply 호칭" type="button">Not applied</button>
+                        </div>
+                   </li>
+                   <li class="mt20">
+                        <label class="label-input mb6" for="">WiFi Rental</label>
+                        <div class="align vm gap10 mt6">
+                            <button class="btn line lg btn-wifi active" type="button">Apply</button>
+                            <button class="btn line lg btn-wifi 호칭" type="button">Not applied</button>
+                        </div>
+                   </li>
+                   <li class="mt20">
+                        <label class="label-input mb6" for="">Flight seat requests (Select)</label>
+                        <textarea class="textarea-type2" name="" id="" cols="30" rows="10" placeholder="Please enter your content."></textarea>
+                    </li>
+                   <li class="mt20">
+                        <label class="label-input mb6" for="">Other requests (Select)</label>
+                        <textarea class="textarea-type2" name="" id="" cols="30" rows="10" placeholder="Please enter your content."></textarea>
+                    </li>
+                </ul>
+                <div class="mt88 pb12">
+                    <a class="btn primary lg" href="reservation-sum-pay.html">Next</a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

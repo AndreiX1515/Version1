@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script>
+        // Early redirect to prevent the language page from flashing.
+        // - If auto-login is enabled (and logged in), go directly to home.
+        // - If onboarding was already completed, skip language selection.
+        (function () {
+            try {
+                var ls = window.localStorage;
+                if (!ls) return;
+                var autoLogin = ls.getItem('autoLogin') === 'true';
+                var isLoggedIn = ls.getItem('isLoggedIn') === 'true';
+                var userId = ls.getItem('userId');
+                var userEmail = ls.getItem('userEmail');
+                var permitConfirmed = ls.getItem('permitConfirmed') === '1';
+                var languageOnboarded = ls.getItem('languageOnboarded') === '1';
+                var lang = ls.getItem('selectedLanguage');
+                if (lang !== 'en' && lang !== 'tl') lang = 'en';
+
+                // Auto-login users: go home immediately.
+                if (autoLogin && isLoggedIn && userId && userEmail) {
+                    location.replace('home.html?lang=' + encodeURIComponent(lang));
+                    return;
+                }
+
+                // Onboarding already completed: go home.
+                if (permitConfirmed || languageOnboarded) {
+                    location.replace('home.html?lang=' + encodeURIComponent(lang));
+                    return;
+                }
+            } catch (_) {}
+        })();
+    </script>
+    <script src="js/language.js" defer></script>
+</head>
+<body>
+    <div class="main">
+        <header class="header-type2">
+            <div></div>
+            <div class="title"><img class="img-logo" src="images/logo_txt.svg"></div>
+            <div></div>
+        </header>
+        <div class="text fz20 fw600 lh28 txt-center mt60 mb45">Please select your language.</div>
+        <ul class="language-selection">
+            <li><a class="btn-language active" href="#none" data-lang="en">English</a></li>
+            <li><a class="btn-language" href="#none" data-lang="tl">Tagalog</a></li>
+        </ul>
+        <div class="px20 fixed-bottom">
+            <button class="btn primary lg" type="button" id="continueBtn">Continue</button>
+        </div>
+    </div>
+</body>
+</html>

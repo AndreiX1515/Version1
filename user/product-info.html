@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel | Package Products</title>
+    <meta name="description" content="Browse Smart Travel's travel packages.">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/product-info.css?v=20260102">
+    <link rel="stylesheet" href="../css/sr-only.css">
+    <link rel="stylesheet" href="/css/i18n-boot.css">
+    <script src="/js/i18n-boot.js"></script>
+    <script src="../js/i18n.js" defer></script>
+    <script src="../js/tab.js" defer></script>
+    <script src="../js/api.js?v=20251226_purch1" defer></script>
+    <script src="../js/button.js" defer></script>
+    <script src="../js/product-info.js?v=20251227_i18n_thumb_fix1" defer></script>
+</head>
+<body>
+    <!-- Skip Navigation -->
+    
+    <div class="main" id="main-content" role="main">
+        <!-- Header -->
+        <header class="header-type2" style="box-shadow: none;" role="banner">
+            <a class="btn-back" href="javascript:history.back();" aria-label="Go back">
+                <img src="../images/ico_back_black.svg" alt="">
+            </a>
+            <!-- 요구사항(id 48): 타이틀 영역은 대분류에 따라 변경되지 않고 'Package product'로 고정 -->
+            <div class="title">Package product</div>
+            <div></div>
+        </header>
+
+        <!-- NOTE -->
+        <nav role="tablist" aria-label="Package categories">
+            <ul class="tab-type2 px20" id="mainCategoryTabs" style="box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);">
+                <!-- NOTE -->
+            </ul>
+        </nav>
+
+        <!-- NOTE -->
+        <div class="filter-section" role="region" aria-label="Sub categories">
+            <div class="px16 py12">
+                <ul class="align gap8" id="subCategories" role="tablist" aria-label="Sub categories">
+                    <li>
+                        <button class="chips type2 active btn-category" type="button" role="tab" aria-selected="true">All</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Package List -->
+        <div class="package-container">
+            <ul class="list-type2" id="packageList" role="grid" aria-label="Package list">
+                <!-- NOTE -->
+            </ul>
+            
+            <!-- Loading -->
+            <div class="loading-section" id="loadingSection" style="display: none;" aria-hidden="true">
+                <div class="loading-spinner"></div>
+                <div class="text fz14 fw400 lh20 gray6b mt12" data-i18n="loadingPackages">Loading packages...</div>
+            </div>
+            
+            <!-- Load More -->
+            <div class="load-more-section" id="loadMoreSection" style="display: none;">
+                <button class="btn line lg" onclick="loadMorePackages()" id="loadMoreBtn">
+                    <span data-i18n="loadMore">Load more</span> (<span id="remainingCount">0</span>)
+                </button>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;" role="status">
+            <div class="text fz16 fw500 lh24 black12 mt16" data-i18n="noPackagesInCategory">No packages in this category</div>
+            <div class="text fz14 fw400 lh20 gray6b mt8" data-i18n="selectOtherCategory">Please select another category</div>
+        </div>
+    </div>
+    <script>
+        // NOTE
+        document.addEventListener('DOMContentLoaded', function() {
+            // NOTE
+            setTimeout(function() {
+                if (typeof getCurrentLanguage === 'function') {
+                    document.documentElement.lang = getCurrentLanguage();
+                }
+            }, 100);
+        });
+    </script>
+</body>
+</html>

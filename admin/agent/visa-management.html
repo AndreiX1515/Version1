@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN - Visa Management List</title>
+
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+	<style>
+		.sortable {
+			cursor: pointer;
+			user-select: none;
+		}
+		.sortable:hover {
+			background-color: rgba(0, 0, 0, 0.05);
+		}
+		#dateSortIcon {
+			font-size: 0.8em;
+			margin-left: 4px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<!-- header -->
+	<header class="layout-header"></header>
+
+	<!-- main -->
+	<main class="layout-main">
+		<!-- nav -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content">
+			<time class="page-date" id="current-date" datetime=""></time>
+
+			<h1 class="page-title" data-lan-eng="Visa Management List">Visa Management List</h1>
+
+			<div class="card-panel jw-mgt32">
+				<div class="list-header">
+					<div class="result-count">
+						<span data-lan-eng="Search results">Search results</span> <span class="result-count__num" id="totalCount">0</span><span data-lan-eng="items"> items</span>
+					</div>
+					<form class="search-form" action="" method="get" id="filterForm">
+						<select class="select" name="status" id="statusFilter" onchange="applyFilters()">
+							<option value="" data-lan-eng="Overall Status">Overall Status</option>
+							<option value="pending" data-lan-eng="Request Received">Request Received</option>
+							<option value="reviewing" data-lan-eng="Under Review">Under Review</option>
+							<option value="approved" data-lan-eng="Issuance Complete">Issuance Complete</option>
+							<option value="rejected" data-lan-eng="Returned">Returned</option>
+						</select>
+						<select class="select" name="sortOrder" id="sortOrderFilter" onchange="applyFilters()">
+							<option value="latest" data-lan-eng="Latest">Latest</option>
+							<option value="oldest" data-lan-eng="Oldest">Oldest</option>
+						</select>
+					</form>
+				</div>
+
+				<table class="jw-tableA">
+					<colgroup>
+						<col class="col-60"> <!-- No -->
+						<col> <!-- Applicant name -->
+						<col> <!-- Application date/time -->
+						<col> <!-- Status -->
+					</colgroup>
+					<thead>
+						<tr>
+							<th class="no is-center">No</th>
+							<th class="is-center" data-lan-eng="Applicant name">Applicant name</th>
+							<th class="is-center sortable" data-lan-eng="Application date/time" id="sortByDate" onclick="toggleDateSort()" style="cursor: pointer;">
+								Application date/time <span id="dateSortIcon">▼</span>
+							</th>
+							<th class="is-center" data-lan-eng="Status">Status</th>
+						</tr>
+					</thead>
+					<tbody id="visaAppsTableBody">
+						<tr>
+							<td colspan="4" class="is-center">Loading...</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div class="jw-pagebox" role="navigation" aria-label="Pagination">
+					<div class="contents">
+						<button type="button" class="first" aria-label="First page" aria-disabled="false">
+							<img src="../image/first.svg" alt="">
+						</button>
+						<button type="button" class="prev" aria-label="Previous page" aria-disabled="false">
+							<img src="../image/prev.svg" alt="">
+						</button>
+
+						<div class="page" role="list">
+							<button type="button" class="p show" role="listitem" aria-current="page">1</button>
+						</div>
+
+						<button type="button" class="next" aria-label="Next page" aria-disabled="false">
+							<img src="../image/next.svg" alt="">
+						</button>
+						<button type="button" class="last" aria-label="Last page" aria-disabled="false">
+							<img src="../image/last.svg" alt="">
+						</button>
+					</div>
+				</div>
+			</div>
+
+		</section>
+
+	</main>
+
+	<script src="../js/default.js?v=20251227_change_pw_1"></script>
+	<script src="../js/agent.js"></script>
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_agent.html'
+		});
+
+		let currentPage = 1;
+		const limit = 10;
+		let currentFilters = { status: '', sortOrder: 'latest' };
+
+		document.addEventListener('DOMContentLoaded', async () => {
+			try {
+				const sessionResponse = await fetch('../backend/api/check-session.php', {
+					credentials: 'same-origin'
+				});
+				const sessionData = await sessionResponse.json();
+
+				if (!sessionData.authenticated) {
+					window.location.href = '../index.html';
+					return;
+				}
+
+				waitForHeaderUserNameAndHydrate();
+				await loadVisaApplications();
+			} catch (error) {
+				console.error('Session check error:', error);
+				window.location.href = '../index.html';
+				return;
+			}
+		});
+
+		function applyFilters() {
+			currentFilters.status = document.getElementById('statusFilter').value;
+			currentFilters.sortOrder = document.getElementById('sortOrderFilter').value;
+			updateSortIcon();
+			currentPage = 1;
+			loadVisaApplications();
+		}
+
+		function toggleDateSort() {
+			// 현재 정렬 순서 토글
+			if (currentFilters.sortOrder === 'latest') {
+				currentFilters.sortOrder = 'oldest';
+			} else {
+				currentFilters.sortOrder = 'latest';
+			}
+			// 드롭다운도 동기화
+			document.getElementById('sortOrderFilter').value = currentFilters.sortOrder;
+			updateSortIcon();
+			currentPage = 1;
+			loadVisaApplications();
+		}
+
+		function updateSortIcon() {
+			const icon = document.getElementById('dateSortIcon');
+			if (icon) {
+				icon.textContent = currentFilters.sortOrder === 'latest' ? '▼' : '▲';
+			}
+		}
+
+		async function loadVisaApplications(page = currentPage) {
+			try {
+				const tbody = document.getElementById('visaAppsTableBody');
+				if (tbody) {
+					tbody.innerHTML = '<tr><td colspan="4" class="is-center">Loading...</td></tr>';
+				}
+
+				const params = new URLSearchParams({
+					action: 'getAgentVisaApplications',
+					page: page,
+					limit: limit
+				});
+
+				if (currentFilters.status) params.append('status', currentFilters.status);
+				if (currentFilters.sortOrder) params.append('sortOrder', currentFilters.sortOrder);
+
+				const response = await fetch(`../backend/api/agent-api.php?${params.toString()}`, {
+					credentials: 'same-origin'
+				});
+
+				if (response.status === 401) {
+					window.location.href = '../index.html';
+					return;
+				}
+				if (!response.ok) throw new Error('HTTP ' + response.status);
+
+				const result = await response.json();
+
+				if (result.success && result.data) {
+					const { applications, pagination } = result.data;
+
+					const totalCountEl = document.getElementById('totalCount');
+					if (totalCountEl) totalCountEl.textContent = pagination.totalCount || 0;
+
+					if (tbody) {
+						if (applications.length === 0) {
+							tbody.innerHTML = '<tr><td colspan="4" class="is-center">No visa applications found.</td></tr>';
+						} else {
+							tbody.innerHTML = applications.map((app, index) => {
+								const createdAt = app.createdAt ? app.createdAt.replace('T', ' ').substring(0, 16) : '';
+								const statusMap = {
+									'pending': 'Request Received',
+									'reviewing': 'Under Review',
+									'approved': 'Issuance Complete',
+									'rejected': 'Returned'
+								};
+								const statusLabel = statusMap[String(app.status || '').toLowerCase()] || 'Request Received';
+								const appId = app.visaApplicationId || app.applicationId || app.id;
+								const rowNum = pagination ? (pagination.totalCount - (page - 1) * limit - index) : (app.rowNum || index + 1);
+								return `
+									<tr onclick="window.location.href='visa-detail.html?id=${escapeHtml(appId)}'" style="cursor: pointer;">
+										<td class="no is-center">${rowNum}</td>
+										<td class="is-center">${escapeHtml(app.applicantName || '')}</td>
+										<td class="is-center">${escapeHtml(createdAt)}</td>
+										<td class="is-center">${escapeHtml(statusLabel)}</td>
+									</tr>
+								`;
+							}).join('');
+						}
+					}
+
+					if (pagination) {
+						updatePagination(pagination);
+						currentPage = pagination.currentPage;
+					}
+				}
+			} catch (error) {
+				console.error('Error loading visa applications:', error);
+				const tbody = document.getElementById('visaAppsTableBody');
+				if (tbody) {
+					tbody.innerHTML = '<tr><td colspan="4" class="is-center">Error loading data.</td></tr>';
+				}
+			}
+		}
+
+		function updatePagination(pagination) {
+			const { currentPage, totalPages } = pagination;
+			const pageContainer = document.querySelector('.jw-pagebox .page');
+
+			if (pageContainer) {
+				pageContainer.innerHTML = '';
+				const groupSize = 5;
+				const groupStart = Math.floor((currentPage - 1) / groupSize) * groupSize + 1;
+				const groupEnd = Math.min(totalPages, groupStart + groupSize - 1);
+
+				for (let i = groupStart; i <= groupEnd; i++) {
+					const button = document.createElement('button');
+					button.type = 'button';
+					button.className = 'p' + (i === currentPage ? ' show' : '');
+					button.setAttribute('role', 'listitem');
+					if (i === currentPage) button.setAttribute('aria-current', 'page');
+					button.textContent = i;
+					button.onclick = () => loadVisaApplications(i);
+					pageContainer.appendChild(button);
+				}
+			}
+
+			const firstBtn = document.querySelector('.jw-pagebox .first');
+			const prevBtn = document.querySelector('.jw-pagebox .prev');
+			const nextBtn = document.querySelector('.jw-pagebox .next');
+			const lastBtn = document.querySelector('.jw-pagebox .last');
+
+			if (firstBtn) {
+				firstBtn.disabled = currentPage === 1;
+				firstBtn.setAttribute('aria-disabled', currentPage === 1);
+				firstBtn.onclick = currentPage === 1 ? null : () => loadVisaApplications(1);
+			}
+
+			const groupSize = 5;
+			const groupStart = Math.floor((currentPage - 1) / groupSize) * groupSize + 1;
+			const prevTarget = Math.max(1, groupStart - groupSize);
+			const nextTarget = Math.min(totalPages, groupStart + groupSize);
+
+			if (prevBtn) {
+				prevBtn.disabled = currentPage === 1;
+				prevBtn.setAttribute('aria-disabled', currentPage === 1);
+				prevBtn.onclick = currentPage === 1 ? null : () => loadVisaApplications(prevTarget);
+			}
+			if (nextBtn) {
+				nextBtn.disabled = currentPage >= totalPages;
+				nextBtn.setAttribute('aria-disabled', currentPage >= totalPages);
+				nextBtn.onclick = currentPage >= totalPages ? null : () => loadVisaApplications(nextTarget);
+			}
+			if (lastBtn) {
+				lastBtn.disabled = currentPage >= totalPages;
+				lastBtn.setAttribute('aria-disabled', currentPage >= totalPages);
+				lastBtn.onclick = currentPage >= totalPages ? null : () => loadVisaApplications(totalPages);
+			}
+		}
+
+		function escapeHtml(text) {
+			const div = document.createElement('div');
+			div.textContent = text;
+			return div.innerHTML;
+		}
+	</script>
+</body>
+
+</html>

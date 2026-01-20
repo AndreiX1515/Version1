@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel | Permission Settings</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="/css/i18n-boot.css">
+    <script src="/js/i18n-boot.js"></script>
+    <script src="../js/i18n.js" defer></script>
+    <script src="../js/button.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            //    
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const urlLang = urlParams.get('lang');
+                if (urlLang && ['en', 'tl'].includes(urlLang)) {
+                    localStorage.setItem('selectedLanguage', urlLang);
+                }
+            } catch (_) {}
+
+            //    ()     
+            try {
+                if (localStorage.getItem('permitConfirmed') === '1') {
+                    const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+                    location.replace(`../home.html?lang=${encodeURIComponent(currentLang)}`);
+                    return;
+                }
+            } catch (_) {}
+
+            const confirmBtn = document.getElementById('confirmBtn');
+            if (confirmBtn) {
+                confirmBtn.addEventListener('click', function() {
+                    const currentLang = localStorage.getItem('selectedLanguage') || 'en';
+                    console.log('Permit page - Moving to home with language:', currentLang);
+                    //       (    )
+                    localStorage.setItem('permitConfirmed', '1');
+                    location.href = `../home.html?lang=${currentLang}`;
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="main">
+        <div class="permit-container">
+            <div class="permit-header">
+                <img src="../images/logo_txt.svg" alt="Smart Travel" class="logo">
+                <h1 data-i18n="appPermissions">App Permissions</h1>
+                <p data-i18n="permissionsRequired">The following permissions are required for optimal service.</p>
+            </div>
+
+            <div class="permit-list">
+                <div class="permit-item">
+                    <div class="permit-info">
+                        <div class="permit-icon">
+                            <img src="../images/ico_location.svg" alt="Location">
+                        </div>
+                        <div class="permit-text">
+                            <h3 data-i18n="location">Location</h3>
+                            <p data-i18n="locationDesc">Provide customized travel products and guide services based on current location</p>
+                            <span class="permit-badge required" data-i18n="required">Required</span>
+                        </div>
+                    </div>
+                    <div class="permit-toggle">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked disabled>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="permit-item">
+                    <div class="permit-info">
+                        <div class="permit-icon">
+                            <img src="../images/ico_camera.svg" alt="Camera">
+                        </div>
+                        <div class="permit-text">
+                            <h3 data-i18n="camera">Camera</h3>
+                            <p data-i18n="cameraDesc">Register profile photos and take photos during travel</p>
+                            <span class="permit-badge optional" data-i18n="optional">Optional</span>
+                        </div>
+                    </div>
+                    <div class="permit-toggle">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="permit-item">
+                    <div class="permit-info">
+                        <div class="permit-icon">
+                            <img src="../images/ico_bell.svg" alt="Notifications">
+                        </div>
+                        <div class="permit-text">
+                            <h3 data-i18n="notification">Notifications</h3>
+                            <p data-i18n="notificationDesc">Receive important notifications for booking confirmations, schedule changes, and event updates</p>
+                            <span class="permit-badge optional" data-i18n="optional">Optional</span>
+                        </div>
+                    </div>
+                    <div class="permit-toggle">
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="permit-item">
+                    <div class="permit-info">
+                        <div class="permit-icon">
+                            <img src="../images/ico_file.svg" alt="Storage">
+                        </div>
+                        <div class="permit-text">
+                            <h3 data-i18n="storage">Storage</h3>
+                            <p data-i18n="storageDesc">Save travel documents and photos, download offline maps</p>
+                            <span class="permit-badge optional" data-i18n="optional">Optional</span>
+                        </div>
+                    </div>
+                    <div class="permit-toggle">
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="permit-footer">
+                <p class="permit-notice" data-i18n="permissionsNote">
+                    Permissions can be changed in settings at any time.
+                </p>
+                <button class="btn primary lg w100" type="button" id="confirmBtn" data-i18n="confirm">
+                    Confirm
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .permit-container {
+            padding: 40px 20px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .permit-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .permit-header .logo {
+            height: 40px;
+            margin-bottom: 20px;
+        }
+
+        .permit-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+
+        .permit-header p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .permit-list {
+            margin-bottom: 40px;
+        }
+
+        .permit-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .permit-item:last-child {
+            border-bottom: none;
+        }
+
+        .permit-info {
+            display: flex;
+            align-items: flex-start;
+            flex: 1;
+        }
+
+        .permit-icon {
+            width: 40px;
+            height: 40px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+        }
+
+        .permit-icon img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .permit-text h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #1a1a1a;
+        }
+
+        .permit-text p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .permit-badge {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        .permit-badge.required {
+            background: #ffe6e6;
+            color: #d32f2f;
+        }
+
+        .permit-badge.optional {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .3s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #ff4757;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        input:disabled + .toggle-slider {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .permit-footer {
+            text-align: center;
+        }
+
+        .permit-notice {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 20px;
+        }
+    </style>
+</body>
+</html>

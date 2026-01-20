@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN</title>
+
+	<!-- 공통 스타일 -->
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+</head>
+
+<body>
+
+	<!-- header 들어올 자리 -->
+	<header class="layout-header"></header>
+
+	<!-- 본문 영역 -->
+	<main class="layout-main">
+		<!-- nav 들어올 자리 -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content">
+			<time class="page-date" datetime="2025-01-01">January 1, 2025</time>
+
+			<h1 class="page-title" data-lan-eng="Operating Status">운영현황</h1>
+			
+						
+			<div class="overview-card-grid jw-mgt32">
+				<!-- 예약 현황 -->
+				<article class="card">
+					<div>
+						<h2 class="card-title" data-lan-eng="Reservation Status">예약 현황</h2>
+						<a href="../reservations/reservation-list.html" class="card-link">See All →</a>
+					</div>
+					<div>
+						<ul class="status-list">
+							<li class="status-item">
+								<i class="dot dot-blue" aria-hidden="true"></i>
+								<span class="label" data-lan-eng="Checking before advance payment">선금 확인 전</span>
+								<strong class="count">11<span data-lan-eng="Dry">건</span></strong>
+							</li>
+							<li class="status-item">
+								<i class="dot dot-green" aria-hidden="true"></i>
+								<span class="label" data-lan-eng="Check remaining balance">잔금 확인 전</span>
+								<strong class="count">8<span data-lan-eng="Dry">건</span></strong>
+							</li>
+						</ul>
+					</div>
+				</article>
+
+				<!-- 문의 현황 -->
+				<article class="card">
+					<div>
+						<h2 class="card-title" data-lan-eng="Inquiry Status">문의 현황</h2>
+						<a href="../reservations/reservation-list.html" class="card-link">See All →</a>
+					</div>
+					<div>
+						<ul class="status-list">
+							<li class="status-item">
+								<i class="dot dot-blue" aria-hidden="true"></i>
+								<span class="label" data-lan-eng="Unanswered">미답변</span>
+								<strong class="count">15<span data-lan-eng="Dry">건</span></strong>
+							</li>
+							<li class="status-item">
+								<i class="dot dot-green" aria-hidden="true"></i>
+								<span class="label" data-lan-eng="Answered">답변완료</span>
+								<strong class="count">7<span data-lan-eng="Dry">건</span></strong>
+							</li>
+						</ul>
+					</div>
+				</article>
+			</div>
+
+			<div class="card-panel jw-mgt68">
+				<h2 class="card-title" data-lan-eng="Today's Travel Itinerary">오늘 여행 일정</h2>
+				<p class="card-subtitle">12<span data-lan-eng="Dry">건</span></p>
+
+				<div class="tableA-scroll">
+					<div class="jw-tableA typeB">
+						<table>
+							<colgroup>
+								<col style="width:60px;"><!-- No -->
+								<col><!-- 상품명 -->
+								<col style="width:220px;"><!-- 여행 기간 -->
+								<col style="width:120px;"><!-- 고객 유형 -->
+								<col style="width:100px;"><!-- 인원 수 -->
+								<col style="width:140px;"><!-- 배정 가이드 -->
+							</colgroup>
+							<thead>
+								<tr>
+									<th>No</th>
+									<th data-lan-eng="Product Name">상품명</th>
+									<th data-lan-eng="Travel period">여행 기간</th>
+									<th data-lan-eng="Customer Type">고객 유형</th>
+									<th data-lan-eng="Number of people">인원 수</th>
+									<th data-lan-eng="Assignment Guide">배정 가이드</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="is-center">1</td>
+									<td>Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meal...</td>
+									<td class="is-center">2025-04-19 ~ 2025-04-24</td>
+									<td class="is-center">B2B</td>
+									<td class="is-center">50</td>
+									<td class="is-center">Kim Minsu</td>
+								</tr>
+								<tr>
+									<td class="is-center">2</td>
+									<td>Korea Basic Tour 5 Days, 4 Nights – Includes Nami Island and Everland</td>
+									<td class="is-center">2025-04-19 ~ 2025-04-24</td>
+									<td class="is-center">B2B</td>
+									<td class="is-center">50</td>
+									<td class="is-center">Lee Ji-hoon</td>
+								</tr>
+								<tr>
+									<td class="is-center">3</td>
+									<td>Autumn Foliage Tour & Seoraksan Cable Car 5 Days, 4 Nights</td>
+									<td class="is-center">2025-04-19 ~ 2025-04-24</td>
+									<td class="is-center">B2C</td>
+									<td class="is-center">50</td>
+									<td class="is-center">Lee Subin</td>
+								</tr>
+								<tr>
+									<td class="is-center">4</td>
+									<td>Winter Package 5 Days, 4 Nights – Includes Everland & Ski Option</td>
+									<td class="is-center">2025-04-19 ~ 2025-04-24</td>
+									<td class="is-center">B2B</td>
+									<td class="is-center">50</td>
+									<td class="is-center">Choi Ha-eun</td>
+								</tr>
+								<tr>
+									<td class="is-center">5</td>
+									<td>Jeonju & Gunsan Retro Tour 4 Days, 3 Nights – Includes Hanok Village & Railroad Village</td>
+									<td class="is-center">2025-04-19 ~ 2025-04-24</td>
+									<td class="is-center">B2B</td>
+									<td class="is-center">50</td>
+									<td class="is-center">Jay Jung</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+			</div>
+
+
+
+		</section>
+
+	</main>
+
+	<!-- 기본 스크립트 -->
+	<script src="../js/default.js"></script>
+	<script src="../js/agent.js"></script>
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_agent.html'
+		});
+	</script>
+</body>
+
+</html>

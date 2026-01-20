@@ -1,0 +1,2649 @@
+/* info-container Section */
+.info-container {
+  width: 100%;
+  background-color: #f6f6f6;
+  /* border-radius: 10px; */
+  height: 5vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  padding: 5px 25px;
+}
+
+.header-counts {
+  width: 100%;
+  padding: 5px 5px 0px 5px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  margin-bottom: 3px;
+}
+
+/* Card Header */
+.card .counts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0px;
+  min-height: 30px; 
+  background-color: #fdfdfd;
+  color: #333;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.25px;
+}
+
+/* Title Wrapper */
+.title-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  background-color: #17a2b8; /* Dark gray with 75% opacity for translucency */
+  border-radius: 8px;
+  width: auto;
+}
+
+.title-wrapper h6 {
+  margin: 0;
+  padding: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ffffff;
+}
+
+.table-header .title-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.table-header .title-wrapper h6 {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ffffff; /* Match the pill text color */
+  letter-spacing: 0.4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.accent-pill {
+  display: flex;
+  align-items: center; /* Vertical centering */
+  justify-content: center;
+}
+
+.accent-pill h6 {
+  font-size: 0.7rem;
+  padding: 2px 15px;
+  border-radius: 15px;
+  border: 1px solid gainsboro;
+  background-color: #f8f9fa;
+  color: #1f75fe;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.clickable-card {
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s ease-in-out;
+}
+
+.clickable-card:hover {
+  background: rgba(0, 0, 0, 0.05); /* Light hover effect */
+  transform: scale(1.05); /* Smooth scaling effect */
+}
+
+/* Main Content Area (Child of .main-content-container) */
+
+/* Top header summary area (like cards or counts) */
+.main-content .header-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 0;
+  min-height: 10vh;
+  /* border: 1px solid black; */
+}
+
+/* ==================================== */
+/* Second Div*/
+/* ==================================== */
+
+/* Secondary Section (e.g., tools/filters) */
+.second-div {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+  height: clamp(45px, 4vh, 80px); /* Min: 45px, Prefers: 6vh, Max: 80px */
+  margin: 0px 0px;
+  padding: 0px 25px 0px 0px;
+
+  /* border: 1px solid black; */
+}
+
+/* Navigation Tabs Wrapper */
+.navTabs-wrapper {
+  flex: 1;
+  min-width: 0;
+  height: 100%; /* Full height of parent */
+  padding: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center; /* Optional: vertically center nav pills */
+  gap: 10px;
+  /* border: 1px solid black; */
+}
+
+/* Content Heading */
+.content-heading {
+  flex: 1;
+  min-width: 0;
+  height: 100%; /* Full height of parent */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  /* border: 1px solid black; */
+}
+
+/* ------------------------------------ */
+/* Nav Pills Structure */
+
+.nav-pills {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 0;
+  list-style-type: none;
+}
+
+/* ------------------------------------ */
+/* Nav Links Styling */
+
+.navTabs-wrapper .nav-link {
+  background-color: transparent;
+  padding: 5px 10px;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  border: 1px solid gainsboro;
+  /* color: black; */
+}
+
+/* ------------------------------------ */
+/* Hover and Active States */
+.navTabs-wrapper .nav-link:hover {
+  border-color: #007bff;
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.navTabs-wrapper .nav-link.active {
+  border-color: #007bff;
+  background-color: #007bff;
+  color: white;
+}
+
+/* ==================================== */
+/* Content Heading and Save Button */
+
+.content-heading .saveBtn {
+  display: none;
+}
+
+/* Container for Secondary Header */
+.second-header-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 0;
+}
+
+/* Sorting Container */
+.sorting-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Select Dropdown */
+.sorting-wrapper select,
+.select-wrapper select {
+  width: 160px;
+  padding: 6px 10px;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #f9f9f9;
+  border: 1px solid #d4d4d4;
+  border-radius: 6px;
+  color: #333;
+  appearance: none;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.sorting-wrapper select:focus,
+.select-wrapper select:focus {
+  border-color: #116530;
+  box-shadow: 0 0 0 1px rgba(17, 101, 48, 0.3);
+}
+
+/* Wrapper for Custom Select */
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.select-wrapper::after {
+  content: "▾";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: #888;
+  pointer-events: none;
+}
+
+/* Filter Field Stack */
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Flight Booking Field */
+.flightbooking-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+
+.flightbooking-wrapper input {
+  width: 140px;
+  height: 36px;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #d4d4d4;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.flightbooking-wrapper input:focus {
+  border-color: #116530;
+  box-shadow: 0 0 0 1px rgba(17, 101, 48, 0.3);
+  outline: none;
+}
+
+/* Date Range Field Group */
+.date-range-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.date-range-wrapper label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #444;
+}
+
+.date-range-inputs-wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Input with Icon */
+.input-with-icon {
+  position: relative;
+  width: 150px;
+}
+
+.input-with-icon input {
+  width: 100%;
+  height: 36px;
+  padding: 6px 35px 6px 10px;
+  font-size: 14px;
+  border: 1px solid #d4d4d4;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  color: #333;
+  transition: border-color 0.2s ease;
+}
+
+.input-with-icon input:focus {
+  border-color: #116530;
+  box-shadow: 0 0 0 1px rgba(17, 101, 48, 0.3);
+  outline: none;
+}
+
+.input-with-icon input::placeholder {
+  color: #999;
+}
+
+.input-with-icon .calendar-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #6c757d;
+  pointer-events: none;
+}
+
+/* Ensure the datepicker is above the table header */
+.ui-datepicker {
+  z-index: 9999 !important;
+  position: absolute !important;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ccc;
+  padding: 5px;
+  
+}
+
+.datepicker {
+  cursor: pointer;
+  user-select: none;
+  pointer-events: auto;
+}
+
+/* Prevent focus and keyboard navigation */
+.datepicker * {
+  outline: none !important;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Make date links non-focusable */
+.datepicker td a {
+  display: block;
+  padding: 5px;
+  text-align: center;
+  border-radius: 4px;
+  color: black;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  pointer-events: none; /* Disable interaction (optional) */
+}
+
+/* Optional: Allow hover styling but not interaction */
+.datepicker td a:hover {
+  background-color: #116530;
+  color: white;
+  cursor: default;
+}
+
+
+
+
+
+
+
+
+.buttons-wrapper {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+
+  /* border: 1px solid black; */
+}
+
+/* Flight Price Slide */
+.price-range-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+#slider-range {
+  width: 100%;
+  height: 8px;
+  background: #ddd;
+  border-radius: 5px;
+  position: relative;
+  margin-top: 5px;
+}
+
+.ui-slider-handle {
+  background: #116530;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.price-values {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.price-range-field {
+  width: 60px;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#clearSorting {
+  font-size: 12px;
+  padding: 8px 10px;
+  align-self: center;
+}
+
+.header-counts .card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: calc(25% - 5px);
+  min-height: 150px; /* Total fixed height of the card */
+  max-height: 170px;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 8px 0px 8px;
+  box-sizing: border-box;
+  overflow-y: hidden;
+}
+
+.card-content {
+  flex: 1; /* Take the remaining space */
+  padding: 5px 12px;
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  /* border: 1px solid black; */
+}
+
+.card-content-body .col-md-5 {
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1;
+  gap: 10px;
+  padding: 5px 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff; /* Keep white for cleanliness */
+  transition: transform 0.2s ease;
+  /* Removed shadow for flat design */
+}
+
+.card-content-body .col-md-4 {
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1;
+  gap: 10px;
+  padding: 5px 5px;
+  border: 1px solid #ccc; /* Minimalist outlined border */
+  border-radius: 6px; /* Slight rounding for clean look */
+  background-color: #fff; /* Flat white background */
+  transition: transform 0.2s ease;
+  /* Removed box-shadow for flat appearance */
+}
+
+.card-content-body .col-md-5:hover,
+.card-content-body .col-md-4:hover {
+  border-color: #999;
+}
+
+.totalpayment {
+  height: 105px;
+}
+
+.clickable-card {
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s ease-in-out;
+}
+
+.clickable-card:hover {
+  background: rgba(0, 0, 0, 0.05); /* Light hover effect */
+  transform: scale(1.02); /* Smooth scaling effect */
+}
+
+.card-icon {
+  font-size: 14px; /* Smaller icon font size */
+  margin-right: 5px; /* Reduced margin */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px; /* Smaller width */
+  height: 30px; /* Smaller height */
+  border-radius: 30%;
+  color: #ffffff; /* Default icon color */
+}
+
+.card-icon p {
+  font-size: 0.8rem;
+  font-weight: bolder;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3); /* subtle downward shadow */
+  letter-spacing: 1px;
+}
+
+.month-icon-1 p {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.month-icon-2 p {
+  font-size: 10px;
+  font-weight: 900;
+}
+
+
+
+
+
+/* Base Icon Styling */
+/* Base Icon Styling */
+.icon {
+  color: #fff; /* Default white text */
+  padding: 10px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.2s ease;
+}
+
+.icon:hover {
+  transform: scale(1.05);
+}
+
+/* Blue Icon for Total Transactions */
+.icon-blue {
+  background-color: #17a2b8; /* Light blue */
+  color: #ffffff;
+}
+
+/* Green Icon for Completed Transactions */
+.icon-green {
+  background-color: #28a745; /* Green */
+  color: #ffffff;
+}
+
+/* Yellow Icon for Pending Transactions */
+.icon-yellow {
+  background-color: #ffc107; /* Yellow */
+  color: #333333; /* Dark for contrast */
+}
+
+/* Red Icon for Cancelled Transactions */
+.icon-red {
+  background-color: #dc3545; /* Red */
+  color: #ffffff;
+}
+
+/* Gray Icon for Neutral/Inactive States */
+.icon-gray {
+  background-color: #6c757d; /* Bootstrap gray */
+  color: #ffffff;
+}
+
+/* Orange Icon for Special Status */
+.icon-orange {
+  background-color: #ff9900; /* Bright orange */
+  color: #333333; /* Dark for contrast */
+}
+
+
+
+.side-content {
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflowed content if any */
+  text-overflow: ellipsis; /* Add ellipsis if content is too long */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Optional: align text to the start */
+  line-height: 0.9;
+}
+.side-content h5 {
+  font-size: 20px; /* Reduced font size for the number */
+  font-weight: bold;
+  margin: 0;
+  color: #3a3535;
+}
+
+.side-content p {
+  font-size: 8.5px; /* Smaller font size for description */
+  font-weight: bolder;
+  color: #747b85; /* Lighter gray for the description */
+  margin: 0;
+}
+
+.side-content .total-text {
+  font-size: 8.5px; /* Smaller font size for the total text */
+  font-weight: bold;
+  color: #747b85; /* Lighter gray for the description */
+  margin: 0;
+  flex-wrap: nowrap;
+}
+
+/* ==================================== */
+
+/* ===============================
+   CARD CONTAINER STYLES
+================================= */
+.card-4 {
+  padding: 5px;
+}
+
+/* .card-4 .header {
+  height: 32px;
+  color: #4c4f52;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+} */
+
+/* .card-4 .title-wrapper h6 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 14px;
+} */
+
+.card-4 .view-currency-btn {
+  padding: 4px 10px;
+  font-size: 10px;
+  border-radius: 5px;
+  background-color: #116530;
+  border: none;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.card-4 .view-currency-btn:hover {
+  background-color: #0d4d28;
+}
+
+/* === Container Body Styling === */
+.card-4 .card-content-body {
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 5px 0px 5px 0px;
+
+  /* border: 1px solid black; */
+}
+
+/* === Currency Row Flex Layout === */
+.currency-row {
+  display: flex;
+  align-items: stretch; /* Ensure full height alignment */
+  justify-content: center; /* Horizontally center items */
+  width: 100%;
+  gap: 5px; /* Space between each card/icon */
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+}
+
+/* === USD Card Styling === */
+.usd-card-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+}
+
+/* === Exchange Icon Container === */
+.icon-container {
+  width: 50px;
+  min-width: 50px;
+  height: auto;
+  display: flex;
+  align-items: center; /* Vertically center */
+  justify-content: center; /* Horizontally center */
+  background-color: transparent;
+  /* border: 1px solid black; */
+  box-sizing: border-box;
+}
+
+/* === Exchange Icon Wrapper === */
+.icon-wrapper-currency {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #495057;
+}
+
+/* === PHP & KRW Card Column === */
+.php-kr-card-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+}
+
+/* === PHP & KRW Individual Box Style === */
+.card-php-kr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 5px 10px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* === Responsive (Optional for mobile fix) === */
+@media (max-width: 768px) {
+  .currency-row {
+    flex-direction: column;
+  }
+
+  .icon-wrapper {
+    width: 100%;
+    min-width: auto;
+    height: 40px;
+  }
+}
+
+/* ===============================
+   FLAG WRAPPER FOR USD
+================================= */
+/* === Main Card Container === */
+.currency-card .flag-icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Vertically center contents */
+  padding: 8px 8px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  text-align: center;
+}
+
+/* === Flag Image === */
+.currency-card .flag-icon-wrapper img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+/* === Currency Code (e.g., USD) === */
+.currency-card .currency-code {
+  font-size: 13px;
+  margin-bottom: 5px;
+  color: #444;
+  letter-spacing: 1px;
+}
+
+/* === Currency Value (e.g., $1) === */
+.currency-text-wrapper .currency-value {
+  margin: 8px 0 4px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* === Currency Label (e.g., US Dollar) === */
+.currency-text-wrapper .currency-label {
+  font-size: 0.6rem;
+  color: #666;
+  margin: 0;
+}
+
+.card-php-kr {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 5px 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card-php-kr .card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-php-kr .flag-icon-wrapper img {
+  width: 30px;
+  height: 30px;
+}
+
+.kr-icon-wrapper {
+  margin-left: -10px;
+}
+
+.side-content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 8px;
+}
+
+.side-content .currency-text {
+  font-size: 1rem;
+}
+
+/* ===============================
+   PILL BUTTON
+================================= */
+.pill-button {
+  display: inline-block;
+  padding: 4px 15px;
+  font-size: 10px;
+  color: #000;
+  background-color: #fff;
+  text-decoration: none;
+  border-radius: 30px;
+  text-align: center;
+  border: 1px solid #b9adad;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    border-color 0.3s ease;
+}
+
+.pill-button:hover {
+  background-color: #f1f1f1;
+  border-color: #3b413d;
+}
+
+.pill-button:active {
+  transform: translateY(0);
+  background-color: #e0e0e0;
+}
+
+/* ===============================
+   IMAGE CONTAINER (Optional usage)
+================================= */
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+/* ===============================
+   RESPONSIVE DESIGN
+================================= */
+@media (max-width: 768px) {
+  .card-4 .row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .php-kr-card-wrapper {
+    height: auto;
+  }
+
+  .card-4 .col-md-3,
+  .card-4 .col-md-2,
+  .card-4 .col-md-7 {
+    width: 100% !important;
+    height: auto;
+  }
+}
+/* ======================================= */
+
+/* ==================================== */
+/* Navigation Tabs Wrapper */
+
+.navTabs-wrapper {
+  width: 75%;
+  padding: 0px;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  /* border-radius: 15px; */
+  /* border: 1px solid black; */
+}
+
+/* ------------------------------------ */
+/* Nav Pills Structure */
+
+.nav-pills {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 0;
+  list-style-type: none;
+}
+
+/* ------------------------------------ */
+/* Nav Links Styling */
+
+.navTabs-wrapper .nav-link {
+  background-color: transparent;
+  padding: 5px 10px;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  border: 1px solid gainsboro;
+  /* color: black; */
+}
+
+/* ------------------------------------ */
+/* Hover and Active States */
+.navTabs-wrapper .nav-link:hover {
+  border-color: #007bff;
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.navTabs-wrapper .nav-link.active {
+  border-color: #007bff;
+  background-color: #007bff;
+  color: white;
+}
+
+/* .card .counts-header:hover {
+  background-color: #f5f5f5;
+} */
+
+.main-content .header-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0px 0; /* Add some padding instead of fixed height */
+  height: auto;
+  /* border: 1px solid black; */
+}
+
+.header-counts .card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: calc(25% - 5px);
+  min-height: 150px; /* Total fixed height of the card */
+  max-height: 170px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 8px 0px 8px;
+  box-sizing: border-box;
+  overflow-y: hidden;
+}
+
+.card-content {
+  flex: 1; /* Take the remaining space */
+  padding: 5px 12px;
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  /* border: 1px solid black; */
+}
+
+.card-content-body .col-md-5 {
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1;
+  gap: 10px;
+  padding: 8px 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff; /* Keep white for cleanliness */
+  transition: transform 0.2s ease;
+  /* Removed shadow for flat design */
+}
+
+.card-content-body .col-md-4 {
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1;
+  gap: 10px;
+  padding: 8px 5px;
+  border: 1px solid #ccc; /* Minimalist outlined border */
+  border-radius: 6px; /* Slight rounding for clean look */
+  background-color: #fff; /* Flat white background */
+  transition: transform 0.2s ease;
+  /* Removed box-shadow for flat appearance */
+}
+
+.card-content-body .col-md-5:hover,
+.card-content-body .col-md-4:hover {
+  border-color: #999;
+}
+
+.totalpayment {
+  height: 105px;
+}
+
+.clickable-card {
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s ease-in-out;
+}
+
+.clickable-card:hover {
+  background: rgba(0, 0, 0, 0.05); /* Light hover effect */
+  transform: scale(1.02); /* Smooth scaling effect */
+}
+
+.card-icon {
+  font-size: 14px; /* Smaller icon font size */
+  margin-right: 5px; /* Reduced margin */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px; /* Smaller width */
+  height: 30px; /* Smaller height */
+  border-radius: 30%;
+  color: #ffffff; /* Default icon color */
+}
+
+.card-icon p {
+  font-size: 0.8rem;
+  font-weight: bolder;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3); /* subtle downward shadow */
+  letter-spacing: 1px;
+}
+
+.month-icon-1 p {
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.month-icon-2 p {
+  font-size: 10px;
+  font-weight: 900;
+}
+
+/* Blue Icon for Total Transactions */
+.icon-blue {
+  background-color: #17a2b8; /* Light blue background */
+}
+
+/* Green Icon for Completed Transactions */
+.icon-green {
+  background-color: #28a745; /* Green background */
+}
+
+/* Yellow Icon for Pending Transactions */
+.icon-yellow {
+  background-color: #ffc107; /* Yellow background */
+  color: #333; /* Darker color for contrast */
+}
+
+/* Red Icon for Cancelled Transactions */
+.icon-red {
+  background-color: #dc3545; /* Red background */
+}
+
+.icon-gray {
+  background-color: gray; /* Gray background */
+}
+
+.side-content {
+  white-space: nowrap; /* Prevent text wrapping */
+  overflow: hidden; /* Hide overflowed content if any */
+  text-overflow: ellipsis; /* Add ellipsis if content is too long */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Optional: align text to the start */
+  line-height: 0.9;
+}
+.side-content h5 {
+  font-size: 20px; /* Reduced font size for the number */
+  font-weight: bold;
+  margin: 0;
+  color: #3a3535;
+}
+
+.side-content p {
+  font-size: 8.5px; /* Smaller font size for description */
+  font-weight: bolder;
+  color: #747b85; /* Lighter gray for the description */
+  margin: 0;
+}
+
+.side-content .total-text {
+  font-size: 8.5px; /* Smaller font size for the total text */
+  font-weight: bold;
+  color: #747b85; /* Lighter gray for the description */
+  margin: 0;
+  flex-wrap: nowrap;
+}
+
+/* ===============================
+   CARD CONTAINER STYLES
+================================= */
+.card-4 {
+  padding: 5px;
+}
+
+/* .card-4 .header {
+  height: 32px;
+  color: #4c4f52;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+} */
+
+/* .card-4 .title-wrapper h6 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 14px;
+} */
+
+.card-4 .view-currency-btn {
+  padding: 4px 10px;
+  font-size: 10px;
+  border-radius: 5px;
+  background-color: #116530;
+  border: none;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.card-4 .view-currency-btn:hover {
+  background-color: #0d4d28;
+}
+
+/* === Container Body Styling === */
+.card-4 .card-content-body {
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 5px 0px 5px 0px;
+
+  /* border: 1px solid black; */
+}
+
+/* === Currency Row Flex Layout === */
+.currency-row {
+  display: flex;
+  align-items: stretch; /* Ensure full height alignment */
+  justify-content: center; /* Horizontally center items */
+  width: 100%;
+  gap: 5px; /* Space between each card/icon */
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+}
+
+/* === USD Card Styling === */
+.usd-card-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+}
+
+/* === Exchange Icon Container === */
+.icon-container {
+  width: 50px;
+  min-width: 50px;
+  height: auto;
+  display: flex;
+  align-items: center; /* Vertically center */
+  justify-content: center; /* Horizontally center */
+  background-color: transparent;
+  /* border: 1px solid black; */
+  box-sizing: border-box;
+}
+
+/* === Exchange Icon Wrapper === */
+.icon-wrapper-currency {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #495057;
+}
+
+/* === PHP & KRW Card Column === */
+.php-kr-card-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+}
+
+/* === PHP & KRW Individual Box Style === */
+.card-php-kr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 5px 10px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* === Responsive (Optional for mobile fix) === */
+@media (max-width: 768px) {
+  .currency-row {
+    flex-direction: column;
+  }
+
+  .icon-wrapper {
+    width: 100%;
+    min-width: auto;
+    height: 40px;
+  }
+}
+
+/* ===============================
+   FLAG WRAPPER FOR USD
+================================= */
+/* === Main Card Container === */
+.currency-card .flag-icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Vertically center contents */
+  padding: 8px 8px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  text-align: center;
+}
+
+/* === Flag Image === */
+.currency-card .flag-icon-wrapper img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+/* === Currency Code (e.g., USD) === */
+.currency-card .currency-code {
+  font-size: 13px;
+  margin-bottom: 5px;
+  color: #444;
+  letter-spacing: 1px;
+}
+
+/* === Currency Value (e.g., $1) === */
+.currency-text-wrapper .currency-value {
+  margin: 8px 0 4px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* === Currency Label (e.g., US Dollar) === */
+.currency-text-wrapper .currency-label {
+  font-size: 0.6rem;
+  color: #666;
+  margin: 0;
+}
+
+.card-php-kr {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 5px 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card-php-kr .card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-php-kr .flag-icon-wrapper img {
+  width: 30px;
+  height: 30px;
+}
+
+.kr-icon-wrapper {
+  margin-left: -10px;
+}
+
+.side-content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 8px;
+}
+
+.side-content .currency-text {
+  font-size: 1rem;
+}
+
+/* ===============================
+   PILL BUTTON
+================================= */
+.pill-button {
+  display: inline-block;
+  padding: 4px 15px;
+  font-size: 10px;
+  color: #000;
+  background-color: #fff;
+  text-decoration: none;
+  border-radius: 30px;
+  text-align: center;
+  border: 1px solid #b9adad;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    border-color 0.3s ease;
+}
+
+.pill-button:hover {
+  background-color: #f1f1f1;
+  border-color: #3b413d;
+}
+
+.pill-button:active {
+  transform: translateY(0);
+  background-color: #e0e0e0;
+}
+
+/* ===============================
+   IMAGE CONTAINER (Optional usage)
+================================= */
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+/* ===============================
+   RESPONSIVE DESIGN
+================================= */
+@media (max-width: 768px) {
+  .card-4 .row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .php-kr-card-wrapper {
+    height: auto;
+  }
+
+  .card-4 .col-md-3,
+  .card-4 .col-md-2,
+  .card-4 .col-md-7 {
+    width: 100% !important;
+    height: auto;
+  }
+}
+
+/* ============================= */
+
+/* ============================= */
+/* Second Row Container */
+
+.second-row-container {
+  display: flex;
+  gap: 8px;
+  position: relative;
+  height: 33.5vh;
+  /* border: 1px solid black; */
+}
+
+.second-row-container > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  height: 100%;
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+  background-color: transparent;
+  gap: 8px; /* Add spacing between header/body if needed */
+}
+
+/* Header section inside each column */
+/* .second-row-container > div .header {
+  width: 100%;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4vh;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #333;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ccc;
+  border-radius: 5px;
+} */
+
+/* Body section inside each column */
+.second-row-container > div .body {
+  flex: 1; /* Fill remaining space under header */
+  width: 100%;
+  overflow-y: auto;
+  background-color: #ffffff;
+  color: #333;
+  padding: 8px;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.one .btn {
+  padding: 8px 8px;
+  border-radius: 4px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: background-color 0.3s ease, text-decoration 0.3s ease;
+  gap: 8px;
+  align-self: first baseline;
+}
+
+/* Optional hover effect for better UX */
+.one .btn:hover {
+  background-color: #c5d4e4;
+  color: rgb(0, 0, 0);
+}
+
+.view-booking-container {
+  display: flex;
+  align-items: center;
+}
+
+.header > div {
+  margin-left: auto;
+}
+
+.header h6 {
+  font-size: 14px;
+  font-weight: bolder;
+}
+
+
+
+/* .search-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; 
+  background-color: #f0f0f0; 
+  border-radius: 10px; 
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  width: 320px; 
+  height: 45px; 
+  padding: 10px 15px;
+  border-radius: 8px;
+  background-color: #e9e9e9e5;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  transition: 0.3s ease-in-out;
+}
+
+.search-input-wrapper:hover {
+  background-color: #d6d6d6; 
+}
+
+.search-input-wrapper input {
+  flex: 1;
+  border: none;
+  font-size: 16px;
+  color: #222; 
+  background-color: transparent;
+  outline: none;
+  padding: 0;
+}
+
+.search-input-wrapper input::placeholder {
+  color: #777; 
+}
+
+.search-input-wrapper .icon {
+  color: #555;
+  font-size: 20px; 
+  margin-left: 12px;
+  transition: 0.3s ease-in-out;
+}
+
+.search-input-wrapper:hover .icon {
+  color: #333; 
+} */
+
+
+/* ======== Payment, Request, Confirm Wrapper Styles ======== */
+/* Tabbed Content */
+.tab-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 70vh;
+  gap: 5px;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+
+
+  /* border: 1px solid black; */
+}
+
+
+
+
+
+
+
+/* ============================== */
+/* Card Container Styling */
+.flight-seat-container .one {
+  width: 100%;
+  height: 67vh;
+  background-color: #fff;
+  overflow: hidden;
+  border: 1px solid gainsboro;
+}
+
+.flight-seat-header {
+  width: 100%;
+  height: 5.3vh;
+  background-color: #fff;
+  overflow: hidden;
+  /* border: 1px solid gainsboro; */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  padding: 0px 8px 5px 8px;
+  border-bottom: 2px solid gainsboro;
+  z-index: 99;
+  /* border: 1px solid black; */
+  margin-bottom: 5px;
+}
+
+.flight-seat-footer {
+  width: 100%;
+  height: 5vh; /* Allow dynamic height for better responsiveness */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 8px 12px;
+  font-family: system-ui, sans-serif;
+  font-size: 14px;
+  color: #333;
+  background-color: #f9f9f9; /* Soft light background */
+  box-sizing: border-box;
+  gap: 10px;
+  border: 1px solid #dee2e6; /* Light border */
+  border-radius: 6px; /* Slightly more rounded */
+  box-shadow: none; /* Flat look */
+}
+
+/* Pagination Container */
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Pagination Buttons */
+.pagination-btn {
+  padding: 6px 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+.pagination-btn:disabled {
+  background-color: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Hide DataTables controls */
+.dataTables_paginate,
+.dataTables_info {
+  display: none !important;
+}
+
+
+/* -------------------------------------
+   TABLE: General Structure & Base Style
+-------------------------------------- */
+.table-header {
+  height: 4vh;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 0 2px;
+  font-weight: bold;
+
+  /* border: 1px solid black; */
+}
+
+.table-wrapper {
+  flex: 1; /* Grow to fill remaining space */
+  overflow-y: auto;
+  font-size: 12px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+}
+
+/* Tab Pane Content */
+.tab-pane-content {
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+}
+
+/* Header Section */
+.header-wrapper {
+  display: flex;
+  width: 100%;
+  height: 35vh;
+  gap: 10px;
+  padding: 0;
+  box-sizing: border-box;
+
+  /* border-bottom: 1px solid black; */
+}
+
+/* Shared Wrapper Styles */
+.request-wrapper,
+.payment-wrapper,
+.pending-wrapper {
+  flex: 1 1 0; /* Grow, shrink, base 0 = equal share */
+  height: 100%; /* Full height of parent */
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  box-sizing: border-box;
+  /* border: 1px solid black; */
+}
+
+/* Confirm Section */
+.confirm-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 34vh;
+  gap: 0px;
+  padding: 0;
+  box-sizing: border-box;
+  /* border-bottom: 1px solid black; */
+}
+
+.confirm-table-container {
+  flex: 1; 
+  width: 100%;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  /* border: 1px solid black; */
+}
+
+
+/* --------------------------------------- */
+/* Table Base Styles */
+
+.table-wrapper .table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+  background-color: transparent;
+  white-space: nowrap;
+  table-layout: auto;
+  overflow-x: auto;
+  overflow-y: auto;
+  margin: 0;
+  font-family: inherit; /* inherit from container */
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+/* --------------------------------------- */
+/* Table Head Styles */
+
+.table thead {
+  background-color: #dc3546e0; /* gainsboro */
+  color: #3a3a3a; /* Darker gray for contrast */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  text-align: left;
+  user-select: none;
+  font-family: inherit;
+}
+
+.table thead th {
+  vertical-align: top;
+  font-size: 0.65rem;
+  font-weight: 500;
+  padding: 5px 8px;
+  text-transform: uppercase;
+  color: #ffffff; /* Matches text color */
+  background-color: #dc3546e0; /* Same as thead */
+  font-family: inherit;
+}
+
+
+.table tbody tr {
+  border-left: none;
+  border-right: none;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: white;
+  font-family: inherit;
+  display: table-row;
+}
+
+.table tbody tr:hover {
+  background-color: #464646; /* darker gray background */
+  color: #111827; /* darker text */
+  cursor: pointer;
+  box-shadow: 0 0 0 1.5px #d1d5db inset;
+}
+
+.table tbody td,
+.table tbody th {
+  color: #374151;
+  vertical-align: middle;
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  white-space: nowrap;
+  border-bottom: 0.5px solid #e5e7eb;
+  border-left: 0.5px solid #e5e7eb;
+  border-right: 0.5px solid #e5e7eb;
+  font-family: inherit;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Hover effect for table rows */
+.table tbody tr:hover td {
+  background-color: #e6e6e6; /* Soft gray highlight */
+}
+
+
+
+
+
+.table tbody tr td:first-child,
+.table tbody tr th:first-child {
+  border-left: none;
+}
+
+
+.table tbody tr td:last-child,
+.table tbody tr th:last-child {
+  border-right: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   Confirm Table Container: Scrollable and Responsive
+============================================================ */
+.confirm-table-container-flight {
+  width: 100%;
+  height: 70vh;
+  overflow: auto;
+  position: relative;
+  display: block;
+  background-color: #fdfdfd;
+  border: 1px solid #dee2e6;
+  /* border-radius: 6px; */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* ============================================================
+   Info Table: Base Setup
+============================================================ */
+.info-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0;
+  empty-cells: show;
+  caption-side: top;
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 18px;
+  color: #111;
+
+  background-color: #fff;
+}
+
+/* ============================================================
+   Optional Column Group
+============================================================ */
+.info-table colgroup col {
+  width: auto;
+}
+
+/* ============================================================
+   Table Header (Thead)
+============================================================ */
+.info-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: #dc3545;
+  color: #fff;
+  border-bottom: 1px solid #dc3545;
+}
+
+.info-table thead th {
+  padding: 10px 8px;
+  font-weight: 600;
+  font-size: 11px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* border-right: .1px solid gainsboro; */
+  line-height: 1;
+  height: 26px;
+}
+
+/* ============================================================
+   Table Body (Tbody)
+============================================================ */
+.info-table tbody tr {
+  height: 10px; /* Slightly smaller than before */
+  transition: background-color 0.2s ease;
+}
+
+/* .info-table tbody tr:nth-child(even) {
+  background-color: #e6e6e6; 
+}
+
+.info-table tbody tr:hover {
+  background-color: #e0e0e0; 
+} */
+
+.info-table tbody td {
+  padding: 6px 6px;
+  font-size: 12px;
+  color: #333;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+
+  border-left: 0.5px solid #dee2e6;
+  border-right: 0.5px solid #dee2e6;
+  border-bottom: 0.5px solid #f1f3f5;
+}
+
+/* Hover effect */
+.info-table tbody tr:hover td {
+  background-color: #f8f9fa; /* Light gray on hover */
+  cursor: default; /* Optional: change cursor on hover */
+}
+
+
+/* ============================================================
+   Support for Rowspan and Colspan Cells
+============================================================ */
+.info-table td[rowspan],
+.info-table td[colspan]
+ {
+  padding: 6px 8px;
+  text-align: center;
+  vertical-align: middle;
+  border-left: 0.5px solid #dee2e6;
+  border-right: 0.5px solid #dee2e6;
+}
+
+
+/* ============================================================
+   Footer or Additional Element Spacing
+============================================================ */
+.info-table + * {
+  margin-top: 1rem;
+}
+
+
+
+/* -------------------------------------
+   COLUMN WIDTHS: Adjusted for compact layout
+-------------------------------------- */
+.info-table th:nth-child(1),
+.info-table td:nth-child(1) {
+  width: 4%;
+}
+
+.info-table th:nth-child(2),
+.info-table td:nth-child(2) {
+  width: 10%;
+}
+
+.info-table th:nth-child(3),
+.info-table td:nth-child(3) {
+  width: 3%;
+}
+
+.info-table th:nth-child(4),
+.info-table td:nth-child(4) {
+  width: 3%;
+}
+
+.info-table th:nth-child(5),
+.info-table td:nth-child(5) {
+  width: 6%;
+}
+
+.info-table th:nth-child(6),
+.info-table td:nth-child(6) {
+  width: 2%;
+}
+
+/* -------------------------------------
+   BUTTON: Book Now (for compact look)
+-------------------------------------- */
+
+.btn-bookNow {
+  padding: 5px 15px; /* Normal button size */
+  font-size: 12.5px;
+  color: #4b4b4b;
+  font-weight: 500;
+  text-decoration: none; /* Remove underline */
+  border: 1px solid #0d6efd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+
+.btn-bookNow:hover {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.btn-bookNow:active {
+  background-color: #bd2130;
+  transform: scale(0.98);
+}
+
+.btn-bookNow:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+
+
+
+
+
+
+
+
+
+/* ================== */
+/* Unconfirmed Table */
+
+.unconfirm-table-container {
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: auto;
+  box-sizing: border-box;
+  border: 1px solid #e0e0e0; /* optional */
+}
+
+.unconfirm-table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+/* Table Header */
+.unconfirm-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  text-align: left;
+}
+
+/* Column Width Adjustments */
+.unconfirm-table th:nth-child(1),
+.unconfirm-table td:nth-child(1) {
+  width: 2%;
+}
+
+.unconfirm-table th:nth-child(2),
+.unconfirm-table td:nth-child(2) {
+  width: 10%;
+}
+
+.unconfirm-table th:nth-child(3),
+.unconfirm-table td:nth-child(3) {
+  width: 6%;
+}
+
+.unconfirm-table th:nth-child(4),
+.unconfirm-table td:nth-child(4) {
+  width: 1%;
+}
+
+.unconfirm-table th:nth-child(5),
+.unconfirm-table td:nth-child(5) {
+  width: 1%;
+}
+
+
+
+
+/* Optional: Force inner content to stretch fully */
+/* .unconfirm-table th > *,
+.unconfirm-table td > * {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: stretch;
+  justify-content: stretch;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+} */
+
+
+
+
+
+/* ================== */
+/* Request Table Container */
+.request-table-container {
+  height: 100%;
+  overflow: auto;
+}
+
+/* ================== */
+/* Request Table */
+.request-table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+/* ================== */
+/* Column Width Adjustments */
+.request-table th:nth-child(1),
+.request-table td:nth-child(1) {
+  width: 10%;
+}
+
+.request-table th:nth-child(2),
+.request-table td:nth-child(2) {
+  width: 30%;
+}
+
+.request-table th:nth-child(3),
+.request-table td:nth-child(3) {
+  width: 40%;
+}
+
+.request-table th:nth-child(4),
+.request-table td:nth-child(4) {
+  width: 10%;
+}
+
+.request-table th:nth-child(5),
+.request-table td:nth-child(5) {
+  width: 5%;
+}
+
+.request-table th:nth-child(6),
+.request-table td:nth-child(6) {
+  width: 2%;
+}
+
+/* Make content inside cells fill full height and width */
+/* .request-table th > *,
+.request-table td > * {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: stretch;
+  justify-content: stretch;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+} */
+
+
+
+
+
+
+/* ================== */
+/* Payment Table */
+.payment-table-container {
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: auto;
+  box-sizing: border-box;
+  border: 1px solid #e0e0e0; /* optional */
+}
+
+/* Let the container handle scrolling */
+.payment-table {
+  min-width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+  table-layout: auto;
+}
+
+/* Column Width Adjustments */
+.payment-table th:nth-child(1),
+.payment-table td:nth-child(1) {
+  width: 20%;
+}
+
+.payment-table th:nth-child(2),
+.payment-table td:nth-child(2) {
+  width: 10%;
+}
+
+.payment-table th:nth-child(3),
+.payment-table td:nth-child(3) {
+  width: 50%;
+}
+
+.payment-table th:nth-child(4),
+.payment-table td:nth-child(4) {
+  width: 15%;
+}
+
+.payment-table th:nth-child(5),
+.payment-table td:nth-child(5) {
+  width: 15%;
+}
+
+.payment-table th:nth-child(6),
+.payment-table td:nth-child(6) {
+  width: 15%;
+}
+
+
+
+
+
+
+.td-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.td-content h6 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: bold;
+  color: #000;
+}
+
+.td-content h6 span {
+  font-weight: normal;
+  font-size: 12px;
+}
+
+
+
+
+/* ======================================= */
+/* Confirm Table Container */
+
+.confirm-table-container {
+  height: 100%;
+  overflow: auto;
+}
+
+.confirm-table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+/* Adjust column widths */
+.confirm-table th:nth-child(1),
+.confirm-table td:nth-child(1) {
+  width: 5%; /* NO. */
+}
+
+.confirm-table th:nth-child(2),
+.confirm-table td:nth-child(2) {
+  width: 15%; /* NAME */
+}
+
+.confirm-table th:nth-child(3),
+.confirm-table td:nth-child(3) {
+  width: 15%; /* FLIGHT DATE */
+}
+
+.confirm-table th:nth-child(4),
+.confirm-table td:nth-child(4) {
+  width: 5%; /* TOTAL PAX. */
+  text-align: center;
+}
+
+.confirm-table th:nth-child(5),
+.confirm-table td:nth-child(5) {
+  width: 15%; /* CONTACT NAME */
+}
+
+.confirm-table th:nth-child(6),
+.confirm-table td:nth-child(6) {
+  width: 15%; /* BOOKING TYPE */
+  text-align: left;
+}
+
+.confirm-table th:nth-child(7),
+.confirm-table td:nth-child(7) {
+  width: 10%; /* AMOUNT PAID */
+}
+
+.confirm-table th:nth-child(8),
+.confirm-table td:nth-child(8) {
+  width: 10%; /* BALANCE */
+}
+
+.confirm-table th:nth-child(9),
+.confirm-table td:nth-child(9) {
+  width: 6%; /* STATUS */
+  text-align: center;
+}
+
+
+/* Remove left border from the first column and right border from the last column in body */
+.confirm-table tbody td:first-child {
+  border-left: none;
+}
+
+.confirm-table tbody td:last-child {
+  border-right: none;
+}
+
+.confirm-table tbody tr {
+  background-color: transparent;
+  transition: background-color 0.3s;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============== Fit Container Styles ============== */
+.fit-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  position: relative;
+  height: 30vh;
+  margin-top: 5px;
+}
+
+.fit-container .one {
+  width: 100%; /* Full width for the card */
+  height: 30vh; /* Adjusted height */
+}
+
+.fit-container .one .header {
+  width: 100%;
+  padding: 10px 0px;
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  align-items: center;
+}
+
+/* Confirm Table Container */
+.fit-table-container {
+  width: 100%;
+  height: 60vh;
+
+  position: relative;
+  overflow-y: auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.fit-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: auto;
+  border-radius: 10px;
+}
+
+.fit-table thead {
+  background-color: #424242;
+  color: #fff;
+  text-align: left;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.fit-table thead th {
+  font-size: 14px;
+  padding: 4px 14px;
+  font-weight: 600;
+  color: #fff;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.fit-table tbody td {
+  padding: 6px 14px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  color: #555;
+  font-weight: 600;
+}
+
+.fit-table tbody tr {
+  background-color: transparent;
+  transition: background-color 0.3s;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.fit-table tbody tr:hover {
+  background-color: #b2ebf2;
+}
+
+.fit-table tbody tr:first-child {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.fit-table tbody tr:last-child {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Max-width 1736px adjustments */
+@media (max-width: 1736px) {
+  .header-counts .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .header-counts .card > * {
+    flex-shrink: 0;
+  }
+
+  .card-cancelled {
+    display: none !important;
+  }
+}
+
+/* Max-width 1250px: Adjust card layout and containers */
+@media (max-width: 1580px) {
+  .header-counts {
+    gap: 8px;
+  }
+
+  .header-counts .card {
+    width: calc(50% - 5px);
+    margin-top: 5px;
+  }
+
+  .header-counts .card:first-child,
+  .header-counts .card:nth-child(2) {
+    margin-top: 0;
+  }
+
+  .card-cancelled {
+    display: flex !important;
+  }
+
+  .info-table-container,
+  .confirm-table-container {
+    height: 50vh;
+    overflow-y: auto;
+    padding: 0px 0px;
+  }
+
+  .header-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: auto;
+    padding: 5px 3px;
+  }
+
+  .header-wrapper .request-wrapper,
+  .header-wrapper .payment-wrapper {
+    width: 100%;
+    height: 38.5vh;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .request-table-container,
+  .payment-table-container {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+  }
+
+  .request-table,
+  .payment-table,
+  .confirm-table {
+    font-size: 12px;
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+    background-color: transparent;
+  }
+
+  .request-table th,
+  .payment-table th,
+  .confirm-table th,
+  .confirm-table td {
+    padding: 10px 12px;
+    font-size: 12px;
+    text-align: left;
+    white-space: nowrap;
+    background-color: #f8f9fa;
+  }
+
+  .request-table td,
+  .payment-table td {
+    font-size: 12px;
+    padding: 12px;
+    vertical-align: middle;
+    word-wrap: break-word;
+    white-space: normal;
+  }
+
+
+  .confirm-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50vh;
+    padding: 10px 0 15px;
+  }
+}
+
+
+/* Max-width 768px: Stack cards and adjust tables */
+@media (max-width: 768px) {
+  .header-counts {
+    gap: 10px;
+  }
+
+  .header-counts .card {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .header-counts .card:first-child {
+    margin-top: 0;
+  }
+
+  .request-table-container,
+  .payment-table-container {
+    height: auto;
+    margin-top: 5px;
+  }
+
+  .request-table th,
+  .payment-table th {
+    font-size: 12px;
+  }
+
+  .request-table td,
+  .payment-table td {
+    font-size: 13px;
+  }
+
+  .info-table-container {
+    height: 50vh;
+  }
+}
+
+

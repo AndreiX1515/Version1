@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html id="html-lang" lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN</title>
+
+	<!-- 언어 설정 스크립트 -->
+	<script>
+		(function() {
+			function getCookie(name) {
+				const value = `; ${document.cookie}`;
+				const parts = value.split(`; ${name}=`);
+				if (parts.length === 2) return parts.pop().split(';').shift();
+				return null;
+			}
+			const lang = getCookie('lang') || 'eng';
+			const htmlLang = document.getElementById('html-lang') || document.documentElement;
+			// Admin supports only English/Tagalog
+			htmlLang.setAttribute('lang', (lang === 'tl') ? 'tl' : 'en');
+		})();
+	</script>
+
+	<!-- 공통 스타일 -->
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+	
+	<!-- calendar -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+	<!-- editor -->
+	<link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.js"></script>
+</head>
+
+<body>
+
+	<!-- header 들어올 자리 -->
+	<header class="layout-header"></header>
+
+	<!-- 본문 영역 -->
+	<main class="layout-main">
+		<!-- nav 들어올 자리 -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content">
+		
+			<div class="jw-cols jw-between">
+				<h1 class="page-title" data-lan-eng="Create Reservation">예약 생성</h1>
+				<div class="jw-center jw-gap8">
+					<span class="step-indicator">Step 1 of 2</span>
+					<button type="button" id="test-fill-btn" class="jw-button typeA" data-lan-eng="Test Fill">테스트 입력</button>
+				</div>
+			</div>
+		
+			<h2 class="section-title jw-mgt32" data-lan-eng="Product Information">상품 정보</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+					<div class="grid-item col-span-3">
+						<label class="label-name"><span data-lan-eng="Product Name">상품명</span> <span class="req">*</span></label>
+						<div class="jw-center jw-gap20">
+							<input type="text" id="product_name" class="form-control jw-wf" placeholder="상품을 선택해주세요" data-lan-eng-placeholder="Please select a product" disabled aria-required="true">
+							<button type="button" id="product_search_btn" class="jw-button typeA"><img src="../image/search2.svg" alt=""><span data-lan-eng="Product Search">상품 검색</span></button>
+						</div>
+						<input type="hidden" id="package_id">
+					</div>
+					<div class="grid-item">
+						<label class="label-name"><span data-lan-eng="Travel start date">여행 시작일</span> <span class="req">*</span></label>
+						<div class="field-row">
+							<input id="departure_date" type="text" class="form-control" placeholder="날짜를 선택해주세요" data-lan-eng-placeholder="Please select a date" readonly>
+							<button type="button" id="departure_date_btn" class="btn-icon calendar" data-target="#departure_date" aria-label="달력 열기" disabled>
+								<img src="../image/calendar.svg" alt="">
+							</button>
+						</div>
+						<input type="hidden" id="departure_date_value">
+					</div>
+					<div class="grid-item"></div>
+					<div class="grid-item"></div>
+
+					<!-- 아래 3개는 여행 시작일 선택 후 표시 -->
+					<div class="grid-item hidden" id="trip_range_wrap">
+						<label class="label-name" for="trip_range" data-lan-eng="Travel period">여행 기간</label>
+						<input id="trip_range" type="text" class="form-control" value="" disabled>
+					</div>
+
+					<div class="grid-item hidden" id="meet_time_wrap">
+						<label class="label-name" for="meet_time" data-lan-eng="Meeting time">미팅 시간</label>
+						<input id="meet_time" type="text" class="form-control" value="" disabled>
+					</div>
+
+					<div class="grid-item hidden" id="meet_place_wrap">
+						<label class="label-name" for="meet_place" data-lan-eng="Meeting place">미팅 장소</label>
+						<input id="meet_place" type="text" class="form-control" value="" disabled>
+					</div>
+					<div class="grid-item"></div>
+					<div class="grid-item"></div>
+				</div>
+			</div>
+
+			<!-- Flight Information 섹션 -->
+			<div id="flight-info-section">
+				<h2 class="section-title jw-mgt32" data-lan-eng="Flight Information">항공편 정보</h2>
+
+				<!-- Departure flight 카드 -->
+				<div class="card-panel jw-mgt16">
+					<h3 class="card-panel-title" data-lan-eng="Departure flight">출국편</h3>
+					<div class="card-panel-divider"></div>
+					<div class="grid-wrap jw-mgt16">
+						<div class="grid-item">
+							<label class="label-name" for="out_flight_no" data-lan-eng="Flight number">항공편명</label>
+							<input id="out_flight_no" type="text" class="form-control" value="" disabled>
+						</div>
+
+						<div class="grid-item">
+							<label class="label-name" for="out_depart_dt" data-lan-eng="Departure date and time">출발일시</label>
+							<input id="out_depart_dt" type="text" class="form-control" value="" disabled>
+						</div>
+
+						<div class="grid-item">
+							<label class="label-name" for="out_arrive_dt" data-lan-eng="Arrival time">도착일시</label>
+							<input id="out_arrive_dt" type="text" class="form-control" value="" disabled>
+						</div>
+
+						<div class="grid-item">
+							<label class="label-name" for="out_depart_airport" data-lan-eng="Departure point">출발지</label>
+							<input id="out_depart_airport" type="text" class="form-control" value="" disabled>
+						</div>
+
+						<div class="grid-item">
+							<label class="label-name" for="out_arrive_airport" data-lan-eng="Destination">도착지</label>
+							<input id="out_arrive_airport" type="text" class="form-control" value="" disabled>
+						</div>
+
+						<div class="grid-item"></div>
+					</div>
+				</div>
+
+				<!-- Return trip 카드 -->
+				<div class="card-panel jw-mgt16">
+					<h3 class="card-panel-title" data-lan-eng="Return trip">귀국편</h3>
+					<div class="card-panel-divider"></div>
+					<div class="grid-wrap jw-mgt16">
+						<div class="grid-item">
+							<label class="label-name" for="in_flight_no" data-lan-eng="Flight number">항공편명</label>
+							<input id="in_flight_no" type="text" class="form-control" value="" disabled>
+						</div>
+
+						<div class="grid-item">
+							<label class="label-name" for="in_depart_dt" data-lan-eng="Departure date and time">출발일시</label>
+							<input id="in_depart_dt" type="text" class="form-control" value="" disabled>
+						</div>
+
+						<div class="grid-item">
+							<label class="label-name" for="in_arrive_dt" data-lan-eng="Arrival time">도착일시</label>
+							<input id="in_arrive_dt" type="text" class="form-control" value="" disabled>
+						</div>
+
+						<div class="grid-item">
+							<label class="label-name" for="in_depart_airport" data-lan-eng="Departure point">출발지</label>
+							<input id="in_depart_airport" type="text" class="form-control" value="" disabled>
+						</div>
+
+						<div class="grid-item">
+							<label class="label-name" for="in_arrive_airport" data-lan-eng="Destination">도착지</label>
+							<input id="in_arrive_airport" type="text" class="form-control" value="" disabled>
+						</div>
+
+						<div class="grid-item"></div>
+					</div>
+				</div>
+			</div>
+
+		<div class="jw-cols jw-between jw-mgt32">
+			<h2 class="section-title" data-lan-eng="Contact Person">
+				Contact Person
+			</h2>
+			<button type="button" id="customer_search_btn" class="jw-button typeA" onclick="openCustomerSearchModal()" data-lan-eng="Loading Contact Person">Loading Contact Person</button>
+		</div>
+		<div class="card-panel jw-mgt16">
+			<div class="grid-wrap">
+				<div class="grid-item">
+					<label for="user_name" class="form-label required" data-lan-eng="Name">이름</label>
+					<input type="text" id="user_name" class="form-control" placeholder="이름" data-lan-eng-placeholder="Name" aria-required="true">
+					<input type="hidden" id="customer_account_id">
+				</div>
+					<div class="grid-item">
+						<label for="user_email" class="form-label required" data-lan-eng="Email">이메일</label>
+						<input type="email" id="user_email" class="form-control" placeholder="이메일" data-lan-eng-placeholder="Email" aria-required="true">
+					</div>
+					<div class="grid-item">
+						<label for="user_phone" class="form-label required" data-lan-eng="Contact">연락처</label>
+						<div class="field-row">
+							<select id="country_code" class="select">
+								<option value="+63">+63</option>
+								<option value="+82">+82</option>
+								<option value="+81">+81</option>
+								<option value="+1">+1</option>
+							</select>
+							<input type="text" id="user_phone" class="form-control" placeholder="전화번호" data-lan-eng-placeholder="Phone Number">
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<div class="jw-cols jw-between jw-mgt32">
+			<h2 class="section-title" data-lan-eng="Traveler Information">Traveler Information</h2>
+			<button type="button" id="load_traveler_customers_btn" class="jw-button typeA" onclick="openTravelCustomerSearchModal()" data-lan-eng="Loading customer information">Loading customer information</button>
+		</div>
+		<div class="card-panel jw-mgt16">
+			<div class="traveler-summary-section">
+				<div class="traveler-summary-header">
+					<span class="traveler-summary-count" id="traveler-summary-count">0 Travelers</span>
+					<button type="button" id="manage_traveler_btn" class="jw-button typeA" onclick="openTravelerModal()">Manage Travelers</button>
+				</div>
+				<div class="traveler-summary-list" id="traveler-summary-list">
+					<p class="no-traveler-message">No travelers added yet. Click "Manage Travelers" to add.</p>
+				</div>
+			</div>
+		</div>
+		<style>
+			.traveler-summary-section {
+				padding: 8px 0;
+			}
+			.traveler-summary-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 16px;
+			}
+			.traveler-summary-count {
+				font-size: 16px;
+				font-weight: 600;
+				color: #374151;
+			}
+			.traveler-summary-list {
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+				min-height: 72px;
+			}
+			.traveler-summary-item {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 12px 16px;
+				background: #F9FAFB;
+				border-radius: 8px;
+				border: 1px solid #E5E7EB;
+			}
+			.traveler-summary-item.is-primary {
+				background: #F7FAFF;
+				border-color: #0050C8;
+			}
+			.traveler-summary-info {
+				display: flex;
+				align-items: center;
+				gap: 12px;
+			}
+			.traveler-summary-info .badge-primary {
+				background: #0050C8;
+				color: #fff;
+				padding: 2px 8px;
+				border-radius: 4px;
+				font-size: 11px;
+			}
+			.traveler-summary-name {
+				font-weight: 500;
+				color: #111827;
+			}
+			.traveler-summary-details {
+				color: #6B7280;
+				font-size: 13px;
+			}
+			.no-traveler-message {
+				text-align: center;
+				padding: 24px;
+				color: #9CA3AF;
+			}
+			/* Selected Room Options List */
+			.selected-rooms-list {
+				margin-top: 12px;
+			}
+			.selected-rooms-list:empty {
+				display: none;
+			}
+			.selected-room-item {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 10px 14px;
+				background: #F9FAFB;
+				border: 1px solid #E5E7EB;
+				border-radius: 8px;
+				margin-bottom: 8px;
+			}
+			.selected-room-item:last-child {
+				margin-bottom: 0;
+			}
+			.selected-room-info {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+			}
+			.selected-room-name {
+				font-weight: 500;
+				color: #111827;
+				font-size: 14px;
+			}
+			.selected-room-count {
+				background: #0050C8;
+				color: #fff;
+				padding: 2px 10px;
+				border-radius: 12px;
+				font-size: 12px;
+				font-weight: 500;
+			}
+			.selected-room-details {
+				display: flex;
+				align-items: center;
+				gap: 16px;
+				color: #6B7280;
+				font-size: 13px;
+			}
+			.selected-room-capacity {
+				color: #374151;
+			}
+			.selected-room-price {
+				font-weight: 600;
+				color: #0050C8;
+			}
+		</style>
+
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Reservation Information">예약 정보</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+
+					<div class="grid-item col-span-3">
+						<label class="label-name"><span data-lan-eng="Room Options">룸 옵션 </span><span class="req">*</span></label>
+						<div><button type="button" id="room_option_btn" class="jw-button typeA" data-lan-eng="Select Room Options">룸 옵션 선택</button></div>
+						<div class="selected-rooms-list" id="selected-rooms-list">
+							<!-- 선택된 룸 옵션이 여기에 표시됩니다 -->
+						</div>
+					</div>
+
+					<!-- multi-editor.js -->
+					<div class="grid-item col-span-3">
+						<label class="label-name" for="etc_req_editor" data-lan-eng="Other requests">기타 요청사항</label>
+						<div class="editor-box-wrap">
+						  <div class="jw-editor">
+							<div class="toolbar">
+							  <div class="group">
+								<button type="button" class="editor-btn ql-bold"><img src="../image/editer_bold.svg" alt=""></button>
+								<button type="button" class="editor-btn ql-italic"><img src="../image/editer_italic.svg" alt=""></button>
+								<button type="button" class="editor-btn ql-underline"><img src="../image/editer_underline.svg" alt=""></button>
+								<button type="button" class="editor-btn ql-strike"><img src="../image/editer_strikethrough.svg" alt=""></button>
+								<button type="button" class="editor-btn font-color" onclick="setColor(this);">A</button>
+								<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+							  </div>
+							  <div class="group">
+								<select class="ql-size">
+								  <option value="" selected>Font</option>
+								  <option value="12px">12px</option>
+								  <option value="14px">14px</option>
+								  <option value="16px">16px</option>
+								  <option value="18px">18px</option>
+								  <option value="24px">24px</option>
+								</select>
+							  </div>
+							  <div class="group">
+								<button type="button" class="editor-btn ql-align" value=""><img src="../image/editer_left.svg" alt=""></button>
+								<button type="button" class="editor-btn ql-align" value="center"><img src="../image/editer_center.svg" alt=""></button>
+								<button type="button" class="editor-btn ql-align" value="right"><img src="../image/editer_right.svg" alt=""></button>
+							  </div>
+							  <div class="group">
+								<button type="button" class="editor-btn ql-list" value="ordered"><img src="../image/editer_ordered.svg" alt=""></button>
+								<button type="button" class="editor-btn ql-list" value="bullet"><img src="../image/editer_bullet.svg" alt=""></button>
+							  </div>
+							</div>
+					  
+							<div class="jweditor" id="etc_req_editor" data-placeholder="내용을 입력해주세요"></div>
+						  </div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<h2 class="section-title jw-mgt32" data-lan-eng="Agent Notes">Agent Note</h2>
+			<div class="card-panel jw-mgt16">
+				<div class="grid-wrap">
+					<!-- multi-editor.js -->
+					<div class="grid-item col-span-3">
+						<label class="label-name" for="memo_editor" data-lan-eng="Note">메모</label>
+						<div class="editor-box-wrap">
+						  <div class="jw-editor">
+							<div class="toolbar">
+							  <div class="group">
+								<button type="button" class="editor-btn ql-bold"><img src="../image/editer_bold.svg" alt=""></button>
+								<button type="button" class="editor-btn ql-italic"><img src="../image/editer_italic.svg" alt=""></button>
+								<button type="button" class="editor-btn ql-underline"><img src="../image/editer_underline.svg" alt=""></button>
+								<button type="button" class="editor-btn ql-strike"><img src="../image/editer_strikethrough.svg" alt=""></button>
+								<button type="button" class="editor-btn font-color" onclick="setColor(this);">A</button>
+								<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+							  </div>
+							  <div class="group">
+								<select class="ql-size">
+								  <option value="" selected>Font</option>
+								  <option value="12px">12px</option>
+								  <option value="14px">14px</option>
+								  <option value="16px">16px</option>
+								  <option value="18px">18px</option>
+								  <option value="24px">24px</option>
+								</select>
+							  </div>
+							  <div class="group">
+								<button type="button" class="editor-btn ql-align" value=""><img src="../image/editer_left.svg" alt=""></button>
+								<button type="button" class="editor-btn ql-align" value="center"><img src="../image/editer_center.svg" alt=""></button>
+								<button type="button" class="editor-btn ql-align" value="right"><img src="../image/editer_right.svg" alt=""></button>
+							  </div>
+							  <div class="group">
+								<button type="button" class="editor-btn ql-list" value="ordered"><img src="../image/editer_ordered.svg" alt=""></button>
+								<button type="button" class="editor-btn ql-list" value="bullet"><img src="../image/editer_bullet.svg" alt=""></button>
+							  </div>
+							</div>
+					  
+							<div class="jweditor" id="memo_editor" data-placeholder="내용을 입력해주세요"></div>
+						  </div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Step 1 안내: 결제 정보는 다음 단계에서 입력 -->
+			<div class="card-panel jw-mgt32" style="background: #F0F7FF; border: 1px solid #0050C8;">
+				<div style="display: flex; align-items: center; gap: 12px;">
+					<div style="width: 40px; height: 40px; background: #0050C8; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 600;">1</div>
+					<div>
+						<div style="font-weight: 600; color: #0050C8;" data-lan-eng="Step 1: Reservation Information">Step 1: 예약 정보</div>
+						<div style="color: #6B7280; font-size: 13px; margin-top: 2px;" data-lan-eng="Complete the reservation details above, then proceed to payment">상품, 여행자, 옵션 정보를 입력한 후 결제 단계로 이동합니다.</div>
+					</div>
+				</div>
+			</div>
+
+		</section>
+
+		<!-- 예약 이력 사이드바 -->
+		<aside class="reservation-history-sidebar" id="reservationHistorySidebar" style="display:none;">
+			<h3 class="sidebar-title" data-lan-eng="Reservation History">예약 이력</h3>
+			<div class="history-list" id="historyList">
+				<div class="history-item">
+					<div class="history-time">-</div>
+					<div class="history-description">예약 생성 중...</div>
+				</div>
+			</div>
+		</aside>
+
+	</main>
+
+	<!-- 하단 고정 액션 바 -->
+	<div class="fixed-bottom-bar">
+		<button type="button" class="jw-button typeB" id="saveBtn" data-lan-eng="Next: Payment">Next: Payment</button>
+	</div>
+
+	<style>
+		.layout-main {
+			padding-bottom: 60px !important;
+		}
+		.fixed-bottom-bar {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 60px;
+			background: #fff;
+			border-top: 1px solid #e0e0e0;
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			padding: 0 24px;
+			z-index: 100;
+		}
+		.step-indicator {
+			display: inline-block;
+			padding: 4px 12px;
+			background: #0050C8;
+			color: #fff;
+			border-radius: 16px;
+			font-size: 13px;
+			font-weight: 500;
+		}
+		/* Payment Type Tabs - kept for compatibility */
+		.payment-tab-btn {
+			position: relative;
+			height: 48px;
+			padding: 0 24px;
+			background: transparent;
+			border: none;
+			font-size: 15px;
+			font-weight: 600;
+			color: #6B7280;
+			cursor: pointer;
+			transition: color 0.2s;
+		}
+		.payment-tab-btn:hover {
+			color: #374151;
+		}
+		.payment-tab-btn.active {
+			color: #0065F8;
+		}
+		.payment-tab-btn.active::after {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			height: 3px;
+			background: #0065F8;
+			border-radius: 3px 3px 0 0;
+		}
+	</style>
+
+<!-- 날짜 선택 캘린더 모달 -->
+<div id="date-picker-modal" class="modal" style="display: none;">
+	<div class="modal-content modal-large">
+		<div class="modal-header">
+			<h3 data-lan-eng="Select Travel Date">여행 날짜 선택</h3>
+			<button type="button" class="modal-close" onclick="closeModal('date-picker-modal')">
+				<img src="../image/button-close2.svg" alt="">
+			</button>
+		</div>
+		<div class="modal-body">
+			<div id="calendar-container">
+				<div class="calendar-nav">
+					<button type="button" id="calendar-prev-month" class="calendar-nav-btn">
+						<img src="../image/arrow4.svg" alt="">
+					</button>
+					<div id="calendar-month-display" class="calendar-month-text"></div>
+					<button type="button" id="calendar-next-month" class="calendar-nav-btn">
+						<img src="../image/arrow4.svg" alt="" style="transform: rotate(180deg);">
+					</button>
+				</div>
+				<table class="calendar" role="grid">
+					<thead>
+						<tr>
+							<th data-lan-eng="Sun">일</th>
+							<th data-lan-eng="Mon">월</th>
+							<th data-lan-eng="Tue">화</th>
+							<th data-lan-eng="Wed">수</th>
+							<th data-lan-eng="Thu">목</th>
+							<th data-lan-eng="Fri">금</th>
+							<th data-lan-eng="Sat">토</th>
+						</tr>
+					</thead>
+					<tbody id="calendar-body">
+						<!-- 캘린더는 JavaScript에서 동적으로 생성됩니다 -->
+					</tbody>
+				</table>
+				<div id="calendar-info" class="calendar-info"></div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="jw-button typeB" id="confirm-date-selection" data-lan-eng="Confirm">확인</button>
+			<button type="button" class="jw-button typeD" onclick="closeModal('date-picker-modal')" data-lan-eng="Cancel">취소</button>
+		</div>
+	</div>
+</div>
+
+<!-- 상품 검색 모달 -->
+<div id="product-search-modal" class="modal" style="display: none;">
+	<div class="modal-content modal-large">
+		<div class="modal-header">
+			<h3 data-lan-eng="Product Search">상품 검색</h3>
+			<button type="button" class="modal-close" onclick="closeModal('product-search-modal')">
+				<img src="../image/button-close2.svg" alt="">
+			</button>
+		</div>
+		<div class="modal-body">
+			<div class="search-box">
+				<input type="text" id="product-search-input" class="form-control" placeholder="상품명을 입력하세요" data-lan-eng-placeholder="Enter product name">
+				<button type="button" id="product-search-submit" class="jw-button typeA" data-lan-eng="Search">검색</button>
+			</div>
+			<div class="search-results" id="product-search-results">
+				<!-- 검색 결과가 여기에 표시됩니다 -->
+			</div>
+			<style>
+				/* SMT (#164): Product Search modal UX fixes */
+				#product-search-modal .search-results {
+					max-height: 500px;
+					overflow-y: auto;
+					padding-right: 6px;
+				}
+				#product-search-modal .product-item {
+					cursor: pointer;
+					border: 1px solid #E5E7EB;
+					border-radius: 10px;
+					padding: 12px;
+					margin-top: 10px;
+					background: #fff;
+				}
+				#product-search-modal .product-item:hover {
+					border-color: #9CA3AF;
+					background: #F9FAFB;
+				}
+				#product-search-modal .product-item.selected {
+					border: 2px solid #0050C8;
+					box-shadow: 0 0 0 3px rgba(0, 80, 200, 0.12);
+					background: #F7FAFF;
+				}
+				#product-search-modal .product-item-content {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					gap: 16px;
+				}
+				#product-search-modal .product-info {
+					flex: 1;
+					min-width: 0;
+				}
+				#product-search-modal .product-name { font-weight: 600; }
+				#product-search-modal .product-price { margin-top: 6px; color: #111827; }
+				#product-search-modal .product-description { margin-top: 6px; color: #6B7280; }
+				#product-search-modal .product-actions {
+					display: flex;
+					gap: 8px;
+					flex-shrink: 0;
+				}
+				#product-search-modal .btn-product-action {
+					padding: 8px 16px;
+					border: 1px solid #D1D5DB;
+					border-radius: 6px;
+					background: #fff;
+					color: #374151;
+					font-size: 13px;
+					font-weight: 500;
+					cursor: pointer;
+					transition: all 0.2s;
+				}
+				#product-search-modal .btn-product-action:hover {
+					background: #F3F4F6;
+					border-color: #9CA3AF;
+				}
+				/* 파일이 있는 버튼 - 파란색 활성화 */
+				#product-search-modal .btn-product-action.has-file {
+					background: #0050C8;
+					border-color: #0050C8;
+					color: #fff;
+				}
+				#product-search-modal .btn-product-action.has-file:hover {
+					background: #0041A3;
+					border-color: #0041A3;
+				}
+				/* 파일이 없는 버튼 - 흰색 비활성화 느낌 */
+				#product-search-modal .btn-product-action.no-file {
+					background: #F9FAFB;
+					border-color: #E5E7EB;
+					color: #9CA3AF;
+					cursor: default;
+				}
+				#product-search-modal .btn-product-action.no-file:hover {
+					background: #F9FAFB;
+					border-color: #E5E7EB;
+				}
+			</style>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="jw-button typeB" id="product-search-confirm" onclick="confirmProductSelection()" data-lan-eng="Next" disabled>Next</button>
+			<button type="button" class="jw-button typeD" onclick="closeModal('product-search-modal')" data-lan-eng="Cancel">취소</button>
+		</div>
+	</div>
+</div>
+
+<!-- 파일 뷰어 모달 (Flyer/Detail) -->
+<div id="file-viewer-modal" class="modal" style="display: none;">
+	<div class="modal-content modal-file-viewer">
+		<div class="modal-header">
+			<h3 id="file-viewer-title">File Viewer</h3>
+			<button type="button" class="modal-close" onclick="closeModal('file-viewer-modal')">
+				<img src="../image/button-close2.svg" alt="">
+			</button>
+		</div>
+		<div class="modal-body file-viewer-body">
+			<div id="file-viewer-content"></div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="jw-button typeD" onclick="closeModal('file-viewer-modal')" data-lan-eng="Close">닫기</button>
+		</div>
+	</div>
+</div>
+<style>
+	/* 파일 뷰어 모달 스타일 */
+	.modal-content.modal-file-viewer {
+		max-width: 900px;
+		width: 95%;
+		max-height: 90vh;
+		display: flex;
+		flex-direction: column;
+	}
+	.file-viewer-body {
+		flex: 1;
+		overflow-y: auto;
+		padding: 0 !important;
+		display: flex;
+		justify-content: center;
+		background: #f5f5f5;
+	}
+	#file-viewer-content {
+		width: 100%;
+		text-align: center;
+	}
+	#file-viewer-content img {
+		max-width: 100%;
+		height: auto;
+		display: block;
+		margin: 0 auto;
+	}
+	#file-viewer-content iframe {
+		width: 100%;
+		height: 70vh;
+		border: none;
+	}
+</style>
+
+<!-- 고객 검색 모달 -->
+<div id="customer-search-modal" class="modal" style="display: none;">
+	<div class="modal-content modal-large">
+		<div class="modal-header">
+			<h3 data-lan-eng="Customer Search">고객 검색</h3>
+			<button type="button" class="modal-close" onclick="closeModal('customer-search-modal')">
+				<img src="../image/button-close2.svg" alt="">
+			</button>
+		</div>
+		<div class="modal-body">
+			<div class="search-box">
+				<input type="text" id="customer-search-input" class="form-control" placeholder="고객명, 이메일, 연락처로 검색" data-lan-eng-placeholder="Search by name, email, or contact">
+				<button type="button" id="customer-search-submit" class="jw-button typeA" data-lan-eng="Search">검색</button>
+			</div>
+			<div class="result-count jw-mgt12">
+				<span data-lan-eng="Search results">검색결과</span>
+				<span class="result-count__num" id="customer-search-count">0</span><span data-lan-eng="items">개</span>
+			</div>
+			<div class="table-container">
+				<table class="jw-tableA">
+					<colgroup>
+						<col style="width:40px;">
+						<col>
+						<col>
+						<col style="width:160px;">
+						<col style="width:180px;">
+					</colgroup>
+					<thead>
+						<tr>
+							<th></th>
+							<th data-lan-eng="Customer Name">Customer Name</th>
+							<th data-lan-eng="Email">Email</th>
+							<th data-lan-eng="Contacts">Contacts</th>
+							<th data-lan-eng="Registration date/time">Registration date/time</th>
+						</tr>
+					</thead>
+					<tbody id="customer-search-results">
+						<tr>
+							<td colspan="5" class="is-center" data-lan-eng="No search results">검색 결과가 없습니다.</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="jw-pagebox" id="customer-pagination" role="navigation"></div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="jw-button typeB" onclick="confirmCustomerSelection()" data-lan-eng="Confirm">확인</button>
+			<button type="button" class="jw-button typeD" onclick="closeModal('customer-search-modal')" data-lan-eng="Cancel">취소</button>
+		</div>
+	</div>
+</div>
+
+<!-- 여행 고객 검색 모달 (복수 선택) -->
+<div id="travel-customer-search-modal" class="modal" style="display: none;">
+	<div class="modal-content modal-large">
+		<div class="modal-header">
+			<h3 data-lan-eng="Customer Search">고객 검색</h3>
+			<button type="button" class="modal-close" onclick="closeModal('travel-customer-search-modal')">
+				<img src="../image/button-close2.svg" alt="">
+			</button>
+		</div>
+		<div class="modal-body">
+			<div class="jw-mgb12" id="travel-customer-selected-chips" aria-label="Selected customers"></div>
+			<div class="search-box">
+				<input type="text" id="travel-customer-search-input" class="form-control" placeholder="고객명, 이메일, 연락처로 검색" data-lan-eng-placeholder="Search by name, email, or contact">
+				<button type="button" id="travel-customer-search-submit" class="jw-button typeA" data-lan-eng="Search">검색</button>
+			</div>
+			<div class="result-count jw-mgt12">
+				<span data-lan-eng="Search results">검색결과</span>
+				<span class="result-count__num" id="travel-customer-search-count">0</span><span data-lan-eng="items">개</span>
+			</div>
+			<div class="table-container">
+				<table class="jw-tableA">
+					<colgroup>
+						<col style="width:40px;">
+						<col>
+						<col>
+						<col style="width:160px;">
+						<col style="width:180px;">
+					</colgroup>
+					<thead>
+						<tr>
+							<th></th>
+							<th data-lan-eng="Customer Name">Customer Name</th>
+							<th data-lan-eng="Email">Email</th>
+							<th data-lan-eng="Contacts">Contacts</th>
+							<th data-lan-eng="Registration date/time">Registration date/time</th>
+						</tr>
+					</thead>
+					<tbody id="travel-customer-search-results">
+						<tr>
+							<td colspan="5" class="is-center" data-lan-eng="No search results">검색 결과가 없습니다.</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="jw-pagebox" id="travel-customer-pagination" role="navigation"></div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="jw-button typeB" onclick="confirmTravelCustomerSelection()" data-lan-eng="Select">선택</button>
+			<button type="button" class="jw-button typeD" onclick="closeModal('travel-customer-search-modal')" data-lan-eng="Cancel">취소</button>
+		</div>
+	</div>
+</div>
+
+<!-- 여행자 정보 입력 모달 -->
+<div id="traveler-modal" class="modal" style="display: none;">
+	<div class="modal-content modal-traveler">
+		<div class="modal-header">
+			<h3 data-lan-eng="Traveler Information">Traveler Information</h3>
+			<button type="button" class="modal-close" onclick="closeTravelerModal()">
+				<img src="../image/button-close2.svg" alt="">
+			</button>
+		</div>
+		<div class="modal-body traveler-modal-body">
+			<!-- 왼쪽: 기존 콘텐츠 영역 -->
+			<div class="traveler-modal-main">
+				<div class="traveler-cards-header">
+					<span class="traveler-count" id="traveler-modal-count">0 Travelers</span>
+					<div class="traveler-cards-actions">
+						<button type="button" class="jw-button typeA" onclick="addTravelerCard()">+ Add Traveler</button>
+					</div>
+				</div>
+				<div class="traveler-cards-container" id="traveler-cards-container">
+					<!-- 여행자 카드가 여기에 동적으로 추가됩니다 -->
+				</div>
+			</div>
+			<!-- 오른쪽: 네비게이션 사이드바 -->
+			<div class="traveler-modal-sidebar" id="traveler-modal-sidebar">
+				<div class="sidebar-title" data-lan-eng="Travelers">Travelers</div>
+				<div class="sidebar-nav-list" id="traveler-sidebar-nav">
+					<!-- 여행자 네비게이션 아이템이 여기에 추가됩니다 -->
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="jw-button typeB" onclick="saveTravelersFromModal()" data-lan-eng="Save">Save</button>
+			<button type="button" class="jw-button typeD" onclick="closeTravelerModal()" data-lan-eng="Cancel">Cancel</button>
+		</div>
+	</div>
+</div>
+<style>
+	/* 여행자 모달 스타일 */
+	.modal-content.modal-traveler {
+		max-width: 1400px;
+		width: 95%;
+		max-height: 90vh;
+		display: flex;
+		flex-direction: column;
+	}
+	.traveler-modal-body {
+		flex: 1;
+		overflow: hidden;
+		padding: 0;
+		display: flex;
+		gap: 0;
+	}
+	/* 왼쪽 메인 영역 */
+	.traveler-modal-main {
+		flex: 1;
+		overflow-y: auto;
+		padding: 24px 32px;
+		min-width: 0;
+	}
+	/* 오른쪽 사이드바 */
+	.traveler-modal-sidebar {
+		width: 220px;
+		flex-shrink: 0;
+		background: #F9FAFB;
+		border-left: 1px solid #E5E7EB;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+	}
+	.traveler-modal-sidebar .sidebar-title {
+		padding: 16px 20px;
+		font-size: 14px;
+		font-weight: 600;
+		color: #374151;
+		border-bottom: 1px solid #E5E7EB;
+		background: #fff;
+	}
+	.traveler-modal-sidebar .sidebar-nav-list {
+		flex: 1;
+		overflow-y: auto;
+		padding: 12px;
+	}
+	.traveler-modal-sidebar .sidebar-nav-item {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		padding: 12px 14px;
+		margin-bottom: 6px;
+		border-radius: 8px;
+		cursor: pointer;
+		transition: all 0.15s;
+		border: 1px solid transparent;
+	}
+	.traveler-modal-sidebar .sidebar-nav-item:hover {
+		background: #fff;
+		border-color: #E5E7EB;
+	}
+	.traveler-modal-sidebar .sidebar-nav-item.active {
+		background: #EFF6FF;
+		border-color: #0050C8;
+	}
+	.traveler-modal-sidebar .sidebar-nav-item.is-primary {
+		background: #F0F9FF;
+	}
+	.traveler-modal-sidebar .nav-item-number {
+		width: 24px;
+		height: 24px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: #E5E7EB;
+		border-radius: 50%;
+		font-size: 12px;
+		font-weight: 600;
+		color: #374151;
+		flex-shrink: 0;
+	}
+	.traveler-modal-sidebar .sidebar-nav-item.is-primary .nav-item-number {
+		background: #0050C8;
+		color: #fff;
+	}
+	.traveler-modal-sidebar .nav-item-info {
+		flex: 1;
+		min-width: 0;
+		overflow: hidden;
+	}
+	.traveler-modal-sidebar .nav-item-name {
+		font-size: 13px;
+		font-weight: 500;
+		color: #111827;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.traveler-modal-sidebar .nav-item-type {
+		font-size: 11px;
+		color: #6B7280;
+		margin-top: 2px;
+	}
+	.traveler-modal-sidebar .nav-item-badge {
+		font-size: 9px;
+		padding: 2px 6px;
+		background: #0050C8;
+		color: #fff;
+		border-radius: 3px;
+		flex-shrink: 0;
+	}
+	.traveler-cards-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 20px;
+	}
+	.traveler-cards-actions {
+		display: flex;
+		gap: 8px;
+	}
+	.traveler-count {
+		font-size: 16px;
+		font-weight: 600;
+		color: #374151;
+	}
+	.traveler-cards-container {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+	.traveler-card {
+		border: 1px solid #E5E7EB;
+		border-radius: 12px;
+		padding: 20px;
+		background: #fff;
+		position: relative;
+	}
+	.traveler-card.is-primary {
+		border-color: #0050C8;
+		background: #F7FAFF;
+	}
+	.traveler-card-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 16px;
+		padding-bottom: 12px;
+		border-bottom: 1px solid #E5E7EB;
+	}
+	.traveler-card-title {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+	.traveler-card-title span {
+		font-size: 16px;
+		font-weight: 600;
+		color: #111827;
+	}
+	.traveler-card-title .badge-primary {
+		background: #0050C8;
+		color: #fff;
+		padding: 2px 8px;
+		border-radius: 4px;
+		font-size: 12px;
+	}
+	.traveler-card-actions {
+		display: flex;
+		gap: 8px;
+	}
+	.btn-set-primary {
+		padding: 6px 12px;
+		border: 1px solid #D1D5DB;
+		border-radius: 6px;
+		background: #fff;
+		color: #374151;
+		font-size: 12px;
+		cursor: pointer;
+	}
+	.btn-set-primary:hover {
+		background: #F3F4F6;
+	}
+	.btn-delete-traveler {
+		padding: 6px 10px;
+		border: 1px solid #FCA5A5;
+		border-radius: 6px;
+		background: #FEF2F2;
+		color: #DC2626;
+		font-size: 12px;
+		cursor: pointer;
+	}
+	.btn-delete-traveler:hover {
+		background: #FEE2E2;
+	}
+	.traveler-card-body {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 14px;
+	}
+	.traveler-card-body .form-group {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		min-width: 0;
+		overflow: hidden;
+	}
+	.traveler-card-body .form-group label {
+		font-size: 12px;
+		font-weight: 500;
+		color: #374151;
+	}
+	.traveler-card-body .form-group input,
+	.traveler-card-body .form-group select {
+		width: 100%;
+		padding: 8px 10px;
+		border: 1px solid #D1D5DB;
+		border-radius: 8px;
+		font-size: 13px;
+		box-sizing: border-box;
+		background-color: #fff;
+	}
+	.traveler-card-body .form-group select {
+		display: block !important;
+		appearance: auto !important;
+		cursor: pointer;
+		-webkit-appearance: menulist !important;
+	}
+	.traveler-card-body .form-group input:focus,
+	.traveler-card-body .form-group select:focus {
+		outline: none;
+		border-color: #0050C8;
+	}
+	.traveler-card-body .form-group.col-span-2 {
+		grid-column: span 2;
+	}
+	.traveler-card-body .form-group.col-span-3 {
+		grid-column: span 3;
+	}
+	.traveler-card-body .form-group.col-span-4 {
+		grid-column: span 4;
+	}
+	.no-travelers-message {
+		text-align: center;
+		padding: 40px;
+		color: #6B7280;
+	}
+	/* 여권 사진 업로드 스타일 */
+	.passport-photo-upload {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+	.btn-upload-photo {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		padding: 8px 14px;
+		border: 1px solid #D1D5DB;
+		border-radius: 8px;
+		background: #fff;
+		color: #374151;
+		font-size: 13px;
+		cursor: pointer;
+		transition: all 0.2s;
+		white-space: nowrap;
+		flex-shrink: 0;
+	}
+	.btn-upload-photo:hover {
+		background: #F3F4F6;
+		border-color: #9CA3AF;
+	}
+	.btn-upload-photo img {
+		width: 16px;
+		height: 16px;
+	}
+	.passport-photo-info {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		padding: 6px 12px;
+		background: #F0F9FF;
+		border: 1px solid #BAE6FD;
+		border-radius: 6px;
+	}
+	.passport-photo-info.hidden {
+		display: none;
+	}
+	.photo-filename {
+		font-size: 13px;
+		color: #0369A1;
+		max-width: 200px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.btn-remove-photo {
+		padding: 2px;
+		border: none;
+		background: transparent;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+	}
+	.btn-remove-photo img {
+		width: 14px;
+		height: 14px;
+		opacity: 0.6;
+	}
+	.btn-remove-photo:hover img {
+		opacity: 1;
+	}
+	/* Visa Document 업로드 스타일 */
+	.visa-document-upload {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+	.visa-document-info {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		padding: 6px 12px;
+		background: #F0FDF4;
+		border: 1px solid #86EFAC;
+		border-radius: 6px;
+	}
+	.visa-document-info.hidden {
+		display: none;
+	}
+	.visa-filename {
+		font-size: 13px;
+		color: #166534;
+		max-width: 200px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.visa-upload-container {
+		margin-top: 4px;
+		margin-left: 12px;
+	}
+	/* 읽기 전용 필드 스타일 */
+	.traveler-card-body .readonly-field {
+		background-color: #F3F4F6;
+		cursor: not-allowed;
+		color: #6B7280;
+	}
+	/* 여권 날짜 경고 스타일 */
+	.passport-date-warning-container {
+		padding: 0 !important;
+	}
+	.passport-date-warning {
+		display: inline-block;
+		padding: 8px 12px;
+		background-color: #FEF2F2;
+		border: 1px solid #FCA5A5;
+		border-radius: 6px;
+		color: #DC2626;
+		font-size: 13px;
+	}
+
+	/* 항공 옵션 섹션 스타일 */
+	.flight-options-section {
+		margin-top: 16px;
+		padding-top: 16px;
+		border-top: 1px dashed #E5E7EB;
+	}
+	.flight-options-header {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin-bottom: 12px;
+	}
+	.flight-options-title {
+		font-size: 14px;
+		font-weight: 600;
+		color: #374151;
+	}
+	.flight-options-airline {
+		font-size: 12px;
+		color: #6B7280;
+		padding: 2px 8px;
+		background: #F3F4F6;
+		border-radius: 4px;
+	}
+	.flight-options-body {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
+	}
+	.flight-option-category {
+		min-width: 200px;
+	}
+	.flight-option-category .category-label {
+		display: block;
+		font-size: 12px;
+		font-weight: 500;
+		color: #6B7280;
+		margin-bottom: 8px;
+	}
+	.category-options {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+	.option-checkbox {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		cursor: pointer;
+		padding: 6px 10px;
+		border-radius: 6px;
+		transition: background 0.15s;
+	}
+	.option-checkbox:hover {
+		background: #F3F4F6;
+	}
+	.option-checkbox input[type="checkbox"] {
+		width: 16px;
+		height: 16px;
+		cursor: pointer;
+	}
+	.option-checkbox .option-name {
+		font-size: 13px;
+		color: #374151;
+		flex: 1;
+	}
+	.option-checkbox .option-price {
+		font-size: 12px;
+		color: #0056d9;
+		font-weight: 500;
+	}
+</style>
+
+<!-- 룸 옵션 선택 모달 -->
+<div id="room-option-modal" class="modal" style="display: none;">
+	<div class="modal-content modal-room-option">
+		<div class="modal-body room-option-modal-body">
+			<!-- 제목 -->
+			<h2 class="room-option-title" data-lan-eng="Select Room Options">Select Room Options</h2>
+
+			<!-- Current Room Combination 배너 -->
+			<div id="room-combination-banner" class="room-combination-banner">
+				<div class="room-combination-text">
+					<span data-lan-eng="Current Room Combination">Current Room Combination</span>
+					<span id="room-combination-count">(0/0<span data-lan-eng="People">명</span>)</span>
+				</div>
+				<div class="room-combination-note" data-lan-eng="*Adults and Children with 'Child Room=Yes' are counted. (Infants excluded)">
+					*Adults and Children with 'Child Room=Yes' are counted. (Infants excluded)
+				</div>
+			</div>
+
+			<div class="room-option-notice" style="margin-bottom: 16px; padding: 12px 16px; background: #FFF8E6; border: 1px solid #FFE082; border-radius: 8px; color: #8B6914; font-size: 13px;">
+				* All rooms are based on double occupancy. If a customer wants a private room or is traveling alone, Single Supplement Surcharge will be applied.
+			</div>
+
+			<div class="room-option-container">
+				<!-- 왼쪽: 룸 타입 선택 -->
+				<div class="room-option-left">
+					<div id="room-option-list">
+						<!-- 룸 옵션 목록이 여기에 표시됩니다 -->
+					</div>
+				</div>
+
+				<!-- 오른쪽: 주문 요약 -->
+				<div class="room-option-right">
+					<div id="order-summary-list" class="order-summary-list">
+						<!-- 주문 요약이 여기에 표시됩니다 -->
+					</div>
+					<div class="order-amount-divider"></div>
+					<div class="order-amount-row">
+						<span class="order-amount-label" data-lan-eng="Order Amount">Order Amount</span>
+						<span class="order-amount-value" id="order-amount-value">0(₱)</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- 버튼 -->
+			<button type="button" id="confirm-room-selection-btn" class="room-option-submit-btn" onclick="confirmRoomSelection()" data-lan-eng="Selection complete" disabled>Selection complete</button>
+		</div>
+	</div>
+</div>
+
+<!-- 인원 변경 확인 모달 -->
+<div id="people-change-confirm-modal" class="modal" style="display: none;">
+	<div class="modal-content" style="max-width: 480px; border-radius: 6px; overflow: hidden;">
+		<div class="modal-body" style="text-align: center; padding: 64px 40px 52px 40px;">
+			<p style="font-family: 'Noto Sans', sans-serif; font-weight: 500; font-size: 22px; line-height: 32px; letter-spacing: -0.2px; color: #121212; margin: 0 0 50px 0;" data-lan-eng="If you change the number of people, the room option selection will be reset.">
+				인원 수를 변경하면 룸 옵션 선택이 초기화됩니다.
+			</p>
+			<div style="display: flex; gap: 12px; justify-content: center;">
+				<button type="button" id="people-change-cancel-btn" style="width: 130px; height: 54px; background: #fff; border: 1px solid #0050c8; border-radius: 12px; font-family: 'Noto Sans', sans-serif; font-weight: 600; font-size: 18px; line-height: 28px; letter-spacing: -0.2px; color: #0065f8; cursor: pointer;" data-lan-eng="Cancel">취소</button>
+				<button type="button" id="people-change-continue-btn" style="width: 130px; height: 54px; background: #0065f8; border: none; border-radius: 12px; font-family: 'Noto Sans', sans-serif; font-weight: 600; font-size: 18px; line-height: 28px; letter-spacing: -0.2px; color: #fff; cursor: pointer;" data-lan-eng="Continue">계속</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<!-- 기본 스크립트 -->
+	<script src="../js/default.js"></script>
+	<script src="../js/agent.js"></script>
+<script src="../js/agent-create-reservation.js?v=20260112001"></script>
+<script src="../js/datepicker.js"></script>
+<script src="../js/multi-editor.js"></script>
+
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_agent.html'
+		});
+	</script>
+</body>
+
+</html>
+

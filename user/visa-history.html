@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel | Visa Application History</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="/css/i18n-boot.css">
+    <script src="/js/i18n-boot.js"></script>
+    <script src="../js/i18n.js" defer></script>
+    <script src="../js/tab.js" defer></script>
+    <script src="../js/visa-history.js?v=20260111003" defer></script>
+    <style>
+        .tab-content-wrap { display: none; }
+        .tab-content-wrap.active { display: block; }
+
+        /* Individual visa card styling */
+        .visa-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 4px 0 rgba(87, 87, 87, 0.03), 0 0 20px 0 rgba(198, 198, 198, 0.18);
+        }
+    </style>
+</head>
+<body>
+    <div class="main bg grayfa mh100">
+        <header class="header-type2 bg white" style="box-shadow: none;">
+            <!-- SMT 수정 시작 - mypage.html로 이동 -->
+            <a class="btn-mypage" href="mypage.html"><img src="../images/ico_back_black.svg"></a>
+            <!-- SMT 수정 완료 -->
+            <div class="title">Visa Application Details</div>
+            <div></div>
+        </header>
+        <div class="shadow-bottom h48 w100 scroll-x2">
+            <ul class="tab-type2 px20 bg white">
+                <li><a class="btn-tab2 active" data-target="inadequateDocuments" href="#none">Incomplete documents<span>2</span></a></li>
+                <li><a class="btn-tab2" data-target="duringExamination" href="#none">Under review<span>1</span></a></li>
+                <li><a class="btn-tab2" data-target="completionIssuance" href="#none">Issuance completed<span>0</span></a></li>
+                <li><a class="btn-tab2" data-target="rebellion" href="#none">Returned<span>0</span></a></li>
+            </ul>
+        </div>
+        <div class="px20 pb20 mt24">
+            <div class="tab-content-wrap active" id="inadequateDocuments">
+                <div class="visa-card">
+                    <div class="text fz16 fw600 lh24 black12">Incomplete documents</div>
+                    <ul class="mt12">
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b">Applicant name</div>
+                            <p class="text fz14 fw500 lh22 black12">Jose Ramirez</p>
+                        </li>
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b">Application date</div>
+                            <p class="text fz14 fw500 lh22 black12">2025-05-01</p>
+                        </li>
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b nowrap">Product Name</div>
+                            <p class="text fz14 fw500 lh22 black12 ellipsis1">Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</p>
+                        </li>
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b">Departure date</div>
+                            <p class="text fz14 fw500 lh22 black12">2025-04-19</p>
+                        </li>
+                    </ul>
+                    <button class="btn primary lg mt12" type="button">Submit Documents</button>
+                </div>
+                <div class="visa-card">
+                    <div class="text fz16 fw600 lh24 black12">Incomplete documents</div>
+                    <ul class="mt12">
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b">Applicant name</div>
+                            <p class="text fz14 fw500 lh22 black12">Jose Ramirez</p>
+                        </li>
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b">Application date</div>
+                            <p class="text fz14 fw500 lh22 black12">2025-05-01</p>
+                        </li>
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b nowrap">Product Name</div>
+                            <p class="text fz14 fw500 lh22 black12 ellipsis1">Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</p>
+                        </li>
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b">Departure date</div>
+                            <p class="text fz14 fw500 lh22 black12">2025-04-19</p>
+                        </li>
+                    </ul>
+                    <button class="btn primary lg mt12" type="button">Submit Documents</button>
+                </div>
+            </div>
+            <div class="tab-content-wrap" id="duringExamination">
+                <div class="visa-card">
+                    <div class="text fz16 fw600 lh24 black12">Under review</div>
+                    <ul class="mt12">
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b">Applicant name</div>
+                            <p class="text fz14 fw500 lh22 black12">Jose Ramirez</p>
+                        </li>
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b">Application date</div>
+                            <p class="text fz14 fw500 lh22 black12">2025-05-01</p>
+                        </li>
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b nowrap">Product Name</div>
+                            <p class="text fz14 fw500 lh22 black12 ellipsis1">Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</p>
+                        </li>
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b">Departure date</div>
+                            <p class="text fz14 fw500 lh22 black12">2025-04-19</p>
+                        </li>
+                    </ul>
+                    <button class="btn line active lg mt12" type="button">Document Verification</button>
+                </div>
+            </div>
+            <div class="tab-content-wrap" id="completionIssuance">
+                <div class="visa-card">
+                    <div class="text fz16 fw600 lh24 black12">Issuance completed</div>
+                    <ul class="mt12">
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b">Applicant name</div>
+                            <p class="text fz14 fw500 lh22 black12">Jose Ramirez</p>
+                        </li>
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b">Application date</div>
+                            <p class="text fz14 fw500 lh22 black12">2025-05-01</p>
+                        </li>
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b nowrap">Product Name</div>
+                            <p class="text fz14 fw500 lh22 black12 ellipsis1">Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</p>
+                        </li>
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b">Departure date</div>
+                            <p class="text fz14 fw500 lh22 black12">2025-04-19</p>
+                        </li>
+                    </ul>
+                    <button class="btn primary lg ico1 mt12" type="button">Visa file download</button>
+                </div>
+            </div>
+            <div class="tab-content-wrap" id="rebellion">
+                <div class="visa-card">
+                    <div class="text fz16 fw600 lh24 black12">Returned</div>
+                    <ul class="mt12">
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b">Applicant name</div>
+                            <p class="text fz14 fw500 lh22 black12">Jose Ramirez</p>
+                        </li>
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b">Application date</div>
+                            <p class="text fz14 fw500 lh22 black12">2025-05-01</p>
+                        </li>
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b nowrap">Product Name</div>
+                            <p class="text fz14 fw500 lh22 black12 ellipsis1">Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro</p>
+                        </li>
+                        <li class="align gap10">
+                            <div class="text fz14 fw400 lh22 gray6b">Departure date</div>
+                            <p class="text fz14 fw500 lh22 black12">2025-04-19</p>
+                        </li>
+                    </ul>
+                    <button class="btn primary lg mt12" type="button">Submit Again</button>
+                </div>
+            </div>
+        </div>
+       
+</body>
+</html>

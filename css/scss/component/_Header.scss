@@ -1,0 +1,52 @@
+@layer Header { 
+    .header-type1 {
+        display: flex;
+        justify-content: space-between; 
+        align-items: center;
+        padding: 7px 20px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        height: 44px;
+        .btn-bell {
+            position: relative; 
+            .num { 
+                position: absolute;
+                top: -3px;
+                right: -3px;
+                display: flex;
+                justify-content: center;
+                padding-top: 2.5px;
+                width: auto;
+                min-width: 14px;
+                min-height: 14px;
+                border-radius: 100%;
+                background: var(--reded);
+                color: var(--white);
+                font-size: 6px;
+                font-weight: 400;
+            }
+        }
+    }
+    .header-type2 {
+        display: grid;
+        grid-template-columns: 24px 1fr 24px;
+        padding: 7px 20px;
+        align-items: center;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        height: 44px;
+        .title { 
+            color: var(--black36);
+            text-align: center;
+            font-family: "Noto Sans";
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 24px;
+            letter-spacing: -0.1px;
+        }
+        .img-logo { 
+            display: block;
+            max-width: 142px;
+            margin: 0 auto;
+        }
+    }
+}

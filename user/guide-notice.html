@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel | Guide Notice</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="/css/i18n-boot.css">
+    <script src="/js/i18n-boot.js"></script>
+    <script src="../js/i18n.js" defer></script>
+</head>
+<body>
+    <div class="main">
+        <header class="header-type2">
+            <a class="btn-mypage" id="backBtn" href="#none"><img src="../images/ico_back_black.svg"></a>
+            <div class="title">Guide Notice</div>
+            <div></div>
+        </header>
+       
+       <div>
+            <ul id="noticeList"></ul>
+       </div>
+
+    </div>
+
+    <script>
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const bookingId = params.get('booking_id') || params.get('bookingId') || '';
+            const list = document.getElementById('noticeList');
+            const backBtn = document.getElementById('backBtn');
+            if (backBtn) {
+                backBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (bookingId) window.location.href = `schedule.php?booking_id=${encodeURIComponent(bookingId)}`;
+                    else history.back();
+                });
+            }
+
+            const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, (m) => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[m]));
+
+            const renderEmpty = () => {
+                if (!list) return;
+                list.innerHTML = `
+                    <li class="border-bottomf2 px20 py20">
+                        <div class="text fz14 fw400 lh22 gray96">No guide notices have been posted today.</div>
+                    </li>
+                `;
+            };
+
+            const render = (notices) => {
+                if (!list) return;
+                if (!Array.isArray(notices) || notices.length === 0) return renderEmpty();
+                list.innerHTML = notices.map(n => `
+                    <li class="border-bottomf2 px20 py20">
+                        <div class="text fz16 fw600 lh24 black12">${escapeHtml(n.registrationDateTime || '')}</div>
+                        <div class="text fz16 fw600 lh24 reded mt12">${escapeHtml(n.title || '')}</div>
+                        <p class="text fz14 fw400 lh22 black12 mt8">${escapeHtml(n.content || '')}</p>
+                    </li>
+                `).join('');
+            };
+
+            const load = async () => {
+                if (!bookingId) return renderEmpty();
+                try {
+                    // 읽음 처리 기준: 알림(가이드 공지) 페이지 접속 시점까지 모두 읽음 처리
+                    try {
+                        const userId = localStorage.getItem('userId');
+                        if (userId) {
+                            await fetch('../backend/api/notifications.php', {
+                                method: 'POST',
+                                credentials: 'same-origin',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    action: 'mark_all_as_read',
+                                    userId: userId,
+                                    category: 'guide_notice'
+                                })
+                            });
+                        }
+                    } catch (_) {}
+
+                    const url = `../backend/api/guide-notices.php?action=getGuideNotices&bookingId=${encodeURIComponent(bookingId)}&todayOnly=1`;
+                    const res = await fetch(url, { credentials: 'same-origin' });
+                    const json = await res.json().catch(() => ({}));
+                    if (!res.ok || !json.success) throw new Error(json.message || `HTTP ${res.status}`);
+                    render(json?.data?.notices || []);
+                } catch (e) {
+                    console.error(e);
+                    renderEmpty();
+                }
+            };
+
+            load();
+        })();
+    </script>
+</body>
+</html>

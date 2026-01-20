@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN</title>
+
+	<!-- Common styles -->
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+</head>
+
+<body>
+	<!-- Main content -->
+	<main class="layout-main">
+		<section class="layout-reservation layout-reservation-aside" data-essentialWrap="y">
+			<div class="content-main">
+				<h1 class="page-title" data-lan-eng="Announcements">Announcements</h1>
+				<h2 class="section-title jw-mgt16" data-lan-eng="Notice Details">Notice Details</h2>
+				<div class="card-panel jw-mgt16">
+					<div class="grid-wrap">
+						<div class="grid-item col-span-3">
+							<label class="label-name" data-lan-eng="Registration date/time">Registration date/time</label>
+							<input type="text" class="form-control" id="notice_registration_datetime" value="" disabled>
+							
+						</div>
+						<div class="grid-item col-span-3 jw-mgt16">
+							<label class="label-name" data-lan-eng="Title">Title</label>
+							<input type="text" class="form-control" id="notice_title" value="" disabled>
+							
+						</div>
+						<div class="grid-item col-span-3 jw-mgt16">
+							<label class="label-name" data-lan-eng="Content">Content</label>
+							<div class="editor-box-wrap">
+								<textarea id="notice_content" rows="6" placeholder="Enter content" style="resize:none" disabled></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="controller jw-mgt16" id="notice-editor-actions" style="display:none;">
+					<button type="button" class="jw-button" id="newNoticeBtn" data-lan-eng="New notice">New notice</button>
+					<button type="button" class="jw-button typeA" id="registerNoticeBtn" data-lan-eng="Register" disabled aria-disabled="true">Register</button>
+				</div>
+			</div>
+			
+			<aside class="content-aside" aria-label="Notice List">
+				<h2 class="section-title" data-lan-eng="Components">Notice List</h2>
+				<div class="card-panel jw-mgt16">
+					<table class="jw-tableA">
+						<colgroup>
+							<col class="col-60"> <!-- No -->
+							<col> <!-- Title -->
+							<col class="col-360"> <!-- Registration date/time -->
+							<col class="col-360"> <!-- Status -->
+						</colgroup>
+						<thead>
+							<tr>
+								<th class="no is-center">No</th>
+								<th data-lan-eng="Title">Title</th>
+								<th data-lan-eng="Registration date/time">Registration date/time</th>
+								<th data-lan-eng="Status">Status</th>
+							</tr>
+						</thead>
+						<tbody id="notice-list-tbody">
+							<tr><td colspan="4" class="is-center" data-lan-eng="Loading">Loading...</td></tr>
+						</tbody>
+					</table>
+	
+					<div class="jw-pagebox" id="notice-pagination" role="navigation" aria-label="Pagination"></div>
+				</div>
+			</aside>
+
+		</section>
+
+	</main>
+
+	<!-- Base scripts -->
+	<script src="../js/default.js"></script>
+	<script src="../js/super.js"></script>
+	<script src="../js/reservation-notices.js"></script>
+</body>
+
+</html>

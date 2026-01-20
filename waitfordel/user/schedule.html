@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스마트 트래블 | 여행 일정</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/button.js" defer></script>
+</head>
+<body>
+    <div class="main">
+        <header class="header-type1">
+            <a class="btn-mypage" href="/home.html"><img src="../images/ico_close.svg"></a>
+            <div class="title"></div>
+            <a class="btn-bell" href="guide-notice.html">
+                <img src="../images/ico_bell.svg">
+                <i class="num">1</i>
+            </a>
+        </header>
+        <div class="px20 mt20 mb72">
+            <ul class="tab-type3">
+                <li><a class="btn-tab3 active" href="schedule.html">Travel Itinerary</a></li>
+                <li><a class="btn-tab3" href="guide-location.html">Guide Location</a></li>
+            </ul>
+            <div class="map-type1 mt20">
+                <img class="w100" src="../images/@img_map.jpg" alt="">
+                <div class="card-type4">
+                    <div class="align vm both text fz14 fw600 lh22 black12">
+                        Guide Info
+                        <button class="btn-folding btn-fold1" type="button"><img src="../images/ico_arrow_down_gray.svg" alt=""></button>
+                    </div>
+                    <div class="align both mt8" id="profile">
+                        <div>
+                            <div class="align gap12">
+                                <img class="profile" src="../images/@img_profile.svg" alt="">
+                                <div>
+                                    <div class="text fz12 fw500 lh16 grayb0">Guide</div>
+                                    <div class="text fz14 fw600 lh22 black12">Hyunwoo Park</div>
+                                    <div class="text fz13 fw400 lh16 black12">+82 1012345678</div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-profile-view" type="button"><img src="../images/ico_go_round.svg" alt=""></button>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll_x">
+                <ul class="calendar-type1 mt20">
+                    <li class="active">
+                        <div class="day">Sat</div>
+                        <div class="date">19</div>
+                    </li>
+                    <li>
+                        <div class="day">Sun</div>
+                        <div class="date">20</div>
+                    </li>
+                    <li>
+                        <div class="day">Mon</div>
+                        <div class="date">21</div>
+                    </li>
+                    <li>
+                        <div class="day">Tue</div>
+                        <div class="date">22</div>
+                    </li>
+                    <li>
+                        <div class="day">Wed</div>
+                        <div class="date">23</div>
+                    </li>
+                    <li>
+                        <div class="day">Thu</div>
+                        <div class="date">24</div>
+                    </li>
+                    <li>
+                        <div class="day">Fri</div>
+                        <div class="date">25</div>
+                    </li>
+                    <li>
+                        <div class="day">Sat</div>
+                        <div class="date">26</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="align vm both text fz16 fw600 lh24 black12 mt20">
+                Itinerary Details
+                <button class="text btn-folding btn-fold2" type="button"><img src="../images/ico_arrow_down_gray.svg" alt=""></button>
+            </div>
+            <div class="scroll_x" id="card">
+                <ul class="list-type4 mt12">
+                    <li class="card-type5">
+                        <div class="img-wrap">
+                            <img src="../images/@img_card1.jpg" alt="">
+                            <i class="num">1</i>
+                        </div>
+                        <div class="align both vm mt8">
+                            <div>09:00 - 11:00</div>
+                            <div class="label disabled-secondary ico-time">2h</div>
+                        </div>
+                        <div class="text fz14 fw600 lh22 black12 mt4">Beoseotguji Green Rural Experience Village</div>
+                        <p class="text fz13 fw400 lh19 gray96 mt4">
+                            A natural ecological and cultural space that offers dreams and hope for children, love and memories for couples, and a foundation for creativity for cultural figures
+                        </p>
+                    </li>
+                    <li class="card-type5">
+                        <div class="img-wrap">
+                            <img src="../images/@img_card1.jpg" alt="">
+                            <i class="num">2</i>
+                        </div>
+                        <div class="align both vm mt8">
+                            <div>09:00 - 11:00</div>
+                            <div class="label disabled-secondary ico-time">2h</div>
+                        </div>
+                        <div class="text fz14 fw600 lh22 black12 mt4">Beoseotguji Green Rural Experience Village</div>
+                        <p class="text fz13 fw400 lh19 gray96 mt4">
+                            A natural ecological and cultural space that offers dreams and hope for children, love and memories for couples, and a foundation for creativity for cultural figures
+                        </p>
+                    </li>
+                    <li class="card-type5">
+                        <div class="img-wrap">
+                            <img src="../images/@img_card1.jpg" alt="">
+                            <i class="num">3</i>
+                        </div>
+                        <div class="align both vm mt8">
+                            <div>09:00 - 11:00</div>
+                            <div class="label disabled-secondary ico-time">2h</div>
+                        </div>
+                        <div class="text fz14 fw600 lh22 black12 mt4">Beoseotguji Green Rural Experience Village</div>
+                        <p class="text fz13 fw400 lh19 gray96 mt4">
+                            A natural ecological and cultural space that offers dreams and hope for children, love and memories for couples, and a foundation for creativity for cultural figures
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <div class="align vm both text fz16 fw600 lh24 black12 mt20">
+                Timeline View
+                <button class="text btn-folding btn-fold3" type="button"><img src="../images/ico_arrow_down_gray.svg" alt=""></button>
+            </div>
+            <ul class="list-type5 mt12" id="card2">
+                <li>
+                    <div class="align gap14">
+                        <i class="num">1</i>
+                        <div>
+                            <div class="text fz18 fw500 lh26 black12">09:00 - 11:00</div>
+                            <div class="text fz14 fw600 lh22 black12 mt6">Beoseotguji Green Rural Experience Village</div>
+                        </div>
+                    </div>
+                    <div class="text fz14 fw600 lh22 green1b align gap14 py12 mt16">
+                        <i class="time"></i>
+                        About 2hours
+                    </div>
+                </li>
+                <li>
+                    <div class="align gap14">
+                        <i class="num">2</i>
+                        <div>
+                            <div class="text fz18 fw500 lh26 black12">11:00 - 13:00</div>
+                            <div class="text fz14 fw600 lh22 black12 mt6">Beoseotguji Green Rural Experience Village</div>
+                        </div>
+                    </div>
+                    <div class="text fz14 fw600 lh22 green1b align gap14 py12 mt16">
+                        <i class="time"></i>
+                        About 2 hours
+                    </div>
+                </li>
+            </ul>
+        </div>
+       
+
+    </div>
+
+    <div class="layer"></div>
+    <div class="profile-modal">
+        <div class="header align both vm">
+            <div class="text fz16 fw600 lh24 white">Certified Guide</div>
+            <button class="btn-close-modal" type="button"><img src="../images/ico_close_white.svg" alt=""></button>
+        </div>
+        <div>
+            <img class="img-profile" src="../images/@img_profile.png" alt="">
+        </div>
+        <div class="form-wrap">
+            <div class="input-wrap">
+                <img src="../images/ico_mem_red.svg" alt="">
+                <input type="text" value="Hyunwoo Park">
+            </div>
+            <div class="input-wrap">
+                <img src="../images/ico_tel_red.svg" alt="">
+                <input type="tel" value="+82 1012345678">
+            </div>
+            <div class="about">
+                <img src="../images/ico_docu_red.svg" alt="">
+                <div class="text fz14 fw500 lh22 black12 ml8" >About Me</div>
+            </div>
+            <p class="text fz13 fw400 lh19 black4e">
+                A guide with years of experience and expertise, providing tours tailored to each traveler’s style.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

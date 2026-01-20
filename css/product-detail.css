@@ -1,0 +1,297 @@
+/* Product Detail Page Styles */
+
+/*    */
+.slider-wrap.type2 {
+    height: 300px;
+}
+
+.slider-wrap.type2 img {
+    height: 300px;
+    object-fit: contain;
+    background-color: #f8f9fa;
+}
+
+/*   */
+@media (min-width: 768px) {
+    .main {
+        max-width: 768px;
+        margin: 0 auto;
+    }
+    
+    .slider-wrap.type2 {
+        height: 400px;
+    }
+    
+    .slider-wrap.type2 img {
+        height: 400px;
+        object-fit: contain;
+        background-color: #f8f9fa;
+    }
+    
+    .calendar-type2-wrap {
+        padding: 20px;
+    }
+    
+    .tab-type2 {
+        justify-content: center;
+    }
+    
+    .tab-type2 li {
+        flex: 0 0 auto;
+    }
+    
+    .card-type6 {
+        padding: 24px;
+    }
+    
+    .list-type6 > li > .card-wrap {
+        padding: 20px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .main {
+        max-width: 1024px;
+    }
+    
+    .product-detail-container {
+        display: grid;
+        grid-template-columns: 1fr 400px;
+        gap: 30px;
+        padding: 30px;
+    }
+    
+    .slider-wrap.type2 {
+        height: 500px;
+    }
+    
+    .slider-wrap.type2 img {
+        height: 500px;
+        object-fit: contain;
+        background-color: #f8f9fa;
+    }
+    
+    .product-info-sidebar {
+        position: sticky;
+        top: 20px;
+        height: fit-content;
+    }
+    
+    .btn.primary.lg {
+        font-size: 18px;
+        padding: 16px 24px;
+    }
+}
+
+/*   */
+.btn-tab2:focus {
+    outline: 2px solid #FF6B6B;
+    outline-offset: 2px;
+}
+
+.calendar td:focus {
+    outline: 2px solid #FF6B6B;
+    outline-offset: -2px;
+}
+
+.btn-folding:focus {
+    outline: 2px solid #FF6B6B;
+    outline-offset: 2px;
+}
+
+/* Skip Navigation */
+.skip-nav {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #FF6B6B;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    z-index: 100;
+}
+
+.skip-nav:focus {
+    top: 0;
+}
+
+/*   */
+.calendar td.available {
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    background-color: white !important;
+}
+
+.calendar td.available:hover {
+    background-color: #FFF3F3;
+    transform: scale(1.05);
+}
+
+.calendar td.available.selected {
+    background-color: #FF6B6B;
+    color: white;
+}
+
+.calendar td.available.selected p {
+    color: white;
+}
+
+.calendar td.today {
+    border: 2px solid #FF6B6B;
+}
+
+/*        */
+.calendar tbody:has(td.selected) td.today:not(.selected) {
+    border: none;
+}
+
+.calendar td.past {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/*   */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #FF6B6B;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/*  */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/*   */
+.card-wrap {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*    */
+.btn.primary:hover {
+    background-color: #FF5252;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn.line:hover {
+    background-color: #FFF3F3;
+    border-color: #FF6B6B;
+    transition: all 0.3s ease;
+}
+
+/*    */
+.slider img {
+    loading: lazy;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: #f8f9fa;
+}
+
+/*   */
+.price-highlight {
+    background: linear-gradient(135deg, #FF6B6B, #FF8787);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    display: inline-block;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+/*    */
+.booking-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background-color: #F8F9FA;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+.booking-status.full {
+    background-color: #FFE5E5;
+    color: #D32F2F;
+}
+
+.booking-status.available {
+    background-color: #E8F5E9;
+    color: #2E7D32;
+}
+
+/*   */
+@media print {
+    .btn-wrap,
+    .tab-type2,
+    .slick-dots {
+        display: none;
+    }
+    
+    .card-wrap {
+        display: block !important;
+    }
+    
+    .main {
+        padding-bottom: 0 !important;
+    }
+}

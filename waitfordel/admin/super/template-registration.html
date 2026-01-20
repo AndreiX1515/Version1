@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>SMART TRAVEL ADMIN</title>
+
+	<!-- 공통 스타일 -->
+	<link rel="shortcut icon" href="../image/favicon.ico">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/a_reset.css">
+	<link rel="stylesheet" href="../css/a_variables.css">
+	<link rel="stylesheet" href="../css/a_components.css">
+	<link rel="stylesheet" href="../css/a_contents.css">
+
+	<!-- editor -->
+	<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+</head>
+
+<body>
+
+	<!-- header 들어올 자리 -->
+	<header class="layout-header"></header>
+
+	<!-- 본문 영역 -->
+	<main class="layout-main">
+		<!-- nav 들어올 자리 -->
+		<nav class="layout-nav"></nav>
+
+		<section class="layout-content layout-content-aside">
+			<div class="page-toolbar">
+				<a href="template-list.html" class="jw-button jw-button-back" aria-label="목록으로 돌아가기">
+					<img src="../image/arrow4.svg" alt="">
+					<span data-lan-eng="Return to list">목록으로 돌아가기</span>
+				</a>
+
+				<div class="page-toolbar-actions">
+					<button type="button" class="jw-button typeB" data-lan-eng="">Save</button>
+				</div>
+			</div>
+			
+			<div class="content-main">
+				<h1 class="page-title" data-lan-eng="Template Registration">Template Registration</h1>
+				<h2 class="section-title jw-mgt32" data-lan-eng="Template Information">템플릿 정보</h2>
+				<div class="card-panel jw-mgt16">
+					<div class="grid-wrap">
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Template name">템플릿명</span> <span class="req">*</span></label>
+							<input type="text" class="form-control" value="" data-essential="y" placeholder="Template name">
+						</div>
+
+					</div>
+				</div>
+				<h2 class="section-title jw-mgt32" data-lan-eng="Product Information">상품 정보</h2>
+				<div class="card-panel jw-mgt16">
+					<div class="grid-wrap">
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Product Name">상품명</span> <span class="req">*</span></label>
+							<input type="text" class="form-control" data-essential="y" value="Product Name">
+						</div>
+						<div class="grid-item ">
+							<label class="label-name" ><span data-lan-eng="Sales Target">판매 대상</span> <span class="req">*</span></label>
+							<select class="select" data-essential="y">
+								<option selected>B2B</option>
+								<option>B2C</option>
+							</select>
+						</div>
+						<div class="grid-item"></div>
+						<div class="grid-item"></div>
+
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Category">대분류</span> <span class="req">*</span></label>
+							<select class="select" data-essential="y" data-category="1" onchange="template_detail_sdaf_cate()">
+								<option  selected>Select main category</option>
+								<option value="계절별">Seasonal</option>
+								<option value="지역별">Regional</option>
+								<option value="테마별">Theme</option>
+							</select>
+						</div>
+
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Category">중분류</span> <span class="req">*</span></label>
+							<select class="select" data-essential="y" data-category="2" disabled>
+								<option selected>Please select a main category first</option>
+								<option>Spring</option>
+								<option>Summer</option>
+								<option>Autumn</option>
+								<option>Winter</option>
+							</select>
+						</div>
+						<!-- multi-editor.js -->
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Product Description">상품 설명</span> <span class="req">*</span></label>
+							<div class="editor-box-wrap">
+							<div class="jw-editor">
+								<div class="toolbar">
+								<div class="group">
+									<button type="button" class="editor-btn ql-bold">
+									<img src="../image/editer_bold.svg">
+									</button>
+									<button type="button" class="editor-btn ql-italic">
+									<img src="../image/editer_italic.svg">
+									</button>
+									<button type="button" class="editor-btn ql-underline">
+									<img src="../image/editer_underline.svg">
+									</button>
+									<button type="button" class="editor-btn ql-strike">
+									<img src="../image/editer_strikethrough.svg">
+									</button>
+						
+									<!-- 색상 버튼은 this 넘겨주기 -->
+									<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+									<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+								</div>
+						
+								<div class="group">
+									<!-- select도 this 넘겨주기 -->
+									<select class="editor-font-size" onchange="fontsize(this);">
+									<option value="" selected>폰트</option>
+									<option value="12px">12px</option>
+									<option value="14px">14px</option>
+									<option value="16px">16px</option>
+									<option value="18px">18px</option>
+									<option value="24px">24px</option>
+									</select>
+								</div>
+						
+								<div class="group">
+									<button type="button" class="editor-btn ql-align" value="">
+									<img src="../image/editer_left.svg">
+									</button>
+									<button type="button" class="editor-btn ql-align" value="center">
+									<img src="../image/editer_center.svg">
+									</button>
+									<button type="button" class="editor-btn ql-align" value="right">
+									<img src="../image/editer_right.svg">
+									</button>
+								</div>
+						
+								<div class="group">
+									<button type="button" class="editor-btn ql-list" value="ordered">
+									<img src="../image/editer_ordered.svg">
+									</button>
+									<button type="button" class="editor-btn ql-list" value="bullet">
+									<img src="../image/editer_unordered.svg">
+									</button>
+								</div>
+						
+								<div class="group">
+									<!-- 이것도 this 넘기게 변경 -->
+									<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+									<img src="../image/editer_removeHtmlTags.svg">
+									</button>
+									<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+									HTML
+									</button>
+								</div>
+						
+								<div class="group">
+									<label class="inputFile">
+									<!-- this 넘기기 -->
+									<input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+									<span class="text">이미지</span>
+									<i class="progress"></i>
+									</label>
+								</div>
+								</div>
+						
+								<div class="jweditor" data-placeholder="내용을 입력해주세요"></div>
+							</div>
+							</div>
+						</div>
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Thumbnail image">썸네일 이미지</span> <span class="req">*</span></label>
+							<div class="upload-grid">
+								<div class="upload-grid">
+									<div class="upload-item is-filled">
+										<img class="preview" src="https://picsum.photos/600/600" alt="">
+										<button type="button" class="jw-button btn-close" aria-label="remove">
+											<div class="ic-close" style="width:15px; height:15px; --line:1px; --color:#969696"></div>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="grid-item"></div>
+						<div class="grid-item"></div>
+						<div class="grid-item col-span-3">
+							<label class="label-name" data-lan-eng="Product image">상품 이미지</label>
+							<div class="upload-grid">
+								<div class="upload-item is-filled">
+									<img class="preview" src="https://picsum.photos/600/600" alt="">
+									<button type="button" class="jw-button btn-close" aria-label="remove">
+										<div class="ic-close" style="width:15px; height:15px; --line:1px; --color:#969696"></div>
+									</button>
+								</div>
+								<div class="upload-item jw-center">
+									<label class="inputFile">
+										<input name="" type="file" data-essential="y" onchange="filePreview(this);" >
+										<button type="button" class="btn-upload"><img src="../image/upload3.svg" alt=""> <span data-lan-eng="Image upload">Image upload</span></button>
+									</label>
+								</div>
+								<div class="upload-item jw-center">
+									<label class="inputFile">
+										<input name="" type="file" data-essential="y" onchange="filePreview(this);" >
+										<button type="button" class="btn-upload"><img src="../image/upload3.svg" alt=""> <span data-lan-eng="Image upload">Image upload</span></button>
+									</label>
+								</div>
+								<div class="upload-item jw-center">
+									<label class="inputFile">
+										<input name="" type="file" data-essential="y" onchange="filePreview(this);" >
+										<button type="button" class="btn-upload"><img src="../image/upload3.svg" alt=""> <span data-lan-eng="Image upload">Image upload</span></button>
+									</label>
+								</div>
+								<div class="upload-item jw-center">
+									<label class="inputFile">
+										<input name="" type="file" data-essential="y" onchange="filePreview(this);" >
+										<button type="button" class="btn-upload"><img src="../image/upload3.svg" alt=""> <span data-lan-eng="Image upload">Image upload</span></button>
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Detailed introduction image">상세 소개 이미지</span> <span class="req">*</span></label>
+							<div class="upload-grid">
+								<div class="upload-item is-filled">
+									<img class="preview" src="https://picsum.photos/600/600" alt="">
+									<button type="button" class="btn-close" aria-label="remove">×</button>
+								</div>
+							</div>
+
+						</div>
+						<div class="grid-item"></div>
+						<div class="grid-item"></div>
+
+					</div>
+				</div>
+
+				<h2 class="section-title jw-mgt32" data-lan-eng="Schedule">일정표</h2>
+				<div class="card-panel jw-mgt16">
+					<h3 class="grid-wrap-title" data-lan-eng="Meeting Information">미팅 정보</h3>
+					<div class="grid-wrap jw-mgt16">
+						<div class="grid-item">
+							<label class="label-name"><span data-lan-eng="Meeting time">미팅 시간</span> <span class="req">*</span></label>
+							<div class="meeting-wrap">
+								<select class="select" data-essential="y">
+									<option>00</option>
+									<option>01</option>
+									<option>02</option>
+									<option>03</option>
+									<option>04</option>
+									<option>05</option>
+									<option>06</option>
+									<option>07</option>
+									<option>08</option>
+									<option selected>09</option>
+									<option>10</option>
+									<option>11</option>
+									<option>12</option>
+									<option>13</option>
+									<option>14</option>
+									<option>15</option>
+									<option>16</option>
+									<option>17</option>
+									<option>18</option>
+									<option>19</option>
+									<option>20</option>
+									<option>21</option>
+									<option>22</option>
+									<option>23</option>
+								</select>
+								<select class="select" data-essential="y">
+									<option selected>00</option>
+									<option>05</option>
+									<option>10</option>
+									<option>15</option>
+									<option>20</option>
+									<option>25</option>
+									<option>30</option>
+									<option>35</option>
+									<option>40</option>
+									<option>45</option>
+									<option>50</option>
+									<option>55</option>
+								</select>
+							</div>
+						</div>
+						<div class="grid-item"></div>
+						<div class="grid-item"></div>
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Meeting place name">미팅 장소명</span> <span class="req">*</span></label>
+							<div class="jw-center jw-gap20">
+								<input type="text" class="form-control jw-wf" data-essential="y" value="Please search for an address" disabled>
+								<button type="button" class="jw-button typeA ">Address Search</button>
+							</div>
+						</div>
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Meeting place address">미팅 장소 주소</span> <span class="req">*</span></label>
+							<input type="text" class="form-control" data-essential="y" value="Please search for an address" disabled>
+						</div>
+					</div>
+				</div>
+
+				<div class="card-panel jw-mgt16" id="nday" >
+					<h3 class="grid-wrap-title">
+						<button type="button" class="jw-w jw-cols jw-between" onclick="ndasdtoggle()">1Day <img src="../image/arrow42.svg" alt=""></button>
+					</h3>
+					<i class="line"></i>
+					<div class="grid-wrap jw-mgt12">
+						<div class="grid-item col-span-3">
+							<label class="label-name" data-lan-eng="Schedule Summary">일정 요약</label>
+							<input type="text" class="form-control" placeholder="Schedule Summary">
+						</div>
+					</div>
+					<div class="sub-panel jw-mgt20">
+						<h3 class="grid-wrap-title" data-lan-eng="Tourist Information">관광지 정보</h3>
+						<button type="button" class="jw-button typeA jw-mgt12" data-lan-eng="＋ Add Tourist Attraction" onclick="template_detail_dfghs(this)">＋ 관광지 추가</button>
+
+						<div class="grid-wrap grid-highlight jw-mgt12 dfghs">
+							<div class="grid-item">
+								<label class="label-name"><span data-lan-eng="Schedule start time">Schedule start time</span> <span class="req">*</span></label>
+								<div class="meeting-wrap">
+									<select class="select" data-essential="y">
+										<option>00</option>
+										<option selected>09</option>
+										<option>10</option>
+										<option>11</option>
+										<option>12</option>
+										<option>13</option>
+										<option>14</option>
+										<option>15</option>
+										<option>16</option>
+										<option>17</option>
+										<option>18</option>
+										<option>19</option>
+										<option>20</option>
+										<option>21</option>
+										<option>22</option>
+										<option>23</option>
+									</select>
+									<select class="select" data-essential="y">
+										<option selected>00</option>
+										<option>10</option>
+										<option>20</option>
+										<option>30</option>
+										<option>40</option>
+										<option>50</option>
+									</select>
+								</div>
+							</div>
+							<div class="grid-item">
+								<label class="label-name"><span data-lan-eng="Schedule end time">Schedule end time</span> <span class="req">*</span></label>
+								<div class="meeting-wrap">
+									<select class="select">
+										<option>00</option>
+										<option>09</option>
+										<option selected>10</option>
+										<option>11</option>
+										<option>12</option>
+										<option>13</option>
+										<option>14</option>
+										<option>15</option>
+										<option>16</option>
+										<option>17</option>
+										<option>18</option>
+										<option>19</option>
+										<option>20</option>
+										<option>21</option>
+										<option>22</option>
+										<option>23</option>
+									</select>
+									<select class="select">
+										<option selected>00</option>
+										<option>10</option>
+										<option>20</option>
+										<option>30</option>
+										<option>40</option>
+										<option>50</option>
+									</select>
+								</div>
+							</div>
+							<div class="grid-item"></div>
+							<div class="grid-item col-span-3">
+								<label class="label-name"><span data-lan-eng="Sight Name">Sight Name</span> <span class="req">*</span></label>
+								<div class="jw-center jw-gap20">
+									<input type="text" class="form-control jw-wf" data-essential="y" value="Nami Island" disabled>
+									<button type="button" class="jw-button typeA " data-lan-eng="Address Search">Address Search</button>
+								</div>
+							</div>
+							<div class="grid-item col-span-3">
+								<label class="label-name"><span data-lan-eng="Sight Address">Sight Address</span> <span class="req">*</span></label>
+								<input type="text" class="form-control" data-essential="y" value="Gangwon Chuncheon-si Namsan-myeon Nami Island Road 1" disabled>
+							</div>
+							<!-- multi-editor.js -->
+							<div class="grid-item col-span-3">
+								<label class="label-name"><span data-lan-eng="Sight Information">Sight Information</span> <span class="req">*</span></label>
+								<div class="editor-box-wrap">
+								<div class="jw-editor">
+									<div class="toolbar">
+									<div class="group">
+										<button type="button" class="editor-btn ql-bold">
+										<img src="../image/editer_bold.svg">
+										</button>
+										<button type="button" class="editor-btn ql-italic">
+										<img src="../image/editer_italic.svg">
+										</button>
+										<button type="button" class="editor-btn ql-underline">
+										<img src="../image/editer_underline.svg">
+										</button>
+										<button type="button" class="editor-btn ql-strike">
+										<img src="../image/editer_strikethrough.svg">
+										</button>
+							
+										<!-- 색상 버튼은 this 넘겨주기 -->
+										<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+										<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+									</div>
+							
+									<div class="group">
+										<!-- select도 this 넘겨주기 -->
+										<select class="editor-font-size" onchange="fontsize(this);">
+										<option value="" selected>폰트</option>
+										<option value="12px">12px</option>
+										<option value="14px">14px</option>
+										<option value="16px">16px</option>
+										<option value="18px">18px</option>
+										<option value="24px">24px</option>
+										</select>
+									</div>
+							
+									<div class="group">
+										<button type="button" class="editor-btn ql-align" value="">
+										<img src="../image/editer_left.svg">
+										</button>
+										<button type="button" class="editor-btn ql-align" value="center">
+										<img src="../image/editer_center.svg">
+										</button>
+										<button type="button" class="editor-btn ql-align" value="right">
+										<img src="../image/editer_right.svg">
+										</button>
+									</div>
+							
+									<div class="group">
+										<button type="button" class="editor-btn ql-list" value="ordered">
+										<img src="../image/editer_ordered.svg">
+										</button>
+										<button type="button" class="editor-btn ql-list" value="bullet">
+										<img src="../image/editer_unordered.svg">
+										</button>
+									</div>
+							
+									<div class="group">
+										<!-- 이것도 this 넘기게 변경 -->
+										<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+										<img src="../image/editer_removeHtmlTags.svg">
+										</button>
+										<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+										HTML
+										</button>
+									</div>
+							
+									<div class="group">
+										<label class="inputFile">
+										<!-- this 넘기기 -->
+										<input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+										<span class="text">이미지</span>
+										<i class="progress"></i>
+										</label>
+									</div>
+									</div>
+							
+									<div class="jweditor" data-placeholder="내용을 입력해주세요"></div>
+								</div>
+								</div>
+							</div>
+
+							<div class="grid-item col-span-3">
+								<label class="label-name"><span data-lan-eng="Sight Image">Sight Image</span> <span class="req">*</span></label>
+								<div class="upload-grid">
+									<div class="upload-item jw-center">
+										<label class="inputFile">
+											<input name="" type="file" data-essential="y" onchange="filePreview(this);" >
+											<button type="button" class="btn-upload"><img src="../image/upload3.svg" alt=""> <span data-lan-eng="Image Upload">Image upload</span></button>
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="grid-item col-span-3">
+								<div class="grid-item-controoler">
+									<button type="button" class="jw-button typeA" onclick="template_detail_hsdfghsh(this)"><img src="../image/trash.svg" alt=""><span data-lan-eng="Delete tourist attraction">Delete tourist attraction</span></button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="sub-panel jw-mgt20">
+						<h4 class="grid-wrap-title" data-lan-eng="Accommodation Information">숙소 정보</h4>
+
+						<div class="grid-wrap grid-highlight jw-mgt12">
+							<div class="grid-item col-span-3">
+								<label class="label-name"><span data-lan-eng="Accommodation name">숙소명</span> <span class="req">*</span></label>
+								<div class="jw-center jw-gap20">
+									<input type="text" class="form-control jw-wf" data-essential="y" value="" placeholder="Please search for an address" disabled>
+									<button type="button" class="jw-button typeA " data-lan-eng="Address Search">주소 검색</button>
+								</div>
+
+							</div>
+
+							<div class="grid-item col-span-3">
+								<label class="label-name"><span data-lan-eng="Accommodation address">숙소 주소</span> <span class="req">*</span></label>
+								<input type="text" class="form-control" data-essential="y" value="" placeholder="Please search for an address" disabled>
+							</div>
+							<!-- multi-editor.js -->
+							<div class="grid-item col-span-3">
+								<label class="label-name"><span data-lan-eng="Accommodation Description">숙소 설명</span> <span class="req">*</span></label>
+								<div class="editor-box-wrap">
+								<div class="jw-editor">
+									<div class="toolbar">
+									<div class="group">
+										<button type="button" class="editor-btn ql-bold">
+										<img src="../image/editer_bold.svg">
+										</button>
+										<button type="button" class="editor-btn ql-italic">
+										<img src="../image/editer_italic.svg">
+										</button>
+										<button type="button" class="editor-btn ql-underline">
+										<img src="../image/editer_underline.svg">
+										</button>
+										<button type="button" class="editor-btn ql-strike">
+										<img src="../image/editer_strikethrough.svg">
+										</button>
+							
+										<!-- 색상 버튼은 this 넘겨주기 -->
+										<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+										<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+									</div>
+							
+									<div class="group">
+										<!-- select도 this 넘겨주기 -->
+										<select class="editor-font-size" onchange="fontsize(this);">
+										<option value="" selected>폰트</option>
+										<option value="12px">12px</option>
+										<option value="14px">14px</option>
+										<option value="16px">16px</option>
+										<option value="18px">18px</option>
+										<option value="24px">24px</option>
+										</select>
+									</div>
+							
+									<div class="group">
+										<button type="button" class="editor-btn ql-align" value="">
+										<img src="../image/editer_left.svg">
+										</button>
+										<button type="button" class="editor-btn ql-align" value="center">
+										<img src="../image/editer_center.svg">
+										</button>
+										<button type="button" class="editor-btn ql-align" value="right">
+										<img src="../image/editer_right.svg">
+										</button>
+									</div>
+							
+									<div class="group">
+										<button type="button" class="editor-btn ql-list" value="ordered">
+										<img src="../image/editer_ordered.svg">
+										</button>
+										<button type="button" class="editor-btn ql-list" value="bullet">
+										<img src="../image/editer_unordered.svg">
+										</button>
+									</div>
+							
+									<div class="group">
+										<!-- 이것도 this 넘기게 변경 -->
+										<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+										<img src="../image/editer_removeHtmlTags.svg">
+										</button>
+										<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+										HTML
+										</button>
+									</div>
+							
+									<div class="group">
+										<label class="inputFile">
+										<!-- this 넘기기 -->
+										<input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+										<span class="text">이미지</span>
+										<i class="progress"></i>
+										</label>
+									</div>
+									</div>
+							
+									<div class="jweditor" data-placeholder="내용을 입력해주세요"></div>
+								</div>
+								</div>
+							</div>
+
+							<div class="grid-item col-span-3">
+								<label class="label-name"><span data-lan-eng="Accommodation image">숙소 이미지</span> <span class="req">*</span></label>
+								<div class="upload-grid">
+									<div class="upload-item jw-center">
+										<label class="inputFile">
+											<input name="" type="file" data-essential="y" onchange="filePreview(this);" >
+											<button type="button" class="btn-upload"><img src="../image/upload3.svg" alt=""> <span data-lan-eng="Image Upload">Image upload</span></button>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="sub-panel jw-mgt20">
+						<h4 class="grid-wrap-title" data-lan-eng="Transportation Information">교통편 정보</h4>
+						<div class="grid-wrap grid-highlight jw-mgt12">
+							<!-- multi-editor.js -->
+							<div class="grid-item col-span-3">
+								<label class="label-name" data-lan-eng="Description">설명</label>
+								<div class="editor-box-wrap">
+								<div class="jw-editor">
+									<div class="toolbar">
+									<div class="group">
+										<button type="button" class="editor-btn ql-bold">
+										<img src="../image/editer_bold.svg">
+										</button>
+										<button type="button" class="editor-btn ql-italic">
+										<img src="../image/editer_italic.svg">
+										</button>
+										<button type="button" class="editor-btn ql-underline">
+										<img src="../image/editer_underline.svg">
+										</button>
+										<button type="button" class="editor-btn ql-strike">
+										<img src="../image/editer_strikethrough.svg">
+										</button>
+							
+										<!-- 색상 버튼은 this 넘겨주기 -->
+										<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+										<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+									</div>
+							
+									<div class="group">
+										<!-- select도 this 넘겨주기 -->
+										<select class="editor-font-size" onchange="fontsize(this);">
+										<option value="" selected>폰트</option>
+										<option value="12px">12px</option>
+										<option value="14px">14px</option>
+										<option value="16px">16px</option>
+										<option value="18px">18px</option>
+										<option value="24px">24px</option>
+										</select>
+									</div>
+							
+									<div class="group">
+										<button type="button" class="editor-btn ql-align" value="">
+										<img src="../image/editer_left.svg">
+										</button>
+										<button type="button" class="editor-btn ql-align" value="center">
+										<img src="../image/editer_center.svg">
+										</button>
+										<button type="button" class="editor-btn ql-align" value="right">
+										<img src="../image/editer_right.svg">
+										</button>
+									</div>
+							
+									<div class="group">
+										<button type="button" class="editor-btn ql-list" value="ordered">
+										<img src="../image/editer_ordered.svg">
+										</button>
+										<button type="button" class="editor-btn ql-list" value="bullet">
+										<img src="../image/editer_unordered.svg">
+										</button>
+									</div>
+							
+									<div class="group">
+										<!-- 이것도 this 넘기게 변경 -->
+										<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+										<img src="../image/editer_removeHtmlTags.svg">
+										</button>
+										<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+										HTML
+										</button>
+									</div>
+							
+									<div class="group">
+										<label class="inputFile">
+										<!-- this 넘기기 -->
+										<input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+										<span class="text">이미지</span>
+										<i class="progress"></i>
+										</label>
+									</div>
+									</div>
+							
+									<div class="jweditor" data-placeholder="내용을 입력해주세요"></div>
+								</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="sub-panel jw-mgt20">
+						<h4 class="grid-wrap-title" data-lan-eng="Meal information">식사 정보</h4>
+						<div class="grid-wrap grid-highlight jw-mgt12">
+							<div class="grid-item">
+								<label class="label-name" data-lan-eng="Breakfast">조식</label>
+								<input type="text" class="form-control" value="" placeholder="Breakfast">
+							</div>
+							<div class="grid-item">
+								<label class="label-name" data-lan-eng="Chinese food">중식</label>
+								<input type="text" class="form-control" value="" placeholder="Chinese food">
+							</div>
+							<div class="grid-item">
+								<label class="label-name" data-lan-eng="Dinner">석식</label>
+								<input type="text" class="form-control" value="" placeholder="Dinner">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<h2 class="section-title jw-mgt32" data-lan-eng="Fee information">요금 정보</h2>
+				<div class="card-panel jw-mgt16">
+					<h3 class="grid-wrap-title" data-lan-eng="Number of people fee">인원별 요금</h3>
+					<i class="line"></i>
+					<button type="button" class="jw-button typeA" onclick="template_detail_sfg1(this)" data-lan-eng="＋ Add">＋ 추가</button>
+					<div class="tableA-scroll jw-mgt12">
+						<table class="jw-tableA booking-detail">
+							<colgroup>
+								<col class="col-80"> <!-- No -->
+								<col> <!-- 옵션명 -->
+								<col class="col-300"> <!-- 인원별 요금 -->
+								<col class="col-100"> <!-- 삭제 -->
+							</colgroup>
+							<thead>
+								<tr>
+									<th class="is-center">No</th>
+									<th data-lan-eng="Option name">옵션명</th>
+									<th data-lan-eng="Number of people fee (₱)">인원별 요금 (₱)</th>
+									<th data-lan-eng="Delete">삭제</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="is-center">1</td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Adult" placeholder="옵션명"></div></td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="34,000" inputmode="numeric" placeholder="0"></div></td>
+									<td class="is-center jw-center">
+										<button type="button" class="jw-button" aria-label="row delete" onclick="template_detail_sfg1d(this)"><img src="../image/trash.svg" alt=""></button>
+									</td>
+								</tr>
+								<tr>
+									<td class="is-center">2</td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Child"></div></td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="23,800" inputmode="numeric"></div></td>
+									<td class="is-center jw-center">
+										<button type="button" class="jw-button" aria-label="row delete" onclick="template_detail_sfg1d(this)"><img src="../image/trash.svg" alt=""></button>
+									</td>
+								</tr>
+								<tr>
+									<td class="is-center">3</td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="Child"></div></td>
+									<td class="is-center"><div class="cell"><input type="text" class="form-control" value="0" inputmode="numeric"></div></td>
+									<td class="is-center jw-center">
+										<button type="button" class="jw-button" aria-label="row delete" onclick="template_detail_sfg1d(this)"><img src="../image/trash.svg" alt=""></button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="card-panel jw-mgt16">
+					<h3 class="grid-wrap-title" data-lan-eng="Room rate for single occupancy">싱글룸 이용 요금</h3>
+					<div class="grid-wrap jw-mgt16">
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Single room usage fee (₱)">싱글룸 이용 요금 (₱)</span> <span class="req">*</span></label>
+							<input type="text" class="form-control jw-w348" value="10,000" inputmode="numeric" placeholder="Enter numbers">
+							<p class="form-desc is-warning" data-lan-eng="* When booking for 2 or more people, you will be charged for the number of single rooms selected. For 1 person booking, it is applied for free.">* 2인 이상 예약 시, 선택한 싱글룸 수만큼 요금이 부과됩니다. 1인 예약 시에는 무료로 적용됩니다.</p>
+						</div>
+					</div>
+				</div>
+				<h2 class="section-title jw-mgt32" data-section-name="poham" data-lan-eng="Included/Not Included Items">포함/불포함 사항</h2>
+				<div class="card-panel jw-mgt16" data-section-name="poham">
+					<h3 class="grid-wrap-title" data-lan-eng="Included items">포함 사항</h3>
+					<i class="line"></i>
+					<button type="button" class="jw-button typeA" data-lan-eng="＋ Add" onclick="template_detail_sfg3(this)">＋ 추가</button>
+					<div class="tableA-scroll jw-mgt20">
+						<table class="jw-tableA booking-detail">
+							<colgroup>
+								<col class="col-80"> <!-- No -->
+								<col> <!-- 포함 사항 -->
+								<col class="col-100"> <!-- 삭제 -->
+							</colgroup>
+							<thead>
+								<tr>
+									<th>No</th>
+									<th data-lan-eng="Included items">포함 사항</th>
+									<th data-lan-eng="Delete">삭제</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="is-center">1</td>
+									<td class="is-center">
+										<div class="cell">
+											<input type="text" class="form-control" value="All accommodation (based on 2 people per room)">
+										</div>
+									</td>
+									<td class="is-center jw-center">
+										<button type="button" class="jw-button" aria-label="row delete" onclick="trash_typeA(this);"><img src="../image/trash.svg" alt=""></button>
+									</td>
+								</tr>
+								<tr>
+									<td class="is-center">2</td>
+									<td class="is-center">
+										<div class="cell">
+											<input type="text" class="form-control" value="Accompanied by a dedicated vehicle and professional guide">
+										</div>
+									</td>
+									<td class="is-center jw-center">
+										<button type="button" class="jw-button" aria-label="row delete" onclick="trash_typeA(this);"><img src="../image/trash.svg" alt=""></button>
+									</td>
+								</tr>
+								<tr>
+									<td class="is-center">3</td>
+									<td class="is-center">
+										<div class="cell">
+											<input type="text" class="form-control" value="All meals and entrance fees specified in the schedule are included">
+										</div>
+									</td>
+									<td class="is-center jw-center">
+										<button type="button" class="jw-button" aria-label="row delete" onclick="trash_typeA(this);"><img src="../image/trash.svg" alt=""></button>
+									</td>
+								</tr>
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="card-panel jw-mgt16" data-section-name="poham">
+					<h3 class="grid-wrap-title" data-lan-eng="Excluded items">불포함 사항</h3>
+					<i class="line"></i>
+					<button type="button" class="jw-button typeA" data-lan-eng="＋ Add" onclick="template_detail_sfg3(this)">＋ 추가</button>
+
+					<div class="tableA-scroll jw-mgt20">
+						<table class="jw-tableA booking-detail">
+							<colgroup>
+								<col class="col-80"> <!-- No -->
+								<col> <!-- 불포함 사항 -->
+								<col class="col-100"> <!-- 삭제 -->
+							</colgroup>
+							<thead>
+								<tr>
+									<th data-lan-eng="">No</th>
+									<th data-lan-eng="Excluded items">불포함 사항</th>
+									<th data-lan-eng="Delete">삭제</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="is-center">1</td>
+									<td class="is-center">
+										<div class="cell">
+											<input type="text" class="form-control" value="Personal travel insurance and personal expenses">
+										</div>
+									</td>
+									<td class="is-center jw-center"><button type="button" class="jw-button" aria-label="row delete" onclick="trash_typeA(this);"><img src="../image/trash.svg" alt=""></button>
+									</td>
+								</tr>
+								<tr>
+									<td class="is-center">2</td>
+									<td class="is-center">
+										<div class="cell">
+											<input type="text" class="form-control" value="Meals and transportation costs during free time">
+										</div>
+									</td>
+									<td class="is-center jw-center"><button type="button" class="jw-button" aria-label="row delete" onclick="trash_typeA(this);"><img src="../image/trash.svg" alt=""></button>
+									</td>
+								</tr>
+								<tr>
+									<td class="is-center">3</td>
+									<td class="is-center">	
+										<div class="cell">
+											<input type="text" class="form-control" value="Manner tips and optional tourism costs">
+										</iv>
+									</td>
+									<td class="is-center jw-center"><button type="button" class="jw-button" aria-label="row delete" onclick="trash_typeA(this);"><img src="../image/trash.svg" alt=""></button>
+									</td>
+								</tr>
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<h2 class="section-title jw-mgt32" data-lan-eng="Usage Guide">이용안내</h2>
+				<div class="card-panel jw-mgt16">
+					<div class="grid-wrap jw-mgt0">
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Notice">안내문</span> <span class="req">*</span></label>
+							<div class="cell">
+								<div class="field-row jw-center">
+									<div class="jw-center jw-gap10"><img src="../image/file.svg" alt=""> <span data-lan-eng="File">파일</span> [pdf, 328KB]</div>
+									<div class="jw-center jw-gap10">
+										<i></i>
+										<button type="button" class="jw-button typeF"><img src="../image/buttun-download.svg" alt=""></button>
+										<button type="button" class="jw-button typeF"><img src="../image/button-close2.svg" alt=""></button>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<!-- multi-editor.js -->
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Description">설명</span> <span class="req">*</span></label>
+							<div class="editor-box-wrap">
+							<div class="jw-editor">
+								<div class="toolbar">
+								<div class="group">
+									<button type="button" class="editor-btn ql-bold">
+									<img src="../image/editer_bold.svg">
+									</button>
+									<button type="button" class="editor-btn ql-italic">
+									<img src="../image/editer_italic.svg">
+									</button>
+									<button type="button" class="editor-btn ql-underline">
+									<img src="../image/editer_underline.svg">
+									</button>
+									<button type="button" class="editor-btn ql-strike">
+									<img src="../image/editer_strikethrough.svg">
+									</button>
+						
+									<!-- 색상 버튼은 this 넘겨주기 -->
+									<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+									<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+								</div>
+						
+								<div class="group">
+									<!-- select도 this 넘겨주기 -->
+									<select class="editor-font-size" onchange="fontsize(this);">
+									<option value="" selected>폰트</option>
+									<option value="12px">12px</option>
+									<option value="14px">14px</option>
+									<option value="16px">16px</option>
+									<option value="18px">18px</option>
+									<option value="24px">24px</option>
+									</select>
+								</div>
+						
+								<div class="group">
+									<button type="button" class="editor-btn ql-align" value="">
+									<img src="../image/editer_left.svg">
+									</button>
+									<button type="button" class="editor-btn ql-align" value="center">
+									<img src="../image/editer_center.svg">
+									</button>
+									<button type="button" class="editor-btn ql-align" value="right">
+									<img src="../image/editer_right.svg">
+									</button>
+								</div>
+						
+								<div class="group">
+									<button type="button" class="editor-btn ql-list" value="ordered">
+									<img src="../image/editer_ordered.svg">
+									</button>
+									<button type="button" class="editor-btn ql-list" value="bullet">
+									<img src="../image/editer_unordered.svg">
+									</button>
+								</div>
+						
+								<div class="group">
+									<!-- 이것도 this 넘기게 변경 -->
+									<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+									<img src="../image/editer_removeHtmlTags.svg">
+									</button>
+									<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+									HTML
+									</button>
+								</div>
+						
+								<div class="group">
+									<label class="inputFile">
+									<!-- this 넘기기 -->
+									<input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+									<span class="text">이미지</span>
+									<i class="progress"></i>
+									</label>
+								</div>
+								</div>
+						
+								<div class="jweditor" data-placeholder="내용을 입력해주세요"></div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<h2 class="section-title jw-mgt32" data-lan-eng="Cancellation/Refund Policy">취소/환불 규정</h2>
+				<div class="card-panel jw-mgt16">
+					<div class="grid-wrap jw-mgt0">
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Full refund available standard date">Full refund available standard date</span> <span class="req">*</span></label>
+							<input type="text" class="form-control jw-w348" value="15" inputmode="numeric" placeholder="Enter numbers">
+							<p class="form-desc is-warning" data-lan-eng="Cancel up to 1 day before for a full refund">Cancel up to 1 day before for a full refund</p>
+						</div>
+						<!-- multi-editor.js -->
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Description">설명</span> <span class="req">*</span></label>
+							<div class="editor-box-wrap">
+							<div class="jw-editor">
+								<div class="toolbar">
+								<div class="group">
+									<button type="button" class="editor-btn ql-bold">
+									<img src="../image/editer_bold.svg">
+									</button>
+									<button type="button" class="editor-btn ql-italic">
+									<img src="../image/editer_italic.svg">
+									</button>
+									<button type="button" class="editor-btn ql-underline">
+									<img src="../image/editer_underline.svg">
+									</button>
+									<button type="button" class="editor-btn ql-strike">
+									<img src="../image/editer_strikethrough.svg">
+									</button>
+						
+									<!-- 색상 버튼은 this 넘겨주기 -->
+									<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+									<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+								</div>
+						
+								<div class="group">
+									<!-- select도 this 넘겨주기 -->
+									<select class="editor-font-size" onchange="fontsize(this);">
+									<option value="" selected>폰트</option>
+									<option value="12px">12px</option>
+									<option value="14px">14px</option>
+									<option value="16px">16px</option>
+									<option value="18px">18px</option>
+									<option value="24px">24px</option>
+									</select>
+								</div>
+						
+								<div class="group">
+									<button type="button" class="editor-btn ql-align" value="">
+									<img src="../image/editer_left.svg">
+									</button>
+									<button type="button" class="editor-btn ql-align" value="center">
+									<img src="../image/editer_center.svg">
+									</button>
+									<button type="button" class="editor-btn ql-align" value="right">
+									<img src="../image/editer_right.svg">
+									</button>
+								</div>
+						
+								<div class="group">
+									<button type="button" class="editor-btn ql-list" value="ordered">
+									<img src="../image/editer_ordered.svg">
+									</button>
+									<button type="button" class="editor-btn ql-list" value="bullet">
+									<img src="../image/editer_unordered.svg">
+									</button>
+								</div>
+						
+								<div class="group">
+									<!-- 이것도 this 넘기게 변경 -->
+									<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+									<img src="../image/editer_removeHtmlTags.svg">
+									</button>
+									<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+									HTML
+									</button>
+								</div>
+						
+								<div class="group">
+									<label class="inputFile">
+									<!-- this 넘기기 -->
+									<input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+									<span class="text">이미지</span>
+									<i class="progress"></i>
+									</label>
+								</div>
+								</div>
+						
+								<div class="jweditor" data-placeholder="내용을 입력해주세요">Please enter a description</div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<h2 class="section-title jw-mgt32" data-lan-eng="Visa Application Guide">비자 신청 안내</h2>
+				<div class="card-panel jw-mgt16">
+					<div class="grid-wrap jw-mgt0">
+						<!-- multi-editor.js -->
+						<div class="grid-item col-span-3">
+							<label class="label-name"><span data-lan-eng="Description">설명</span> <span class="req">*</span></label>
+							<div class="editor-box-wrap">
+								<div class="jw-editor">
+									<div class="toolbar">
+									<div class="group">
+										<button type="button" class="editor-btn ql-bold">
+										<img src="../image/editer_bold.svg">
+										</button>
+										<button type="button" class="editor-btn ql-italic">
+										<img src="../image/editer_italic.svg">
+										</button>
+										<button type="button" class="editor-btn ql-underline">
+										<img src="../image/editer_underline.svg">
+										</button>
+										<button type="button" class="editor-btn ql-strike">
+										<img src="../image/editer_strikethrough.svg">
+										</button>
+							
+										<!-- 색상 버튼은 this 넘겨주기 -->
+										<button type="button" class="editor-btn font-color" onclick="setColor(this);">가</button>
+										<button type="button" class="background-color" onclick="setColor(this, 2);"></button>
+									</div>
+							
+									<div class="group">
+										<!-- select도 this 넘겨주기 -->
+										<select class="editor-font-size" onchange="fontsize(this);">
+										<option value="" selected>폰트</option>
+										<option value="12px">12px</option>
+										<option value="14px">14px</option>
+										<option value="16px">16px</option>
+										<option value="18px">18px</option>
+										<option value="24px">24px</option>
+										</select>
+									</div>
+							
+									<div class="group">
+										<button type="button" class="editor-btn ql-align" value="">
+										<img src="../image/editer_left.svg">
+										</button>
+										<button type="button" class="editor-btn ql-align" value="center">
+										<img src="../image/editer_center.svg">
+										</button>
+										<button type="button" class="editor-btn ql-align" value="right">
+										<img src="../image/editer_right.svg">
+										</button>
+									</div>
+							
+									<div class="group">
+										<button type="button" class="editor-btn ql-list" value="ordered">
+										<img src="../image/editer_ordered.svg">
+										</button>
+										<button type="button" class="editor-btn ql-list" value="bullet">
+										<img src="../image/editer_unordered.svg">
+										</button>
+									</div>
+							
+									<div class="group">
+										<!-- 이것도 this 넘기게 변경 -->
+										<button type="button" class="editor-btn" onclick="removeHtmlTags(this);">
+										<img src="../image/editer_removeHtmlTags.svg">
+										</button>
+										<button type="button" class="editor-btn" style="font-size:9px;" onclick="toggleHtmlView(this);">
+										HTML
+										</button>
+									</div>
+							
+									<div class="group">
+										<label class="inputFile">
+										<!-- this 넘기기 -->
+										<input name="item_img[]" type="file" accept="image/*" multiple onchange="insertImage(this);">
+										<span class="text">이미지</span>
+										<i class="progress"></i>
+										</label>
+									</div>
+									</div>
+							
+									<div class="jweditor" data-placeholder="내용을 입력해주세요">Please enter a description</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<aside class="content-aside off" aria-label="구성 요소" style="top:0px">
+				<h3 class="aside-title" data-lan-eng="Components">구성 요소</h3>
+				<div class="card-panel jw-mgt16">
+						<div class="grid-item">
+
+							<div class="aside-list">
+								<div class="aside-row">
+									<div class="aside-row__title" data-lan-eng="Template Information">템플릿 정보</div>
+									<span class="aside-row__req" data-lan-eng="Required">필수</span>
+								</div>
+								<hr>
+
+								<div class="aside-row">
+									<div class="aside-row__title" data-lan-eng="Product Information">상품 정보</div>
+									<span class="aside-row__req" data-lan-eng="Required">필수</span>
+								</div>
+								<hr>
+
+								<div class="aside-row">
+									<div class="aside-row__title" data-lan-eng="Schedule">일정표</div>
+									<span class="aside-row__req" data-lan-eng="Required">필수</span>
+								</div>
+								<div class="aside-sub">
+									<div class="aside-row">
+										<div class="aside-row__subtitle" data-lan-eng="Meeting Information">미팅 정보</div>
+										<span class="aside-row__req" data-lan-eng="Required">필수</span>
+									</div>
+									
+									<div class="aside-row-list">
+										<div class="aside-row">
+											<div class="aside-row__subtitle" data-lan-eng="1st day">1일차</div>
+											<span class="aside-row__req" data-lan-eng="Required">필수</span>
+										</div>
+										<div class="aside-row">
+											<div class="aside-row__subtitle" data-lan-eng="Day 2">2일차</div>
+											<button type="button" class="jw-button aside-add-section" onclick="template_detail_sdaf_delete(this)"><img src="../image/minus.svg" alt=""></button>
+										</div>
+									</div>
+									<div class="aside-row">
+										<button type="button" class="jw-button aside-button-typeA" onclick="template_detail_sdaf(this)"><img src="../image/plus.svg" alt=""> <span data-lan-eng="Add day">일차 추가</span></button>
+									</div>
+								</div>
+								<hr>
+								<div class="aside-row">
+									<div class="aside-row__title" data-lan-eng="Fee information">요금 정보</div>
+									<span class="aside-row__req" data-lan-eng="Required">필수</span>
+								</div>
+								<hr>
+								<div class="aside-row">
+									<div class="aside-row__title" data-lan-eng="Included/Not Included Items">포함/불포함 사항</div>
+									<button type="button" class="jw-button aside-add-section" data-target-section="poham" onclick="togglePlusMinus(this)"><img src="../image/minus.svg" alt=""></button>
+								</div>
+								<hr>
+								<div class="aside-row">
+									<div class="aside-row__title" data-lan-eng="Usage Guide">이용안내</div>
+									<span class="aside-row__req" data-lan-eng="Required">필수</span>
+								</div>
+								<hr>
+								<div class="aside-row">
+									<div class="aside-row__title" data-lan-eng="Cancellation/Refund Policy">취소/환불 규정</div>
+									<span class="aside-row__req" data-lan-eng="Required">필수</span>
+								</div>
+								<hr>
+								<div class="aside-row">
+									<div class="aside-row__title" data-lan-eng="Visa Application Guide">비자 신청 안내</div>
+									<span class="aside-row__req" data-lan-eng="Required">필수</span>
+								</div>
+
+							</div>
+
+						</div>
+						<div class="temporary-guide" style="position:relative; margin-top:50px; ">
+							<button type="button" class="jw-button" onclick="modal('template-detail-modal1.html', '600px', '252px')">필수값 입력 요청</button>
+							<button type="button" class="jw-button" onclick="modal('product-detail_modal_5.html', '580px', '252px')">테이블 삭제 시</button>
+						</div>
+				</div>
+			</aside>
+
+		</section>
+
+	</main>
+
+	<!-- 기본 스크립트 -->
+	<script src="../js/default.js"></script>
+	<script src="../js/super.js"></script>
+	<script src="../js/multi-editor.js"></script>
+
+
+	<script>
+		init({
+			headerUrl: '../inc/header.html',
+			navUrl: '../inc/nav_super.html'
+		});
+	</script>
+</body>
+
+</html>

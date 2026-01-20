@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel | Visa Application Details - Under Review</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/auth-guard.js" defer></script>
+    <script src="../js/api.js" defer></script>
+    <link rel="stylesheet" href="/css/i18n-boot.css">
+    <script src="/js/i18n-boot.js"></script>
+    <script src="../js/i18n.js" defer></script>
+    <script src="../js/visa-detail-examination.js" defer></script>
+    <!-- SMT   -     visa-history.html  -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const backButton = document.querySelector('.btn-mypage');
+            if (backButton) {
+                backButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.location.href = 'visa-history.html';
+                });
+            }
+        });
+    </script>
+    <!-- SMT   -->
+</head>
+<body>
+    <div class="main bg white mh100">
+        <header class="header-type2 bg white">
+            <a class="btn-mypage" href="#none"><img src="../images/ico_back_black.svg"></a>
+            <div class="title"></div>
+            <div></div>
+        </header>
+       
+        <div class="px20 pb20 mt24">
+            <div class="text fz20 fw600 lh28 black12">
+                Your documents have been submitted.<br>
+                Your visa application is now under review.
+            </div>
+            <!-- Documents are rendered by JS -->
+            <div class="mt32"></div>
+        </div>
+       
+</body>
+</html>

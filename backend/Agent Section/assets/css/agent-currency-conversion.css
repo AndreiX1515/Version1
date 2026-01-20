@@ -1,0 +1,270 @@
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 88vh;
+  width: 97%;
+  margin: 15px 30px 0px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.content-header {
+  height: 20vh;
+  font-family: Arial, sans-serif;
+  color: #333;
+  width: 100%;
+  background-color: #e6e6e6a4;
+  z-index: 10;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  /* border: 1px solid black; */
+
+  /* Soft shadow added */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.content-header h1 {
+	font-size: 22px;
+	font-weight: bold;
+	margin: 0;
+	color: #1d1d1d;
+}
+
+.content-header p {
+	font-size: 16px;
+	font-weight: 400;
+	margin: 0;
+	color: #6b6b6b;
+}
+
+.back-button-wrapper {
+	margin-bottom: 10px;
+}
+
+.back-button-link {
+	text-decoration: none;
+	color: #6c757d;
+	font-size: 14px;
+	display: inline-flex;
+	align-items: center;
+	transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.back-button-link:hover {
+	color: #116530;
+}
+
+/* General Layout for Content */
+.content-body {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+  height: 68vh;
+  /* border: 1px solid black; */
+  padding: 10;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+}
+
+
+
+
+.content-footer {
+  width: 100%;
+  height: 8vh;
+  padding: 10px 10px 10px 10px;
+  border-top: 1px solid gainsboro; /* Flat top border */
+  border-left: 1px solid gainsboro;
+  border-right: 1px solid gainsboro;
+  border-bottom: 1px solid gainsboro;
+  /* display: none; */
+  gap: 10px;
+  
+  justify-content: flex-end;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Box shadow */
+}
+
+
+.content-footer .btn {
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  border-radius: 8px;
+}
+
+.content-footer .btn:hover {
+  opacity: 0.9; /* Slight hover effect */
+}
+
+
+/* ========================== */
+
+/* ========================== */
+
+.table-container {
+  height: 73.5vh;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  overflow-x: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid gainsboro;
+}
+
+.currency-table {
+  width: 100%;
+  height: auto; /* Remove 80vh to let the table size adjust based on content */
+  border-collapse: collapse;
+  font-size: 14px;
+  table-layout: auto; /* Let columns size according to their content */
+}
+
+.currency-table thead {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.currency-table th,
+.currency-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: middle; /* Ensure content is vertically centered */
+  height: auto; /* Prevent row stretching */
+}
+
+.currency-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.currency-table tbody tr {
+  height: auto; /* Ensure rows don't stretch */
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badge.confirmed {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.badge.pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.badge.cancelled {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+
+
+
+/* TABLE FOOTER */ 
+
+.table-footer {
+  height: 6vh;
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 0 15px;
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.table-footer .last-updated-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+}
+
+.table-footer .last-updated-wrapper h6 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #3d3d3d;
+  margin: 0;
+}
+
+
+
+
+
+
+
+
+
+
+/* FOR PAGINATION */
+
+.pagination-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.pagination-btn {
+  padding: 8px 16px;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.pagination-btn:hover {
+  background-color: #f3f4f6;
+}
+
+.page-info {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+
+
+
+/* ====================== */
+
+
+  .rate-up {
+    color: green;
+    font-weight: bold;
+  }
+
+  .rate-down {
+    color: red;
+    font-weight: bold;
+  }
+
+  .rate-neutral {
+    color: gray;
+    font-style: italic;
+  }
+
+  .currency-table td {
+    padding: 8px 12px;
+    text-align: left;
+  }
+
+  .currency-table th {
+    padding: 10px;
+    background-color: #f4f4f4;
+  }
+

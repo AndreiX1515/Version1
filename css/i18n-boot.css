@@ -1,0 +1,6 @@
+/* Prevent language flash (FOUC): hide until i18n applies the chosen language */
+html[data-i18n-pending="1"]:not([data-i18n-ready="1"]) body {
+  visibility: hidden;
+}
+
+

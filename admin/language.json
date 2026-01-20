@@ -1,0 +1,7516 @@
+{
+    "admin": [
+        [
+            "",
+            "ID"
+        ],
+        [
+            "",
+            "ID"
+        ],
+        [
+            "",
+            "Password"
+        ],
+        [
+            "",
+            "Password"
+        ],
+        [
+            " ",
+            "Remember ID"
+        ],
+        [
+            " ",
+            "Find ID"
+        ],
+        [
+            " ",
+            "Reset Password"
+        ],
+        [
+            "",
+            "Login"
+        ]
+    ]
+},
+{
+    "overview.html": [
+        [
+            "",
+            "Operating Status"
+        ],
+        [
+            " ",
+            "Reservation Status"
+        ],
+        [
+            "  ",
+            "Waiting for advance payment deposit"
+        ],
+        [
+            "",
+            "Dry"
+        ],
+        [
+            "  ",
+            "Waiting for balance payment"
+        ],
+        [
+            "8",
+            ""
+        ],
+        [
+            "",
+            "Dry"
+        ],
+        [
+            " ",
+            "Inquiry Status"
+        ],
+        [
+            "",
+            "Unanswered"
+        ],
+        [
+            "15",
+            ""
+        ],
+        [
+            "",
+            "Dry"
+        ],
+        [
+            "",
+            "Processing"
+        ],
+        [
+            "7",
+            ""
+        ],
+        [
+            "",
+            "Dry"
+        ],
+        [
+            "  ",
+            "Today's Travel Itinerary"
+        ],
+        [
+            "",
+            "Dry"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            " ",
+            "Travel period"
+        ],
+        [
+            " ",
+            "Customer Type"
+        ],
+        [
+            " ",
+            "Number of people"
+        ],
+        [
+            " ",
+            "Assignment Guide"
+        ],
+        [
+            " ",
+            "Sales Statistics"
+        ],
+        [
+            " ",
+            "Select period"
+        ],
+        [
+            "",
+            "Daily"
+        ],
+        [
+            "",
+            "Weekly"
+        ],
+        [
+            "",
+            "Annual"
+        ],
+        [
+            "",
+            "All"
+        ],
+        [
+            "  (₱)",
+            "Total sales amount (₱)"
+        ],
+        [
+            "  ",
+            "Sales Status by Product"
+        ],
+        [
+            " ",
+            "Select period"
+        ],
+        [
+            "",
+            "Daily"
+        ],
+        [
+            "",
+            "Weekly"
+        ],
+        [
+            "",
+            "Annual"
+        ],
+        [
+            "",
+            "All"
+        ],
+        [
+            "  ",
+            "Total number of sales"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            "",
+            "Views"
+        ],
+        [
+            "",
+            "Number of reservations"
+        ],
+        [
+            "",
+            "Reservation rate"
+        ],
+        [
+            "",
+            "Sales amount"
+        ]
+    ]
+},
+{
+    "member-list.html": [
+        [
+            "  ",
+            "Member List"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            " ",
+            "Customer Name Search"
+        ],
+        [
+            " ",
+            "Member type"
+        ],
+        [
+            "",
+            "Name"
+        ],
+        [
+            "",
+            "Registration date/time"
+        ],
+        [
+            "",
+            "Download"
+        ]
+    ]
+},
+{
+    "b2b-customer-list.html": [
+        [
+            "B2B  ",
+            "B2B Customer List"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            "",
+            "all"
+        ],
+        [
+            "",
+            "all"
+        ],
+        [
+            " ",
+            "Customer Name Search"
+        ],
+        [
+            "",
+            "Customer Name"
+        ],
+        [
+            " ",
+            "Agent Name"
+        ],
+        [
+            "",
+            "Email"
+        ],
+        [
+            "",
+            "Contacts"
+        ],
+        [
+            "",
+            "Registration date/time"
+        ],
+        [
+            "",
+            "Download"
+        ]
+    ]
+},
+{
+    "b2c-customer-list.html": [
+        [
+            "B2C  ",
+            "B2C Customer List"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            " ",
+            "Customer Name Search"
+        ],
+        [
+            "",
+            "Customer Name"
+        ],
+        [
+            "",
+            "Email"
+        ],
+        [
+            "",
+            "Contacts"
+        ],
+        [
+            "",
+            "Registration date/time"
+        ],
+        [
+            "",
+            "Download"
+        ]
+    ]
+},
+{
+    "agent-list.html": [
+        [
+            " ",
+            "Agent List"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            " ",
+            "Agent Name Search"
+        ],
+        [
+            "",
+            "Agent Name"
+        ],
+        [
+            "",
+            "Person in charge"
+        ],
+        [
+            " ",
+            "Contract period"
+        ],
+        [
+            " ",
+            "Activity Status"
+        ],
+        [
+            "",
+            "Download"
+        ]
+    ]
+},
+{
+    "guide-list.html": [
+        [
+            " ",
+            "Guide List"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            " ",
+            "Search Guide Name"
+        ],
+        [
+            "",
+            "Guide Name"
+        ],
+        [
+            "",
+            "Email"
+        ],
+        [
+            "",
+            "Contacts"
+        ],
+        [
+            " ",
+            "Contract period"
+        ],
+        [
+            " ",
+            "Activity Status"
+        ],
+        [
+            "",
+            "Download"
+        ]
+    ]
+},
+{
+    "b2b-booking-list.html": [
+        [
+            "B2B  ",
+            "B2B Reservation List"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            " ",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            "all"
+        ],
+        [
+            "",
+            "all"
+        ],
+        [
+            " ",
+            "Search"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            " ",
+            "Travel start date"
+        ],
+        [
+            " ",
+            "Agent Name"
+        ],
+        [
+            "",
+            "Reserver's name"
+        ],
+        [
+            " ",
+            "Number of people for reservation"
+        ],
+        [
+            " ",
+            "Assignment Guide"
+        ],
+        [
+            "",
+            "Status"
+        ],
+        [
+            "  ",
+            "Waiting for advance payment deposit"
+        ],
+        [
+            "  ",
+            "Waiting for balance payment"
+        ],
+        [
+            " ",
+            "Reservation confirmed"
+        ],
+        [
+            " ",
+            "Trip completed"
+        ],
+        [
+            " ",
+            "Trip completed"
+        ],
+        [
+            " ",
+            "Reservation cancellation"
+        ],
+        [
+            " ",
+            "Refund completed"
+        ],
+        [
+            " ",
+            "Refund completed"
+        ],
+        [
+            " ",
+            "Refund completed"
+        ],
+        [
+            " ",
+            "Refund completed"
+        ],
+        [
+            "",
+            "Download"
+        ]
+    ]
+},
+{
+    "b2c-booking-list.html": [
+        [
+            "B2C  ",
+            "B2C Reservation List"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            " ",
+            "Search"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            " ",
+            "Travel start date"
+        ],
+        [
+            "",
+            "Reserver's name"
+        ],
+        [
+            " ",
+            "Number of people for reservation"
+        ],
+        [
+            " ",
+            "Assignment Guide"
+        ],
+        [
+            "",
+            "Status"
+        ],
+        [
+            " ",
+            "Payment completed"
+        ],
+        [
+            " ",
+            "Payment cancellation"
+        ],
+        [
+            " ",
+            "Payment Suspension"
+        ],
+        [
+            " ",
+            "Trip completed"
+        ],
+        [
+            " ",
+            "Refund completed"
+        ],
+        [
+            " ",
+            "Refund completed"
+        ],
+        [
+            " ",
+            "Refund completed"
+        ],
+        [
+            " ",
+            "Refund completed"
+        ],
+        [
+            " ",
+            "Refund completed"
+        ],
+        [
+            " ",
+            "Refund completed"
+        ],
+        [
+            "",
+            "Download"
+        ]
+    ]
+},
+{
+    "sales-date.html": [
+        [
+            " ",
+            "Sales by date"
+        ],
+        [
+            " ",
+            "Select period"
+        ],
+        [
+            "",
+            "Daily"
+        ],
+        [
+            "",
+            "Weekly"
+        ],
+        [
+            "",
+            "Monthly"
+        ],
+        [
+            "",
+            "Annual"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            "",
+            "Time zone"
+        ],
+        [
+            "  (₱)",
+            "Total sales amount (₱)"
+        ],
+        [
+            "",
+            "Download"
+        ]
+    ]
+},
+{
+    "sales-product.html": [
+        [
+            " ",
+            "Sales by product"
+        ],
+        [
+            " ",
+            "Select period"
+        ],
+        [
+            "",
+            "Daily"
+        ],
+        [
+            "",
+            "Weekly"
+        ],
+        [
+            "",
+            "Monthly"
+        ],
+        [
+            "",
+            "Annual"
+        ],
+        [
+            "",
+            "All"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            "",
+            "Views"
+        ],
+        [
+            "",
+            "Number of reservations"
+        ],
+        [
+            "",
+            "Reservation rate"
+        ],
+        [
+            " (₱)",
+            "Sales Amount (₱)"
+        ],
+        [
+            "",
+            "Download"
+        ]
+    ]
+},
+{
+    "product-list.html": [
+        [
+            " ",
+            "Product List"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            " ",
+            "Overall status"
+        ],
+        [
+            " ",
+            "Search Product Name"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            " ",
+            "Sales Target"
+        ],
+        [
+            " ",
+            "Remaining quantity"
+        ],
+        [
+            " ",
+            "Sales period"
+        ],
+        [
+            "",
+            "Status"
+        ],
+        [
+            "",
+            "Registration date/time"
+        ]
+    ]
+},
+{
+    "product-registration.html": [
+        [
+            " ",
+            "Product Registration"
+        ],
+        [
+            "",
+            "Temporary save"
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            " ",
+            "Product Information"
+        ],
+        [
+            " ",
+            "Load Template"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            "  *",
+            ""
+        ],
+        [
+            " ",
+            "Sales Target"
+        ],
+        [
+            " *",
+            ""
+        ],
+        [
+            "",
+            "Category"
+        ],
+        [
+            "",
+            "Select main category"
+        ],
+        [
+            " *",
+            ""
+        ],
+        [
+            "",
+            "Category"
+        ],
+        [
+            "  ",
+            "Please select a main category first"
+        ],
+        [
+            "  *",
+            "Product Description"
+        ],
+        [
+            " ",
+            "Thumbnail image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Product image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            "   *",
+            "Detailed introduction image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Flight Information"
+        ],
+        [
+            "",
+            "Departure flight"
+        ],
+        [
+            "",
+            "Flight number"
+        ],
+        [
+            "",
+            "Departure time"
+        ],
+        [
+            "",
+            "Arrival time"
+        ],
+        [
+            "",
+            "Departure point"
+        ],
+        [
+            "",
+            "Destination"
+        ],
+        [
+            "",
+            "Return trip"
+        ],
+        [
+            "",
+            "Flight number"
+        ],
+        [
+            "",
+            "Departure time"
+        ],
+        [
+            "",
+            "Arrival time"
+        ],
+        [
+            "",
+            "Departure point"
+        ],
+        [
+            "",
+            "Destination"
+        ],
+        [
+            " ",
+            "Sales Information"
+        ],
+        [
+            "  ",
+            "Basic Sales Information"
+        ],
+        [
+            " ",
+            "Sale period *"
+        ],
+        [
+            "  100  .",
+            "The period can only be set up to a maximum of 100 days."
+        ],
+        [
+            " ",
+            "Minimum departure headcount"
+        ],
+        [
+            "  ",
+            "Maximum capacity"
+        ],
+        [
+            "   (₱)",
+            "Basic Airfare (₱)"
+        ],
+        [
+            "",
+            "Schedule"
+        ],
+        [
+            " ",
+            "Meeting Information"
+        ],
+        [
+            " ",
+            "Meeting time"
+        ],
+        [
+            " ",
+            "Meeting place name"
+        ],
+        [
+            " ",
+            "Address Search"
+        ],
+        [
+            "  ",
+            "Meeting place address"
+        ],
+        [
+            " ",
+            "Schedule Summary"
+        ],
+        [
+            " ",
+            "Tourist Information"
+        ],
+        [
+            "＋  ",
+            "＋ Add Tourist Attraction"
+        ],
+        [
+            "  ",
+            "Schedule start time"
+        ],
+        [
+            "  ",
+            "Schedule end time"
+        ],
+        [
+            "",
+            "Sight Name"
+        ],
+        [
+            " ",
+            "Address Search"
+        ],
+        [
+            " ",
+            "Sight Address"
+        ],
+        [
+            " ",
+            "Please search for an address"
+        ],
+        [
+            " ",
+            "Sight Information"
+        ],
+        [
+            " .",
+            "Please enter a description"
+        ],
+        [
+            "  *",
+            "Sight Image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            "",
+            "Delete tourist attraction"
+        ],
+        [
+            " ",
+            "Accommodation Information"
+        ],
+        [
+            "",
+            "Accommodation name"
+        ],
+        [
+            " ",
+            "Address Search"
+        ],
+        [
+            " ",
+            "Accommodation address"
+        ],
+        [
+            " ",
+            "Accommodation Description"
+        ],
+        [
+            "  *",
+            "Accommodation image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Transportation Information"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            " ",
+            "Meal Information"
+        ],
+        [
+            "",
+            "Breakfast"
+        ],
+        [
+            "",
+            "Lunch"
+        ],
+        [
+            "",
+            "Dinner"
+        ],
+        [
+            " ",
+            "Fee information"
+        ],
+        [
+            " ",
+            "Number of people fee"
+        ],
+        [
+            "＋ ",
+            "＋ Add"
+        ],
+        [
+            "",
+            "Option name"
+        ],
+        [
+            "  (₱)",
+            "Number of people fee (₱)"
+        ],
+        [
+            "",
+            "Delete"
+        ],
+        [
+            "  ",
+            "Room rate for single occupancy"
+        ],
+        [
+            "   (₱)",
+            "Single room usage fee (₱) *"
+        ],
+        [
+            " ",
+            "Enter numbers"
+        ],
+        [
+            "* 2   ,     . 1    .",
+            "* When booking for 2 or more people, you will be charged for the number of single rooms selected. For 1 person booking, it is applied for free."
+        ],
+        [
+            "",
+            "Usage Guide"
+        ],
+        [
+            "",
+            "Notice"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            " .",
+            "Please enter a description"
+        ],
+        [
+            "/ ",
+            "Cancellation/Refund Policy"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            " .",
+            "Please enter a description"
+        ],
+        [
+            "  ",
+            "Visa Application Guide"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            " .",
+            "Please enter a description"
+        ],
+        [
+            " ",
+            "Components"
+        ],
+        [
+            " ",
+            "Product Information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            " ",
+            "Flight Information"
+        ],
+        [
+            " ",
+            "Sales Information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "  ",
+            "Basic Sales Information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "  ",
+            "Daily Sales Adjustment"
+        ],
+        [
+            "",
+            "Schedule"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            " ",
+            "Meeting Information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "1",
+            "1st day"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            " ",
+            "Add day"
+        ],
+        [
+            " ",
+            "Fee information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "/ ",
+            "Included/Not Included Items"
+        ],
+        [
+            "",
+            "Usage Guide"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "/ ",
+            "Cancellation/Refund Policy"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "  ",
+            "Visa Application Guide"
+        ],
+        [
+            "",
+            "Required"
+        ]
+    ]
+},
+{
+    "product-detail.html": [
+        [
+            " ",
+            "Return to list"
+        ],
+        [
+            "",
+            "Delete"
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            " ",
+            "Product Details"
+        ],
+        [
+            " ",
+            "Product Information"
+        ],
+        [
+            " ",
+            "Load Template"
+        ],
+        [
+            "",
+            "Registration date/time"
+        ],
+        [
+            "",
+            "Product code"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            " ",
+            "Sales Target"
+        ],
+        [
+            "",
+            "Category"
+        ],
+        [
+            "",
+            "Category"
+        ],
+        [
+            " ",
+            "Product Description"
+        ],
+        [
+            " ",
+            "Thumbnail image"
+        ],
+        [
+            " ",
+            "Product image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            "  ",
+            "Detailed introduction image"
+        ],
+        [
+            " ",
+            "Flight Information"
+        ],
+        [
+            "",
+            "Departure flight"
+        ],
+        [
+            "",
+            "Flight number"
+        ],
+        [
+            "",
+            "Departure time"
+        ],
+        [
+            "",
+            "Arrival time"
+        ],
+        [
+            "",
+            "Departure point"
+        ],
+        [
+            "",
+            "Destination"
+        ],
+        [
+            "",
+            "Return trip"
+        ],
+        [
+            "",
+            "Flight number"
+        ],
+        [
+            "",
+            "Departure time"
+        ],
+        [
+            "",
+            "Arrival time"
+        ],
+        [
+            "",
+            "Departure point"
+        ],
+        [
+            "",
+            "Destination"
+        ],
+        [
+            " ",
+            "Sales Information"
+        ],
+        [
+            "  ",
+            "Basic Sales Information"
+        ],
+        [
+            " ",
+            "Sale period"
+        ],
+        [
+            "  100  .",
+            "The period can only be set up to a maximum of 100 days."
+        ],
+        [
+            "  ",
+            "Minimum departure headcount"
+        ],
+        [
+            "  ",
+            "Maximum capacity"
+        ],
+        [
+            "   (₱)",
+            "Basic airfare (₱)"
+        ],
+        [
+            "  ",
+            "Daily Sales Adjustment"
+        ],
+        [
+            " ",
+            "Flight departure date"
+        ],
+        [
+            " ",
+            "Reserved personnel"
+        ],
+        [
+            "  ",
+            "Maximum capacity"
+        ],
+        [
+            "  (₱)",
+            "Airfare (₱)"
+        ],
+        [
+            "",
+            "Schedule"
+        ],
+        [
+            " ",
+            "Meeting Information"
+        ],
+        [
+            " ",
+            "Meeting time"
+        ],
+        [
+            " ",
+            "Meeting place name"
+        ],
+        [
+            " ",
+            "Address Search"
+        ],
+        [
+            "  ",
+            "Meeting place address"
+        ],
+        [
+            " ",
+            "Schedule Summary"
+        ],
+        [
+            " ",
+            "Arrival at Incheon"
+        ],
+        [
+            " ",
+            "Tourist Information"
+        ],
+        [
+            "＋  ",
+            "＋ Add Tourist Attraction"
+        ],
+        [
+            "  ",
+            "Schedule start time"
+        ],
+        [
+            "  ",
+            "Schedule end time"
+        ],
+        [
+            "",
+            "Sight Name"
+        ],
+        [
+            " ",
+            "Address Search"
+        ],
+        [
+            " ",
+            "Sight Address"
+        ],
+        [
+            " ",
+            "Sight Information"
+        ],
+        [
+            "  *",
+            "Sight Image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            "",
+            "Delete tourist attraction"
+        ],
+        [
+            " ",
+            "Accommodation Information"
+        ],
+        [
+            "",
+            "Accommodation name"
+        ],
+        [
+            " ",
+            "Address Search"
+        ],
+        [
+            " ",
+            "Accommodation address"
+        ],
+        [
+            " ",
+            "Accommodation Description"
+        ],
+        [
+            " ",
+            "Accommodation image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Transportation Information"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            " ",
+            "Meal Information"
+        ],
+        [
+            "",
+            "Breakfast"
+        ],
+        [
+            "",
+            "Lunch"
+        ],
+        [
+            "",
+            "Dinner"
+        ],
+        [
+            " ",
+            "Fee information"
+        ],
+        [
+            " ",
+            "Number of people fee"
+        ],
+        [
+            "＋ ",
+            "＋ Add"
+        ],
+        [
+            "",
+            "Option name"
+        ],
+        [
+            "  (₱)",
+            "Number of people fee (₱)"
+        ],
+        [
+            "",
+            "Delete"
+        ],
+        [
+            "  ",
+            "Room rate for single occupancy"
+        ],
+        [
+            "   (₱)",
+            "Single room usage fee (₱) *"
+        ],
+        [
+            "* 2   ,     . 1    .",
+            "* When booking for 2 or more people, you will be charged for the number of single rooms selected. For 1 person booking, it is applied for free."
+        ],
+        [
+            "/ ",
+            "Included/Not Included Items"
+        ],
+        [
+            " ",
+            "Included items"
+        ],
+        [
+            "＋ ",
+            "＋ Add"
+        ],
+        [
+            " ",
+            "Included items"
+        ],
+        [
+            "",
+            "Delete"
+        ],
+        [
+            " ",
+            "Excluded items"
+        ],
+        [
+            "＋ ",
+            "＋ Add"
+        ],
+        [
+            "No",
+            ""
+        ],
+        [
+            " ",
+            "Excluded items"
+        ],
+        [
+            "",
+            "Delete"
+        ],
+        [
+            "",
+            "Usage Guide"
+        ],
+        [
+            "",
+            "Notice"
+        ],
+        [
+            "",
+            "File"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            " .",
+            "This is an explanation"
+        ],
+        [
+            "/ ",
+            "Cancellation/Refund Policy"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            "  ",
+            "Visa Application Guide"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            " .",
+            "This is an explanation"
+        ],
+        [
+            " ",
+            "Save as Template"
+        ],
+        [
+            " ",
+            "Components"
+        ],
+        [
+            " ",
+            "Product Information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            " ",
+            "Flight Information"
+        ],
+        [
+            " ",
+            "Sales Information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "  ",
+            "Basic Sales Information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "  ",
+            "Daily Sales Adjustment"
+        ],
+        [
+            "",
+            "Schedule"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            " ",
+            "Meeting Information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "1",
+            "1st day"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "2",
+            "Day 2"
+        ],
+        [
+            " ",
+            "Add day"
+        ],
+        [
+            " ",
+            "Fee information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "/ ",
+            "Included/Not Included Items"
+        ],
+        [
+            "",
+            "Usage Guide"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "/ ",
+            "Cancellation/Refund Policy"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "  ",
+            "Visa Application Guide"
+        ],
+        [
+            "",
+            "Required"
+        ]
+    ]
+},
+{
+    "product-preview.html": [
+        [
+            "",
+            "Preview"
+        ],
+        [
+            "",
+            "Cancel"
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            " ",
+            "Product Information"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            "     5 6  –     , ·· ",
+            "Seoul Cherry Blossom Highlights 6-Day, 5-Night Package – Includes Full Itinerary Guide and Meals, with Visits to Nami Island, Seokchon Lake, and Yunjung-ro"
+        ],
+        [
+            " ",
+            "Sales Target"
+        ],
+        [
+            "",
+            "Category"
+        ],
+        [
+            "",
+            "Seasonal"
+        ],
+        [
+            "",
+            "Category"
+        ],
+        [
+            "",
+            "Spring"
+        ],
+        [
+            " ",
+            "Product Description"
+        ],
+        [
+            " ",
+            "Thumbnail image"
+        ],
+        [
+            " ",
+            "Product image"
+        ],
+        [
+            "  ",
+            "Detailed introduction image"
+        ],
+        [
+            " ",
+            "Flight Information"
+        ],
+        [
+            "",
+            "Departure flight"
+        ],
+        [
+            "",
+            "Flight number"
+        ],
+        [
+            "",
+            "Departure time"
+        ],
+        [
+            "",
+            "Arrival time"
+        ],
+        [
+            "",
+            "Departure point"
+        ],
+        [
+            "",
+            "Destination"
+        ],
+        [
+            "",
+            "Return trip"
+        ],
+        [
+            "",
+            "Flight number"
+        ],
+        [
+            "",
+            "Departure time"
+        ],
+        [
+            "",
+            "Arrival time"
+        ],
+        [
+            "",
+            "Departure point"
+        ],
+        [
+            "",
+            "Destination"
+        ],
+        [
+            " ",
+            "Sales Information"
+        ],
+        [
+            "  ",
+            "Basic Sales Information"
+        ],
+        [
+            " ",
+            "Sales period"
+        ],
+        [
+            "  ",
+            "Minimum number of participants required"
+        ],
+        [
+            "  ",
+            "Maximum capacity"
+        ],
+        [
+            "   (¥)",
+            "Basic Airfare (₱)"
+        ],
+        [
+            "  ",
+            "Daily Sales Adjustment"
+        ],
+        [
+            " ",
+            "Flight departure date"
+        ],
+        [
+            "  ",
+            "Maximum capacity"
+        ],
+        [
+            "  (¥)",
+            "Airfare (₱)"
+        ],
+        [
+            "",
+            "Schedule"
+        ],
+        [
+            " ",
+            "Meeting Information"
+        ],
+        [
+            " ",
+            "Meeting time"
+        ],
+        [
+            " ",
+            "Meeting place name"
+        ],
+        [
+            "  ",
+            "Meeting place address"
+        ],
+        [
+            " ",
+            "Schedule Summary"
+        ],
+        [
+            " ",
+            "Arrival at Incheon"
+        ],
+        [
+            " ",
+            "Tourist Information"
+        ],
+        [
+            "  ",
+            "Schedule start time"
+        ],
+        [
+            "  ",
+            "Schedule End Time"
+        ],
+        [
+            "",
+            "Sight Name"
+        ],
+        [
+            " ",
+            "Sight Address"
+        ],
+        [
+            " ",
+            "Sight Information"
+        ],
+        [
+            " ",
+            "Sight Image"
+        ],
+        [
+            " ",
+            "Accommodation Information"
+        ],
+        [
+            "",
+            "Accommodation name"
+        ],
+        [
+            " ",
+            "Accommodation address"
+        ],
+        [
+            " ",
+            "Accommodation Description"
+        ],
+        [
+            " ",
+            "Accommodation images"
+        ],
+        [
+            " ",
+            "Transportation Information"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            " ",
+            "Meal Information"
+        ],
+        [
+            "",
+            "Breakfast"
+        ],
+        [
+            "",
+            "Lunch"
+        ],
+        [
+            "",
+            "Dinner"
+        ],
+        [
+            " ",
+            "Fee information"
+        ],
+        [
+            " ",
+            "Number of people fee"
+        ],
+        [
+            "",
+            "Option name"
+        ],
+        [
+            "  (₱)",
+            "Number of people fee (₱)"
+        ],
+        [
+            "  ",
+            "Room rate for single occupancy"
+        ],
+        [
+            "   (₱)",
+            "Single room usage fee (₱)"
+        ],
+        [
+            "/ ",
+            "Included/Not Included Items"
+        ],
+        [
+            " ",
+            "Included items"
+        ],
+        [
+            " ",
+            "Included items"
+        ],
+        [
+            "   (2 1 )",
+            "All accommodation (based on 2 people per room)"
+        ],
+        [
+            "     ",
+            "Accompanied by a dedicated vehicle and professional guide"
+        ],
+        [
+            "       ",
+            "All meals and entrance fees specified in the schedule are included"
+        ],
+        [
+            " ",
+            "Excluded items"
+        ],
+        [
+            " ",
+            "Excluded items"
+        ],
+        [
+            "     ",
+            "Personal travel insurance and personal expenses"
+        ],
+        [
+            "     ",
+            "Meals and transportation costs during free time"
+        ],
+        [
+            "     ",
+            "Manner tips and optional tourism costs"
+        ],
+        [
+            "",
+            "Usage Guide"
+        ],
+        [
+            "",
+            "Notice"
+        ],
+        [
+            "",
+            "File"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            "/ ",
+            "Cancellation/Refund Policy"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            "  ",
+            "Visa Application Guide"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            "",
+            "This is an explanation"
+        ]
+    ]
+},
+{
+    "template-list.html": [
+        [
+            " ",
+            "Template List"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            "",
+            "Template name"
+        ],
+        [
+            "",
+            "Category"
+        ],
+        [
+            "",
+            "Category"
+        ],
+        [
+            " ",
+            "Schedule period"
+        ],
+        [
+            "",
+            "Registration date/time"
+        ]
+    ]
+},
+{
+    "category-management.html": [
+        [
+            " ",
+            ""
+        ],
+        [
+            " ",
+            ""
+        ],
+        [
+            "",
+            "Seasonal"
+        ],
+        [
+            " ",
+            "Add subcategory"
+        ],
+        [
+            "",
+            "By region"
+        ],
+        [
+            " ",
+            "Add subcategory"
+        ],
+        [
+            "",
+            "By theme"
+        ],
+        [
+            " ",
+            "Add subcategory"
+        ],
+        [
+            "",
+            "Private"
+        ],
+        [
+            " ",
+            "Enter category name"
+        ],
+        [
+            " ",
+            "Add subcategory"
+        ],
+        [
+            " ",
+            "Add main category"
+        ]
+    ]
+},
+{
+    "user-inquiry-list.html": [
+        [
+            "  ",
+            "Member Inquiry List"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            " ",
+            "Response status"
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            " ",
+            "Processing status"
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            "Latest"
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            " ",
+            "Inquiry type"
+        ],
+        [
+            " ",
+            "Inquiry Title"
+        ],
+        [
+            "",
+            "Date created"
+        ],
+        [
+            " ",
+            "Response status"
+        ],
+        [
+            " ",
+            "Processing status"
+        ],
+        [
+            "",
+            "Download"
+        ]
+    ]
+},
+{
+    "agent-inquiry-list.html": [
+        [
+            "  ",
+            "Agent Inquiry List"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            " ",
+            "Response status"
+        ],
+        [
+            " ",
+            "Processing status"
+        ],
+        [
+            "",
+            "Latest"
+        ],
+        [
+            "",
+            "Agent Name"
+        ],
+        [
+            " ",
+            "Inquiry Title"
+        ],
+        [
+            "",
+            "Date created"
+        ],
+        [
+            " ",
+            "Response status"
+        ],
+        [
+            " ",
+            "Processing status"
+        ],
+        [
+            "",
+            "Download"
+        ]
+    ]
+},
+{
+    "visa-app-list.html": [
+        [
+            "  ",
+            "Visa Application List"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            " ",
+            ""
+        ],
+        [
+            "",
+            "Applicant name"
+        ],
+        [
+            "",
+            "Application date/time"
+        ],
+        [
+            "",
+            "Status"
+        ],
+        [
+            "",
+            "Download"
+        ]
+    ]
+},
+{
+    "popup-management.html": [
+        [
+            " ",
+            "Popup Management"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            " ",
+            "Overall status"
+        ],
+        [
+            "",
+            "Latest"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Registration date/time"
+        ],
+        [
+            " ",
+            "Exposure period"
+        ],
+        [
+            "",
+            "Status"
+        ],
+        [
+            " ",
+            "Register Popup"
+        ]
+    ]
+},
+{
+    "banner-management.html": [
+        [
+            " ",
+            "Banner Management"
+        ],
+        [
+            " 1",
+            "Banner 1"
+        ],
+        [
+            "  (  640x320)",
+            "Banner image (recommended size 640x320)"
+        ],
+        [
+            "URL",
+            ""
+        ],
+        [
+            " ",
+            "Delete image"
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            " 2",
+            "Banner 2"
+        ],
+        [
+            "  (  640x320)",
+            "Banner image (recommended size 640x320)"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            "URL",
+            ""
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            " 3",
+            "Banner 3"
+        ],
+        [
+            "  (  640x320)",
+            "Banner image (recommended size 640x320)"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            "URL",
+            ""
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            " 4",
+            "Banner 4"
+        ],
+        [
+            "  (  640x320)",
+            "Banner image (recommended size 640x320)"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            "URL",
+            "URL"
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            " 5",
+            "Banner 5"
+        ],
+        [
+            "  (  640x320)",
+            "Banner image (recommended size 640x320)"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            "URL",
+            ""
+        ],
+        [
+            "",
+            "Save"
+        ]
+    ]
+},
+{
+    "notice.html": [
+        [
+            "",
+            "Announcements"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            "",
+            "Latest"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Registration date/time"
+        ],
+        [
+            " ",
+            "Exposure period"
+        ],
+        [
+            " ",
+            "Notice Registration"
+        ]
+    ]
+},
+{
+    "terms.html": [
+        [
+            " ",
+            "Terms of Use"
+        ],
+        [
+            " ",
+            "Terms of Use"
+        ],
+        [
+            "   ",
+            "Collection and Use of Personal Information"
+        ],
+        [
+            " 3 ",
+            "Personal Information Provided to Third Parties"
+        ],
+        [
+            " ",
+            "Marketing Use"
+        ],
+        [
+            "",
+            "English"
+        ],
+        [
+            "",
+            "Tagalog"
+        ],
+        [
+            " ",
+            "Save changes"
+        ]
+    ]
+},
+{
+    "company-information.html": [
+        [
+            " ",
+            "Company Information"
+        ],
+        [
+            "",
+            "Information"
+        ],
+        [
+            "",
+            "Address"
+        ],
+        [
+            " ",
+            "Representative email"
+        ],
+        [
+            " ()",
+            "Inquiry phone number (domestic)"
+        ],
+        [
+            " ()",
+            "Inquiry phone number (overseas)"
+        ],
+        [
+            " ",
+            "Save changes"
+        ]
+    ]
+},
+{
+    "b2b-customer-detail.html": [
+        [
+            " ",
+            "Return to list"
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            "B2B  ",
+            "B2B Customer Details"
+        ],
+        [
+            " ",
+            "Basic Information"
+        ],
+        [
+            "",
+            "Customer Name"
+        ],
+        [
+            "",
+            "Contacts"
+        ],
+        [
+            "",
+            "Email"
+        ],
+        [
+            "",
+            "Reset"
+        ],
+        [
+            " ",
+            "Customer number"
+        ],
+        [
+            " ",
+            "Agent Name"
+        ],
+        [
+            "",
+            "Registration date/time"
+        ],
+        [
+            "",
+            "Note"
+        ],
+        [
+            "",
+            "This is a memo input field."
+        ],
+        [
+            " ",
+            "Traveler Information"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Name"
+        ],
+        [
+            "",
+            "Nature"
+        ],
+        [
+            "",
+            "Gender"
+        ],
+        [
+            "",
+            "Age"
+        ],
+        [
+            "",
+            "Date of birth"
+        ],
+        [
+            "",
+            "Country of origin"
+        ],
+        [
+            "",
+            "Passport number"
+        ],
+        [
+            " ",
+            "Passport Issue Date"
+        ],
+        [
+            " ",
+            "Passport expiration date"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            "",
+            "Image"
+        ],
+        [
+            " ",
+            "Reservation Details"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            "",
+            "Reservation date"
+        ],
+        [
+            " ",
+            "Travel start date"
+        ],
+        [
+            " ",
+            "Reservation Status"
+        ],
+        [
+            " ",
+            "Number of people for reservation"
+        ],
+        [
+            " (₱)",
+            "Order Amount (₱)"
+        ],
+        [
+            " ",
+            "Inquiry History"
+        ],
+        [
+            " ",
+            "Inquiry type"
+        ],
+        [
+            " ",
+            "Inquiry Title"
+        ],
+        [
+            "",
+            "Date created"
+        ],
+        [
+            " ",
+            "Response status"
+        ],
+        [
+            " ",
+            "Processing status"
+        ]
+    ]
+},
+{
+    "b2c-customer-detail.html": [
+        [
+            " ",
+            "Return to list"
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            "B2C  ",
+            "B2C Customer Details"
+        ],
+        [
+            " ",
+            ""
+        ],
+        [
+            "",
+            "Basic Information"
+        ],
+        [
+            "",
+            "Customer Name"
+        ],
+        [
+            "",
+            "Contacts"
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            "Reset"
+        ],
+        [
+            " ",
+            "Customer number"
+        ],
+        [
+            " ",
+            "Registration date/time"
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            "Note"
+        ],
+        [
+            " ",
+            "Reservation Details"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            "",
+            "Reservation date"
+        ],
+        [
+            " ",
+            "Travel start date"
+        ],
+        [
+            " ",
+            "Reservation Status"
+        ],
+        [
+            " ",
+            "Number of people for reservation"
+        ],
+        [
+            " (₱)",
+            "Order Amount (₱)"
+        ],
+        [
+            " ",
+            "Inquiry History"
+        ],
+        [
+            " ",
+            "Inquiry type"
+        ],
+        [
+            " ",
+            "Inquiry Title"
+        ],
+        [
+            "",
+            "Date created"
+        ],
+        [
+            " ",
+            "Response status"
+        ],
+        [
+            " ",
+            "Processing status"
+        ]
+    ]
+},
+{
+    "agent-detail.html": [
+        [
+            " ",
+            "Return to list"
+        ],
+        [
+            "",
+            "Under contract"
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            " ",
+            "Agent Details"
+        ],
+        [
+            " ",
+            "Basic Information"
+        ],
+        [
+            "",
+            "Agent Name"
+        ],
+        [
+            "",
+            "Area"
+        ],
+        [
+            "",
+            "Person in charge"
+        ],
+        [
+            " ",
+            "Person in charge email"
+        ],
+        [
+            " ",
+            "Contact information"
+        ],
+        [
+            "",
+            "Reset"
+        ],
+        [
+            " ",
+            "Partnership code"
+        ],
+        [
+            "  ",
+            "Number of affiliated customers"
+        ],
+        [
+            "",
+            "Registration date/time"
+        ],
+        [
+            "",
+            "Note"
+        ],
+        [
+            ".",
+            "This is a memo input field."
+        ],
+        [
+            " ",
+            "Contract Information"
+        ],
+        [
+            " ",
+            "Contract period"
+        ],
+        [
+            "  (%)",
+            "Deposit ratio (%)"
+        ]
+    ]
+},
+{
+    "guide-detail.html": [
+        [
+            " ",
+            "Return to list"
+        ],
+        [
+            "",
+            "Under contract"
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            " ",
+            "Guide Details"
+        ],
+        [
+            " ",
+            "Basic Information"
+        ],
+        [
+            "",
+            "Guide Name"
+        ],
+        [
+            "",
+            "Email"
+        ],
+        [
+            "",
+            "Contacts"
+        ],
+        [
+            "",
+            "Reset"
+        ],
+        [
+            "",
+            "Registration date/time"
+        ],
+        [
+            "",
+            "ID Photo"
+        ],
+        [
+            "",
+            "Image"
+        ],
+        [
+            " ",
+            "Guide Introduction"
+        ],
+        [
+            " .",
+            "Guide introduction section."
+        ],
+        [
+            "",
+            "Note"
+        ],
+        [
+            " .",
+            "This is a memo input field."
+        ],
+        [
+            " ",
+            "Contract Information"
+        ],
+        [
+            " ",
+            "Contract period"
+        ],
+        [
+            "  ",
+            "Assigned schedule list"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            " ",
+            "Travel start date"
+        ],
+        [
+            "",
+            "Reserver's name"
+        ],
+        [
+            " ",
+            "Number of people for reservation"
+        ],
+        [
+            " ",
+            "Travel status"
+        ]
+    ]
+},
+{
+    "b2b-booking-detail.html": [
+        [
+            " ",
+            "Return to list"
+        ],
+        [
+            "B2B  ",
+            "B2B Reservation Details"
+        ],
+        [
+            "   ",
+            "Product and Reservation Information"
+        ],
+        [
+            " ",
+            "Meeting location"
+        ],
+        [
+            "",
+            "Announcements"
+        ],
+        [
+            " ",
+            "Product Information"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            " ",
+            "Travel period"
+        ],
+        [
+            " ",
+            "Meeting time"
+        ],
+        [
+            " ",
+            "Meeting place"
+        ],
+        [
+            " ",
+            "Reservation Information"
+        ],
+        [
+            " ",
+            "Reservation number"
+        ],
+        [
+            "",
+            "Reservation date and time"
+        ],
+        [
+            " ",
+            "Number of people for reservation"
+        ],
+        [
+            " ",
+            "Room options"
+        ],
+        [
+            "  ",
+            "Add Cabin Baggage"
+        ],
+        [
+            "",
+            "Not selected"
+        ],
+        [
+            " ",
+            "Breakfast Request"
+        ],
+        [
+            "",
+            "Apply"
+        ],
+        [
+            " ",
+            "WiFi Rental"
+        ],
+        [
+            "",
+            "Apply"
+        ],
+        [
+            "  ",
+            "Airline seat request details"
+        ],
+        [
+            " ",
+            "Other requests"
+        ],
+        [
+            " ",
+            "Payment Information"
+        ],
+        [
+            "  (₱)",
+            "Order Amount (₱)"
+        ],
+        [
+            " (₱)",
+            "Advance payment (₱)"
+        ],
+        [
+            "  ",
+            "Deadline for advance payment"
+        ],
+        [
+            "  ",
+            "Advance payment proof file"
+        ],
+        [
+            "  ",
+            "Advance payment proof file"
+        ],
+        [
+            " (₱)",
+            "Balance (₱)"
+        ],
+        [
+            "  ",
+            "Payment deadline"
+        ],
+        [
+            " ",
+            "Please select a date"
+        ],
+        [
+            "  ",
+            "Proof of balance file"
+        ],
+        [
+            " ",
+            "Agent Information"
+        ],
+        [
+            "",
+            "Agent Name"
+        ],
+        [
+            "",
+            "Person in charge"
+        ],
+        [
+            " ",
+            "Person in charge email"
+        ],
+        [
+            " ",
+            "Contact information"
+        ],
+        [
+            "  (%)",
+            "Deposit ratio (%)"
+        ],
+        [
+            " ",
+            "Agent Notes"
+        ],
+        [
+            "",
+            "Note"
+        ],
+        [
+            "  ",
+            "This is a message written by the agent"
+        ],
+        [
+            " ",
+            "Flight Information"
+        ],
+        [
+            "",
+            "Departure flight"
+        ],
+        [
+            "",
+            "Flight number"
+        ],
+        [
+            "",
+            "Departure date and time"
+        ],
+        [
+            "",
+            "Arrival time"
+        ],
+        [
+            "",
+            "Departure point"
+        ],
+        [
+            "",
+            "Destination"
+        ],
+        [
+            "",
+            "Return trip"
+        ],
+        [
+            "",
+            "Flight number"
+        ],
+        [
+            "",
+            "Departure date and time"
+        ],
+        [
+            "",
+            "Arrival time"
+        ],
+        [
+            "",
+            "Departure point"
+        ],
+        [
+            "",
+            "Destination"
+        ],
+        [
+            "  ",
+            "Customer Information"
+        ],
+        [
+            "",
+            "Name"
+        ],
+        [
+            "",
+            "Email"
+        ],
+        [
+            "",
+            "Contacts"
+        ],
+        [
+            "  ",
+            "Travel Customer Information"
+        ],
+        [
+            " ",
+            "Main traveler"
+        ],
+        [
+            " ",
+            "Reservation Status"
+        ],
+        [
+            " ",
+            "Number of people option"
+        ],
+        [
+            "  ",
+            "Visa application status"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Name"
+        ],
+        [
+            "",
+            "Nature"
+        ],
+        [
+            "",
+            "Gender"
+        ],
+        [
+            "",
+            "Age"
+        ],
+        [
+            "",
+            "Date of birth"
+        ],
+        [
+            "",
+            "Country of origin"
+        ],
+        [
+            "",
+            "Passport number"
+        ],
+        [
+            " ",
+            "Passport Issue Date"
+        ],
+        [
+            " ",
+            "Passport expiration date"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            "  ",
+            "Waiting for advance payment deposit"
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            "  ",
+            "Waiting for advance payment deposit"
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            "  ",
+            "Waiting for advance payment deposit"
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            "  ",
+            "Waiting for advance payment deposit"
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            "  ",
+            "Waiting for advance payment deposit"
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            "  ",
+            "Waiting for advance payment deposit"
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            "  ",
+            "Waiting for advance payment deposit"
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            "  ",
+            "Waiting for advance payment deposit"
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            "  ",
+            "Waiting for advance payment deposit"
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            "  ",
+            "Waiting for advance payment deposit"
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ]
+    ]
+},
+{
+    "b2c-booking-detail.html": [
+        [
+            " ",
+            "Return to list"
+        ],
+        [
+            " ",
+            "Reservation confirmed"
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            "B2C  ",
+            "B2C Reservation Details"
+        ],
+        [
+            "   ",
+            "Product and Reservation Information"
+        ],
+        [
+            " ",
+            "Meeting location"
+        ],
+        [
+            "",
+            "Announcements"
+        ],
+        [
+            " ",
+            "Product Information"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            " ",
+            "Travel period"
+        ],
+        [
+            " ",
+            "Meeting time"
+        ],
+        [
+            " ",
+            "Meeting place"
+        ],
+        [
+            " ",
+            "Reservation Information"
+        ],
+        [
+            " ",
+            "Reservation number"
+        ],
+        [
+            "",
+            "Reservation date and time"
+        ],
+        [
+            " ",
+            "Number of people for reservation"
+        ],
+        [
+            " ",
+            "Room options"
+        ],
+        [
+            "  ",
+            "Add Cabin Baggage"
+        ],
+        [
+            "",
+            "Not selected"
+        ],
+        [
+            " ",
+            "Breakfast Request"
+        ],
+        [
+            " ",
+            "WiFi Rental"
+        ],
+        [
+            "",
+            "Apply"
+        ],
+        [
+            "  ",
+            "Airline seat request details"
+        ],
+        [
+            " ",
+            "Other requests"
+        ],
+        [
+            " ",
+            "Payment Information"
+        ],
+        [
+            " ",
+            "Order Amount"
+        ],
+        [
+            " ",
+            "Flight Information"
+        ],
+        [
+            "",
+            "Departure flight"
+        ],
+        [
+            "",
+            "Flight number"
+        ],
+        [
+            "",
+            "Departure date and time"
+        ],
+        [
+            "",
+            "Arrival time"
+        ],
+        [
+            "",
+            "Departure point"
+        ],
+        [
+            "",
+            "Destination"
+        ],
+        [
+            "",
+            "Return trip"
+        ],
+        [
+            "",
+            "Flight number"
+        ],
+        [
+            "",
+            "Departure date and time"
+        ],
+        [
+            "",
+            "Arrival time"
+        ],
+        [
+            "",
+            "Departure point"
+        ],
+        [
+            "",
+            "Destination"
+        ],
+        [
+            "  ",
+            "Customer Information"
+        ],
+        [
+            "",
+            "Name"
+        ],
+        [
+            "",
+            "Email"
+        ],
+        [
+            "",
+            "Contacts"
+        ],
+        [
+            "  ",
+            "Travel Customer Information"
+        ],
+        [
+            " ",
+            "Main traveler"
+        ],
+        [
+            " ",
+            "Reservation Status"
+        ],
+        [
+            " ",
+            "Number of people option"
+        ],
+        [
+            "  ",
+            "Visa application status"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Name"
+        ],
+        [
+            "",
+            "Nature"
+        ],
+        [
+            "",
+            "Gender"
+        ],
+        [
+            "",
+            "Age"
+        ],
+        [
+            "",
+            "Date of birth"
+        ],
+        [
+            "",
+            "Country of origin"
+        ],
+        [
+            "",
+            "Passport number"
+        ],
+        [
+            " ",
+            "Passport Issue Date"
+        ],
+        [
+            " ",
+            "Passport expiration date"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            " ",
+            "Reservation Status"
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            " ",
+            "Reservation Status"
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            " ",
+            "Reservation Status"
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            " ",
+            "Reservation Status"
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            " ",
+            "Refund completed"
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            " ",
+            "Reservation Status"
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            " ",
+            "Reservation Status"
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            " ",
+            "Reservation Status"
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            " ",
+            "Reservation Status"
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            " ",
+            "Reservation Status"
+        ],
+        [
+            "",
+            "Adult"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "",
+            "Male"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ]
+    ]
+},
+{
+    "product-registration.html": [
+        [
+            " ",
+            "Product Registration"
+        ],
+        [
+            "",
+            "Temporary save"
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            " ",
+            "Product Information"
+        ],
+        [
+            " ",
+            "Load Template"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            "  *",
+            ""
+        ],
+        [
+            " ",
+            "Sales Target"
+        ],
+        [
+            " *",
+            ""
+        ],
+        [
+            "",
+            "Category"
+        ],
+        [
+            "",
+            "Select main category"
+        ],
+        [
+            " *",
+            ""
+        ],
+        [
+            "",
+            "Category"
+        ],
+        [
+            "  ",
+            "Please select a main category first"
+        ],
+        [
+            "  *",
+            "Product Description"
+        ],
+        [
+            " ",
+            "Thumbnail image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Product image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            "   *",
+            "Detailed introduction image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Flight Information"
+        ],
+        [
+            "",
+            "Departure flight"
+        ],
+        [
+            "",
+            "Flight number"
+        ],
+        [
+            "",
+            "Departure time"
+        ],
+        [
+            "",
+            "Arrival time"
+        ],
+        [
+            "",
+            "Departure point"
+        ],
+        [
+            "",
+            "Destination"
+        ],
+        [
+            "",
+            "Return trip"
+        ],
+        [
+            "",
+            "Flight number"
+        ],
+        [
+            "",
+            "Departure time"
+        ],
+        [
+            "",
+            "Arrival time"
+        ],
+        [
+            "",
+            "Departure point"
+        ],
+        [
+            "",
+            "Destination"
+        ],
+        [
+            " ",
+            "Sales Information"
+        ],
+        [
+            "  ",
+            "Basic Sales Information"
+        ],
+        [
+            " ",
+            "Sale period *"
+        ],
+        [
+            "  100  .",
+            "The period can only be set up to a maximum of 100 days."
+        ],
+        [
+            " ",
+            "Minimum departure headcount"
+        ],
+        [
+            "  ",
+            "Maximum capacity"
+        ],
+        [
+            "   (₱)",
+            "Basic Airfare (₱)"
+        ],
+        [
+            "",
+            "Schedule"
+        ],
+        [
+            " ",
+            "Meeting Information"
+        ],
+        [
+            " ",
+            "Meeting time"
+        ],
+        [
+            " ",
+            "Meeting place name"
+        ],
+        [
+            " ",
+            "Address Search"
+        ],
+        [
+            "  ",
+            "Meeting place address"
+        ],
+        [
+            " ",
+            "Schedule Summary"
+        ],
+        [
+            " ",
+            "Tourist Information"
+        ],
+        [
+            "＋  ",
+            "＋ Add Tourist Attraction"
+        ],
+        [
+            "  ",
+            "Schedule start time"
+        ],
+        [
+            "  ",
+            "Schedule end time"
+        ],
+        [
+            "",
+            "Sight Name"
+        ],
+        [
+            " ",
+            "Address Search"
+        ],
+        [
+            " ",
+            "Sight Address"
+        ],
+        [
+            " ",
+            "Please search for an address"
+        ],
+        [
+            " ",
+            "Sight Information"
+        ],
+        [
+            " .",
+            "Please enter a description"
+        ],
+        [
+            "  *",
+            "Sight Image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            "",
+            "Delete tourist attraction"
+        ],
+        [
+            " ",
+            "Accommodation Information"
+        ],
+        [
+            "",
+            "Accommodation name"
+        ],
+        [
+            " ",
+            "Address Search"
+        ],
+        [
+            " ",
+            "Accommodation address"
+        ],
+        [
+            " ",
+            "Accommodation Description"
+        ],
+        [
+            "  *",
+            "Accommodation image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Transportation Information"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            " ",
+            "Meal Information"
+        ],
+        [
+            "",
+            "Breakfast"
+        ],
+        [
+            "",
+            "Lunch"
+        ],
+        [
+            "",
+            "Dinner"
+        ],
+        [
+            " ",
+            "Fee information"
+        ],
+        [
+            " ",
+            "Number of people fee"
+        ],
+        [
+            "＋ ",
+            "＋ Add"
+        ],
+        [
+            "",
+            "Option name"
+        ],
+        [
+            "  (₱)",
+            "Number of people fee (₱)"
+        ],
+        [
+            "",
+            "Delete"
+        ],
+        [
+            "  ",
+            "Room rate for single occupancy"
+        ],
+        [
+            "   (₱)",
+            "Single room usage fee (₱) *"
+        ],
+        [
+            " ",
+            "Enter numbers"
+        ],
+        [
+            "* 2   ,     . 1    .",
+            "* When booking for 2 or more people, you will be charged for the number of single rooms selected. For 1 person booking, it is applied for free."
+        ],
+        [
+            "",
+            "Usage Guide"
+        ],
+        [
+            "",
+            "Notice"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            " .",
+            "Please enter a description"
+        ],
+        [
+            "/ ",
+            "Cancellation/Refund Policy"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            " .",
+            "Please enter a description"
+        ],
+        [
+            "  ",
+            "Visa Application Guide"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            " .",
+            "Please enter a description"
+        ],
+        [
+            " ",
+            "Components"
+        ],
+        [
+            " ",
+            "Product Information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            " ",
+            "Flight Information"
+        ],
+        [
+            " ",
+            "Sales Information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "  ",
+            "Basic Sales Information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "  ",
+            "Daily Sales Adjustment"
+        ],
+        [
+            "",
+            "Schedule"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            " ",
+            "Meeting Information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "1",
+            "1st day"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            " ",
+            "Add day"
+        ],
+        [
+            " ",
+            "Fee information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "/ ",
+            "Included/Not Included Items"
+        ],
+        [
+            "",
+            "Usage Guide"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "/ ",
+            "Cancellation/Refund Policy"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "  ",
+            "Visa Application Guide"
+        ],
+        [
+            "",
+            "Required"
+        ]
+    ]
+},
+{
+    "product-detail.html": [
+        [
+            " ",
+            "Return to list"
+        ],
+        [
+            "",
+            "Delete"
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            " ",
+            "Product Details"
+        ],
+        [
+            " ",
+            "Product Information"
+        ],
+        [
+            " ",
+            "Load Template"
+        ],
+        [
+            "",
+            "Registration date/time"
+        ],
+        [
+            "",
+            "Product code"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            " ",
+            "Sales Target"
+        ],
+        [
+            "",
+            "Category"
+        ],
+        [
+            "",
+            "Category"
+        ],
+        [
+            " ",
+            "Product Description"
+        ],
+        [
+            " ",
+            "Thumbnail image"
+        ],
+        [
+            " ",
+            "Product image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            "  ",
+            "Detailed introduction image"
+        ],
+        [
+            " ",
+            "Flight Information"
+        ],
+        [
+            "",
+            "Departure flight"
+        ],
+        [
+            "",
+            "Flight number"
+        ],
+        [
+            "",
+            "Departure time"
+        ],
+        [
+            "",
+            "Arrival time"
+        ],
+        [
+            "",
+            "Departure point"
+        ],
+        [
+            "",
+            "Destination"
+        ],
+        [
+            "",
+            "Return trip"
+        ],
+        [
+            "",
+            "Flight number"
+        ],
+        [
+            "",
+            "Departure time"
+        ],
+        [
+            "",
+            "Arrival time"
+        ],
+        [
+            "",
+            "Departure point"
+        ],
+        [
+            "",
+            "Destination"
+        ],
+        [
+            " ",
+            "Sales Information"
+        ],
+        [
+            "  ",
+            "Basic Sales Information"
+        ],
+        [
+            " ",
+            "Sale period"
+        ],
+        [
+            "  100  .",
+            "The period can only be set up to a maximum of 100 days."
+        ],
+        [
+            "  ",
+            "Minimum departure headcount"
+        ],
+        [
+            "  ",
+            "Maximum capacity"
+        ],
+        [
+            "   (₱)",
+            "Basic airfare (₱)"
+        ],
+        [
+            "  ",
+            "Daily Sales Adjustment"
+        ],
+        [
+            " ",
+            "Flight departure date"
+        ],
+        [
+            " ",
+            "Reserved personnel"
+        ],
+        [
+            "  ",
+            "Maximum capacity"
+        ],
+        [
+            "  (₱)",
+            "Airfare (₱)"
+        ],
+        [
+            "",
+            "Schedule"
+        ],
+        [
+            " ",
+            "Meeting Information"
+        ],
+        [
+            " ",
+            "Meeting time"
+        ],
+        [
+            " ",
+            "Meeting place name"
+        ],
+        [
+            " ",
+            "Address Search"
+        ],
+        [
+            "  ",
+            "Meeting place address"
+        ],
+        [
+            " ",
+            "Schedule Summary"
+        ],
+        [
+            " ",
+            "Arrival at Incheon"
+        ],
+        [
+            " ",
+            "Tourist Information"
+        ],
+        [
+            "＋  ",
+            "＋ Add Tourist Attraction"
+        ],
+        [
+            "  ",
+            "Schedule start time"
+        ],
+        [
+            "  ",
+            "Schedule end time"
+        ],
+        [
+            "",
+            "Sight Name"
+        ],
+        [
+            " ",
+            "Address Search"
+        ],
+        [
+            " ",
+            "Sight Address"
+        ],
+        [
+            " ",
+            "Sight Information"
+        ],
+        [
+            "  *",
+            "Sight Image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            "",
+            "Delete tourist attraction"
+        ],
+        [
+            " ",
+            "Accommodation Information"
+        ],
+        [
+            "",
+            "Accommodation name"
+        ],
+        [
+            " ",
+            "Address Search"
+        ],
+        [
+            " ",
+            "Accommodation address"
+        ],
+        [
+            " ",
+            "Accommodation Description"
+        ],
+        [
+            " ",
+            "Accommodation image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Transportation Information"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            " ",
+            "Meal Information"
+        ],
+        [
+            "",
+            "Breakfast"
+        ],
+        [
+            "",
+            "Lunch"
+        ],
+        [
+            "",
+            "Dinner"
+        ],
+        [
+            " ",
+            "Fee information"
+        ],
+        [
+            " ",
+            "Number of people fee"
+        ],
+        [
+            "＋ ",
+            "＋ Add"
+        ],
+        [
+            "",
+            "Option name"
+        ],
+        [
+            "  (₱)",
+            "Number of people fee (₱)"
+        ],
+        [
+            "",
+            "Delete"
+        ],
+        [
+            "  ",
+            "Room rate for single occupancy"
+        ],
+        [
+            "   (₱)",
+            "Single room usage fee (₱) *"
+        ],
+        [
+            "* 2   ,     . 1    .",
+            "* When booking for 2 or more people, you will be charged for the number of single rooms selected. For 1 person booking, it is applied for free."
+        ],
+        [
+            "/ ",
+            "Included/Not Included Items"
+        ],
+        [
+            " ",
+            "Included items"
+        ],
+        [
+            "＋ ",
+            "＋ Add"
+        ],
+        [
+            " ",
+            "Included items"
+        ],
+        [
+            "",
+            "Delete"
+        ],
+        [
+            " ",
+            "Excluded items"
+        ],
+        [
+            "＋ ",
+            "＋ Add"
+        ],
+        [
+            "No",
+            ""
+        ],
+        [
+            " ",
+            "Excluded items"
+        ],
+        [
+            "",
+            "Delete"
+        ],
+        [
+            "",
+            "Usage Guide"
+        ],
+        [
+            "",
+            "Notice"
+        ],
+        [
+            "",
+            "File"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            " .",
+            "This is an explanation"
+        ],
+        [
+            "/ ",
+            "Cancellation/Refund Policy"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            "  ",
+            "Visa Application Guide"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            " .",
+            "This is an explanation"
+        ],
+        [
+            " ",
+            "Save as Template"
+        ],
+        [
+            " ",
+            "Components"
+        ],
+        [
+            " ",
+            "Product Information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            " ",
+            "Flight Information"
+        ],
+        [
+            " ",
+            "Sales Information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "  ",
+            "Basic Sales Information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "  ",
+            "Daily Sales Adjustment"
+        ],
+        [
+            "",
+            "Schedule"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            " ",
+            "Meeting Information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "1",
+            "1st day"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "2",
+            "Day 2"
+        ],
+        [
+            " ",
+            "Add day"
+        ],
+        [
+            " ",
+            "Fee information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "/ ",
+            "Included/Not Included Items"
+        ],
+        [
+            "",
+            "Usage Guide"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "/ ",
+            "Cancellation/Refund Policy"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "  ",
+            "Visa Application Guide"
+        ],
+        [
+            "",
+            "Required"
+        ]
+    ]
+},
+{
+    "template-detail.html": [
+        [
+            " ",
+            "Return to list"
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            " ",
+            "Template Details"
+        ],
+        [
+            " ",
+            "Template Information"
+        ],
+        [
+            "",
+            "Registration date/time"
+        ],
+        [
+            " *",
+            "Template name"
+        ],
+        [
+            " ",
+            "Product Information"
+        ],
+        [
+            " *",
+            "Product Name"
+        ],
+        [
+            " ",
+            "Sales Target"
+        ],
+        [
+            "",
+            "Category"
+        ],
+        [
+            "",
+            "Category"
+        ],
+        [
+            " ",
+            "Product Description"
+        ],
+        [
+            " ",
+            "Thumbnail image"
+        ],
+        [
+            " ",
+            "Product image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            "  ",
+            "Detailed introduction image"
+        ],
+        [
+            "",
+            "Schedule"
+        ],
+        [
+            " ",
+            "Meeting Information"
+        ],
+        [
+            " ",
+            "Meeting time"
+        ],
+        [
+            " ",
+            "Meeting place name"
+        ],
+        [
+            "  ",
+            "Meeting place address"
+        ],
+        [
+            " ",
+            "Schedule Summary"
+        ],
+        [
+            " ",
+            "Tourist Information"
+        ],
+        [
+            "＋  ",
+            "＋ Add Tourist Attraction"
+        ],
+        [
+            "  ",
+            "Schedule start time"
+        ],
+        [
+            "  ",
+            "Schedule end time"
+        ],
+        [
+            "",
+            "Sight Name"
+        ],
+        [
+            " ",
+            "Address Search"
+        ],
+        [
+            " ",
+            "Sight Address"
+        ],
+        [
+            " ",
+            "Sight Information"
+        ],
+        [
+            " ",
+            "Sight Image"
+        ],
+        [
+            " ",
+            "Image Upload"
+        ],
+        [
+            " ",
+            "Delete tourist attraction"
+        ],
+        [
+            " ",
+            "Accommodation Information"
+        ],
+        [
+            "",
+            "Accommodation name"
+        ],
+        [
+            " ",
+            "Address Search"
+        ],
+        [
+            " ",
+            "Accommodation address"
+        ],
+        [
+            " ",
+            "Accommodation Description"
+        ],
+        [
+            "",
+            "This is an explanation"
+        ],
+        [
+            " ",
+            "Accommodation image"
+        ],
+        [
+            " ",
+            "Image Upload"
+        ],
+        [
+            " ",
+            "Meal Information"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            "  ",
+            "Dedicated vehicle transportation"
+        ],
+        [
+            " ",
+            "Meal Information"
+        ],
+        [
+            "",
+            "Breakfast"
+        ],
+        [
+            "",
+            "Lunch"
+        ],
+        [
+            "",
+            "Dinner"
+        ],
+        [
+            " ",
+            "Fee information"
+        ],
+        [
+            " ",
+            "Number of people fee"
+        ],
+        [
+            "＋ ",
+            "＋ Add"
+        ],
+        [
+            "",
+            "Option name"
+        ],
+        [
+            "  (₱)",
+            "Number of people fee (₱)"
+        ],
+        [
+            "",
+            "Delete"
+        ],
+        [
+            "  ",
+            "Room rate for single occupancy"
+        ],
+        [
+            "   (₱)",
+            "Single room usage fee (₱) *"
+        ],
+        [
+            "* 2   ,     . 1    .",
+            "* When booking for 2 or more people, you will be charged for the number of single rooms selected. For 1 person booking, it is applied for free."
+        ],
+        [
+            "/ ",
+            "Included/Not Included Items"
+        ],
+        [
+            " ",
+            "Included items"
+        ],
+        [
+            "＋ ",
+            "＋ Add"
+        ],
+        [
+            "No",
+            ""
+        ],
+        [
+            " ",
+            "Included items"
+        ],
+        [
+            "",
+            "Delete"
+        ],
+        [
+            " ",
+            "Excluded items"
+        ],
+        [
+            "＋ ",
+            "＋ Add"
+        ],
+        [
+            "No",
+            ""
+        ],
+        [
+            " ",
+            "Excluded items"
+        ],
+        [
+            "",
+            "Delete"
+        ],
+        [
+            "",
+            "Usage Guide"
+        ],
+        [
+            "",
+            "Notice"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            "/ ",
+            "Cancellation/Refund Policy"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            "  ",
+            "Visa Application Guide"
+        ],
+        [
+            "",
+            "Description"
+        ],
+        [
+            " .",
+            "This is an explanation"
+        ],
+        [
+            " ",
+            "Components"
+        ],
+        [
+            " ",
+            "Template Information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            " ",
+            "Product Information Required"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "",
+            "Schedule"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            " ",
+            "Meeting Information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "1",
+            "1st day"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "2",
+            "Day 2"
+        ],
+        [
+            " ",
+            "Add day"
+        ],
+        [
+            " ",
+            "Fee information"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "/ ",
+            "Included/Not Included Items"
+        ],
+        [
+            "",
+            "Usage Guide"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "/ ",
+            "Cancellation/Refund Policy"
+        ],
+        [
+            "",
+            "Required"
+        ],
+        [
+            "  ",
+            "Visa Application Guide"
+        ],
+        [
+            "",
+            "Required"
+        ]
+    ]
+},
+{
+    "user-inquiry-detail.html": [
+        [
+            " ",
+            "Return to list"
+        ],
+        [
+            " ",
+            "Processing complete"
+        ],
+        [
+            "  ",
+            "Member Inquiry Details"
+        ],
+        [
+            " ",
+            "Inquirer Information"
+        ],
+        [
+            "",
+            "Customer Name"
+        ],
+        [
+            "",
+            "Contacts"
+        ],
+        [
+            "",
+            "Email"
+        ],
+        [
+            " ",
+            "Customer number"
+        ],
+        [
+            " ",
+            "Agent Name"
+        ],
+        [
+            " ",
+            "Inquiry details"
+        ],
+        [
+            "",
+            "Date Created"
+        ],
+        [
+            " ",
+            "Inquiry type"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Content"
+        ],
+        [
+            "",
+            "Attachment"
+        ],
+        [
+            "",
+            "File"
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            " ",
+            "Leave a reply"
+        ],
+        [
+            "",
+            "Content"
+        ],
+        [
+            " .",
+            "Please enter your content"
+        ],
+        [
+            " ",
+            "Send answer"
+        ]
+    ]
+},
+{
+    "agent-inquiry-detail.html": [
+        [
+            " ",
+            "Return to list"
+        ],
+        [
+            "  ",
+            "Agent Inquiry Details"
+        ],
+        [
+            " ",
+            "Inquirer Information"
+        ],
+        [
+            "",
+            "Agent Name"
+        ],
+        [
+            "",
+            "Area"
+        ],
+        [
+            "",
+            "Person in charge"
+        ],
+        [
+            " ",
+            "Person in charge email"
+        ],
+        [
+            " ",
+            "Contact information"
+        ],
+        [
+            " ",
+            "Inquiry details"
+        ],
+        [
+            "",
+            "Date Created"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Content"
+        ],
+        [
+            "",
+            "Attachment"
+        ],
+        [
+            "",
+            "File"
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            " ",
+            "Leave a reply"
+        ],
+        [
+            "",
+            "Content"
+        ],
+        [
+            " .",
+            "Please enter your content"
+        ],
+        [
+            " ",
+            "Send answer"
+        ]
+    ]
+},
+{
+    "visa-app-detail.html": [
+        [
+            " ",
+            "Return to list"
+        ],
+        [
+            " ",
+            "Under review"
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            "  ",
+            "Visa Application Details"
+        ],
+        [
+            " ",
+            "Document details"
+        ],
+        [
+            " ( 6 )",
+            "ID Photo (Within the last 6 months)"
+        ],
+        [
+            "",
+            "ID Photo"
+        ],
+        [
+            " ",
+            "Passport copy"
+        ],
+        [
+            " ",
+            "Passport copy"
+        ],
+        [
+            "  ",
+            "Bank Account Certificate"
+        ],
+        [
+            "  ",
+            "Bank Account Certificate"
+        ],
+        [
+            " 3   ",
+            "Bank transaction history for the last 3 months"
+        ],
+        [
+            "  ",
+            "Bank Transaction Statement"
+        ],
+        [
+            "    ",
+            "Travel Itinerary Including Flight Information"
+        ],
+        [
+            " ",
+            "Travel Itinerary"
+        ],
+        [
+            " ",
+            "Application Information"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            "",
+            "Application date/time"
+        ],
+        [
+            " ",
+            "Applicant Information"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Name"
+        ],
+        [
+            "",
+            "Nature"
+        ],
+        [
+            "",
+            "Gender"
+        ],
+        [
+            "",
+            "Age"
+        ],
+        [
+            "",
+            "Date of birth"
+        ],
+        [
+            "",
+            "Country of origin"
+        ],
+        [
+            "",
+            "Passport number"
+        ],
+        [
+            " ",
+            "Passport Issue Date"
+        ],
+        [
+            " ",
+            "Passport expiration date"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            "",
+            "Image"
+        ],
+        [
+            " ",
+            "Visa Upload"
+        ],
+        [
+            " ",
+            "Visa file"
+        ],
+        [
+            " ",
+            "Upload"
+        ]
+    ]
+},
+{
+    "popup-detail.html": [
+        [
+            " ",
+            "Return to list"
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            " ",
+            "Member Inquiry List"
+        ],
+        [
+            " ",
+            "Popup information"
+        ],
+        [
+            "  (  640x640)",
+            "Popup image (recommended size 640x640)"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            " ",
+            "Exposure period"
+        ],
+        [
+            "",
+            "Registration date/time"
+        ],
+        [
+            "",
+            "Status"
+        ],
+        [
+            "",
+            "Activate"
+        ]
+    ]
+},
+{
+    "popup-registration.html": [
+        [
+            " ",
+            "Return to list"
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            " ",
+            "Register Popup"
+        ],
+        [
+            " ",
+            "Popup information"
+        ],
+        [
+            "  (  640x640)",
+            "Popup image (recommended size 640x640)"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            " ",
+            "Exposure period"
+        ]
+    ]
+},
+{
+    "notice-detail.html": [
+        [
+            " ",
+            "Return to list"
+        ],
+        [
+            "",
+            "Delete"
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            " ",
+            "Notice Details"
+        ],
+        [
+            " ",
+            "Notice Registration Information"
+        ],
+        [
+            "",
+            "Registration date/time"
+        ],
+        [
+            " ",
+            "Exposure period"
+        ],
+        [
+            " ",
+            "Notice"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Content"
+        ],
+        [
+            " .",
+            "This is the content"
+        ],
+        [
+            "",
+            "Image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            "",
+            "Image"
+        ],
+        [
+            "",
+            "Image"
+        ],
+        [
+            " ",
+            "Notice"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Content"
+        ],
+        [
+            " .",
+            "This is the content"
+        ],
+        [
+            "",
+            "Image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            "",
+            "Image"
+        ],
+        [
+            "",
+            "Image"
+        ]
+    ]
+},
+{
+    "notice-registration.html": [
+        [
+            " ",
+            "Return to list"
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            " ",
+            "Notice Registration"
+        ],
+        [
+            " ",
+            "Notice Registration Information"
+        ],
+        [
+            " ",
+            "Exposure period"
+        ],
+        [
+            " ",
+            "Notice"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Content"
+        ],
+        [
+            " .",
+            "Please enter your content"
+        ],
+        [
+            "",
+            "Image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ],
+        [
+            " ",
+            "Tagalog Announcements"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Content"
+        ],
+        [
+            " .",
+            "Please enter your content"
+        ],
+        [
+            "",
+            "Image"
+        ],
+        [
+            " ",
+            "Image upload"
+        ]
+    ]
+},
+{
+    "overview.html": [
+        [
+            "",
+            "Operating Status"
+        ],
+        [
+            " ",
+            "Reservation Status"
+        ],
+        [
+            "  ",
+            "Checking before advance payment"
+        ],
+        [
+            "",
+            "Dry"
+        ],
+        [
+            "  ",
+            "Check remaining balance"
+        ],
+        [
+            "",
+            "Dry"
+        ],
+        [
+            " ",
+            "Inquiry Status"
+        ],
+        [
+            "",
+            "Unanswered"
+        ],
+        [
+            "",
+            "Dry"
+        ],
+        [
+            "",
+            "Processing"
+        ],
+        [
+            "",
+            "Dry"
+        ],
+        [
+            "  ",
+            "Today's Travel Itinerary"
+        ],
+        [
+            "",
+            "Dry"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            " ",
+            "Travel period"
+        ],
+        [
+            " ",
+            "Customer Type"
+        ],
+        [
+            " ",
+            "Number of people"
+        ],
+        [
+            " ",
+            "Assignment Guide"
+        ]
+    ]
+},
+{
+    "customer-list.html": [
+        [
+            " ",
+            "Customer List"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            " ",
+            "Customer Name Search"
+        ],
+        [
+            "",
+            "Customer Name"
+        ],
+        [
+            "",
+            "Email"
+        ],
+        [
+            "",
+            "Contacts"
+        ],
+        [
+            "",
+            "Registration date/time"
+        ],
+        [
+            "",
+            "Download"
+        ],
+        [
+            " ",
+            "Single registration"
+        ],
+        [
+            " ",
+            "Batch Registration"
+        ]
+    ]
+},
+{
+    "customer-detail.html": [
+        [
+            " ",
+            ""
+        ],
+        [
+            " ",
+            "Customer Details"
+        ],
+        [
+            " ",
+            "Basic Information"
+        ],
+        [
+            "",
+            "Customer Name"
+        ],
+        [
+            "",
+            "Contacts"
+        ],
+        [
+            "",
+            "Email"
+        ],
+        [
+            "",
+            "Reset"
+        ],
+        [
+            " ",
+            "Customer number"
+        ],
+        [
+            " ",
+            "Agent Name"
+        ],
+        [
+            "",
+            "Registration date/time"
+        ],
+        [
+            "",
+            "Note"
+        ],
+        [
+            ".",
+            "This is a memo input field."
+        ],
+        [
+            " ",
+            "Traveler Information"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Name"
+        ],
+        [
+            "",
+            "Nature"
+        ],
+        [
+            "",
+            "Gender"
+        ],
+        [
+            "",
+            "Age"
+        ],
+        [
+            "",
+            "Date of birth"
+        ],
+        [
+            "",
+            "Country of origin"
+        ],
+        [
+            "",
+            "Passport number"
+        ],
+        [
+            " ",
+            "Passport Issue Date"
+        ],
+        [
+            " ",
+            "Passport expiration date"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            " ",
+            "Reservation Details"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            "",
+            "Reservation date"
+        ],
+        [
+            " ",
+            "Travel start date"
+        ],
+        [
+            " ",
+            "Reservation Status"
+        ],
+        [
+            " ",
+            "Number of people for reservation"
+        ],
+        [
+            "  (₱)",
+            "Order Amount (₱)"
+        ],
+        [
+            " ",
+            ""
+        ],
+        [
+            " ",
+            "Inquiry type"
+        ],
+        [
+            " ",
+            "Inquiry Title"
+        ],
+        [
+            "",
+            "Date created"
+        ],
+        [
+            " ",
+            "Response status"
+        ],
+        [
+            " ",
+            "Processing status"
+        ],
+        [
+            "",
+            "Unanswered"
+        ],
+        [
+            "",
+            "Received"
+        ]
+    ]
+},
+{
+    "customer-register.html": [
+        [
+            " ",
+            ""
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            " ",
+            "Customer Registration"
+        ],
+        [
+            " ",
+            "Basic Information"
+        ],
+        [
+            "",
+            "Customer Name"
+        ],
+        [
+            "",
+            "Contacts"
+        ],
+        [
+            "",
+            "Email"
+        ],
+        [
+            "",
+            "Auto Input"
+        ],
+        [
+            "",
+            "Note"
+        ],
+        [
+            " ",
+            "Please enter a memo"
+        ],
+        [
+            " ",
+            "Traveler Information"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Name"
+        ],
+        [
+            "",
+            "Nature"
+        ],
+        [
+            "",
+            "Gender"
+        ],
+        [
+            "",
+            "Age"
+        ],
+        [
+            "",
+            "Date of birth"
+        ],
+        [
+            "",
+            "Country of origin"
+        ],
+        [
+            "",
+            "Passport number"
+        ],
+        [
+            " ",
+            "Passport Issue Date"
+        ],
+        [
+            " ",
+            "Passport expiration date"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            " ",
+            "Image upload"
+        ]
+    ]
+},
+{
+    "reservation-list.html": [
+        [
+            " ",
+            "Reservation List"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            " ",
+            "Travel start date"
+        ],
+        [
+            " ",
+            "Overall status"
+        ],
+        [
+            "",
+            "All"
+        ],
+        [
+            " ",
+            "Search"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            " ",
+            "Travel start date"
+        ],
+        [
+            "",
+            "Reserver's name"
+        ],
+        [
+            " ",
+            "Number of people for reservation"
+        ],
+        [
+            "",
+            "Status"
+        ],
+        [
+            "  ",
+            "Checking before advance payment"
+        ],
+        [
+            "  ",
+            "Check remaining balance"
+        ],
+        [
+            " ",
+            "Reservation confirmed"
+        ],
+        [
+            " ",
+            "Trip completed"
+        ],
+        [
+            " ",
+            "Reservation cancellation"
+        ],
+        [
+            " ",
+            "Refund completed"
+        ],
+        [
+            " ",
+            "Refund completed"
+        ],
+        [
+            " ",
+            "Refund completed"
+        ],
+        [
+            " ",
+            "Refund completed"
+        ],
+        [
+            " ",
+            "Refund completed"
+        ],
+        [
+            "",
+            "Download"
+        ]
+    ]
+},
+{
+    "reservation-detail.html": [
+        [
+            " ",
+            ""
+        ],
+        [
+            "  ",
+            "Check remaining balance"
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            " ",
+            "Reservation Details"
+        ],
+        [
+            "   ",
+            "Product and Reservation Information"
+        ],
+        [
+            " ",
+            "Meeting location"
+        ],
+        [
+            "",
+            "Announcements"
+        ],
+        [
+            " ",
+            "Product Information"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            " ",
+            "Travel period"
+        ],
+        [
+            " ",
+            "Meeting time"
+        ],
+        [
+            " ",
+            "Meeting place"
+        ],
+        [
+            " ",
+            "Reservation Information"
+        ],
+        [
+            " ",
+            "Reservation number"
+        ],
+        [
+            "",
+            "Reservation date and time"
+        ],
+        [
+            " ",
+            "Number of people for reservation"
+        ],
+        [
+            " ",
+            "Room options"
+        ],
+        [
+            "  ",
+            "Add Cabin Baggage"
+        ],
+        [
+            " ",
+            "Breakfast Request"
+        ],
+        [
+            " ",
+            "WiFi Rental"
+        ],
+        [
+            "  ",
+            "Airline seat request details"
+        ],
+        [
+            " ",
+            "Other requests"
+        ],
+        [
+            " ",
+            "Payment Information"
+        ],
+        [
+            "  (₱)",
+            "Order Amount (₱)"
+        ],
+        [
+            " (₱)",
+            "Advance payment (₱)"
+        ],
+        [
+            "  ",
+            "Deadline for advance payment"
+        ],
+        [
+            "  ",
+            "Advance payment proof file"
+        ],
+        [
+            " (₱)",
+            "Balance (₱)"
+        ],
+        [
+            " ",
+            "Agent Notes"
+        ],
+        [
+            "",
+            "Note"
+        ],
+        [
+            " ",
+            "Flight Information"
+        ],
+        [
+            "",
+            "Departure flight"
+        ],
+        [
+            "",
+            "Flight number"
+        ],
+        [
+            "",
+            "Departure date and time"
+        ],
+        [
+            "",
+            "Arrival time"
+        ],
+        [
+            "",
+            "Departure point"
+        ],
+        [
+            "",
+            "Destination"
+        ],
+        [
+            "",
+            "Return trip"
+        ],
+        [
+            "",
+            "Flight number"
+        ],
+        [
+            "",
+            "Departure date and time"
+        ],
+        [
+            "",
+            "Arrival time"
+        ],
+        [
+            "",
+            "Departure point"
+        ],
+        [
+            "",
+            "Destination"
+        ],
+        [
+            "  ",
+            "Customer Information"
+        ],
+        [
+            "",
+            "Name"
+        ],
+        [
+            "",
+            "Email"
+        ],
+        [
+            "",
+            "Contacts"
+        ],
+        [
+            "  ",
+            "Travel Customer Information"
+        ],
+        [
+            " ",
+            "Main traveler"
+        ],
+        [
+            " ",
+            "Number of people option"
+        ],
+        [
+            "  ",
+            "Visa application status"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Name"
+        ],
+        [
+            "",
+            "Nature"
+        ],
+        [
+            "",
+            "Gender"
+        ],
+        [
+            "",
+            "Age"
+        ],
+        [
+            "",
+            "Date of birth"
+        ],
+        [
+            "",
+            "Country of origin"
+        ],
+        [
+            "",
+            "Passport number"
+        ],
+        [
+            " ",
+            "Passport Issue Date"
+        ],
+        [
+            " ",
+            "Passport expiration date"
+        ],
+        [
+            " ",
+            "Passport photo"
+        ],
+        [
+            "",
+            "Passport photo"
+        ],
+        [
+            "",
+            "Passport photo"
+        ],
+        [
+            "",
+            "Passport photo"
+        ],
+        [
+            "",
+            "Passport photo"
+        ],
+        [
+            "",
+            "Passport photo"
+        ],
+        [
+            "",
+            "Passport photo"
+        ],
+        [
+            "",
+            "Passport photo"
+        ],
+        [
+            "",
+            "Passport photo"
+        ],
+        [
+            "",
+            "Passport photo"
+        ],
+        [
+            "",
+            "Passport photo"
+        ]
+    ]
+},
+{
+    "create-reservation.html": [
+        [
+            " ",
+            "Create Reservation"
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            " ",
+            "Product Information"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            " ",
+            "Product Search"
+        ],
+        [
+            " ",
+            "Travel start date"
+        ],
+        [
+            "  ",
+            "Customer Information"
+        ],
+        [
+            "",
+            "Name"
+        ],
+        [
+            "",
+            "Email"
+        ],
+        [
+            "",
+            "Contact"
+        ],
+        [
+            "  ",
+            "Travel Customer Information"
+        ],
+        [
+            "＋  ",
+            "＋ Add Customer"
+        ],
+        [
+            " ",
+            "Main traveler"
+        ],
+        [
+            " ",
+            "Number of people option"
+        ],
+        [
+            "  ",
+            "Visa application status"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Name"
+        ],
+        [
+            "",
+            "Nature"
+        ],
+        [
+            "",
+            "Gender"
+        ],
+        [
+            "",
+            "Age"
+        ],
+        [
+            " ",
+            "Reservation Information"
+        ],
+        [
+            " ",
+            "Room Options"
+        ],
+        [
+            "  ",
+            "Select Room Options"
+        ],
+        [
+            "  ",
+            "Carry-on baggage additional"
+        ],
+        [
+            "",
+            "Not selected"
+        ],
+        [
+            " ",
+            "Breakfast Request"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            " ",
+            "WiFi Rental"
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "  ",
+            ""
+        ],
+        [
+            "",
+            "Not applied"
+        ],
+        [
+            "  ",
+            "Airline seat request details"
+        ],
+        [
+            " ",
+            "Other requests"
+        ],
+        [
+            " ",
+            "Agent Notes"
+        ],
+        [
+            "",
+            "Note"
+        ],
+        [
+            " ",
+            "Payment Information"
+        ],
+        [
+            "  (₱)",
+            "Order Amount (₱)"
+        ],
+        [
+            " (₱)",
+            "Advance payment (₱)"
+        ],
+        [
+            "  ",
+            "Advance payment deposit deadline"
+        ],
+        [
+            "  ",
+            "Advance payment proof file"
+        ],
+        [
+            " ",
+            "File upload"
+        ],
+        [
+            "       .\n\t\t\t\t\t\t\t\t       .",
+            "Please upload the file within the set deposit deadline.<br>If not uploaded within the deadline, your reservation will be canceled."
+        ],
+        [
+            " (₱)",
+            "Balance (₱)"
+        ]
+    ]
+},
+{
+    "inquiry-list.html": [
+        [
+            " ",
+            "Inquiry List"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            " ",
+            "Response status"
+        ],
+        [
+            "",
+            "Latest"
+        ],
+        [
+            " ",
+            "Inquiry Title"
+        ],
+        [
+            "",
+            "Date created"
+        ],
+        [
+            " ",
+            "Response status"
+        ]
+    ]
+},
+{
+    "inquiry-detail.html": [
+        [
+            " ",
+            ""
+        ],
+        [
+            "",
+            "Save"
+        ],
+        [
+            " ",
+            "Inquiry Details"
+        ],
+        [
+            " ",
+            "Inquiry Details"
+        ],
+        [
+            "",
+            "Date Created"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Content"
+        ],
+        [
+            "",
+            "Attachment"
+        ],
+        [
+            " ",
+            "File upload"
+        ],
+        [
+            "",
+            "File"
+        ],
+        [
+            "",
+            "Image"
+        ]
+    ]
+},
+{
+    "register-inquiry.html": [
+        [
+            " ",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            " ",
+            "Submit Inquiry"
+        ],
+        [
+            " ",
+            "Inquiry details"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Title"
+        ],
+        [
+            "",
+            "Content"
+        ],
+        [
+            " ",
+            "Please enter your content"
+        ],
+        [
+            "",
+            "Attachment"
+        ],
+        [
+            " ",
+            "File upload"
+        ]
+    ]
+},
+{
+    "inquiry-list.html": [
+        [
+            " ",
+            "Inquiry List"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            " ",
+            "Inquiry type"
+        ],
+        [
+            " ",
+            "Inquiry Title"
+        ],
+        [
+            "",
+            "Date created"
+        ],
+        [
+            " ",
+            "Response status"
+        ],
+        [
+            " ",
+            "Processing status"
+        ],
+        [
+            "",
+            "Download"
+        ]
+    ]
+},
+{
+    "inquiry-detail.html": [
+        [
+            " ",
+            "Return to list"
+        ],
+        [
+            " ",
+            "Inquiry Details"
+        ],
+        [
+            " ",
+            "Inquirer Information"
+        ],
+        [
+            " ",
+            "Agent Name"
+        ],
+        [
+            " ",
+            "Inquiry details"
+        ],
+        [
+            "",
+            "Attachment"
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            " ",
+            "Leave a reply"
+        ],
+        [
+            " ",
+            ""
+        ]
+    ]
+},
+{
+    "full-list.html": [
+        [
+            " ",
+            "Full list"
+        ],
+        [
+            "",
+            "Search results"
+        ],
+        [
+            "",
+            "items"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            " ",
+            "Travel start date"
+        ],
+        [
+            "",
+            "Reserver's name"
+        ],
+        [
+            " ",
+            "Number of people for reservation"
+        ],
+        [
+            " ",
+            "Progress status"
+        ]
+    ]
+},
+{
+    "assigned-schedule-detail.html": [
+        [
+            " ",
+            "Return to list"
+        ],
+        [
+            " ",
+            "Detailed Itinerary"
+        ],
+        [
+            " ",
+            "Product Information"
+        ],
+        [
+            "",
+            "Product Name"
+        ],
+        [
+            " ",
+            ""
+        ],
+        [
+            " ",
+            ""
+        ],
+        [
+            " ",
+            ""
+        ],
+        [
+            " ",
+            "Flight Information"
+        ],
+        [
+            "",
+            "Departure flight"
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            "Return trip"
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            " ",
+            "Reservation Information"
+        ],
+        [
+            " ",
+            ""
+        ],
+        [
+            " ",
+            ""
+        ],
+        [
+            "  ",
+            "Travel Customer Information"
+        ],
+        [
+            "",
+            "Name"
+        ],
+        [
+            "",
+            "Nature"
+        ],
+        [
+            "",
+            "Passport number"
+        ],
+        [
+            " ",
+            "Number of people option"
+        ]
+    ]
+},
+{
+    "today-schedule-detail.html": [
+        [
+            " ",
+            "Detailed Itinerary"
+        ],
+        [
+            " ",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            " ",
+            ""
+        ],
+        [
+            " ",
+            ""
+        ],
+        [
+            " ",
+            ""
+        ],
+        [
+            " ",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            " ",
+            ""
+        ],
+        [
+            " ",
+            ""
+        ],
+        [
+            " ",
+            ""
+        ],
+        [
+            "  ",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            "",
+            ""
+        ],
+        [
+            " ",
+            ""
+        ]
+    ]
+}

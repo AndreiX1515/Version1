@@ -1,0 +1,92 @@
+@layer Align {
+  .align {
+    display: flex;
+    @media screen and (width < 1000px) {
+      &.align-mo { 
+        display: block;
+      }
+    
+    }
+    @media screen and (width < 768px) {
+      .align-mo2 { 
+        display: block;
+      }
+    }
+    &.column { 
+      flex-direction: column;
+    }
+    &.both {
+      justify-content: space-between;
+    }
+    &.right {
+      justify-content: flex-end;
+    }
+    &.center {
+      justify-content: center;
+    }
+    &.vt {
+      align-items: flex-start;
+    }
+    &.vm {
+      align-items: center;
+    }
+    &.vb {
+      align-items: flex-end;
+    }
+    &.gap3 { 
+      gap: 3px;
+    }
+    &.gap4 { 
+      gap: 4px;
+    }
+    &.gap8 { 
+      gap: 8px;
+    }
+    &.gap10 { 
+      gap: 1rem;
+    }
+    &.gap12 { 
+      gap: 1.2rem;
+    }
+    &.gap14 { 
+      gap: 1.4rem;
+    }
+    &.gap16 { 
+      gap: 1.6rem;
+    }
+    &.gap20 { 
+      gap: 2rem;
+    }
+    &.gap24 { 
+      gap: 2.4rem;
+    }
+    &.gap40 { 
+      gap: 4rem;
+    }
+    &.gap48 { 
+      gap: 4.8rem;
+    }
+    &.gap50 { 
+      gap: 5rem;
+    }
+    &.gap66 { 
+      gap: 6.6rem;
+    }
+  }
+  .txt-center {
+    text-align: center;
+  }
+  .txt-right {
+    text-align: right;
+  }
+  .txt-left {
+    text-align: left;
+  }
+  @media screen and (max-width: 1000px) {
+    .txt-left-mo {
+      width: 100%;
+      display: block;
+      text-align: left; 
+    }
+  }
+}
