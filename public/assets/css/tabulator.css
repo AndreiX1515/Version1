@@ -238,7 +238,7 @@
   border-right: none !important;
   border-top: none !important;
   white-space: nowrap !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   text-overflow: ellipsis !important;
 
   /* border: 1px solid gainsboro !important; */
@@ -528,7 +528,6 @@ input[type="checkbox"].tabulator-checkbox {
 
 /* ADDED: Empty state icon */
 .tabulator-placeholder::before {
-  content: '📋';
   display: block;
   font-size: 2rem;
   margin-bottom: 8px;
@@ -815,3 +814,18 @@ input[type="checkbox"].tabulator-checkbox {
   contain: layout style paint;
 }
 
+
+
+
+
+
+
+
+/* Allow hover content to escape Tabulator cells */
+.tabulator,
+.tabulator-tableHolder,
+.tabulator-table,
+.tabulator-row,
+.tabulator-cell {
+  overflow: visible !important;
+}

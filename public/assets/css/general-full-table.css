@@ -34,10 +34,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 16px;
+  padding: var(--space-md) var(--space-lg) var(--space-sm) var(--space-md);
   height: 50px;          /* fixed header height */
   background-color: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-color);
+  /* border-bottom: 1px solid var(--border-color); */
   flex-shrink: 0;
 }
 
@@ -45,11 +45,16 @@
    TABLE CONTAINER
    ========================================================= */
 .full-table-wrapper .table-container {
-  flex: 1;               /* fills remaining space */
-  min-height: 0;         /* important for Firefox */
-  overflow: hidden;      /* Tabulator will handle internal scroll */
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;          /* Tabulator controls scrolling */
   position: relative;
+
+  padding: 0 var(--space-md);
+  scrollbar-gutter: stable; /* reserves scrollbar space */
 }
+
+
 
 /* =========================================================
    TABLE FOOTER
@@ -76,10 +81,6 @@
    =============================== */
 
 
-
-
-
-
 .table-actions-left {
   display: flex;
   align-items: center;
@@ -87,18 +88,22 @@
 }
 
 /* =========================================================
-   TABLE SEARCH FIELD (ADAPTED TO ICON ACTION BUTTON STYLES)
+   TABLE SEARCH FIELD (ENHANCED X BUTTON)
 ========================================================= */
 
 .table-search-wrapper {
   position: relative;
-  width: 260px; /* adjustable */
+  width: 300px; /* adjustable */
+  /* border: 1px solid gainsboro !important; */
+  display: flex; /* ensure proper alignment */
+  align-items: center;
 }
 
+/* Input field */
 .table-search-input {
   width: 100%;
   height: 40px; /* same height as icon-action-btn */
-  padding: 0 12px 0 38px; /* left padding for icon */
+  padding: 0 50px 0 38px; /* left padding for search icon, right for X button */
   font-size: 0.875rem;
 
   background-color: var(--bg-surface);
@@ -111,20 +116,21 @@
     background-color var(--transition-base),
     border-color var(--transition-base),
     box-shadow var(--transition-base);
+
 }
 
-/* Hover state — matches icon-action-btn */
+/* Hover state */
 .table-search-input:hover {
   background-color: var(--bg-hover);
   border-color: var(--border-interactive);
 }
 
-/* Focus state — clear, accessible */
+/* Focus state */
 .table-search-input:focus {
   outline: none;
   background-color: var(--bg-surface);
   border-color: var(--border-interactive);
-  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15); /* subtle accent glow */
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.15);
 }
 
 /* Placeholder */
@@ -132,7 +138,7 @@
   color: var(--text-muted);
 }
 
-/* Search icon inside input */
+/* Search icon */
 .table-search-wrapper .search-icon {
   position: absolute;
   top: 50%;
@@ -143,9 +149,53 @@
   pointer-events: none;
 }
 
+/* ================================
+   CLEAR (X) BUTTON - RIGHTMOST
+================================= */
+.table-search-wrapper .search-clear-btn {
+  position: absolute;
+  top: 50%;
+  right: 4px; /* closer to the edge of wrapper */
+  transform: translateY(-50%);
 
+  margin-right: 10px;
 
+  width: 24px;
+  height: 24px;
 
+  display: none; /* hidden by default */
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+
+  font-size: 0.875rem;
+  color: var(--text-muted);
+
+  cursor: pointer;
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base);
+  z-index: 2; /* ensure it’s above the input */
+}
+
+/* Hover state */
+.table-search-wrapper .search-clear-btn:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+/* Visible state toggled by JS */
+.table-search-wrapper .search-clear-btn.is-visible {
+  display: inline-flex;
+}
+
+/* Prevent focus outline */
+.table-search-wrapper .search-clear-btn:focus {
+  outline: none;
+}
 
 
 
@@ -381,25 +431,30 @@
   border-color: var(--border-interactive);
 }
 
+
 /* Filter Badge */
 .filter-badge {
   position: absolute;
-  top: -6px;
-  right: -6px;
+  top: -10px;
+  right: -10px;
   background: linear-gradient(135deg, var(--accent) 0%, #4f46e5 100%);
   color: white;
   font-size: 0.625rem;
   font-weight: var(--font-bold);
-  min-width: 18px;
-  height: 18px;
+  min-width: 18px;           /* default size for single digit */
+  height: 18px;              /* fixed height */
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-full);
-  padding: 0 5px;
+  border-radius: 50%;        /* circular for single digit */
   border: 2px solid var(--bg-secondary);
   line-height: 1;
+  padding: 0 5px;            /* extra space for multiple digits */
+  box-sizing: border-box;    /* include padding in width */
+  white-space: nowrap;        /* prevent line break */
+  transition: width 0.2s ease, min-width 0.2s ease; /* smooth expansion */
 }
+
 
 
 
@@ -892,6 +947,148 @@
 .pagination-number:hover:not(.active) {
     background: #d4d4d4;
 }
+
+
+
+
+
+
+
+/* Wrapper */
+.branch-cell-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Branch name */
+.branch-name {
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+/* Hover card */
+.branch-hover-card {
+  position: fixed;
+  min-width: 250px;
+  padding: var(--space-md) var(--space-md);
+
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-xl);
+  z-index: 99999;
+
+  color: var(--text-primary);
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+}
+
+
+
+/* Show on hover */
+.branch-cell-wrapper:hover .branch-hover-card {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+
+/* Card content */
+.branch-hover-title {
+  font-size: 0.8rem;
+  font-weight: var(--font-semibold);
+  margin-bottom: var(--space-xs);
+  color: var(--text-primary);
+}
+
+.branch-hover-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.branch-hover-row .label {
+  color: var(--text-muted);
+}
+
+
+
+
+
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 20px;
+  padding: 0 8px;
+
+  font-size: 0.65rem;
+  font-weight: var(--font-semibold);
+  line-height: 1;
+
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+
+  border: 1px solid transparent;
+}
+
+
+.status-active {
+  background: var(--success-soft);
+  color: var(--success-text);
+  border-color: var(--success-border);
+}
+
+
+.status-pending {
+  background: var(--warning-soft);
+  color: var(--warning-text);
+  border-color: var(--warning-border);
+}
+
+
+.status-inactive {
+  background: var(--danger-soft);
+  color: var(--danger-text);
+  border-color: var(--danger-border);
+}
+
+
+.status-suspended {
+  background: var(--danger-softer);
+  color: var(--danger-text-emphasis);
+  border-color: var(--danger-border-strong);
+}
+
+
+.status-default {
+  background: var(--bg-muted);
+  color: var(--text-muted);
+  border-color: var(--border-color);
+}
+
+
+/* .status-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: currentColor;
+} */
+
+
+
+
+
 
 
 
