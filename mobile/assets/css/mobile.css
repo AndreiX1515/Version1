@@ -392,15 +392,21 @@ body {
   border-top: 1px solid var(--border-light);
 }
 
+
+
+
+
 /* Theme Toggle Container */
 .theme-toggle-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-md);
+  gap: 12px;
+  padding: 10px 14px;
   background-color: var(--bg-surface);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-light);
+  cursor: pointer;
   transition: all var(--transition-base);
 }
 
@@ -410,19 +416,44 @@ body {
 
 /* Theme Label */
 .theme-toggle-label {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
   font-size: 0.9rem;
-  font-weight: var(--font-semibold);
+  font-weight: 600;
   color: var(--text-primary);
 }
 
-.theme-label-icon {
-  font-size: 1rem;
-  color: var(--accent);
-  transition: all var(--transition-base);
+/* Toggle Button */
+.theme-toggle-btn {
+  width: 42px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--border-light);
+  border: none;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background var(--transition-base);
 }
+
+.theme-toggle-switch {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  transition: transform var(--transition-base);
+}
+
+/* Dark mode state */
+html.dark .theme-toggle-btn {
+  background: var(--accent);
+}
+
+html.dark .theme-toggle-switch {
+  transform: translateX(20px);
+}
+
+
+
 
 
 
@@ -861,49 +892,115 @@ body {
   background: transparent;
   z-index: 20;
   pointer-events: none;
+
+  /* border: 1px solid gainsboro; */
+}
+
+
+
+
+/* ================================
+   THEME TOGGLE CONTAINER - LOGIN
+================================ */
+.theme-toggle-container-login {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background-color: var(--bg-surface, #f5f5f5);
+  border: 1px solid var(--border-light, #d0d0d0);
+  cursor: pointer;
+  transition: background-color 180ms ease, border-color 180ms ease;
+}
+
+/* Dark mode container */
+html.dark .theme-toggle-container-login {
+  border-color: rgba(255, 255, 255, 0.12);
+  background-color: var(--bg-surface-dark, #2c2c2c);
 }
 
 /* ================================
-   THEME TOGGLE BUTTON
+   LABEL TEXT - LOGIN
 ================================ */
-.theme-toggle-btn {
-  pointer-events: auto;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-full);
-  border: none;
-  background-color: var(--overlay-light);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-sm);
-  cursor: pointer;
-  transition:
-    background-color var(--transition-fast),
-    transform var(--transition-fast),
-    box-shadow var(--transition-fast);
-}
-
-/* Hover / Active (Material feel) */
-.theme-toggle-btn:active {
-  transform: scale(0.92);
-  box-shadow: var(--shadow-xs);
-}
-
-/* Icon styling */
-.theme-icon {
-  font-size: 1rem;
+.theme-toggle-container-login .theme-label-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary, #222);
+  user-select: none;
   line-height: 1;
-  color: var(--text-primary);
-  transition: transform var(--transition-base),
-              color var(--transition-base);
+  transition: color 180ms ease;
 }
 
-/* Dark mode visual tweak */
-.dark .theme-toggle-btn {
-  background-color: var(--overlay-dark);
+html.dark .theme-toggle-container-login .theme-label-text {
+  color: var(--text-on-dark, #f5f5f5);
 }
+
+/* ================================
+   TOGGLE BUTTON - LOGIN
+================================ */
+.theme-toggle-container-login .theme-toggle-btn {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  padding: 0;
+  border-radius: 999px;
+  border: none;
+  background-color: var(--border-light, #d0d0d0);
+  cursor: pointer;
+  outline: none;
+  transition:
+    background-color 180ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 180ms cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+/* Hover & Focus */
+.theme-toggle-container-login .theme-toggle-btn:hover {
+  box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.04);
+}
+.theme-toggle-container-login .theme-toggle-btn:focus-visible {
+  box-shadow: 0 0 0 6px rgba(25, 118, 210, 0.25);
+}
+
+/* Pressed / Active state */
+.theme-toggle-container-login .theme-toggle-btn:active .theme-toggle-thumb {
+  width: 20px;
+}
+
+/* ================================
+   TOGGLE THUMB - LOGIN
+================================ */
+.theme-toggle-container-login .theme-toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 160ms ease;
+}
+
+/* Dark mode thumb state */
+html.dark .theme-toggle-container-login .theme-toggle-btn {
+  background-color: var(--accent, #4caf50);
+}
+
+html.dark .theme-toggle-container-login .theme-toggle-thumb {
+  transform: translateX(18px);
+}
+
+
+
+
+
+
+
 
 
 

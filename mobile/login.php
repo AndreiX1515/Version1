@@ -23,15 +23,23 @@
   <div class="login-container">
 
     <header class="login-top-header">
-      <button
-        class="theme-toggle-btn"
-        aria-label="Toggle theme"
-        title="Toggle dark mode"
-        data-theme-toggle
-      >
-        <span class="theme-icon">🌙</span>
-      </button>
+
+      <div class="theme-toggle-container-login" data-theme-toggle>
+        <span class="theme-label-text">Light</span>
+
+        <button
+          class="theme-toggle-btn"
+          aria-label="Toggle theme"
+          aria-pressed="false"
+          type="button"
+        >
+          <span class="theme-toggle-thumb"></span>
+        </button>
+      </div>
+
+
     </header>
+
 
 
     <div class="login-header">

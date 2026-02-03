@@ -102,14 +102,18 @@
         <div class="sidebar-footer">
             <div class="theme-toggle-container">
                 <div class="theme-toggle-label">
-                    <span>Theme</span>
+                    <span>Theme:</span>
+                    <span class="theme-mode-text">Light</span>
+
                 </div>
+
                 <label class="toggle-switch" for="themeToggle">
                     <input type="checkbox" id="themeToggle" aria-label="Toggle dark mode">
                     <span class="toggle-slider"></span>
                 </label>
             </div>
         </div>
+
 
     </aside>
 
@@ -193,23 +197,21 @@
                     </div>
 
                     <div class="package-tabs-wrapper">
+
                         <!-- <button class="tabs-nav left" disabled>
-                        <i class="fas fa-chevron-left"></i>
-                    </button> -->
+                            <i class="fas fa-chevron-left"></i>
+                        </button> -->
 
                         <div class="package-tabs" id="packageTabs">
                             <button class="tab-btn active" data-tab="all">
-
                                 <span>All</span>
                             </button>
 
                             <button class="tab-btn" data-tab="korea">
-
                                 <span>Korea</span>
                             </button>
 
                             <button class="tab-btn" data-tab="japan">
-
                                 <span>Japan</span>
                             </button>
 
@@ -228,14 +230,16 @@
                         </div>
 
                         <!-- <button class="tabs-nav right">
-                        <i class="fas fa-chevron-right"></i>
-                    </button> -->
+                            <i class="fas fa-chevron-right"></i>
+                        </button> -->
+
                     </div>
 
                 </div>
 
                 <!-- Package Grid -->
                 <div class="package-grid">
+
 
                     <!-- Featured Card (Full Width) -->
                     <div class="package-card featured" data-package-id="seoul-city-explorer" data-category="korea">
@@ -263,11 +267,12 @@
                     </div>
 
                     <!-- Regular Cards -->
-                    <div class="package-card" data-category="japan">
+                    <div class="package-card" data-package-id="busan-beach-resort" data-category="japan">
                         <button class="package-favorite" aria-label="Add to favorites">
                             <i class="far fa-heart"></i>
                         </button>
                         <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&h=400&fit=crop" alt="Tokyo Explorer">
+
                         <div class="package-info">
                             <div class="package-rating">
                                 <i class="fas fa-star"></i>
@@ -284,6 +289,7 @@
                                 <button class="btn-details">View</button>
                             </div>
                         </div>
+                        
                     </div>
 
                     <div class="package-card" data-category="japan">
@@ -449,24 +455,30 @@
         <div class="page-content content-wrapper" id="bookingsPage">
 
             <div class="page-content-header">
+
                 <div class="page-content-header-main">
+
                     <button
                         class="page-back-btn"
                         type="button"
                         aria-label="Go back"
-                        onclick="history.back()"
-                    >
+                        onclick="window.location.href='../../mobile/landing.php';">
                         <i class="fas fa-arrow-left"></i>
                     </button>
+
+
 
                     <div class="page-content-header-text">
                         <h2>My Bookings</h2>
                         <p>View and manage your travel reservations</p>
                     </div>
-
                 </div>
+
             </div>
 
+            <div class="page-content-body">
+
+            </div>
 
             <div class="empty-state">
                 <i class="fas fa-calendar-alt"></i>
@@ -486,8 +498,7 @@
                         class="page-back-btn"
                         type="button"
                         aria-label="Go back"
-                        onclick="history.back()"
-                    >
+                        onclick="switchToHome()">
                         <i class="fas fa-arrow-left"></i>
                     </button>
 
@@ -497,6 +508,10 @@
                     </div>
 
                 </div>
+            </div>
+
+            <div class="page-content-body">
+
             </div>
 
         </div>
@@ -510,8 +525,7 @@
                         class="page-back-btn"
                         type="button"
                         aria-label="Go back"
-                        onclick="history.back()"
-                    >
+                        onclick="switchToHome()">
                         <i class="fas fa-arrow-left"></i>
                     </button>
 
@@ -522,46 +536,51 @@
                 </div>
             </div>
 
-            <div class="profile-content">
-                <div class="profile-section">
-                    <div class="profile-avatar-large">
-                        <img src="" alt="">
-                        <button class="avatar-edit">
-                            <i class="fas fa-camera"></i>
-                        </button>
+            <div class="page-content-body">
+                <div class="profile-content">
+                    <div class="profile-section">
+                        <div class="profile-avatar-large">
+                            <img src="" alt="">
+                            <button class="avatar-edit">
+                                <i class="fas fa-camera"></i>
+                            </button>
+                        </div>
+                        <h3>John Traveler</h3>
+                        <p class="profile-email">john@travel.com</p>
                     </div>
-                    <h3>John Traveler</h3>
-                    <p class="profile-email">john@travel.com</p>
+
+                    <div class="profile-menu">
+                        <a href="#" class="profile-menu-item">
+                            <i class="fas fa-user"></i>
+                            <span>Personal Information</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="#" class="profile-menu-item">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Payment Methods</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="#" class="profile-menu-item">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="#" class="profile-menu-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Privacy & Security</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="#" class="profile-menu-item">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Help & Support</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
                 </div>
 
-                <div class="profile-menu">
-                    <a href="#" class="profile-menu-item">
-                        <i class="fas fa-user"></i>
-                        <span>Personal Information</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                    <a href="#" class="profile-menu-item">
-                        <i class="fas fa-credit-card"></i>
-                        <span>Payment Methods</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                    <a href="#" class="profile-menu-item">
-                        <i class="fas fa-bell"></i>
-                        <span>Notifications</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                    <a href="#" class="profile-menu-item">
-                        <i class="fas fa-shield-alt"></i>
-                        <span>Privacy & Security</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                    <a href="#" class="profile-menu-item">
-                        <i class="fas fa-question-circle"></i>
-                        <span>Help & Support</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                </div>
             </div>
+
+
 
         </div>
 
@@ -571,12 +590,12 @@
             <!-- Package Tabs Header -->
             <div class="page-content-header">
                 <div class="page-content-header-main">
+
                     <button
                         class="page-back-btn"
                         type="button"
                         aria-label="Go back"
-                        onclick="history.back()"
-                    >
+                        onclick="switchToHome()">
                         <i class="fas fa-arrow-left"></i>
                     </button>
 
@@ -587,169 +606,171 @@
                 </div>
             </div>
 
-            <div class="package-header">
-                <div class="package-tabs-wrapper">
-                    <!-- <button class="tabs-nav left" disabled>
+            <div class="page-content-body">
+                <div class="package-header">
+                    <div class="package-tabs-wrapper">
+                        <!-- <button class="tabs-nav left" disabled>
                         <i class="fas fa-chevron-left"></i>
                     </button> -->
 
-                    <div class="package-tabs" id="packageTabs">
-                        <button class="tab-btn active" data-tab="all">
+                        <div class="package-tabs" id="packageTabs">
+                            <button class="tab-btn active" data-tab="all">
 
-                            <span>All</span>
-                        </button>
+                                <span>All</span>
+                            </button>
 
-                        <button class="tab-btn" data-tab="korea">
+                            <button class="tab-btn" data-tab="korea">
 
-                            <span>Korea</span>
-                        </button>
+                                <span>Korea</span>
+                            </button>
 
-                        <button class="tab-btn" data-tab="japan">
+                            <button class="tab-btn" data-tab="japan">
 
-                            <span>Japan</span>
-                        </button>
+                                <span>Japan</span>
+                            </button>
 
-                        <button class="tab-btn" disabled data-tab="japan">
-                            <span>Vietnam</span>
-                        </button>
+                            <button class="tab-btn" disabled data-tab="japan">
+                                <span>Vietnam</span>
+                            </button>
 
-                        <button class="tab-btn" disabled data-tab="japan">
-                            <span>Thailand</span>
-                        </button>
+                            <button class="tab-btn" disabled data-tab="japan">
+                                <span>Thailand</span>
+                            </button>
 
-                        <button class="tab-btn" disabled>
-                            <span>Coming Soon</span>
-                        </button>
+                            <button class="tab-btn" disabled>
+                                <span>Coming Soon</span>
+                            </button>
 
-                    </div>
+                        </div>
 
-                    <!-- <button class="tabs-nav right">
+                        <!-- <button class="tabs-nav right">
                         <i class="fas fa-chevron-right"></i>
                     </button> -->
-                </div>
-            </div>
-
-
-            <!-- Package Grid -->
-            <div class="package-grid">
-
-                <!-- Featured Card (Full Width) -->
-                <div class="package-card featured" data-category="korea">
-                    <div class="package-badge">Featured</div>
-                    <button class="package-favorite" aria-label="Add to favorites">
-                        <i class="far fa-heart"></i>
-                    </button>
-                    <img src="https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=800&h=400&fit=crop" alt="Korea City Tour">
-                    <div class="package-info">
-                        <div class="package-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>4.8</span>
-                        </div>
-                        <h3>Seoul City Explorer</h3>
-                        <p><i class="far fa-clock"></i> 5 Days / 4 Nights</p>
-                        <div class="package-footer">
-                            <span class="price">₱29,999</span>
-                            <button class="btn-details">View Details</button>
-                        </div>
                     </div>
                 </div>
 
-                <!-- Regular Cards -->
-                <div class="package-card" data-category="japan">
-                    <button class="package-favorite" aria-label="Add to favorites">
-                        <i class="far fa-heart"></i>
-                    </button>
-                    <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&h=400&fit=crop" alt="Tokyo Explorer">
-                    <div class="package-info">
-                        <div class="package-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span>5.0</span>
-                        </div>
-                        <h3>Tokyo Explorer</h3>
-                        <p><i class="far fa-clock"></i> 7 Days / 6 Nights</p>
-                        <div class="package-footer">
-                            <span class="price">₱49,999</span>
-                            <button class="btn-details">View</button>
-                        </div>
-                    </div>
-                </div>
+                <!-- Package Grid -->
+                <div class="package-grid">
 
-                <div class="package-card" data-category="japan">
-                    <div class="package-badge popular">Popular</div>
-                    <button class="package-favorite" aria-label="Add to favorites">
-                        <i class="far fa-heart"></i>
-                    </button>
-                    <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?w=600&h=400&fit=crop" alt="Kyoto & Osaka">
-                    <div class="package-info">
-                        <div class="package-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span>4.5</span>
-                        </div>
-                        <h3>Kyoto & Osaka</h3>
-                        <p><i class="far fa-clock"></i> 9 Days / 8 Nights</p>
-                        <div class="package-footer">
-                            <span class="price">₱69,999</span>
-                            <button class="btn-details">View</button>
+                    <!-- Featured Card (Full Width) -->
+                    <div class="package-card featured" data-category="korea">
+                        <div class="package-badge">Featured</div>
+                        <button class="package-favorite" aria-label="Add to favorites">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <img src="https://images.unsplash.com/photo-1517154421773-0529f29ea451?w=800&h=400&fit=crop" alt="Korea City Tour">
+                        <div class="package-info">
+                            <div class="package-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>4.8</span>
+                            </div>
+                            <h3>Seoul City Explorer</h3>
+                            <p><i class="far fa-clock"></i> 5 Days / 4 Nights</p>
+                            <div class="package-footer">
+                                <span class="price">₱29,999</span>
+                                <button class="btn-details">View Details</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="package-card" data-category="korea">
-                    <button class="package-favorite" aria-label="Add to favorites">
-                        <i class="far fa-heart"></i>
-                    </button>
-                    <img src="https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=600&h=400&fit=crop" alt="Busan Beach">
-                    <div class="package-info">
-                        <div class="package-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span>4.3</span>
-                        </div>
-                        <h3>Busan Beach</h3>
-                        <p><i class="far fa-clock"></i> 4 Days / 3 Nights</p>
-                        <div class="package-footer">
-                            <span class="price">₱24,999</span>
-                            <button class="btn-details">View</button>
+                    <!-- Regular Cards -->
+                    <div class="package-card" data-category="japan">
+                        <button class="package-favorite" aria-label="Add to favorites">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&h=400&fit=crop" alt="Tokyo Explorer">
+                        <div class="package-info">
+                            <div class="package-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>5.0</span>
+                            </div>
+                            <h3>Tokyo Explorer</h3>
+                            <p><i class="far fa-clock"></i> 7 Days / 6 Nights</p>
+                            <div class="package-footer">
+                                <span class="price">₱49,999</span>
+                                <button class="btn-details">View</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="package-card" data-category="japan">
-                    <button class="package-favorite" aria-label="Add to favorites">
-                        <i class="far fa-heart"></i>
-                    </button>
-                    <img src="https://images.unsplash.com/photo-1542640244-7e672d6cef4e?w=600&h=400&fit=crop" alt="Hokkaido Winter">
-                    <div class="package-info">
-                        <div class="package-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>4.7</span>
-                        </div>
-                        <h3>Hokkaido Winter</h3>
-                        <p><i class="far fa-clock"></i> 6 Days / 5 Nights</p>
-                        <div class="package-footer">
-                            <span class="price">₱54,999</span>
-                            <button class="btn-details">View</button>
+                    <div class="package-card" data-category="japan">
+                        <div class="package-badge popular">Popular</div>
+                        <button class="package-favorite" aria-label="Add to favorites">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?w=600&h=400&fit=crop" alt="Kyoto & Osaka">
+                        <div class="package-info">
+                            <div class="package-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>4.5</span>
+                            </div>
+                            <h3>Kyoto & Osaka</h3>
+                            <p><i class="far fa-clock"></i> 9 Days / 8 Nights</p>
+                            <div class="package-footer">
+                                <span class="price">₱69,999</span>
+                                <button class="btn-details">View</button>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="package-card" data-category="korea">
+                        <button class="package-favorite" aria-label="Add to favorites">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <img src="https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=600&h=400&fit=crop" alt="Busan Beach">
+                        <div class="package-info">
+                            <div class="package-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>4.3</span>
+                            </div>
+                            <h3>Busan Beach</h3>
+                            <p><i class="far fa-clock"></i> 4 Days / 3 Nights</p>
+                            <div class="package-footer">
+                                <span class="price">₱24,999</span>
+                                <button class="btn-details">View</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="package-card" data-category="japan">
+                        <button class="package-favorite" aria-label="Add to favorites">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        <img src="https://images.unsplash.com/photo-1542640244-7e672d6cef4e?w=600&h=400&fit=crop" alt="Hokkaido Winter">
+                        <div class="package-info">
+                            <div class="package-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>4.7</span>
+                            </div>
+                            <h3>Hokkaido Winter</h3>
+                            <p><i class="far fa-clock"></i> 6 Days / 5 Nights</p>
+                            <div class="package-footer">
+                                <span class="price">₱54,999</span>
+                                <button class="btn-details">View</button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
@@ -860,9 +881,17 @@
     </nav>
 
 
+    <!-- 1. Load data FIRST -->
+    <script src="../mobile/js/JSON/package-data.js"></script>
+
+    <!-- 2. Load package details functionality SECOND -->
+    <script src="../mobile/js/package-details.js"></script>
+
     <!-- Scripts -->
     <script src="../mobile/js/landing.js"></script>
-    <script src="../mobile/js/theme-toggle.js"></script>
+
+    <!-- <script src="../mobile/js/theme-toggle.js"></script> -->
+
 </body>
 
 

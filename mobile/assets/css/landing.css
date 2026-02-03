@@ -8,6 +8,7 @@
   flex-direction: column;
   padding-inline: 0;
   padding-top: 0;
+
   padding-bottom: calc(70px + var(--space-lg));
 }
 
@@ -60,7 +61,7 @@
 /* Standard laptops: 1280px */
 @media (min-width: 1280px) {
   .dashboard {
-    padding-top: var(--space-xl);
+    padding-top: var(--space-sm);
     padding-bottom: var(--space-xl);
   }
 }
@@ -68,7 +69,7 @@
 /* Large desktop: 1440px */
 @media (min-width: 1440px) {
   .dashboard {
-    padding-top: var(--space-xl);
+    padding-top: 0;
     padding-bottom: var(--space-2xl);
   }
 }
@@ -80,6 +81,9 @@
   display: none;
   animation: pageSlideIn 0.3s ease;
   width: 100%;
+  height: auto;
+  
+  /* border: 1px solid gainsboro; */
 }
 
 .page-content.active {
@@ -111,7 +115,7 @@
 
 @media (min-width: 1280px) {
   .page-content:not(:first-child) {
-    padding: var(--space-xl) var(--space-2xl);
+    padding: var(--space-md) var(--space-md);
   }
 }
 
@@ -133,12 +137,14 @@
   position: relative;
   width: 100%;
   height: 200px;
-  margin: 0 0 var(--space-md) 0;
+  margin: 0 0 var(--space-sm) 0 !important;
   border-radius: 0;
   overflow: hidden;
   box-shadow: var(--shadow-lg);
   background: var(--bg-muted);
   transition: height 0.3s ease;
+
+  /* border: 1px solid gainsboro; */
 }
 
 /* Small phones */
@@ -346,6 +352,8 @@
 .package-wrapper {
   width: 100%;
   padding: var(--space-md);
+
+  /* border: 1px solid gainsboro; */
 }
 
 @media (min-width: 640px) {
@@ -368,13 +376,21 @@
 
 @media (min-width: 1280px) {
   .package-wrapper {
-    padding: var(--space-xl) var(--space-2xl);
+    padding: var(--space-lg) var(--space-md);
   }
 }
+
+
 
 /* ================================
    PACKAGE HEADER & TABS
 ================================ */
+
+/* .page-content-body {
+  border: 1px solid gainsboro;
+} */
+
+
 .package-header {
   display: flex;
   flex-direction: column;
@@ -383,7 +399,9 @@
 }
 
 .content-wrapper .page-content-header {
-  padding: 0;
+  padding: var(--space-sm) var(--space-xs);
+
+  /* border: 1px solid gainsboro; */
 }
 
 .package-title {
@@ -400,7 +418,7 @@
 }
 
 .package-title-text h2 {
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   font-weight: 600;
   color: var(--text-primary);
   letter-spacing: -0.5px;
@@ -821,8 +839,13 @@
   background-color: rgba(29, 33, 40, 0.95);
 }
 
+
+
+
 /* Package Info */
 .package-info {
+  display: flex;
+  justify-content: space-between;
   padding: var(--space-sm);
   display: flex;
   flex-direction: column;
@@ -977,6 +1000,10 @@
   box-shadow: var(--shadow-sm);
 }
 
+
+
+
+
 /* ================================
    ABOUT SECTION - ENHANCED PADDING
 ================================ */
@@ -984,6 +1011,10 @@
   width: 100%;
   padding: var(--space-md);
   padding-bottom: var(--space-lg);
+
+  margin-top: var(--space-md);
+
+  /* border: 1px solid gainsboro; */
 }
 
 @media (min-width: 640px) {
@@ -1009,10 +1040,11 @@
 
 @media (min-width: 1280px) {
   .about-wrapper {
-    padding: var(--space-xl) var(--space-2xl);
+    padding: var(--space-md) var(--space-md);
     padding-bottom: var(--space-2xl);
   }
 }
+
 
 /* About Header */
 .about-header {
@@ -1689,7 +1721,7 @@
    PAGE HEADERS - CONSISTENT PADDING
 ================================ */
 .page-header {
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-xs);
   padding: var(--space-md);
 }
 
@@ -1749,9 +1781,12 @@
   }
 }
 
+
+
+
 /* Page Content Header */
 .page-content-header {
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-sm);
   padding: var(--space-md);
 }
 
@@ -1780,35 +1815,52 @@
   }
 }
 
+
+
+
 .page-content-header-main {
   display: flex;
   align-items: center;
   gap: var(--space-md);
 }
 
+
+
 .page-back-btn {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  color: var(--text-secondary);
+  background-color: var(--accent); /* solid fill */
+  color: #ffffff; /* icon color */
+  border: none; /* remove border */
+  width: 40px; /* circular size */
+  height: 40px;
+  border-radius: 50%; /* makes it circular */
   display: flex;
   align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* subtle material shadow */
+  transition: all 0.2s ease-in-out;
 }
 
 .page-back-btn i {
   font-size: 1rem;
 }
 
+.page-back-btn:hover {
+  background-color: #11522a; /* darker accent on hover */
+  transform: scale(1.05); /* subtle material touch */
+}
+
 @media (min-width: 640px) {
+  .page-back-btn {
+    width: 45px;
+    height: 45px;
+  }
   .page-back-btn i {
     font-size: 1.1rem;
   }
 }
 
-.page-back-btn:hover {
-  color: var(--accent);
-}
+
 
 .page-content-header-text h2 {
   font-size: 1.4rem;

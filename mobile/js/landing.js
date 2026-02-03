@@ -5,7 +5,14 @@ const sidebar = document.getElementById('mobileSidebar');
 const overlay = document.getElementById('sidebarOverlay');
 const toggleBtn = document.querySelector('.sidebar-toggle');
 const closeBtn = document.getElementById('sidebarClose');
+
+
+// For Theme Toggle
 const themeToggleBtn = document.getElementById('themeToggle');
+const themeModeText  = document.querySelector('.theme-mode-text');
+
+
+
 const bottomNavLinks = document.querySelectorAll('.bottom-nav a');
 const sidebarNavLinks = document.querySelectorAll('.sidebar-nav a:not(.danger)');
 const pageContents = document.querySelectorAll('.page-content');
@@ -32,6 +39,7 @@ let autoplayInterval;
 const autoplayDelay = 4000; // 4 seconds
 
 function showSlide(index) {
+
     // Remove active class from all slides and indicators
     carouselSlides.forEach(slide => slide.classList.remove('active'));
     indicators.forEach(indicator => indicator.classList.remove('active'));
@@ -118,6 +126,7 @@ document.addEventListener('visibilitychange', () => {
     }
 });
 
+
 // ================================
 // SIDEBAR FUNCTIONALITY
 // ================================
@@ -170,14 +179,15 @@ document.addEventListener('keydown', (e) => {
 // NAVIGATION FUNCTIONALITY
 // ================================
 function switchPage(pageName, packageId = null) {
-    
     // Hide all pages
     pageContents.forEach(page => page.classList.remove('active'));
+
     // Show selected page
     const selectedPage = document.getElementById(`${pageName}Page`);
     if (selectedPage) {
         selectedPage.classList.add('active');
     }
+
     // Update bottom nav active state
     bottomNavLinks.forEach(link => {
         link.classList.remove('active');
@@ -185,6 +195,7 @@ function switchPage(pageName, packageId = null) {
             link.classList.add('active');
         }
     });
+
     // Update sidebar nav active state
     sidebarNavLinks.forEach(link => {
         link.classList.remove('active');
@@ -192,28 +203,32 @@ function switchPage(pageName, packageId = null) {
             link.classList.add('active');
         }
     });
+
     // Close sidebar after navigation
     closeSidebar();
+
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
+    // Save current page in localStorage for persistence
+    localStorage.setItem('currentPage', pageName);
+
+    // Handle package-detail page
     if (pageName === 'package-detail' && packageId) {
-    localStorage.setItem('currentPackageId', packageId);
-    // Load package data dynamically
-    loadPackageData();
-  }
+        localStorage.setItem('currentPackageId', packageId);
+        loadPackageData();
+    }
 }
 
-// Update card click handlers
-document.querySelectorAll('.btn-details').forEach(button => {
-  button.addEventListener('click', function(e) {
-    e.preventDefault();
-    const card = this.closest('.package-card');
-    const packageId = card.dataset.packageId;
-    switchPage('package-detail', packageId);
-  });
+// Restore page on reload
+document.addEventListener('DOMContentLoaded', () => {
+    const savedPage = localStorage.getItem('currentPage');
+    if (savedPage) {
+        switchPage(savedPage);
+    } else {
+        switchPage('home'); // default page
+    }
 });
-
 
 // Bottom navigation click events
 bottomNavLinks.forEach(link => {
@@ -238,6 +253,9 @@ function switchToHome() {
     switchPage('home');
 }
 
+
+
+
 // Logout functionality
 const logoutLink = document.querySelector('.sidebar-nav a.danger');
 if (logoutLink) {
@@ -251,6 +269,9 @@ if (logoutLink) {
         }
     });
 }
+
+
+
 
 // ================================
 // PROFILE AVATAR NAVIGATION
@@ -272,8 +293,6 @@ if (seeAllButton) {
         switchPage('packages');
     });
 }
-
-
 
 
 
@@ -308,6 +327,7 @@ tabButtons.forEach(btn => {
 });
 
 
+
 // ================================
 // FAVORITE FUNCTIONALITY
 // ================================
@@ -337,80 +357,37 @@ favoriteButtons.forEach(button => {
 });
 
 
+
+
 // ================================
 // THEME TOGGLE FUNCTIONALITY
 // ================================
-function initTheme() {
-    // Check for saved theme preference or default to light
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.classList.toggle('dark', currentTheme === 'dark');
-    updateThemeButton(currentTheme);
-}
 
-function updateThemeButton(theme) {
-    const icon = themeToggleBtn.querySelector('.theme-icon');
-    const text = themeToggleBtn.querySelector('span');
-    
-    if (theme === 'dark') {
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-        text.textContent = 'Light Mode';
-    } else {
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
-        text.textContent = 'Dark Mode';
+document.addEventListener('DOMContentLoaded', () => {
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeModeText  = document.querySelector('.theme-mode-text');
+
+    if (!themeToggleBtn || !themeModeText) {
+        console.error('Theme toggle elements not found');
+        return;
     }
-}
 
-themeToggleBtn.addEventListener('click', () => {
-    const isDark = document.documentElement.classList.toggle('dark');
-    const theme = isDark ? 'dark' : 'light';
-    localStorage.setItem('theme', theme);
-    updateThemeButton(theme);
-    
-    // Add animation to button
-    themeToggleBtn.style.transform = 'scale(0.95)';
-    setTimeout(() => {
-        themeToggleBtn.style.transform = '';
-    }, 150);
-});
+    function applyTheme(isDark) {
+        document.documentElement.classList.toggle('dark', isDark);
+        themeToggleBtn.checked = isDark;
+        themeModeText.textContent = isDark ? 'Dark' : 'Light';
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
 
-// Initialize theme on page load
-initTheme();
+    // Initialize
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    applyTheme(savedTheme === 'dark');
 
-
-
-// ================================
-// VIEW DETAILS FUNCTIONALITY
-// ================================
-document.querySelectorAll('.btn-details').forEach(button => {
-    button.addEventListener('click', function(e) {
-        e.preventDefault(); // prevent default link behavior
-        e.stopPropagation(); // stop bubbling if needed
-
-        // Get the package card
-        const card = this.closest('.package-card');
-
-        // Get package ID from data attribute (add data-package-id to your cards)
-        const packageId = card.dataset.packageId || 'default-package';
-
-        // Get package name (for detail view or alert)
-        const packageName = card.querySelector('h3')?.textContent || 'Unnamed Package';
-
-        // Store package ID in localStorage
-        localStorage.setItem('currentPackageId', packageId);
-
-        // Trigger detail view logic (alert for now)
-        alert(`Viewing details for: ${packageName}\n\nThis would open a detailed package view.`);
-
-        // Navigate to details page
-        window.location.href = `package-details.html#package/${packageId}`;
+    // Toggle handler
+    themeToggleBtn.addEventListener('change', () => {
+        applyTheme(themeToggleBtn.checked);
     });
 });
-
-
-
-
 
 
 
@@ -505,11 +482,11 @@ tabs.addEventListener('mousemove', (e) => {
 });
 
 /* Arrow buttons */
-document.querySelector('.tabs-nav.left').onclick = () =>
-  tabs.scrollBy({ left: -120, behavior: 'smooth' });
+// document.querySelector('.tabs-nav.left').onclick = () =>
+//   tabs.scrollBy({ left: -120, behavior: 'smooth' });
 
-document.querySelector('.tabs-nav.right').onclick = () =>
-  tabs.scrollBy({ left: 120, behavior: 'smooth' });
+// document.querySelector('.tabs-nav.right').onclick = () =>
+//   tabs.scrollBy({ left: 120, behavior: 'smooth' });
 
 
 
@@ -540,6 +517,9 @@ window.addEventListener('scroll', () => {
 // ================================
 console.log('Smart Escape Travel App initialized ✈️');
 
+
+
+
 // Add loading animation removal
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
@@ -554,3 +534,84 @@ document.addEventListener('touchend', (e) => {
     }
     lastTouchEnd = now;
 }, false);
+
+
+
+
+
+
+
+
+
+
+
+// Initialize View Details buttons
+function initPackageDetailsNavigation() {
+    console.log('🔍 Initializing package details navigation...');
+    
+    const detailButtons = document.querySelectorAll('.btn-details');
+    console.log(`✅ Found ${detailButtons.length} View Details buttons`);
+    
+    detailButtons.forEach((button, index) => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            console.log(`🎯 Button ${index + 1} clicked`);
+            
+            // Get package card
+            const card = this.closest('.package-card');
+            if (!card) {
+                console.error('❌ Could not find package card');
+                return;
+            }
+            
+            // Get package ID from data attribute
+            let packageId = card.dataset.packageId;
+            
+            // If no data-package-id, generate from title
+            if (!packageId) {
+                const titleElement = card.querySelector('h3');
+                if (titleElement) {
+                    packageId = titleElement.textContent
+                        .toLowerCase()
+                        .trim()
+                        .replace(/\s+/g, '-')
+                        .replace(/[^\w-]/g, '');
+                    console.log('🔄 Generated package ID:', packageId);
+                } else {
+                    packageId = 'seoul-city-explorer';
+                    console.warn('⚠️ Using fallback package ID');
+                }
+            }
+            
+            console.log('📦 Opening package:', packageId);
+            
+            // Store package ID in localStorage
+            localStorage.setItem('currentPackageId', packageId);
+            
+            // Navigate to package details page
+            // Adjust path based on current location
+            const currentPath = window.location.pathname;
+            let targetPath;
+            
+            if (currentPath.includes('/pages/')) {
+                targetPath = `package-details.php?id=${packageId}`;
+            } else {
+                targetPath = `pages/package-details.php?id=${packageId}`;
+            }
+            
+            console.log('🚀 Navigating to:', targetPath);
+            window.location.href = targetPath;
+        });
+    });
+}
+
+// Call after DOM is loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPackageDetailsNavigation);
+} else {
+    initPackageDetailsNavigation();
+}
+
+console.log('✅ Package details navigation initialized');
