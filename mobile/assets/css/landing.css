@@ -1,35 +1,40 @@
 /* ================================
-   DASHBOARD CONTENT
+   DASHBOARD CONTENT — ENHANCED
 ================================ */
 .dashboard {
   width: 100%;
   min-height: calc(100vh - 65px);
   display: flex;
   flex-direction: column;
-  padding-inline: 0;
-  padding-top: 0;
 
-  padding-bottom: calc(70px + var(--space-lg));
+  /* Base padding (mobile-first) */
+  padding-top: var(--space-md);       /* comfortable top space */
+  padding-inline: var(--space-md);    /* left & right padding */
 }
 
 /* Small phones: 375px */
 @media (min-width: 375px) {
   .dashboard {
-    padding-bottom: calc(65px + var(--space-lg));
+    padding-top: var(--space-md);
+    padding-inline: var(--space-md);
+    padding-bottom: calc(65px + var(--space-md));
   }
 }
 
 /* Large phones: 480px */
 @media (min-width: 480px) {
   .dashboard {
-    padding-bottom: calc(60px + var(--space-xl));
+    padding-top: var(--space-lg);
+    padding-inline: var(--space-lg);
+    padding-bottom: calc(60px + var(--space-lg));
   }
 }
 
 /* Phablets: 640px */
 @media (min-width: 640px) {
   .dashboard {
-    padding-top: 0;
+    padding-top: var(--space-lg);
+    padding-inline: var(--space-lg);
     padding-bottom: calc(60px + var(--space-xl));
   }
 }
@@ -37,15 +42,17 @@
 /* Tablets: 768px */
 @media (min-width: 768px) {
   .dashboard {
-    padding-top: var(--space-sm);
+    padding-top: var(--space-lg);
+    padding-inline: var(--space-xl);
     padding-bottom: var(--space-2xl);
   }
 }
 
-/* Between tablet-laptop: 850px (CRITICAL NEW BREAKPOINT) */
+/* Between tablet-laptop: 850px */
 @media (min-width: 850px) {
   .dashboard {
-    padding-top: var(--space-md);
+    padding-top: var(--space-lg);
+    padding-inline: var(--space-2xl);
     padding-bottom: var(--space-2xl);
   }
 }
@@ -54,22 +61,25 @@
 @media (min-width: 1024px) {
   .dashboard {
     padding-top: var(--space-lg);
-    padding-bottom: var(--space-xl);
+    padding-inline: var(--space-2xl);
+    padding-bottom: var(--space-2xl);
   }
 }
 
 /* Standard laptops: 1280px */
 @media (min-width: 1280px) {
   .dashboard {
-    padding-top: var(--space-sm);
-    padding-bottom: var(--space-xl);
+    padding-top: var(--space-lg);
+    padding-inline: var(--space-2xl);
+    padding-bottom: var(--space-2xl);
   }
 }
 
 /* Large desktop: 1440px */
 @media (min-width: 1440px) {
   .dashboard {
-    padding-top: 0;
+    padding-top: var(--space-2xl);
+    padding-inline: var(--space-2xl);
     padding-bottom: var(--space-2xl);
   }
 }
@@ -97,7 +107,7 @@
 
 @media (min-width: 640px) {
   .page-content:not(:first-child) {
-    padding: var(--space-md) var(--space-lg);
+    padding: 0;
   }
 }
 
@@ -130,6 +140,7 @@
   }
 }
 
+
 /* ================================
    HERO CAROUSEL - SMOOTH TRANSITIONS
 ================================ */
@@ -138,14 +149,27 @@
   width: 100%;
   height: 200px;
   margin: 0 0 var(--space-sm) 0 !important;
-  border-radius: 0;
+  border-radius: var(--space-md);
   overflow: hidden;
-  box-shadow: var(--shadow-lg);
   background: var(--bg-muted);
-  transition: height 0.3s ease;
 
-  /* border: 1px solid gainsboro; */
+  /* Subtle glow border */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* light mode default */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+
+  /* Smooth transitions */
+  transition: 
+    height 0.3s ease,
+    border 0.3s ease,
+    box-shadow 0.3s ease;
 }
+
+/* DARK MODE ADAPTATION */
+body.dark .hero-carousel {
+  border: 1px solid rgba(255, 255, 255, 0.15); /* lighter glow on dark */
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
+}
+
 
 /* Small phones */
 @media (min-width: 375px) {
@@ -351,14 +375,14 @@
 ================================ */
 .package-wrapper {
   width: 100%;
-  padding: var(--space-md);
+  padding: var(--space-md) var(--space-xs);
 
   /* border: 1px solid gainsboro; */
 }
 
 @media (min-width: 640px) {
   .package-wrapper {
-    padding: var(--space-md) var(--space-lg);
+    padding: var(--space-md) var(--space-xs);
   }
 }
 
@@ -379,6 +403,8 @@
     padding: var(--space-lg) var(--space-md);
   }
 }
+
+
 
 
 
@@ -557,93 +583,99 @@
   cursor: not-allowed;
 }
 
+
+
+
 /* ================================
    INTELLIGENT PACKAGE GRID SYSTEM
 ================================ */
+
+/* Base Grid (Mobile-first) */
 .package-grid {
   display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-md);
   animation: fadeIn 0.4s ease;
 }
 
-/* Mobile: 2 columns, featured full width */
-.package-grid {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.package-grid .package-card.featured {
+/* Featured card defaults to full width */
+.package-card.featured {
   grid-column: 1 / -1;
 }
 
-/* Phablets: 2 columns with better spacing */
+/* ================================
+   PHABLETS (≥ 640px)
+================================ */
 @media (min-width: 640px) {
   .package-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-lg);
+    gap: var(--space-md);
   }
 }
 
-/* Tablets: Intelligent 3-column layout */
+/* ================================
+   TABLETS (≥ 768px)
+================================ */
 @media (min-width: 768px) {
   .package-grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
   }
-  
-  /* If exactly 3 cards (1 featured + 2 regular):
-     Featured takes full width, 2 cards adapt full width */
-  .package-grid .package-card:nth-child(2):nth-last-child(2),
-  .package-grid .package-card:nth-child(3):nth-last-child(1) {
-    grid-column: span 1;
-  }
-  
-  /* Featured always full width */
-  .package-grid .package-card.featured {
+
+  .package-card.featured {
     grid-column: 1 / -1;
   }
-  
-  /* If 4 cards (1 featured + 3 regular):
-     Featured full, 3 cards in row */
-  .package-grid .package-card:nth-child(2):nth-last-child(3),
-  .package-grid .package-card:nth-child(3):nth-last-child(2),
-  .package-grid .package-card:nth-child(4):nth-last-child(1) {
-    grid-column: span 1;
-  }
 }
 
-/* Between tablet-laptop: 850px - Better spacing */
-@media (min-width: 850px) {
-  .package-grid {
-    gap: var(--space-lg);
-  }
-}
-
-/* Small laptops: 1024px - Maintain 3 cols with more padding */
+/* ================================
+   SMALL LAPTOPS (≥ 1024px)
+================================ */
 @media (min-width: 1024px) {
   .package-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-xl);
+    gap: var(--space-md);
   }
 }
 
-/* Standard laptops: 1280px - 4 columns for better use of space */
+/* ================================
+   DESKTOP (≥ 1280px)
+   — Full width / half width logic
+================================ */
 @media (min-width: 1280px) {
+
+  /* 2-column grid for regular cards */
   .package-grid {
-    grid-template-columns: repeat(4, 1fr);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* <- key fix for below featured row */
+    gap: var(--space-md);
   }
-  
-  /* Featured takes 2 columns on large screens */
-  .package-grid .package-card.featured {
-    grid-column: span 2;
+
+  /* EVEN total cards → featured spans half */
+  .package-grid.is-even .package-card.featured {
+    grid-column: span 1; /* Half width in 2-column grid */
+  }
+
+  /* ODD total cards → featured full width */
+  .package-grid:not(.is-even) .package-card.featured {
+    grid-column: 1 / -1; /* Full width */
+  }
+
+  /* Optional: dense packing */
+  .package-grid {
+    grid-auto-flow: dense;
   }
 }
 
-/* Large desktop: 1440px+ - Optimal 4-column layout */
+/* ================================
+   LARGE DESKTOP (≥ 1440px)
+================================ */
 @media (min-width: 1440px) {
   .package-grid {
-    gap: var(--space-2xl);
+    gap: var(--space-md);
   }
 }
 
+/* ================================
+   ANIMATION
+================================ */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -654,6 +686,8 @@
     transform: translateY(0);
   }
 }
+
+
 
 /* ================================
    PACKAGE CARD - MODERN ROUNDED
@@ -671,7 +705,6 @@
 }
 
 .package-card:active {
-  transform: scale(0.98);
   box-shadow: var(--shadow-md);
 }
 
@@ -846,7 +879,7 @@
 .package-info {
   display: flex;
   justify-content: space-between;
-  padding: var(--space-sm);
+  padding: var(--space-md);
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
@@ -1019,7 +1052,7 @@
 
 @media (min-width: 640px) {
   .about-wrapper {
-    padding: var(--space-md) var(--space-lg);
+    padding: var(--space-md) var(--space-xs);
     padding-bottom: var(--space-xl);
   }
 }

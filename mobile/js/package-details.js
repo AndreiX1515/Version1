@@ -1,44 +1,42 @@
 // ================================
-// PACKAGE DETAILS PAGE - UPDATED
+// PACKAGE DETAILS - SPA VERSION
 // ================================
-// Compatible with korea-packages.js structure
-// Supports navigation to booking page with package data
+// Adapted to work within landing.php SPA
 
-// Get package ID from URL or localStorage
-function getPackageId() {
-  // Check URL parameter first (?id=seoul-city-explorer)
-  const urlParams = new URLSearchParams(window.location.search);
-  const urlId = urlParams.get('id');
-  if (urlId) {
-    return urlId;
-  }
-  
-  // Check URL hash (#package/seoul-city-explorer)
-  const hash = window.location.hash;
-  if (hash.includes('package/')) {
-    return hash.split('package/')[1];
-  }
-  
-  // Check localStorage as fallback
-  return localStorage.getItem('currentPackageId') || 'seoul-city-explorer';
-}
+// ================================
+// STATE
+// ================================
+let currentMonth = 4; // May (0-indexed)
+let currentYear = 2026;
+let selectedDate = null;
+let selectedDateData = null;
+let currentPackageData = null;
 
-// Load package data
-function loadPackageData() {
-  const packageId = getPackageId();
-  console.log('📦 Loading package:', packageId);
+// ================================
+// LOAD PACKAGE DATA
+// ================================
+function loadPackageData(packageId) {
+  // Use passed packageId or get from session
+  const id = packageId || sessionStorage.getItem('currentPackageId') || 'seoul-city-explorer';
+  
+  console.log('📦 Loading package:', id);
   
   // Get package from KOREA_PACKAGES
-  const packageData = getPackageById(packageId);
+  const packageData = getPackageById(id);
   
   if (!packageData) {
-    console.error('❌ Package not found:', packageId);
-    alert('Package not found. Redirecting to home...');
-    window.location.href = '../pages/landing.php';
+    console.error('❌ Package not found:', id);
+    alert('Package not found. Returning to home...');
+    if (typeof goBackFromPackageDetails === 'function') {
+      goBackFromPackageDetails();
+    }
     return;
   }
   
   console.log('✅ Package loaded:', packageData.title);
+  
+  // Store globally
+  currentPackageData = packageData;
   
   // Populate page with package data
   populatePackageDetails(packageData);
@@ -48,9 +46,17 @@ function loadPackageData() {
   
   // Store full package data for booking page
   sessionStorage.setItem('currentPackageData', JSON.stringify(packageData));
+  
+  // Check favorite status
+  checkFavoriteStatus(id);
 }
 
-// Populate package details
+// Make globally available
+window.loadPackageData = loadPackageData;
+
+// ================================
+// POPULATE UI
+// ================================
 function populatePackageDetails(data) {
   console.log('🎨 Populating UI...');
   
@@ -63,11 +69,12 @@ function populatePackageDetails(data) {
   safeSetText('packageRating', `${data.rating.average} (${data.rating.total} reviews)`);
   
   // Badge
-  const badge = document.querySelector('.package-badge-hero');
+  const badge = safeGetElement('packageBadge');
   if (badge) {
     if (data.featured) {
       badge.style.display = 'inline-block';
       badge.textContent = 'Featured';
+      badge.style.background = 'linear-gradient(135deg, var(--accent), var(--accent-hover))';
     } else if (data.status === 'coming-soon') {
       badge.style.display = 'inline-block';
       badge.textContent = 'Coming Soon';
@@ -126,7 +133,9 @@ function populatePackageDetails(data) {
   console.log('✅ UI populated');
 }
 
-// Safe DOM helpers
+// ================================
+// SAFE DOM HELPERS
+// ================================
 function safeGetElement(id) {
   const element = document.getElementById(id);
   if (!element) console.warn(`⚠️ Element not found: ${id}`);
@@ -151,15 +160,10 @@ function safeSetAttribute(id, attr, value) {
 // ================================
 // CALENDAR FUNCTIONALITY
 // ================================
-let currentMonth = 4; // May (0-indexed)
-let currentYear = 2026;
-let selectedDate = null;
-let selectedDateData = null;
-
 function renderCalendar(packageData) {
   console.log('📅 Rendering calendar...');
   
-  const calendarGrid = document.querySelector('.calendar-grid');
+  const calendarGrid = document.querySelector('#packageDetailsPage .calendar-grid');
   if (!calendarGrid) {
     console.warn('⚠️ Calendar grid not found');
     return;
@@ -221,7 +225,7 @@ function selectDate(dateStr, availability, packageData) {
   console.log('📅 Date selected:', dateStr, availability);
   
   // Update UI
-  document.querySelectorAll('.calendar-day').forEach(day => {
+  document.querySelectorAll('#packageDetailsPage .calendar-day').forEach(day => {
     day.classList.remove('selected');
   });
   event.currentTarget.classList.add('selected');
@@ -255,32 +259,38 @@ function selectDate(dateStr, availability, packageData) {
   }));
 }
 
-// Calendar navigation
-const prevMonthBtn = safeGetElement('prevMonth');
-if (prevMonthBtn) {
-  prevMonthBtn.addEventListener('click', () => {
-    currentMonth--;
-    if (currentMonth < 0) {
-      currentMonth = 11;
-      currentYear--;
-    }
-    const packageData = getPackageById(getPackageId());
-    renderCalendar(packageData);
-  });
-}
+// ================================
+// CALENDAR NAVIGATION
+// ================================
+document.addEventListener('DOMContentLoaded', () => {
+  const prevMonthBtn = safeGetElement('prevMonth');
+  if (prevMonthBtn) {
+    prevMonthBtn.addEventListener('click', () => {
+      currentMonth--;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+      if (currentPackageData) {
+        renderCalendar(currentPackageData);
+      }
+    });
+  }
 
-const nextMonthBtn = safeGetElement('nextMonth');
-if (nextMonthBtn) {
-  nextMonthBtn.addEventListener('click', () => {
-    currentMonth++;
-    if (currentMonth > 11) {
-      currentMonth = 0;
-      currentYear++;
-    }
-    const packageData = getPackageById(getPackageId());
-    renderCalendar(packageData);
-  });
-}
+  const nextMonthBtn = safeGetElement('nextMonth');
+  if (nextMonthBtn) {
+    nextMonthBtn.addEventListener('click', () => {
+      currentMonth++;
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      if (currentPackageData) {
+        renderCalendar(currentPackageData);
+      }
+    });
+  }
+});
 
 // ================================
 // REVIEWS
@@ -378,107 +388,111 @@ function renderRelatedPackages(data) {
 
 function viewPackage(packageId) {
   console.log('🔄 Switching to package:', packageId);
-  localStorage.setItem('currentPackageId', packageId);
-  window.location.href = `package-details.php?id=${packageId}`;
-}
-
-// ================================
-// NAVIGATION & ACTIONS
-// ================================
-function goBack() {
-  if (window.history.length > 1) {
-    window.history.back();
+  
+  // Use SPA navigation instead of page reload
+  if (typeof showPackageDetails === 'function') {
+    showPackageDetails(packageId);
   } else {
-    window.location.href = '../pages/landing.php';
+    console.error('❌ showPackageDetails not found');
   }
 }
 
-// Favorite toggle
-const favoriteBtn = document.querySelector('.hero-favorite-btn');
-if (favoriteBtn) {
-  favoriteBtn.addEventListener('click', function() {
-    this.classList.toggle('active');
-    
-    const packageId = getPackageId();
-    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-    
-    if (this.classList.contains('active')) {
-      if (!favorites.includes(packageId)) {
-        favorites.push(packageId);
-      }
-    } else {
-      const index = favorites.indexOf(packageId);
-      if (index > -1) {
-        favorites.splice(index, 1);
-      }
-    }
-    
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-    console.log('❤️ Favorites updated:', favorites);
-  });
-}
+// Make globally available
+window.viewPackage = viewPackage;
 
-// Check favorite status
-function checkFavoriteStatus() {
-  const packageId = getPackageId();
+// ================================
+// FAVORITE TOGGLE
+// ================================
+document.addEventListener('DOMContentLoaded', () => {
+  const favoriteBtn = safeGetElement('packageFavoriteBtn');
+  if (favoriteBtn) {
+    favoriteBtn.addEventListener('click', function() {
+      this.classList.toggle('active');
+      
+      if (!currentPackageData) return;
+      
+      const packageId = currentPackageData.id;
+      const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      
+      if (this.classList.contains('active')) {
+        if (!favorites.includes(packageId)) {
+          favorites.push(packageId);
+        }
+      } else {
+        const index = favorites.indexOf(packageId);
+        if (index > -1) {
+          favorites.splice(index, 1);
+        }
+      }
+      
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      console.log('❤️ Favorites updated:', favorites);
+    });
+  }
+});
+
+function checkFavoriteStatus(packageId) {
   const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
   
   if (favorites.includes(packageId)) {
-    const btn = document.querySelector('.hero-favorite-btn');
+    const btn = safeGetElement('packageFavoriteBtn');
     if (btn) btn.classList.add('active');
   }
 }
 
-// Book Now button - Navigate to booking page
-const bookNowBtn = safeGetElement('bookNowBtn');
-if (bookNowBtn) {
-  bookNowBtn.addEventListener('click', () => {
-    if (!selectedDate) {
-      alert('Please select a departure date from the calendar first.');
-      // Scroll to calendar
-      document.querySelector('.booking-calendar-wrapper')?.scrollIntoView({ behavior: 'smooth' });
-      return;
-    }
-    
-    // Get current package data
-    const packageId = getPackageId();
-    const packageData = getPackageById(packageId);
-    
-    // Prepare booking data
-    const bookingData = {
-      packageId: packageId,
-      packageTitle: packageData.title,
-      packagePrice: packageData.price.amount,
-      departureDate: selectedDate,
-      dateInfo: selectedDateData,
-      duration: packageData.duration,
-      timestamp: new Date().toISOString()
-    };
-    
-    // Store in sessionStorage for booking page
-    sessionStorage.setItem('bookingData', JSON.stringify(bookingData));
-    
-    console.log('📝 Proceeding to booking:', bookingData);
-    
-    // Navigate to booking page
-    window.location.href = `booking.php?package=${packageId}&date=${selectedDate}`;
-  });
+// ================================
+// BOOK NOW BUTTON
+// ================================
+document.addEventListener('DOMContentLoaded', () => {
+  // Main book now button
+  const bookNowBtn = safeGetElement('bookNowBtn');
+  if (bookNowBtn) {
+    bookNowBtn.addEventListener('click', handleBookNow);
+  }
+  
+  // Sticky book now button
+  const stickyBookNowBtn = safeGetElement('stickyBookNowBtn');
+  if (stickyBookNowBtn) {
+    stickyBookNowBtn.addEventListener('click', handleBookNow);
+  }
+});
+
+function handleBookNow() {
+  if (!selectedDate) {
+    alert('Please select a date from the calendar first');
+    // Scroll to calendar
+    document.querySelector('#packageDetailsPage .booking-calendar-wrapper')?.scrollIntoView({ 
+      behavior: 'smooth' 
+    });
+    return;
+  }
+  
+  if (!currentPackageData) {
+    console.error('❌ No package data');
+    return;
+  }
+  
+  // Prepare booking data
+  const bookingData = {
+    packageId: currentPackageData.id,
+    packageTitle: currentPackageData.title,
+    packagePrice: currentPackageData.price.amount,
+    departureDate: selectedDate,
+    dateInfo: selectedDateData,
+    duration: currentPackageData.duration,
+    timestamp: new Date().toISOString()
+  };
+  
+  // Store in sessionStorage for booking page
+  sessionStorage.setItem('bookingData', JSON.stringify(bookingData));
+  
+  console.log('📝 Proceeding to booking:', bookingData);
+  
+  // Navigate to booking page (separate page)
+  window.location.href = `pages/booking.php?package=${currentPackageData.id}&date=${selectedDate}`;
 }
 
 // ================================
-// INITIALIZE
+// INITIALIZATION
 // ================================
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('🚀 Package Details Page Initializing...');
-  
-  loadPackageData();
-  checkFavoriteStatus();
-  
-  console.log('✅ Package Details Page Ready!');
-});
-
-// Make goBack available globally
-window.goBack = goBack;
-window.viewPackage = viewPackage;
-
-console.log('📦 Package Details Script Loaded');
+console.log('📦 Package Details (SPA Version) Script Loaded');

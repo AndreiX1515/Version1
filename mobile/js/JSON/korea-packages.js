@@ -7,7 +7,7 @@
 const KOREA_PACKAGES = {
   "seoul-city-explorer": {
     id: "seoul-city-explorer",
-    country: "korea",
+    country: "South Korea",
     city: "Seoul",
     title: "Seoul City Explorer",
     subtitle: "Discover the heart of South Korea",
@@ -302,7 +302,7 @@ const KOREA_PACKAGES = {
 
   "busan-beach-resort": {
     id: "busan-beach-resort",
-    country: "korea",
+    country: "South Korea",
     city: "Busan",
     title: "Busan Beach Resort",
     subtitle: "Sun, sand, and sea in Korea's coastal gem",

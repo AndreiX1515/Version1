@@ -222,9 +222,9 @@ body {
   transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 60;
   overflow-y: auto;
-
-
 }
+
+
 
 /* Desktop / full width */
 @media (min-width: 1024px) {
@@ -643,7 +643,12 @@ input:checked + .toggle-slider::before {
   z-index: 100;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+      
 }
+
+
+
+
 
 .bottom-nav a {
   position: relative;

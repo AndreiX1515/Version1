@@ -4,7 +4,6 @@
  * URL: /backend/test-connection.php
  */
 
-//   
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ini_set('log_errors', 0);
@@ -12,6 +11,7 @@ ini_set('log_errors', 0);
 // HTML 
 header('Content-Type: text/html; charset=utf-8');
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -176,9 +176,10 @@ header('Content-Type: text/html; charset=utf-8');
 <body>
     <div class="container">
         <div class="header">
-            <h1>🔌   </h1>
-            <p>    </p>
+            <h1>🔌</h1>
+            <p></p>
         </div>
+
         <div class="content">
             <?php
             //  
@@ -202,41 +203,45 @@ header('Content-Type: text/html; charset=utf-8');
                     'code' => 'EXTENSION_NOT_LOADED',
                     'solution' => 'PHP MySQLi    . (: sudo apt-get install php-mysqli  php.ini extension=mysqli )'
                 ];
+
             } else {
-                //  
+
+               
                 try {
                     $conn = new mysqli($servername, $username, $password, $dbname, $port);
                 
                 if ($conn->connect_error) {
-                    $connection_status = "failed";
-                    $connection_error = [
-                        'message' => $conn->connect_error,
-                        'code' => $conn->connect_errno
-                    ];
-                } else {
-                    $connection_status = "success";
-                    $conn->set_charset("utf8");
-                    
-                    //   
-                    $test_query = "SELECT VERSION() as mysql_version, DATABASE() as current_database, NOW() as server_time";
-                    $result = $conn->query($test_query);
-                    
-                    if ($result) {
-                        $test_query_result = $result->fetch_assoc();
+                        $connection_status = "failed";
+                        $connection_error = [
+                            'message' => $conn->connect_error,
+                            'code' => $conn->connect_errno
+                        ];
                     } else {
-                        $test_query_error = $conn->error;
-                    }
-                    
-                    //   
-                    $tables_query = "SHOW TABLES";
-                    $tables_result = $conn->query($tables_query);
-                    $tables = [];
-                    if ($tables_result) {
-                        while ($row = $tables_result->fetch_array()) {
-                            $tables[] = $row[0];
+                        $connection_status = "success";
+                        $conn->set_charset("utf8");
+                        
+                        //   
+                        $test_query = "SELECT VERSION() as mysql_version, DATABASE() as current_database, NOW() as server_time";
+                        $result = $conn->query($test_query);
+                        
+                        if ($result) {
+                            $test_query_result = $result->fetch_assoc();
+                        } else {
+                            $test_query_error = $conn->error;
+                        }
+                        
+                        //   
+                        $tables_query = "SHOW TABLES";
+                        $tables_result = $conn->query($tables_query);
+                        $tables = [];
+                        if ($tables_result) {
+                            while ($row = $tables_result->fetch_array()) {
+                                $tables[] = $row[0];
+                            }
                         }
                     }
-                } catch (Exception $e) {
+                } 
+                catch (Exception $e) {
                     $connection_status = "failed";
                     $connection_error = [
                         'message' => $e->getMessage(),
@@ -244,6 +249,7 @@ header('Content-Type: text/html; charset=utf-8');
                     ];
                 }
             }
+            
             ?>
             
             <!--   -->
@@ -379,6 +385,7 @@ header('Content-Type: text/html; charset=utf-8');
             
             <a href="test-connection.php" class="refresh-btn">🔄 </a>
         </div>
+        
     </div>
 </body>
 </html>

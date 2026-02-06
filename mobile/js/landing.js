@@ -1,131 +1,114 @@
 // ================================
+// LANDING.JS - SPA VERSION (FIXED)
+// Header & Sidebar Always Visible
+// ================================
+
+// ================================
 // DOM ELEMENTS
 // ================================
 const sidebar = document.getElementById('mobileSidebar');
 const overlay = document.getElementById('sidebarOverlay');
 const toggleBtn = document.querySelector('.sidebar-toggle');
 const closeBtn = document.getElementById('sidebarClose');
-
-
-// For Theme Toggle
 const themeToggleBtn = document.getElementById('themeToggle');
-const themeModeText  = document.querySelector('.theme-mode-text');
-
-
-
+const themeModeText = document.querySelector('.theme-mode-text');
 const bottomNavLinks = document.querySelectorAll('.bottom-nav a');
 const sidebarNavLinks = document.querySelectorAll('.sidebar-nav a:not(.danger)');
 const pageContents = document.querySelectorAll('.page-content');
 
-// Carousel elements
-const carouselTrack = document.getElementById('carouselTrack');
-const carouselSlides = document.querySelectorAll('.carousel-slide');
-const indicators = document.querySelectorAll('.indicator');
-
 // Package filtering
 const tabButtons = document.querySelectorAll('.package-tabs .tab-btn');
 const packageCards = document.querySelectorAll('.package-card');
-
-// Favorite buttons
 const favoriteButtons = document.querySelectorAll('.package-favorite');
 
-
+// ================================
+// STATE MANAGEMENT
+// ================================
+let currentPage = 'home';
+let currentPackageId = null;
+let packageDetailsHistory = [];
 
 // ================================
 // CAROUSEL FUNCTIONALITY
 // ================================
-let currentSlide = 0;
-let autoplayInterval;
-const autoplayDelay = 4000; // 4 seconds
+(function initCarousel() {
+    const carouselTrack = document.getElementById('carouselTrack');
+    const carouselSlides = document.querySelectorAll('.carousel-slide');
+    const indicators = document.querySelectorAll('.indicator');
+    const carouselContainer = document.querySelector('.carousel-container');
 
-function showSlide(index) {
+    if (!carouselTrack || !carouselSlides.length || !indicators.length || !carouselContainer) {
+        return;
+    }
 
-    // Remove active class from all slides and indicators
-    carouselSlides.forEach(slide => slide.classList.remove('active'));
-    indicators.forEach(indicator => indicator.classList.remove('active'));
+    let currentSlide = 0;
+    let autoplayInterval;
+    const autoplayDelay = 4000;
 
-    // Add active class to current slide and indicator
-    carouselSlides[index].classList.add('active');
-    indicators[index].classList.add('active');
+    function showSlide(index) {
+        carouselSlides.forEach(slide => slide.classList.remove('active'));
+        indicators.forEach(indicator => indicator.classList.remove('active'));
+        carouselSlides[index].classList.add('active');
+        indicators[index].classList.add('active');
+        carouselTrack.style.transform = `translateX(${-index * 100}%)`;
+    }
 
-    // Move the track
-    const offset = -index * 100;
-    carouselTrack.style.transform = `translateX(${offset}%)`;
-}
-
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % carouselSlides.length;
-    showSlide(currentSlide);
-}
-
-function prevSlide() {
-    currentSlide = (currentSlide - 1 + carouselSlides.length) % carouselSlides.length;
-    showSlide(currentSlide);
-}
-
-function startAutoplay() {
-    autoplayInterval = setInterval(nextSlide, autoplayDelay);
-}
-
-function stopAutoplay() {
-    clearInterval(autoplayInterval);
-}
-
-// Initialize carousel
-showSlide(0);
-startAutoplay();
-
-// Indicator click events
-indicators.forEach((indicator, index) => {
-    indicator.addEventListener('click', () => {
-        currentSlide = index;
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % carouselSlides.length;
         showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + carouselSlides.length) % carouselSlides.length;
+        showSlide(currentSlide);
+    }
+
+    function startAutoplay() {
         stopAutoplay();
-        startAutoplay(); // Restart autoplay after manual change
+        autoplayInterval = setInterval(nextSlide, autoplayDelay);
+    }
+
+    function stopAutoplay() {
+        clearInterval(autoplayInterval);
+    }
+
+    showSlide(0);
+    startAutoplay();
+
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            currentSlide = index;
+            showSlide(currentSlide);
+            startAutoplay();
+        });
     });
-});
 
-// Touch swipe for carousel
-let touchStartX = 0;
-let touchEndX = 0;
+    let touchStartX = 0;
+    let touchEndX = 0;
 
-const carouselContainer = document.querySelector('.carousel-container');
+    carouselContainer.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+        stopAutoplay();
+    });
 
-carouselContainer.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-    stopAutoplay();
-});
+    carouselContainer.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+        startAutoplay();
+    });
 
-carouselContainer.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-    startAutoplay(); // Restart autoplay after swipe
-});
-
-function handleSwipe() {
-    const swipeThreshold = 50;
-    const diff = touchStartX - touchEndX;
-
-    if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0) {
-            // Swipe left - next slide
-            nextSlide();
-        } else {
-            // Swipe right - previous slide
-            prevSlide();
+    function handleSwipe() {
+        const threshold = 50;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > threshold) {
+            diff > 0 ? nextSlide() : prevSlide();
         }
     }
-}
 
-// Pause autoplay when page is not visible
-document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-        stopAutoplay();
-    } else {
-        startAutoplay();
-    }
-});
-
+    document.addEventListener('visibilitychange', () => {
+        document.hidden ? stopAutoplay() : startAutoplay();
+    });
+})();
 
 // ================================
 // SIDEBAR FUNCTIONALITY
@@ -134,51 +117,37 @@ function openSidebar() {
     sidebar.classList.add('open');
     overlay.classList.add('active');
     toggleBtn.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevent body scroll
+    document.body.style.overflow = 'hidden';
 }
 
 function closeSidebar() {
     sidebar.classList.remove('open');
     overlay.classList.remove('active');
     toggleBtn.classList.remove('active');
-    document.body.style.overflow = ''; // Restore body scroll
+    document.body.style.overflow = '';
 }
 
-// Toggle sidebar
 toggleBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (sidebar.classList.contains('open')) {
-        closeSidebar();
-    } else {
-        openSidebar();
-    }
+    sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
 });
 
-// Close sidebar with close button
 closeBtn.addEventListener('click', closeSidebar);
-
-// Close sidebar when clicking overlay
 overlay.addEventListener('click', closeSidebar);
+sidebar.addEventListener('click', (e) => e.stopPropagation());
 
-// Prevent sidebar click from closing
-sidebar.addEventListener('click', (e) => {
-    e.stopPropagation();
-});
-
-// Close sidebar on escape key
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && sidebar.classList.contains('open')) {
         closeSidebar();
     }
 });
 
-
-
-
 // ================================
 // NAVIGATION FUNCTIONALITY
 // ================================
-function switchPage(pageName, packageId = null) {
+function switchPage(pageName, options = {}) {
+    console.log(`🔄 Switching to page: ${pageName}`);
+    
     // Hide all pages
     pageContents.forEach(page => page.classList.remove('active'));
 
@@ -186,9 +155,12 @@ function switchPage(pageName, packageId = null) {
     const selectedPage = document.getElementById(`${pageName}Page`);
     if (selectedPage) {
         selectedPage.classList.add('active');
+    } else {
+        console.error(`❌ Page not found: ${pageName}Page`);
+        return;
     }
 
-    // Update bottom nav active state
+    // Update navigation states
     bottomNavLinks.forEach(link => {
         link.classList.remove('active');
         if (link.dataset.page === pageName) {
@@ -196,7 +168,6 @@ function switchPage(pageName, packageId = null) {
         }
     });
 
-    // Update sidebar nav active state
     sidebarNavLinks.forEach(link => {
         link.classList.remove('active');
         if (link.dataset.page === pageName) {
@@ -204,33 +175,193 @@ function switchPage(pageName, packageId = null) {
         }
     });
 
-    // Close sidebar after navigation
+    // Close sidebar
     closeSidebar();
 
-    // Scroll to top
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Scroll to top unless specified otherwise
+    if (!options.skipScroll) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-    // Save current page in localStorage for persistence
-    localStorage.setItem('currentPage', pageName);
+    // Update current page
+    currentPage = pageName;
 
-    // Handle package-detail page
-    if (pageName === 'package-detail' && packageId) {
-        localStorage.setItem('currentPackageId', packageId);
-        loadPackageData();
+    // Save state
+    if (!options.skipHistory) {
+        localStorage.setItem('currentPage', pageName);
+    }
+
+    // Update URL hash
+    if (!options.skipHash) {
+        updateURLHash(pageName);
+    }
+
+    // Update package grid parity
+    updatePackageGridParity(selectedPage);
+
+    console.log(`✅ Switched to: ${pageName}`);
+}
+
+function updateURLHash(pageName, packageId = null) {
+    let hash = '';
+    
+    if (pageName === 'packageDetails' && packageId) {
+        hash = `#package/${packageId}`;
+    } else if (pageName !== 'home') {
+        hash = `#${pageName}`;
+    }
+    
+    if (window.location.hash !== hash) {
+        history.pushState(null, '', hash || window.location.pathname);
     }
 }
 
-// Restore page on reload
-document.addEventListener('DOMContentLoaded', () => {
-    const savedPage = localStorage.getItem('currentPage');
-    if (savedPage) {
-        switchPage(savedPage);
+function updatePackageGridParity(pageElement) {
+    if (!pageElement) return;
+    const packageGrid = pageElement.querySelector('.package-grid');
+    if (!packageGrid) return;
+    const totalCards = packageGrid.children.length;
+    packageGrid.classList.toggle('is-even', totalCards % 2 === 0);
+}
+
+// ================================
+// PACKAGE DETAILS NAVIGATION (FIXED)
+// ================================
+function showPackageDetails(packageId) {
+    console.log(`📦 Opening package details: ${packageId}`);
+    
+    // Store current package
+    currentPackageId = packageId;
+    
+    // Add to history for back button
+    packageDetailsHistory.push({
+        page: currentPage,
+        packageId: currentPackageId
+    });
+    
+    // Store in sessionStorage
+    sessionStorage.setItem('currentPackageId', packageId);
+    
+    // Switch to package details page
+    switchPage('packageDetails', { skipScroll: true });
+    
+    // Load package data
+    if (typeof loadPackageData === 'function') {
+        loadPackageData(packageId);
     } else {
-        switchPage('home'); // default page
+        console.error('❌ loadPackageData function not found');
     }
+    
+    // Update URL
+    updateURLHash('packageDetails', packageId);
+    
+    // ✅ FIX: KEEP HEADER & SIDEBAR VISIBLE (Don't hide them!)
+    // Removed the hiding code - header and sidebar stay visible
+    
+    console.log(`✅ Package details loaded: ${packageId}`);
+}
+
+function goBackFromPackageDetails() {
+    console.log('⬅️ Going back from package details');
+    
+    // ✅ FIX: No need to show header/sidebar - they're always visible
+    
+    // Get previous page from history
+    if (packageDetailsHistory.length > 0) {
+        const previous = packageDetailsHistory.pop();
+        switchPage(previous.page || 'home');
+    } else {
+        switchPage('home');
+    }
+    
+    // Clear package state
+    currentPackageId = null;
+    sessionStorage.removeItem('currentPackageId');
+}
+
+// Make globally available
+window.showPackageDetails = showPackageDetails;
+window.goBackFromPackageDetails = goBackFromPackageDetails;
+
+// ================================
+// VIEW DETAILS BUTTON HANDLERS
+// ================================
+function initPackageDetailsNavigation() {
+    console.log('🔍 Initializing package details navigation...');
+    
+    const detailButtons = document.querySelectorAll('.btn-details');
+    console.log(`✅ Found ${detailButtons.length} View Details buttons`);
+    
+    detailButtons.forEach((button, index) => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const card = this.closest('.package-card');
+            if (!card) {
+                console.error('❌ Could not find package card');
+                return;
+            }
+            
+            let packageId = card.dataset.packageId;
+            
+            if (!packageId) {
+                const titleElement = card.querySelector('h3');
+                if (titleElement) {
+                    packageId = titleElement.textContent
+                        .toLowerCase()
+                        .trim()
+                        .replace(/\s+/g, '-')
+                        .replace(/[^\w-]/g, '');
+                    console.log('🔄 Generated package ID:', packageId);
+                } else {
+                    packageId = 'seoul-city-explorer';
+                    console.warn('⚠️ Using fallback package ID');
+                }
+            }
+            
+            console.log(`📦 Opening package: ${packageId}`);
+            showPackageDetails(packageId);
+        });
+    });
+}
+
+// ================================
+// URL HASH HANDLING (Back Button)
+// ================================
+function handleHashChange() {
+    const hash = window.location.hash.slice(1);
+    
+    console.log('🔗 Hash changed:', hash);
+    
+    if (!hash) {
+        if (currentPage === 'packageDetails') {
+            goBackFromPackageDetails();
+        } else {
+            switchPage('home', { skipHash: true });
+        }
+    } else if (hash.startsWith('package/')) {
+        const packageId = hash.split('package/')[1];
+        if (packageId !== currentPackageId) {
+            showPackageDetails(packageId);
+        }
+    } else {
+        if (currentPage === 'packageDetails') {
+            goBackFromPackageDetails();
+        }
+        switchPage(hash, { skipHash: true });
+    }
+}
+
+window.addEventListener('hashchange', handleHashChange);
+
+window.addEventListener('load', () => {
+    handleHashChange();
 });
 
-// Bottom navigation click events
+// ================================
+// BOTTOM NAVIGATION
+// ================================
 bottomNavLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -239,42 +370,49 @@ bottomNavLinks.forEach(link => {
     });
 });
 
-// Sidebar navigation click events
+// ================================
+// SIDEBAR NAVIGATION
+// ================================
 sidebarNavLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
         const pageName = link.dataset.page;
-        switchPage(pageName);
+        
+        if (currentPage === 'packageDetails') {
+            goBackFromPackageDetails();
+            setTimeout(() => switchPage(pageName), 100);
+        } else {
+            switchPage(pageName);
+        }
     });
 });
 
-// Helper function for "Browse Packages" button
+// ================================
+// HELPER FUNCTIONS
+// ================================
 function switchToHome() {
     switchPage('home');
 }
 
+window.switchToHome = switchToHome;
 
-
-
-// Logout functionality
+// ================================
+// LOGOUT
+// ================================
 const logoutLink = document.querySelector('.sidebar-nav a.danger');
 if (logoutLink) {
     logoutLink.addEventListener('click', (e) => {
         e.preventDefault();
         const confirmed = confirm('Are you sure you want to logout?');
         if (confirmed) {
-            // Add logout logic here
             alert('Logged out successfully!');
             closeSidebar();
         }
     });
 }
 
-
-
-
 // ================================
-// PROFILE AVATAR NAVIGATION
+// PROFILE AVATAR
 // ================================
 const profileAvatar = document.querySelector('.profile-avatar');
 if (profileAvatar) {
@@ -284,7 +422,7 @@ if (profileAvatar) {
 }
 
 // ================================
-// "SEE ALL" BUTTON NAVIGATION
+// SEE ALL BUTTON
 // ================================
 const seeAllButton = document.querySelector('.package-see-all');
 if (seeAllButton) {
@@ -294,22 +432,16 @@ if (seeAllButton) {
     });
 }
 
-
-
 // ================================
 // PACKAGE FILTERING
 // ================================
 tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-        // Remove active class from all tabs
         tabButtons.forEach(b => b.classList.remove('active'));
-        
-        // Activate clicked tab
         btn.classList.add('active');
         
         const tab = btn.dataset.tab;
         
-        // Filter packages with fade animation
         packageCards.forEach(card => {
             if (tab === 'all') {
                 card.style.display = 'flex';
@@ -326,47 +458,34 @@ tabButtons.forEach(btn => {
     });
 });
 
-
-
 // ================================
-// FAVORITE FUNCTIONALITY
+// FAVORITES
 // ================================
 favoriteButtons.forEach(button => {
     button.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent card click
+        e.stopPropagation();
         button.classList.toggle('active');
         
-        // Add haptic-like animation
         button.style.transform = 'scale(1.2)';
         setTimeout(() => {
             button.style.transform = '';
         }, 200);
 
-        // Optional: Save to localStorage
         const card = button.closest('.package-card');
         const packageName = card.querySelector('h3').textContent;
         
         if (button.classList.contains('active')) {
-            console.log(`Added ${packageName} to favorites`);
-            // You can save to localStorage here
+            console.log(`❤️ Added ${packageName} to favorites`);
         } else {
-            console.log(`Removed ${packageName} from favorites`);
-            // You can remove from localStorage here
+            console.log(`💔 Removed ${packageName} from favorites`);
         }
     });
 });
 
-
-
-
 // ================================
-// THEME TOGGLE FUNCTIONALITY
+// THEME TOGGLE
 // ================================
-
 document.addEventListener('DOMContentLoaded', () => {
-    const themeToggleBtn = document.getElementById('themeToggle');
-    const themeModeText  = document.querySelector('.theme-mode-text');
-
     if (!themeToggleBtn || !themeModeText) {
         console.error('Theme toggle elements not found');
         return;
@@ -379,22 +498,17 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
     }
 
-    // Initialize
     const savedTheme = localStorage.getItem('theme') || 'light';
     applyTheme(savedTheme === 'dark');
 
-    // Toggle handler
     themeToggleBtn.addEventListener('change', () => {
         applyTheme(themeToggleBtn.checked);
     });
 });
 
-
-
 // ================================
-// SMOOTH SCROLL ENHANCEMENTS
+// SCROLL ANIMATIONS
 // ================================
-// Add smooth reveal animation when scrolling
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -408,14 +522,12 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe package cards
 packageCards.forEach(card => {
     observer.observe(card);
 });
 
-
 // ================================
-// PULL TO REFRESH (Optional)
+// PULL TO REFRESH
 // ================================
 let touchStartY = 0;
 let touchEndY = 0;
@@ -431,9 +543,8 @@ document.addEventListener('touchmove', (e) => {
     if (window.scrollY === 0) {
         touchEndY = e.touches[0].clientY;
         const pullDistance = touchEndY - touchStartY;
-        
         if (pullDistance > 0 && pullDistance < pullThreshold * 2) {
-            // You can add visual feedback here
+            // Visual feedback
         }
     }
 });
@@ -441,91 +552,56 @@ document.addEventListener('touchmove', (e) => {
 document.addEventListener('touchend', () => {
     if (window.scrollY === 0) {
         const pullDistance = touchEndY - touchStartY;
-        
         if (pullDistance > pullThreshold) {
-            // Trigger refresh
-            console.log('Pull to refresh triggered');
-            // You can add actual refresh logic here
-            // For example: location.reload();
+            console.log('🔄 Pull to refresh triggered');
         }
-        
         touchStartY = 0;
         touchEndY = 0;
     }
 });
 
-
 // ================================
-// Package Tabs
+// PACKAGE TABS DRAG
 // ================================
-
 const tabs = document.getElementById('packageTabs');
-let isDown = false;
-let startX;
-let scrollLeft;
+if (tabs) {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
 
-tabs.addEventListener('mousedown', (e) => {
-  isDown = true;
-  startX = e.pageX - tabs.offsetLeft;
-  scrollLeft = tabs.scrollLeft;
-});
+    tabs.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - tabs.offsetLeft;
+        scrollLeft = tabs.scrollLeft;
+    });
 
-tabs.addEventListener('mouseleave', () => isDown = false);
-tabs.addEventListener('mouseup', () => isDown = false);
+    tabs.addEventListener('mouseleave', () => isDown = false);
+    tabs.addEventListener('mouseup', () => isDown = false);
 
-tabs.addEventListener('mousemove', (e) => {
-  if (!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - tabs.offsetLeft;
-  const walk = (x - startX) * 1.2; // drag speed
-  tabs.scrollLeft = scrollLeft - walk;
-});
-
-/* Arrow buttons */
-// document.querySelector('.tabs-nav.left').onclick = () =>
-//   tabs.scrollBy({ left: -120, behavior: 'smooth' });
-
-// document.querySelector('.tabs-nav.right').onclick = () =>
-//   tabs.scrollBy({ left: 120, behavior: 'smooth' });
-
-
-
-
-
-
-
-
-
-
-
+    tabs.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - tabs.offsetLeft;
+        const walk = (x - startX) * 1.2;
+        tabs.scrollLeft = scrollLeft - walk;
+    });
+}
 
 // ================================
-// PERFORMANCE OPTIMIZATIONS
+// PERFORMANCE
 // ================================
-
-// Debounce scroll events
 let scrollTimeout;
 window.addEventListener('scroll', () => {
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
-        // Add scroll-based logic here if needed
+        // Scroll logic
     }, 100);
 });
 
-// ================================
-// INITIALIZATION
-// ================================
-console.log('Smart Escape Travel App initialized ✈️');
-
-
-
-
-// Add loading animation removal
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
 });
 
-// Prevent zoom on double tap (iOS)
 let lastTouchEnd = 0;
 document.addEventListener('touchend', (e) => {
     const now = Date.now();
@@ -535,83 +611,20 @@ document.addEventListener('touchend', (e) => {
     lastTouchEnd = now;
 }, false);
 
-
-
-
-
-
-
-
-
-
-
-// Initialize View Details buttons
-function initPackageDetailsNavigation() {
-    console.log('🔍 Initializing package details navigation...');
+// ================================
+// INITIALIZATION
+// ================================
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 Smart Escape Travel App - SPA Mode (FIXED)');
     
-    const detailButtons = document.querySelectorAll('.btn-details');
-    console.log(`✅ Found ${detailButtons.length} View Details buttons`);
-    
-    detailButtons.forEach((button, index) => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            console.log(`🎯 Button ${index + 1} clicked`);
-            
-            // Get package card
-            const card = this.closest('.package-card');
-            if (!card) {
-                console.error('❌ Could not find package card');
-                return;
-            }
-            
-            // Get package ID from data attribute
-            let packageId = card.dataset.packageId;
-            
-            // If no data-package-id, generate from title
-            if (!packageId) {
-                const titleElement = card.querySelector('h3');
-                if (titleElement) {
-                    packageId = titleElement.textContent
-                        .toLowerCase()
-                        .trim()
-                        .replace(/\s+/g, '-')
-                        .replace(/[^\w-]/g, '');
-                    console.log('🔄 Generated package ID:', packageId);
-                } else {
-                    packageId = 'seoul-city-explorer';
-                    console.warn('⚠️ Using fallback package ID');
-                }
-            }
-            
-            console.log('📦 Opening package:', packageId);
-            
-            // Store package ID in localStorage
-            localStorage.setItem('currentPackageId', packageId);
-            
-            // Navigate to package details page
-            // Adjust path based on current location
-            const currentPath = window.location.pathname;
-            let targetPath;
-            
-            if (currentPath.includes('/pages/')) {
-                targetPath = `package-details.php?id=${packageId}`;
-            } else {
-                targetPath = `pages/package-details.php?id=${packageId}`;
-            }
-            
-            console.log('🚀 Navigating to:', targetPath);
-            window.location.href = targetPath;
-        });
-    });
-}
-
-// Call after DOM is loaded
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initPackageDetailsNavigation);
-} else {
     initPackageDetailsNavigation();
-}
+    
+    const savedPage = localStorage.getItem('currentPage');
+    if (savedPage && savedPage !== 'packageDetails') {
+        switchPage(savedPage, { skipHash: true });
+    }
+    
+    console.log('✅ App initialized');
+});
 
-console.log('✅ Package details navigation initialized');
+console.log('📱 Landing.js (SPA - FIXED) loaded');
