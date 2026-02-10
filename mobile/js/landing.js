@@ -1,6 +1,6 @@
 // ================================
-// LANDING.JS - SPA VERSION (FIXED)
-// Header & Sidebar Always Visible
+// LANDING.JS - SPA VERSION
+// Smart Navigation + Unified Breakpoints
 // ================================
 
 // ================================
@@ -25,8 +25,8 @@ const favoriteButtons = document.querySelectorAll('.package-favorite');
 // STATE MANAGEMENT
 // ================================
 let currentPage = 'home';
+let previousPage = 'home'; // Track previous page for smart back navigation
 let currentPackageId = null;
-let packageDetailsHistory = [];
 
 // ================================
 // CAROUSEL FUNCTIONALITY
@@ -142,65 +142,154 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+
+
+
 // ================================
 // NAVIGATION FUNCTIONALITY
 // ================================
+
+
+// AFTER (new code):
 function switchPage(pageName, options = {}) {
-    console.log(`🔄 Switching to page: ${pageName}`);
+  console.log(`🔄 Switching to page: ${pageName}`);
+  
+  // Store previous page ONLY when not going to special pages
+  if (pageName !== 'packageDetails' && pageName !== 'booking') {
+    // Don't update previousPage - it's handled in showPackageDetails
+    // This prevents overwriting the "return to" page
+  }
+  
+  // Hide all pages
+  pageContents.forEach(page => page.classList.remove('active'));
+
+  // Show selected page
+  const selectedPage = document.getElementById(`${pageName}Page`);
+  if (selectedPage) {
+    selectedPage.classList.add('active');
     
-    // Hide all pages
-    pageContents.forEach(page => page.classList.remove('active'));
-
-    // Show selected page
-    const selectedPage = document.getElementById(`${pageName}Page`);
-    if (selectedPage) {
-        selectedPage.classList.add('active');
-    } else {
-        console.error(`❌ Page not found: ${pageName}Page`);
-        return;
+    // Initialize booking page if navigating to it
+    if (pageName === 'booking' && typeof initBookingPage === 'function') {
+      setTimeout(() => initBookingPage(), 100);
     }
+  } else {
+    console.error(`❌ Page not found: ${pageName}Page`);
+    return;
+  }
 
-    // Update navigation states
-    bottomNavLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.dataset.page === pageName) {
-            link.classList.add('active');
-        }
-    });
-
-    sidebarNavLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.dataset.page === pageName) {
-            link.classList.add('active');
-        }
-    });
-
-    // Close sidebar
-    closeSidebar();
-
-    // Scroll to top unless specified otherwise
-    if (!options.skipScroll) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Update navigation states
+  bottomNavLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.dataset.page === pageName) {
+      link.classList.add('active');
     }
+  });
 
-    // Update current page
-    currentPage = pageName;
-
-    // Save state
-    if (!options.skipHistory) {
-        localStorage.setItem('currentPage', pageName);
+  sidebarNavLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.dataset.page === pageName) {
+      link.classList.add('active');
     }
+  });
 
-    // Update URL hash
-    if (!options.skipHash) {
-        updateURLHash(pageName);
-    }
+  // Close sidebar
+  closeSidebar();
 
-    // Update package grid parity
-    updatePackageGridParity(selectedPage);
+  // Scroll to top unless specified otherwise
+  if (!options.skipScroll) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
-    console.log(`✅ Switched to: ${pageName}`);
+  // Update current page
+  currentPage = pageName;
+
+  // Save state (but not for special pages)
+  if (!options.skipHistory && pageName !== 'booking' && pageName !== 'packageDetails') {
+    localStorage.setItem('currentPage', pageName);
+  }
+
+  // Update URL hash
+  if (!options.skipHash) {
+    updateURLHash(pageName);
+  }
+
+  console.log(`✅ Switched to: ${pageName}`);
 }
+
+
+
+// ================================
+// TESTING THE BACK NAVIGATION
+// ================================
+
+/*
+To test if back navigation is working correctly, try these scenarios in console:
+
+// Scenario 1: Home → Package Details → Back
+switchPage('home');
+setTimeout(() => showPackageDetails('seoul-city-explorer'), 1000);
+setTimeout(() => goBackFromPackageDetails(), 2000);
+// Should return to 'home'
+
+// Scenario 2: Packages → Package Details → Back
+switchPage('packages');
+setTimeout(() => showPackageDetails('seoul-city-explorer'), 1000);
+setTimeout(() => goBackFromPackageDetails(), 2000);
+// Should return to 'packages'
+
+// Scenario 3: Favorites → Package Details → Back
+switchPage('favorites');
+setTimeout(() => showPackageDetails('seoul-city-explorer'), 1000);
+setTimeout(() => goBackFromPackageDetails(), 2000);
+// Should return to 'favorites'
+
+*/
+
+
+
+
+
+// ================================
+// UPDATE handleHashChange to handle booking
+// ================================
+function handleHashChange() {
+    const hash = window.location.hash.slice(1);
+    
+    console.log('🔗 Hash changed:', hash);
+    
+    if (!hash) {
+        if (currentPage === 'packageDetails' || currentPage === 'booking') {
+            goBackFromPackageDetails();
+        } else {
+            switchPage('home', { skipHash: true });
+        }
+    } else if (hash.startsWith('package/')) {
+        const packageId = hash.split('package/')[1];
+        if (packageId !== currentPackageId) {
+            showPackageDetails(packageId);
+        }
+    } else if (hash === 'booking') {
+        // Allow direct booking page access if data exists
+        if (sessionStorage.getItem('bookingData')) {
+            switchPage('booking', { skipHash: true });
+        } else {
+            // No booking data, redirect to home
+            switchPage('home', { skipHash: true });
+        }
+    } else {
+        if (currentPage === 'packageDetails' || currentPage === 'booking') {
+            goBackFromPackageDetails();
+        }
+        switchPage(hash, { skipHash: true });
+    }
+}
+
+console.log('✅ Landing.js V2.2 booking support added');
+
+
+
+
+
 
 function updateURLHash(pageName, packageId = null) {
     let hash = '';
@@ -224,64 +313,69 @@ function updatePackageGridParity(pageElement) {
     packageGrid.classList.toggle('is-even', totalCards % 2 === 0);
 }
 
+
+
+
+
+
 // ================================
-// PACKAGE DETAILS NAVIGATION (FIXED)
+// PACKAGE DETAILS NAVIGATION
+// Smart back navigation to previous page
 // ================================
+// REPLACE your existing showPackageDetails function with this:
 function showPackageDetails(packageId) {
-    console.log(`📦 Opening package details: ${packageId}`);
-    
-    // Store current package
-    currentPackageId = packageId;
-    
-    // Add to history for back button
-    packageDetailsHistory.push({
-        page: currentPage,
-        packageId: currentPackageId
-    });
-    
-    // Store in sessionStorage
-    sessionStorage.setItem('currentPackageId', packageId);
-    
-    // Switch to package details page
-    switchPage('packageDetails', { skipScroll: true });
-    
-    // Load package data
-    if (typeof loadPackageData === 'function') {
-        loadPackageData(packageId);
-    } else {
-        console.error('❌ loadPackageData function not found');
-    }
-    
-    // Update URL
-    updateURLHash('packageDetails', packageId);
-    
-    // ✅ FIX: KEEP HEADER & SIDEBAR VISIBLE (Don't hide them!)
-    // Removed the hiding code - header and sidebar stay visible
-    
-    console.log(`✅ Package details loaded: ${packageId}`);
+  console.log(`📦 Opening package details: ${packageId}`);
+  console.log(`📍 Current page (will be previous): ${currentPage}`);
+  
+  // IMPORTANT: Store current page as previous page BEFORE switching
+  sessionStorage.setItem('previousPage', currentPage);
+  
+  // Store current package
+  currentPackageId = packageId;
+  sessionStorage.setItem('currentPackageId', packageId);
+  
+  // Switch to package details page
+  switchPage('packageDetails', { skipScroll: true });
+  
+  // Load package data
+  if (typeof loadPackageData === 'function') {
+    loadPackageData(packageId);
+  } else {
+    console.error('❌ loadPackageData function not found');
+  }
+  
+  // Update URL
+  updateURLHash('packageDetails', packageId);
+  
+  console.log(`✅ Package details loaded: ${packageId} (will return to: ${currentPage})`);
 }
 
-function goBackFromPackageDetails() {
-    console.log('⬅️ Going back from package details');
-    
-    // ✅ FIX: No need to show header/sidebar - they're always visible
-    
-    // Get previous page from history
-    if (packageDetailsHistory.length > 0) {
-        const previous = packageDetailsHistory.pop();
-        switchPage(previous.page || 'home');
-    } else {
-        switchPage('home');
-    }
-    
-    // Clear package state
-    currentPackageId = null;
-    sessionStorage.removeItem('currentPackageId');
-}
-
-// Make globally available
-window.showPackageDetails = showPackageDetails;
+// MAKE SURE goBackFromPackageDetails is available globally
 window.goBackFromPackageDetails = goBackFromPackageDetails;
+
+
+
+// ================================
+// UPDATE your switchPage function to handle previousPage properly
+// ================================
+
+// Find this part in your switchPage function:
+// BEFORE (old code):
+/*
+function switchPage(pageName, options = {}) {
+    console.log(`🔄 Switching to page: ${pageName}`);
+    
+    if (pageName !== 'packageDetails') {
+        previousPage = currentPage;
+    }
+    
+    // ... rest of function
+}
+*/
+
+
+
+
 
 // ================================
 // VIEW DETAILS BUTTON HANDLERS
@@ -320,11 +414,16 @@ function initPackageDetailsNavigation() {
                 }
             }
             
-            console.log(`📦 Opening package: ${packageId}`);
+            console.log(`📦 Opening package: ${packageId} from page: ${currentPage}`);
             showPackageDetails(packageId);
         });
     });
 }
+
+
+
+
+
 
 // ================================
 // URL HASH HANDLING (Back Button)
@@ -394,6 +493,10 @@ function switchToHome() {
     switchPage('home');
 }
 
+function switchToPackage() {
+    switchPage('packages');
+}
+
 window.switchToHome = switchToHome;
 
 // ================================
@@ -420,6 +523,18 @@ if (profileAvatar) {
         switchPage('profile');
     });
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ================================
 // SEE ALL BUTTON
@@ -615,7 +730,7 @@ document.addEventListener('touchend', (e) => {
 // INITIALIZATION
 // ================================
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 Smart Escape Travel App - SPA Mode (FIXED)');
+    console.log('🚀 Smart Escape Travel App - SPA Mode with Smart Navigation');
     
     initPackageDetailsNavigation();
     
@@ -627,4 +742,4 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('✅ App initialized');
 });
 
-console.log('📱 Landing.js (SPA - FIXED) loaded');
+console.log('📱 Landing.js (Smart Navigation) loaded');

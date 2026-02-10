@@ -5,6 +5,7 @@
 // Future: Replace with database queries
 
 const KOREA_PACKAGES = {
+
   "seoul-city-explorer": {
     id: "seoul-city-explorer",
     country: "South Korea",
@@ -660,7 +661,9 @@ const KOREA_PACKAGES = {
     createdAt: "2024-02-01",
     updatedAt: "2026-02-03"
   }
+  
 };
+
 
 // ================================
 // DATABASE HELPER FUNCTIONS
@@ -709,6 +712,7 @@ function searchPackages(query) {
     pkg.overview.description.toLowerCase().includes(lowerQuery)
   );
 }
+
 
 // ================================
 // EXPORT

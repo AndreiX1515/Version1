@@ -1,4 +1,9 @@
 :root {
+
+  --header-height: 65px;
+  --bottom-nav-height: 64px; /* mobile only */
+
+  
   /* ================================
      Backgrounds
      ================================ */

@@ -31,45 +31,47 @@
           class="theme-toggle-btn"
           aria-label="Toggle theme"
           aria-pressed="false"
-          type="button"
-        >
+          type="button">
+          <i class="fas fa-sun"></i>
           <span class="theme-toggle-thumb"></span>
         </button>
       </div>
 
-
     </header>
 
+    
+    <div class="login-wrapper">
 
+      <div class="login-header">
+        <div class="login-logo">
+          <img src="../mobile/assets/images/logo.png" alt="App Logo">
+        </div>
 
-    <div class="login-header">
-      <div class="login-logo">
-        <img src="../mobile/assets/images/logo.png" alt="App Logo">
+        <h1>Welcome Back</h1>
+        <p>Sign in to continue</p>
       </div>
 
-      <h1>Welcome Back</h1>
-      <p>Sign in to continue</p>
+      <form class="login-form" action="dashboard.php" method="post">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" placeholder="Enter your password" required>
+        </div>
+
+        <button class="btn-primary" type="submit">Login</button>
+
+        <div class="login-footer">
+          <span>Don’t have an account?</span>
+          <a href="#">Register</a>
+        </div>
+      </form>
+
     </div>
 
-
-    <form class="login-form" action="dashboard.php" method="post">
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" placeholder="Enter your email" required>
-      </div>
-
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" placeholder="Enter your password" required>
-      </div>
-
-      <button class="btn-primary" type="submit">Login</button>
-
-      <div class="login-footer">
-        <span>Don’t have an account?</span>
-        <a href="#">Register</a>
-      </div>
-    </form>
 
   </div>
 

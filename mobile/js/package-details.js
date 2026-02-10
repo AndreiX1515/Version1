@@ -1,32 +1,33 @@
 // ================================
-// PACKAGE DETAILS - SPA VERSION
+// PACKAGE DETAILS V2.3 - ENHANCED
+// Smart back navigation + Today indicator + Improved calendar
 // ================================
-// Adapted to work within landing.php SPA
 
 // ================================
 // STATE
 // ================================
-let currentMonth = 4; // May (0-indexed)
-let currentYear = 2026;
+const today = new Date();
+today.setHours(0, 0, 0, 0); // Reset time for accurate comparison
+
+let currentMonth = today.getMonth();
+let currentYear = today.getFullYear();
 let selectedDate = null;
 let selectedDateData = null;
-let currentPackageData = null;
+
 
 // ================================
 // LOAD PACKAGE DATA
 // ================================
 function loadPackageData(packageId) {
-  // Use passed packageId or get from session
   const id = packageId || sessionStorage.getItem('currentPackageId') || 'seoul-city-explorer';
   
   console.log('📦 Loading package:', id);
   
-  // Get package from KOREA_PACKAGES
   const packageData = getPackageById(id);
   
   if (!packageData) {
     console.error('❌ Package not found:', id);
-    alert('Package not found. Returning to home...');
+    alert('Package not found. Returning to previous page...');
     if (typeof goBackFromPackageDetails === 'function') {
       goBackFromPackageDetails();
     }
@@ -35,23 +36,18 @@ function loadPackageData(packageId) {
   
   console.log('✅ Package loaded:', packageData.title);
   
-  // Store globally
   currentPackageData = packageData;
   
-  // Populate page with package data
   populatePackageDetails(packageData);
   renderCalendar(packageData);
   renderReviews(packageData);
   renderRelatedPackages(packageData);
   
-  // Store full package data for booking page
   sessionStorage.setItem('currentPackageData', JSON.stringify(packageData));
   
-  // Check favorite status
   checkFavoriteStatus(id);
 }
 
-// Make globally available
 window.loadPackageData = loadPackageData;
 
 // ================================
@@ -60,7 +56,6 @@ window.loadPackageData = loadPackageData;
 function populatePackageDetails(data) {
   console.log('🎨 Populating UI...');
   
-  // Hero section
   safeSetAttribute('heroImage', 'src', data.images.hero);
   safeSetAttribute('heroImage', 'alt', data.title);
   safeSetText('packageTitle', data.title);
@@ -68,7 +63,6 @@ function populatePackageDetails(data) {
   safeSetText('packageDuration', data.duration.description);
   safeSetText('packageRating', `${data.rating.average} (${data.rating.total} reviews)`);
   
-  // Badge
   const badge = safeGetElement('packageBadge');
   if (badge) {
     if (data.featured) {
@@ -84,20 +78,16 @@ function populatePackageDetails(data) {
     }
   }
   
-  // Quick info cards
   safeSetText('infoDuration', data.duration.description);
   safeSetText('infoGroupSize', `${data.requirements.minPeople}-${data.requirements.maxPeople} people`);
   safeSetText('infoLocation', `${data.city}, ${data.country.toUpperCase()}`);
   
-  // Overview
   safeSetText('overviewText', data.overview.description);
   
-  // Highlights
   safeSetHTML('highlightsList', data.overview.highlights.map(highlight => 
     `<li><i class="fas fa-check-circle"></i> ${highlight}</li>`
   ).join(''));
   
-  // Itinerary
   safeSetHTML('itineraryList', data.itinerary.map(day => `
     <div class="itinerary-day">
       <div class="day-header">
@@ -114,21 +104,20 @@ function populatePackageDetails(data) {
     </div>
   `).join(''));
   
-  // Inclusions
   safeSetHTML('inclusionsList', data.inclusions.map(item => `<li>${item}</li>`).join(''));
-  
-  // Exclusions
   safeSetHTML('exclusionsList', data.exclusions.map(item => `<li>${item}</li>`).join(''));
   
-  // Rating summary
   safeSetText('ratingScore', data.rating.average);
   safeSetText('ratingCount', `Based on ${data.rating.total} reviews`);
   
-  // Sticky price
-  safeSetText('stickyPrice', `₱${data.price.amount.toLocaleString()}`);
+  // Set price in both mobile and desktop locations
+  const priceElements = document.querySelectorAll('.price-amount');
+  priceElements.forEach(el => {
+    el.textContent = `₱${data.price.amount.toLocaleString()}`;
+  });
   
-  // Booking summary
-  safeSetText('minDeparture', `${data.requirements.minPeople} people`);
+  safeSetText('minDeparture', `${data.requirements.minPeople}`);
+  safeSetText('maxGroup', `${data.requirements.maxPeople}`);
   
   console.log('✅ UI populated');
 }
@@ -158,62 +147,83 @@ function safeSetAttribute(id, attr, value) {
 }
 
 // ================================
-// CALENDAR FUNCTIONALITY
+// CALENDAR FUNCTIONALITY - ENHANCED
 // ================================
 function renderCalendar(packageData) {
-  console.log('📅 Rendering calendar...');
+  console.log('📅 Rendering calendar for', currentMonth + 1, currentYear);
   
-  const calendarGrid = document.querySelector('#packageDetailsPage .calendar-grid');
-  if (!calendarGrid) {
+  const calendarGrids = document.querySelectorAll('.calendar-grid');
+  if (!calendarGrids.length) {
     console.warn('⚠️ Calendar grid not found');
     return;
   }
   
-  // Update month display
   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
                      'July', 'August', 'September', 'October', 'November', 'December'];
-  safeSetText('calendarMonth', `${monthNames[currentMonth]} ${currentYear}`);
   
-  // Keep headers
-  const dayHeaders = Array.from(calendarGrid.querySelectorAll('.calendar-day-header'));
-  calendarGrid.innerHTML = '';
-  dayHeaders.forEach(header => calendarGrid.appendChild(header));
+  // Update month display in all calendar instances
+  const monthElements = document.querySelectorAll('.calendar-month');
+  monthElements.forEach(el => {
+    el.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+  });
   
-  // Get calendar data
   const firstDay = new Date(currentYear, currentMonth, 1).getDay();
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   
-  // Add empty cells
-  for (let i = 0; i < firstDay; i++) {
-    const emptyDay = document.createElement('div');
-    emptyDay.classList.add('calendar-day', 'disabled');
-    calendarGrid.appendChild(emptyDay);
-  }
-  
-  // Add days
-  for (let day = 1; day <= daysInMonth; day++) {
-    const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    const availability = packageData.availability[dateStr];
+  // Render each calendar instance (mobile section + desktop sidebar)
+  calendarGrids.forEach(calendarGrid => {
+    // Keep headers
+    const dayHeaders = Array.from(calendarGrid.querySelectorAll('.calendar-day-header'));
+    calendarGrid.innerHTML = '';
+    dayHeaders.forEach(header => calendarGrid.appendChild(header));
     
-    const dayElement = document.createElement('div');
-    dayElement.classList.add('calendar-day');
-    
-    if (availability && availability.available) {
-      dayElement.innerHTML = `
-        <div class="calendar-day-number">${day}</div>
-        <div class="calendar-day-price">₱${(availability.price / 1000).toFixed(0)}K</div>
-      `;
-      dayElement.addEventListener('click', () => selectDate(dateStr, availability, packageData));
-    } else {
-      dayElement.classList.add('sold-out');
-      dayElement.innerHTML = `
-        <div class="calendar-day-number">${day}</div>
-        <div class="calendar-day-label">Sold Out</div>
-      `;
+    // Add empty cells
+    for (let i = 0; i < firstDay; i++) {
+      const emptyDay = document.createElement('div');
+      emptyDay.classList.add('calendar-day', 'disabled');
+      calendarGrid.appendChild(emptyDay);
     }
     
-    calendarGrid.appendChild(dayElement);
-  }
+    // Add days
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+      const cellDate = new Date(currentYear, currentMonth, day);
+      cellDate.setHours(0, 0, 0, 0);
+      
+      const isPast = cellDate < today;
+      const isToday = cellDate.getTime() === today.getTime();
+      const availability = packageData.availability[dateStr];
+      
+      const dayElement = document.createElement('div');
+      dayElement.classList.add('calendar-day');
+      
+      // Mark today
+      if (isToday) {
+        dayElement.classList.add('today');
+      }
+      
+      // Check if date is in the past
+      if (isPast) {
+        dayElement.classList.add('past-date');
+        dayElement.innerHTML = `<div class="calendar-day-number">${day}</div>`;
+      } else if (availability && availability.available) {
+        // Available date
+        dayElement.innerHTML = `<div class="calendar-day-number">${day}</div>`;
+        dayElement.addEventListener('click', () => selectDate(dateStr, availability, packageData));
+        dayElement.setAttribute('title', `Available - ₱${availability.price.toLocaleString()}`);
+      } else {
+        // Sold out
+        dayElement.classList.add('sold-out');
+        dayElement.innerHTML = `
+          <div class="calendar-day-number">${day}</div>
+          <div class="calendar-day-label" style="font-size: 0.55rem;">Sold</div>
+        `;
+        dayElement.setAttribute('title', 'Sold out');
+      }
+      
+      calendarGrid.appendChild(dayElement);
+    }
+  });
   
   console.log('✅ Calendar rendered');
 }
@@ -224,34 +234,65 @@ function selectDate(dateStr, availability, packageData) {
   
   console.log('📅 Date selected:', dateStr, availability);
   
-  // Update UI
-  document.querySelectorAll('#packageDetailsPage .calendar-day').forEach(day => {
+  // Update UI in all calendar instances
+  document.querySelectorAll('.calendar-day').forEach(day => {
     day.classList.remove('selected');
   });
-  event.currentTarget.classList.add('selected');
+  
+  // Find and mark selected day in all calendars
+  document.querySelectorAll('.calendar-grid').forEach(grid => {
+    const dayElements = grid.querySelectorAll('.calendar-day');
+    dayElements.forEach(day => {
+      if (day.querySelector('.calendar-day-number')?.textContent === dateStr.split('-')[2].replace(/^0/, '')) {
+        if (!day.classList.contains('past-date') && !day.classList.contains('sold-out') && !day.classList.contains('disabled')) {
+          day.classList.add('selected');
+        }
+      }
+    });
+  });
+  
+  // Show booking info
+  const selectedDateInfos = document.querySelectorAll('.selected-date-info');
+  selectedDateInfos.forEach(info => {
+    info.classList.add('visible');
+  });
   
   // Update booking slots
-  safeSetText('bookingSlots', availability.slots);
-  
-  // Show selected date info
-  const selectedDateInfo = safeGetElement('selectedDateInfo');
-  if (selectedDateInfo) {
-    selectedDateInfo.style.display = 'block';
-  }
+  const bookingSlots = document.querySelectorAll('.booking-slots, #bookingSlots');
+  bookingSlots.forEach(el => {
+    el.textContent = `${availability.slots} slots remaining`;
+  });
   
   // Format dates
   const date = new Date(dateStr);
   const returnDate = new Date(date);
   returnDate.setDate(returnDate.getDate() + packageData.duration.days);
   
-  safeSetText('departureDate', 
-    `${availability.departureTime} - ${availability.flightNumber} (${availability.route})`
-  );
-  safeSetText('returnDate', 
-    `${returnDate.toLocaleDateString('en-US', {month: 'short', day: 'numeric'})} - Return Flight (${availability.route.split('→').reverse().join('→')})`
-  );
+  const departureDateEls = document.querySelectorAll('#departureDate');
+  departureDateEls.forEach(el => {
+    el.textContent = `${date.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})} - ${availability.departureTime} (${availability.flightNumber})`;
+  });
   
-  // Store selected booking data
+  const returnDateEls = document.querySelectorAll('#returnDate');
+  returnDateEls.forEach(el => {
+    el.textContent = `${returnDate.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})} - Return Flight`;
+  });
+  
+  // Update price if it varies by date
+  if (availability.price && availability.price !== packageData.price.amount) {
+    const priceElements = document.querySelectorAll('.price-amount');
+    priceElements.forEach(el => {
+      el.textContent = `₱${availability.price.toLocaleString()}`;
+    });
+  }
+  
+  // Enable book now buttons
+  const bookNowBtns = document.querySelectorAll('.btn-book-now');
+  bookNowBtns.forEach(btn => {
+    btn.disabled = false;
+    btn.innerHTML = '<span>Book Now</span><i class="fas fa-arrow-right"></i>';
+  });
+  
   sessionStorage.setItem('selectedBookingDate', JSON.stringify({
     date: dateStr,
     availability: availability,
@@ -263,9 +304,9 @@ function selectDate(dateStr, availability, packageData) {
 // CALENDAR NAVIGATION
 // ================================
 document.addEventListener('DOMContentLoaded', () => {
-  const prevMonthBtn = safeGetElement('prevMonth');
-  if (prevMonthBtn) {
-    prevMonthBtn.addEventListener('click', () => {
+  const prevMonthBtns = document.querySelectorAll('#prevMonth, .calendar-nav-prev');
+  prevMonthBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
       currentMonth--;
       if (currentMonth < 0) {
         currentMonth = 11;
@@ -275,11 +316,11 @@ document.addEventListener('DOMContentLoaded', () => {
         renderCalendar(currentPackageData);
       }
     });
-  }
+  });
 
-  const nextMonthBtn = safeGetElement('nextMonth');
-  if (nextMonthBtn) {
-    nextMonthBtn.addEventListener('click', () => {
+  const nextMonthBtns = document.querySelectorAll('#nextMonth, .calendar-nav-next');
+  nextMonthBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
       currentMonth++;
       if (currentMonth > 11) {
         currentMonth = 0;
@@ -289,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderCalendar(currentPackageData);
       }
     });
-  }
+  });
 });
 
 // ================================
@@ -358,7 +399,7 @@ function formatDate(dateStr) {
 }
 
 // ================================
-// RELATED PACKAGES
+// RELATED PACKAGES SLIDER
 // ================================
 function renderRelatedPackages(data) {
   console.log('🔗 Rendering related packages...');
@@ -383,13 +424,59 @@ function renderRelatedPackages(data) {
     </div>
   `).join('');
   
+  initRelatedPackagesSlider();
+  
   console.log('✅ Related packages rendered');
 }
+
+function initRelatedPackagesSlider() {
+  const wrapper = document.querySelector('.related-packages-wrapper');
+  if (!wrapper) return;
+  
+  if (wrapper.querySelector('.slider-arrow')) return;
+  
+  if (window.innerWidth >= 1024) {
+    const leftArrow = document.createElement('button');
+    leftArrow.className = 'slider-arrow slider-arrow-left';
+    leftArrow.innerHTML = '<i class="fas fa-chevron-left"></i>';
+    leftArrow.setAttribute('aria-label', 'Previous');
+    
+    const rightArrow = document.createElement('button');
+    rightArrow.className = 'slider-arrow slider-arrow-right';
+    rightArrow.innerHTML = '<i class="fas fa-chevron-right"></i>';
+    rightArrow.setAttribute('aria-label', 'Next');
+    
+    wrapper.appendChild(leftArrow);
+    wrapper.appendChild(rightArrow);
+    
+    const grid = wrapper.querySelector('.related-packages-grid');
+    
+    leftArrow.addEventListener('click', () => {
+      grid.scrollBy({ left: -grid.offsetWidth / 3, behavior: 'smooth' });
+    });
+    
+    rightArrow.addEventListener('click', () => {
+      grid.scrollBy({ left: grid.offsetWidth / 3, behavior: 'smooth' });
+    });
+  }
+}
+
+window.addEventListener('resize', () => {
+  const wrapper = document.querySelector('.related-packages-wrapper');
+  if (!wrapper) return;
+  
+  const arrows = wrapper.querySelectorAll('.slider-arrow');
+  
+  if (window.innerWidth >= 1024 && arrows.length === 0) {
+    initRelatedPackagesSlider();
+  } else if (window.innerWidth < 1024 && arrows.length > 0) {
+    arrows.forEach(arrow => arrow.remove());
+  }
+});
 
 function viewPackage(packageId) {
   console.log('🔄 Switching to package:', packageId);
   
-  // Use SPA navigation instead of page reload
   if (typeof showPackageDetails === 'function') {
     showPackageDetails(packageId);
   } else {
@@ -397,7 +484,6 @@ function viewPackage(packageId) {
   }
 }
 
-// Make globally available
 window.viewPackage = viewPackage;
 
 // ================================
@@ -444,26 +530,19 @@ function checkFavoriteStatus(packageId) {
 // BOOK NOW BUTTON
 // ================================
 document.addEventListener('DOMContentLoaded', () => {
-  // Main book now button
-  const bookNowBtn = safeGetElement('bookNowBtn');
-  if (bookNowBtn) {
-    bookNowBtn.addEventListener('click', handleBookNow);
-  }
-  
-  // Sticky book now button
-  const stickyBookNowBtn = safeGetElement('stickyBookNowBtn');
-  if (stickyBookNowBtn) {
-    stickyBookNowBtn.addEventListener('click', handleBookNow);
-  }
+  const bookNowBtns = document.querySelectorAll('.btn-book-now');
+  bookNowBtns.forEach(btn => {
+    btn.addEventListener('click', handleBookNow);
+  });
 });
 
 function handleBookNow() {
   if (!selectedDate) {
     alert('Please select a date from the calendar first');
-    // Scroll to calendar
-    document.querySelector('#packageDetailsPage .booking-calendar-wrapper')?.scrollIntoView({ 
-      behavior: 'smooth' 
-    });
+    const calendar = document.querySelector('.calendar-grid');
+    if (calendar) {
+      calendar.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
     return;
   }
   
@@ -472,27 +551,60 @@ function handleBookNow() {
     return;
   }
   
-  // Prepare booking data
   const bookingData = {
     packageId: currentPackageData.id,
     packageTitle: currentPackageData.title,
-    packagePrice: currentPackageData.price.amount,
+    packagePrice: selectedDateData.price || currentPackageData.price.amount,
     departureDate: selectedDate,
     dateInfo: selectedDateData,
     duration: currentPackageData.duration,
     timestamp: new Date().toISOString()
   };
   
-  // Store in sessionStorage for booking page
   sessionStorage.setItem('bookingData', JSON.stringify(bookingData));
   
   console.log('📝 Proceeding to booking:', bookingData);
   
-  // Navigate to booking page (separate page)
-  window.location.href = `pages/booking.php?package=${currentPackageData.id}&date=${selectedDate}`;
+  if (typeof switchPage === 'function') {
+    switchPage('booking');
+  } else {
+    window.location.href = `pages/booking.php?package=${currentPackageData.id}&date=${selectedDate}`;
+  }
 }
+
+// ================================
+// SMART BACK NAVIGATION
+// ================================
+function goBackFromPackageDetails() {
+  console.log('⬅️ Going back from package details');
+  
+  // Get stored previous page from sessionStorage
+  const returnPage = sessionStorage.getItem('previousPage');
+  
+  console.log('📍 Previous page stored:', returnPage);
+  
+  // Clear package state
+  sessionStorage.removeItem('currentPackageId');
+  
+  // If we have a stored previous page, go there
+  if (returnPage && typeof switchPage === 'function') {
+    console.log('✅ Returning to:', returnPage);
+    switchPage(returnPage);
+  } else {
+    // Fallback to home
+    console.log('⚠️ No previous page stored, going to home');
+    if (typeof switchPage === 'function') {
+      switchPage('home');
+    } else {
+      window.location.href = '/';
+    }
+  }
+}
+
+// Make globally available
+window.goBackFromPackageDetails = goBackFromPackageDetails;
 
 // ================================
 // INITIALIZATION
 // ================================
-console.log('📦 Package Details (SPA Version) Script Loaded');
+console.log('📦 Package Details V2.3 (Enhanced) Script Loaded');

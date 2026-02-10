@@ -1,5 +1,5 @@
 /* ================================
-   THEME TOGGLE LOGIC (LOGIN)
+   THEME TOGGLE LOGIC (LOGIN) — ICON ADAPTIVE
 ================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -7,8 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleButton    = toggleContainer?.querySelector('.theme-toggle-btn');
     const themeLabelText  = toggleContainer?.querySelector('.theme-label-text');
     const toggleThumb     = toggleContainer?.querySelector('.theme-toggle-thumb');
+    const toggleIcon      = toggleButton?.querySelector('i'); // Font Awesome icon inside button
 
-    if (!toggleContainer || !toggleButton || !themeLabelText || !toggleThumb) {
+    if (!toggleContainer || !toggleButton || !themeLabelText || !toggleThumb || !toggleIcon) {
         console.warn('Login theme toggle elements not found');
         return;
     }
@@ -18,6 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.classList.toggle('dark', isDark);
         themeLabelText.textContent = isDark ? 'Dark' : 'Light';
         toggleButton.setAttribute('aria-pressed', String(isDark));
+
+        // Update icon class
+        toggleIcon.classList.toggle('fa-sun', !isDark);
+        toggleIcon.classList.toggle('fa-moon', isDark);
+
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
     }
 
