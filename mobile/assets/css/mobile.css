@@ -7,28 +7,26 @@
   box-sizing: border-box;
 
   font-family:
-    'Poppins',
-    'Inter',
-    'DM Sans',
+    "Poppins",
+    "Inter",
+    "DM Sans",
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
-    'Segoe UI',
+    "Segoe UI",
     sans-serif;
 
   -webkit-tap-highlight-color: transparent;
 }
 
-
 body {
   background-color: var(--bg-main);
   color: var(--text-primary);
-  transition: background-color var(--transition-base),
-              color var(--transition-base);
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base);
   overflow-x: hidden;
 }
-
-
 
 /* ================================
    MOBILE HEADER (iOS-Inspired)
@@ -56,7 +54,6 @@ body {
   gap: var(--space-sm);
 }
 
-
 .header-center {
   display: flex;
   align-items: center;
@@ -68,8 +65,6 @@ body {
   height: 32px; /* adjust as needed */
   width: auto;
 }
-
-
 
 .header-center h2 {
   font-size: 0.8rem; /* slightly larger for clarity */
@@ -95,7 +90,6 @@ body {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
-
 /* ================================
    HAMBURGER BUTTON (iOS-Inspired)
 ================================ */
@@ -113,7 +107,7 @@ body {
 .sidebar-toggle span,
 .sidebar-toggle::before,
 .sidebar-toggle::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 50%;
   width: 18px;
@@ -173,8 +167,6 @@ body {
   transform: scale(0.95);
 }
 
-
-
 /* ================================
    SIDEBAR OVERLAY (iOS Backdrop)
 ================================ */
@@ -224,14 +216,6 @@ body {
   overflow-y: auto;
 }
 
-
-
-
-
-
-
-
-
 /* Desktop / full width */
 @media (min-width: 768px) {
   .mobile-sidebar {
@@ -242,19 +226,6 @@ body {
     border-bottom-right-radius: 0;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .mobile-sidebar.open {
   left: 0;
@@ -385,8 +356,6 @@ body {
   margin: var(--space-sm) 0;
 }
 
-
-
 /* ================================
    SIDEBAR FOOTER - MINIMALIST TOGGLE
    ================================ */
@@ -397,10 +366,6 @@ body {
   padding-top: var(--space-lg);
   border-top: 1px solid var(--border-light);
 }
-
-
-
-
 
 /* Theme Toggle Container */
 .theme-toggle-container {
@@ -458,11 +423,6 @@ html.dark .theme-toggle-switch {
   transform: translateX(20px);
 }
 
-
-
-
-
-
 /* ================================
    ULTRA-SMOOTH TOGGLE - NO GLITCHING
    ================================ */
@@ -489,38 +449,38 @@ html.dark .theme-toggle-switch {
   background-color: var(--bg-muted);
   border-radius: var(--radius-full);
   border: 1.5px solid var(--border-color);
-  
+
   /* Smooth, synchronized transitions */
-  transition: 
+  transition:
     background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   /* Prevent layout shifts */
   will-change: background-color, border-color;
 }
 
 /* Toggle Knob – perfectly centered, smooth movement */
 .toggle-slider::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 16px;
   height: 16px;
   left: 2px;
   top: 50%;
-  
+
   /* Single transform for smoothness */
   transform: translateY(-50%);
-  
+
   background-color: var(--text-primary);
   border-radius: var(--radius-full);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  
+
   /* Optimized transition - smoother than before */
-  transition: 
+  transition:
     transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
+
   /* GPU acceleration for smooth animation */
   will-change: transform;
 }
@@ -623,14 +583,6 @@ input:checked + .toggle-slider::before {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
-
-
-
-
-
-
 /* ================================
    BOTTOM NAVIGATION (iOS-Inspired)
 ================================ */
@@ -649,12 +601,7 @@ input:checked + .toggle-slider::before {
   z-index: 100;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-      
 }
-
-
-
-
 
 .bottom-nav a {
   position: relative;
@@ -778,7 +725,7 @@ input:checked + .toggle-slider::before {
   .sidebar-nav a:not(.active):hover {
     background-color: transparent;
   }
-  
+
   .bottom-nav a:hover {
     background-color: transparent;
   }
@@ -799,7 +746,9 @@ input:checked + .toggle-slider::before {
   }
 
   .dashboard {
-    padding-bottom: calc(60px + var(--space-xl) + max(0px, env(safe-area-inset-bottom)));
+    padding-bottom: calc(
+      60px + var(--space-xl) + max(0px, env(safe-area-inset-bottom))
+    );
   }
 }
 
@@ -865,10 +814,6 @@ a:focus-visible {
   outline-offset: 2px;
 }
 
-
-
-
-
 /* ================================
    TRANSPARENT LOGIN HEADER
 ================================ */
@@ -885,117 +830,83 @@ a:focus-visible {
   background: transparent;
   z-index: 20;
   pointer-events: none;
-
-  /* border: 1px solid gainsboro; */
 }
 
-
-
-
-/* ================================
-   THEME TOGGLE CONTAINER - LOGIN
-================================ */
 .theme-toggle-container-login {
   display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 8px 14px;
-  border-radius: 12px;
-  background-color: var(--bg-surface, #f5f5f5);
-  border: 1px solid var(--border-light, #d0d0d0);
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.97),
+    rgba(228, 228, 228, 0.92)
+  );
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
   cursor: pointer;
-  transition: background-color 180ms ease, border-color 180ms ease;
-}
-
-/* Dark mode container */
-html.dark .theme-toggle-container-login {
-  border-color: rgba(255, 255, 255, 0.12);
-  background-color: var(--bg-surface-dark, #2c2c2c);
-}
-
-/* ================================
-   LABEL TEXT - LOGIN
-================================ */
-.theme-toggle-container-login .theme-label-text {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-primary, #222);
-  user-select: none;
-  line-height: 1;
-  transition: color 180ms ease;
-}
-
-html.dark .theme-toggle-container-login .theme-label-text {
-  color: var(--text-on-dark, #f5f5f5);
-}
-
-/* ================================
-   TOGGLE BUTTON - LOGIN
-================================ */
-.theme-toggle-container-login .theme-toggle-btn {
-  position: relative;
-  width: 42px;
-  height: 24px;
-  padding: 0;
-  border-radius: 999px;
-  border: none;
-  background-color: var(--border-light, #d0d0d0);
-  cursor: pointer;
-  outline: none;
   transition:
-    background-color 180ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 180ms cubic-bezier(0.4, 0, 0.2, 1);
-  flex-shrink: 0;
+    box-shadow 0.15s ease,
+    transform 0.08s ease;
 }
 
-/* Hover & Focus */
-.theme-toggle-container-login .theme-toggle-btn:hover {
-  box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.04);
-}
-.theme-toggle-container-login .theme-toggle-btn:focus-visible {
-  box-shadow: 0 0 0 6px rgba(25, 118, 210, 0.25);
-}
-
-/* Pressed / Active state */
-.theme-toggle-container-login .theme-toggle-btn:active .theme-toggle-thumb {
-  width: 20px;
-}
-
-/* ================================
-   TOGGLE THUMB - LOGIN
-================================ */
-.theme-toggle-container-login .theme-toggle-thumb {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background-color: #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  transition:
-    transform 200ms cubic-bezier(0.4, 0, 0.2, 1),
-    background-color 160ms ease;
+.dark .theme-toggle-container-login {
+  background: linear-gradient(
+    to bottom,
+    rgba(30, 34, 44, 0.97),
+    rgba(20, 24, 32, 0.97)
+  );
+  border-color: rgba(255, 255, 255, 0.07);
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-/* Dark mode thumb state */
-html.dark .theme-toggle-container-login .theme-toggle-btn {
-  background-color: var(--accent, #4caf50);
+/* Hover & active feedback */
+.theme-toggle-container-login:hover {
+  transform: translateY(-1px);
+}
+.theme-toggle-container-login:active {
+  transform: translateY(1px);
 }
 
-html.dark .theme-toggle-container-login .theme-toggle-thumb {
-  transform: translateX(18px);
+/* Icon FIBS */
+.theme-toggle-container-login i {
+  font-style: normal;
+  font-family: sans-serif;
+  font-size: 1.2rem;
 }
 
+/* Kill FA ::before */
+.theme-toggle-container-login i::before {
+  content: none !important;
+}
 
+/* FIBS content */
+.theme-toggle-container-login i.fa-sun::after {
+  content: "☀";
+  color: #f59e0b;
+}
+.theme-toggle-container-login i.fa-moon::after {
+  content: "☽";
+  color: #818cf8;
+}
 
+/* Hover animation */
+.theme-toggle-container-login:hover i::after {
+  transform: scale(1.2) rotate(10deg);
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
 
-
-
-
-
-
+/* Press feedback */
+.theme-toggle-container-login:active i::after {
+  transform: scale(0.88);
+  opacity: 0.75;
+}
 
 .login-container {
   position: relative;
@@ -1009,13 +920,13 @@ html.dark .theme-toggle-container-login .theme-toggle-thumb {
 
 /* Blurred background overlay - slightly more visible for frosted effect */
 .login-container::before {
-  content: '';
+  content: "";
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../images/login-bg.jpg');
+  background-image: url("../images/login-bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1033,7 +944,7 @@ html.dark .theme-toggle-container-login .theme-toggle-thumb {
 }
 
 .dark .login-container::before {
-  opacity: 0.10;
+  opacity: 0.1;
 }
 
 @media (min-width: 768px) {
@@ -1072,28 +983,38 @@ html.dark .theme-toggle-container-login .theme-toggle-thumb {
   background-color: rgba(255, 255, 255, 0.88);
   border: 1px solid rgba(255, 255, 255, 0.5);
   cursor: pointer;
-  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
   backdrop-filter: blur(12px);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.8);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .dark .theme-toggle-container-login {
   background-color: rgba(18, 22, 30, 0.88);
-  border-color: rgba(255,255,255,0.08);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .theme-toggle-container-login:hover {
-  box-shadow: 0 4px 14px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.8);
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .dark .theme-toggle-container-login:hover {
-  box-shadow: 0 4px 14px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 /* Active / pressed state */
 .theme-toggle-container-login:active {
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.18);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.18);
   transform: translateY(1px);
 }
 
@@ -1104,8 +1025,8 @@ html.dark .theme-toggle-container-login .theme-toggle-thumb {
 
 /* Push-button icon */
 .theme-toggle-container-login .theme-toggle-btn {
-  width: 34px;
-  height: 34px;
+  width: 15px;
+  height: 15px;
   padding: 0;
   border-radius: var(--radius-md);
   border: none;
@@ -1115,25 +1036,30 @@ html.dark .theme-toggle-container-login .theme-toggle-thumb {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
   position: relative;
 }
 
 /* Sun icon — light mode */
 .theme-toggle-container-login .theme-toggle-btn::before {
-  content: '\f185';
-  font-family: 'Font Awesome 5 Free';
+  content: "\f185";
+  font-family: "Font Awesome 5 Free";
   font-weight: 900;
   font-size: 1.1rem;
-  color: #f59e0b;            /* Warm amber for sun */
-  transition: content 0s, opacity 0.15s ease, transform 0.2s ease;
+  color: #f59e0b; /* Warm amber for sun */
+  transition:
+    content 0s,
+    opacity 0.15s ease,
+    transform 0.2s ease;
   display: block;
 }
 
 /* Moon icon — dark mode */
 .dark .theme-toggle-container-login .theme-toggle-btn::before {
-  content: '\f186';
-  color: #818cf8;            /* Soft indigo for moon */
+  content: "\f186";
+  color: #818cf8; /* Soft indigo for moon */
 }
 
 .theme-toggle-container-login .theme-toggle-btn:hover::before {
@@ -1157,8 +1083,6 @@ html.dark .theme-toggle-container-login .theme-toggle-thumb {
   z-index: 1;
 }
 
-
-
 /* Mobile: Flat background */
 @media (max-width: 767px) {
   .login-form {
@@ -1174,23 +1098,25 @@ html.dark .theme-toggle-container-login .theme-toggle-thumb {
   .login-container {
     padding: var(--space-xl);
   }
-  
+
   .login-wrapper {
     /* Frosted glass */
     background-color: rgba(var(--bg-surface-rgb, 255, 255, 255), 0.82);
     backdrop-filter: blur(24px) saturate(1.2);
     -webkit-backdrop-filter: blur(24px) saturate(1.2);
     border-radius: var(--radius-2xl);
-    padding: var(--space-xl);    /* Reduced from space-3xl */
-    border: 1px solid rgba(255,255,255,0.45);
+    padding: var(--space-xl); /* Reduced from space-3xl */
+    border: 1px solid rgba(255, 255, 255, 0.45);
   }
 
   .dark .login-wrapper {
     background-color: rgba(18, 22, 30, 0.82);
-    border-color: rgba(255,255,255,0.08);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.04) inset;
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.45),
+      0 1px 0 rgba(255, 255, 255, 0.04) inset;
   }
-  
+
   .login-form {
     background-color: transparent;
     padding: 0;
@@ -1206,24 +1132,23 @@ html.dark .theme-toggle-container-login .theme-toggle-thumb {
 
 .login-header {
   text-align: center;
-  margin-bottom: var(--space-xl);   /* Reduced from space-2xl */
+  margin-bottom: var(--space-xl); /* Reduced from space-2xl */
 }
 
 .login-logo {
   display: flex;
   justify-content: center;
-  margin-bottom: var(--space-md);   /* Reduced from space-lg */
+  margin-bottom: var(--space-md); /* Reduced from space-lg */
 }
 
 .login-logo img {
   width: 80px;
   height: 80px;
   object-fit: contain;
-
 }
 
 .login-header h1 {
-  font-size: 1.5rem;                /* Reduced from 1.75rem */
+  font-size: 1.5rem; /* Reduced from 1.75rem */
   font-weight: var(--font-bold);
   color: var(--text-primary);
   margin-bottom: var(--space-xs);
@@ -1231,12 +1156,12 @@ html.dark .theme-toggle-container-login .theme-toggle-thumb {
 
 @media (min-width: 640px) {
   .login-header h1 {
-    font-size: 1.75rem;             /* Reduced from 2rem */
+    font-size: 1.75rem; /* Reduced from 2rem */
   }
 }
 
 .login-header p {
-  font-size: 0.875rem;              /* Reduced from 0.95rem */
+  font-size: 0.875rem; /* Reduced from 0.95rem */
   color: var(--text-muted);
 }
 
@@ -1245,20 +1170,20 @@ html.dark .theme-toggle-container-login .theme-toggle-thumb {
 ================================ */
 
 .login-form {
-  background-color: var(--bg-surface);
-  padding: var(--space-lg);         /* Reduced from space-xl */
-  border-radius: var(--radius-xl);
+  /* background-color: var(--bg-surface); */
+  padding: var(--space-lg); /* Reduced from space-xl */
+  /* border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg);
-  border: 1px solid var(--border-light);
+  border: 1px solid var(--border-light); */
 }
 
 .form-group {
-  margin-bottom: var(--space-md);   /* Reduced from space-lg */
+  margin-bottom: var(--space-md); /* Reduced from space-lg */
 }
 
 .form-group label {
   display: block;
-  font-size: 0.8rem;                /* Reduced from 0.85rem */
+  font-size: 0.8rem; /* Reduced from 0.85rem */
   font-weight: var(--font-semibold);
   margin-bottom: var(--space-xs);
   color: var(--text-secondary);
@@ -1267,12 +1192,12 @@ html.dark .theme-toggle-container-login .theme-toggle-thumb {
 /* Improved input borders */
 .form-group input {
   width: 100%;
-  padding: 10px var(--space-md);    /* Tighter vertical padding */
+  padding: 10px var(--space-md); /* Tighter vertical padding */
   border-radius: var(--radius-lg);
   border: 2px solid var(--border-color);
   background-color: var(--bg-main);
   color: var(--text-primary);
-  font-size: 0.9rem;                /* Reduced from 0.95rem */
+  font-size: 0.9rem; /* Reduced from 0.95rem */
   transition: all 0.3s ease;
 }
 
@@ -1305,13 +1230,13 @@ html.dark .theme-toggle-container-login .theme-toggle-thumb {
 
 .btn-primary {
   width: 100%;
-  padding: 11px var(--space-lg);    /* Slightly tighter than before */
+  padding: 11px var(--space-lg); /* Slightly tighter than before */
   margin-top: var(--space-sm);
   border-radius: var(--radius-lg);
   border: none;
   background: linear-gradient(135deg, var(--accent), var(--accent-hover));
   color: white;
-  font-size: 0.95rem;               /* Reduced from 1rem */
+  font-size: 0.95rem; /* Reduced from 1rem */
   font-weight: var(--font-bold);
   cursor: pointer;
   transition: all 0.3s ease;
@@ -1320,7 +1245,11 @@ html.dark .theme-toggle-container-login .theme-toggle-thumb {
 
 .btn-primary:hover {
   box-shadow: var(--shadow-xl);
-  background: linear-gradient(135deg, var(--accent-hover), var(--accent-active));
+  background: linear-gradient(
+    135deg,
+    var(--accent-hover),
+    var(--accent-active)
+  );
 }
 
 .btn-primary:active {
@@ -1333,9 +1262,9 @@ html.dark .theme-toggle-container-login .theme-toggle-thumb {
 ================================ */
 
 .login-footer {
-  margin-top: var(--space-lg);      /* Reduced from space-xl */
+  margin-top: var(--space-lg); /* Reduced from space-xl */
   text-align: center;
-  font-size: 0.82rem;               /* Reduced from 0.85rem */
+  font-size: 0.82rem; /* Reduced from 0.85rem */
   color: var(--text-muted);
 }
 
@@ -1358,11 +1287,11 @@ html.dark .theme-toggle-container-login .theme-toggle-thumb {
   .login-container {
     padding: var(--space-md);
   }
-  
+
   .login-header h1 {
     font-size: 1.3rem;
   }
-  
+
   .login-logo img {
     width: 68px;
     height: 68px;
@@ -1388,5 +1317,3 @@ html.dark .theme-toggle-container-login .theme-toggle-thumb {
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
-
-

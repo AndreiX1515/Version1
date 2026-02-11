@@ -429,37 +429,48 @@ function renderRelatedPackages(data) {
   console.log('✅ Related packages rendered');
 }
 
+
+
 function initRelatedPackagesSlider() {
   const wrapper = document.querySelector('.related-packages-wrapper');
   if (!wrapper) return;
-  
+
+  const grid = wrapper.querySelector('.related-packages-grid');
+  if (!grid) return;
+
+  if (window.innerWidth < 1024) return;
   if (wrapper.querySelector('.slider-arrow')) return;
-  
-  if (window.innerWidth >= 1024) {
-    const leftArrow = document.createElement('button');
-    leftArrow.className = 'slider-arrow slider-arrow-left';
-    leftArrow.innerHTML = '<i class="fas fa-chevron-left"></i>';
-    leftArrow.setAttribute('aria-label', 'Previous');
-    
-    const rightArrow = document.createElement('button');
-    rightArrow.className = 'slider-arrow slider-arrow-right';
-    rightArrow.innerHTML = '<i class="fas fa-chevron-right"></i>';
-    rightArrow.setAttribute('aria-label', 'Next');
-    
-    wrapper.appendChild(leftArrow);
-    wrapper.appendChild(rightArrow);
-    
-    const grid = wrapper.querySelector('.related-packages-grid');
-    
-    leftArrow.addEventListener('click', () => {
-      grid.scrollBy({ left: -grid.offsetWidth / 3, behavior: 'smooth' });
+
+  const leftArrow = document.createElement('button');
+  leftArrow.className = 'slider-arrow slider-arrow-left';
+  leftArrow.innerHTML = '<i class="fas fa-chevron-left"></i>';
+  leftArrow.setAttribute('aria-label', 'Previous');
+
+  const rightArrow = document.createElement('button');
+  rightArrow.className = 'slider-arrow slider-arrow-right';
+  rightArrow.innerHTML = '<i class="fas fa-chevron-right"></i>';
+  rightArrow.setAttribute('aria-label', 'Next');
+
+  /* 🔑 INSERT BEFORE GRID */
+  wrapper.insertBefore(leftArrow, grid);
+  wrapper.insertBefore(rightArrow, grid);
+
+  leftArrow.addEventListener('click', () => {
+    grid.scrollBy({
+      left: -grid.clientWidth / 3,
+      behavior: 'smooth'
     });
-    
-    rightArrow.addEventListener('click', () => {
-      grid.scrollBy({ left: grid.offsetWidth / 3, behavior: 'smooth' });
+  });
+
+  rightArrow.addEventListener('click', () => {
+    grid.scrollBy({
+      left: grid.clientWidth / 3,
+      behavior: 'smooth'
     });
-  }
+  });
 }
+
+
 
 window.addEventListener('resize', () => {
   const wrapper = document.querySelector('.related-packages-wrapper');

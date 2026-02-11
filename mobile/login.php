@@ -24,18 +24,11 @@
 
     <header class="login-top-header">
 
-      <div class="theme-toggle-container-login" data-theme-toggle>
-        <span class="theme-label-text">Light</span>
-
-        <button
-          class="theme-toggle-btn"
-          aria-label="Toggle theme"
-          aria-pressed="false"
-          type="button">
+      <div class="theme-toggle-container-login" aria-label="Toggle theme" aria-pressed="false" role="button">
           <i class="fas fa-sun"></i>
-          <span class="theme-toggle-thumb"></span>
-        </button>
       </div>
+
+
 
     </header>
 

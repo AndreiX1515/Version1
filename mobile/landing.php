@@ -38,7 +38,7 @@
 
         <div class="header-center">
             <img src="assets/images/logo.png" alt="Smart Escape Logo" class="header-logo">
-            <h2>SMART ESCAPE</h2>
+            <h2>SMT ESCAPE</h2>
         </div>
 
         <div class="header-right">
@@ -286,6 +286,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
 
             </div>
@@ -652,19 +653,13 @@
 
                 </div>
 
+
                 <!-- ========================
                     MAIN CONTENT
                 ========================= -->
                 <div class="package-content">
 
                     <div class="package-main-content">
-
-                        <!-- ================================================
-                            TOP SECTION
-                            Desktop:  [package-top-left] [package-booking-panel]
-                            Mobile:   [package-booking-panel] (order:-1, first)
-                                    [package-top-left]
-                        ================================================= -->
 
                         <div class="package-top-section">
 
@@ -709,11 +704,7 @@
                             </div>
 
 
-                            <!-- RIGHT/TOP: Booking Panel
-                                - Mobile: order -1 → appears FIRST (after hero)
-                                - Desktop: right column, sticky
-                            -->
-
+                            <!-- RIGHT/TOP: Booking Panel -->
                             <div class="package-booking-panel">
 
                                 <div class="booking-panel-inner">
@@ -1186,6 +1177,8 @@
 
             </div>
         </div>
+
+
     </main>
 
 

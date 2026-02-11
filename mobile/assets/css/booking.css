@@ -9,7 +9,7 @@
   min-height: 100vh;
   background-color: var(--bg-main);
   padding-bottom: 80px;
-  
+  /* border: 1px solid gainsboro; */
 }
 
 @media (min-width: 768px) {
@@ -108,12 +108,14 @@
 .booking-content {
   max-width: 1400px;
   margin: 0 auto;
-  padding: var(--space-lg) var(--space-md);
+  padding: var(--space-lg) var(--space-xs) var(--space-lg) var(--space-xs);
+
+  /* border: 1px solid gainsboro; */
 }
 
 @media (min-width: 640px) {
   .booking-content {
-    padding: var(--space-xl) var(--space-lg);
+    padding: var(--space-xl) var(--space-xs);
   }
 }
 
@@ -121,8 +123,8 @@
   .booking-content {
     display: grid;
     grid-template-columns: 1fr 400px;
-    gap: var(--space-3xl);
-    padding: var(--space-2xl) var(--space-xl);
+    gap: var(--space-xl);
+    padding: var(--space-md) 0;
     align-items: start;
   }
 }
@@ -130,7 +132,7 @@
 @media (min-width: 1280px) {
   .booking-content {
     grid-template-columns: 1fr 440px;
-    gap: var(--space-4xl);
+    gap: var(--space-md);
   }
 }
 
@@ -162,7 +164,7 @@
   border-radius: var(--radius-xl);
   border: 1px solid var(--border-light);
   box-shadow: var(--shadow-sm);
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--space-md);
 }
 
 @media (min-width: 640px) {
@@ -244,13 +246,13 @@
   border-radius: var(--radius-xl);
   padding: var(--space-lg);
   border: 1px solid var(--border-light);
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 
 @media (min-width: 640px) {
   .booking-section {
     padding: var(--space-xl);
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-md);
   }
 }
 
