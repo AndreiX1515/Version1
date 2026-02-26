@@ -213,6 +213,7 @@
 
                 <!-- Package Grid -->
                 <div class="package-grid">
+
                     <!-- Featured Card (Full Width) -->
                     <div class="package-card featured" data-package-id="seoul-city-explorer" data-category="korea">
                         <div class="package-badge">Featured</div>
@@ -290,6 +291,7 @@
                 </div>
 
             </div>
+
 
             <div class="about-wrapper">
                 <!-- About Header -->

@@ -593,6 +593,7 @@ const KOREA_PACKAGES = {
     updatedAt: "2026-02-03"
   },
 
+
   // ─────────────────────────────────────────
   //  THAILAND
   // ─────────────────────────────────────────
@@ -643,8 +644,8 @@ const KOREA_PACKAGES = {
     },
 
     images: {
-      hero: "https://images.unsplash.com/photo-1508009603885-50cf7c8dd0d5?w=1200&h=600&fit=crop",
-      thumbnail: "https://images.unsplash.com/photo-1508009603885-50cf7c8dd0d5?w=400&h=300&fit=crop",
+      hero: "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?w=400&h=300&fit=crop",
+      thumbnail: "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?w=400&h=300&fit=crop",
       gallery: [
         "https://images.unsplash.com/photo-1508009603885-50cf7c8dd0d5?w=800&h=600&fit=crop",
         "https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=800&h=600&fit=crop",

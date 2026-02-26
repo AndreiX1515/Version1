@@ -18,6 +18,26 @@
   width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
+   padding-bottom: 140px; /* fallback */
+  padding-bottom: calc(130px + env(safe-area-inset-bottom));
+}
+
+@media (min-width: 768px) {
+  /* On tablet+, sticky bar is hidden — no extra padding needed */
+  .package-details-page {
+    padding-bottom: 0;
+  }
+}
+
+/* Also ensure the last content section isn't clipped */
+#packageDetailsPage .package-content {
+  padding-bottom: var(--space-xl);
+}
+
+@media (min-width: 768px) {
+  #packageDetailsPage .package-content {
+    padding-bottom: 0;
+  }
 }
 
 /* ========================

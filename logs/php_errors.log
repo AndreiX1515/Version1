@@ -26,3 +26,5 @@ Stack trace:
 [29-Jan-2026 07:02:44 Europe/Berlin] PHP Warning:  Undefined variable $browser in C:\xampp\htdocs\Version1\public\functions\login.php on line 381
 [29-Jan-2026 07:02:44 Europe/Berlin] Activity log DB error: Unknown column 'level' in 'field list'
 [29-Jan-2026 09:50:34 Europe/Berlin] Environment loaded: local from C:\xampp\htdocs\Version1/.env.local
+[12-Feb-2026 09:33:16 Europe/Berlin] Environment loaded: local from C:\xampp\htdocs\Version1/.env.local
+[23-Feb-2026 03:08:02 Europe/Berlin] Environment loaded: local from C:\xampp\htdocs\Version1/.env.local
